@@ -1,0 +1,12 @@
+{
+  "signIn": {
+    "labelledBy": "Formulaire de connexion",
+    "button": {
+      "default": "Connexion",
+      "signOut": "Déconnexion"
+    },
+    "state": {
+      "isFetching": "En cours..."
+    }
+  }
+}

@@ -1,0 +1,10 @@
+.loader {
+    position: relative;
+    width: 100%;
+    text-align: center;
+}
+
+.loader .fa {
+    padding: 2rem;
+    font-size: 30px;
+}

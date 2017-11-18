@@ -1,0 +1,25 @@
+{
+  "test": "Yeah, le test marche !",
+  "project": {
+    "name": "WorldCup",
+    "shortName": "WCup"
+  },
+  "language": {
+    "en": "English",
+    "es": "Español",
+    "de": "Deutsch",
+    "fr": "Français"
+  },
+  "accessibility": {
+    "aria-label": {
+      "close": "Fermer",
+      "toggleNav": "Basculer le menu"
+    },
+    "sr-only": {
+      "current": "actuel",
+      "current_plural": "actuels",
+      "current_female": "actuelle",
+      "current_female_plural": "actuelles"
+    }
+  }
+}

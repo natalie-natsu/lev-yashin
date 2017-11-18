@@ -1,0 +1,10 @@
+{
+  "MainHeader": {
+    "modal-login": {
+      "title": "Se connecter"
+    },
+    "navbarLanguageDropdown": {
+      "labelledBy": "Choisir une langue"
+    }
+  }
+}

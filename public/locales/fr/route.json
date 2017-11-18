@@ -1,0 +1,11 @@
+{
+  "home": {
+    "text": "Accueil"
+  },
+  "inventory": {
+    "text": "Inventaire"
+  },
+  "games": {
+    "text": "Parties en cours"
+  }
+}

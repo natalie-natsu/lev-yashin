@@ -1,0 +1,12 @@
+{
+  "signIn": {
+    "labelledBy": "Sing-in form",
+    "button": {
+      "default": "Sign in",
+      "signOut": "Sign out"
+    },
+    "state": {
+      "isFetching": "Fetch user info..."
+    }
+  }
+}

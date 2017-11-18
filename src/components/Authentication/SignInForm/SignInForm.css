@@ -1,0 +1,10 @@
+#sign-in-form .forgot-password {
+    float: left;
+    margin: 0 5px 5px 0;
+    color: #4494ff;
+    cursor: pointer;
+}
+
+#sign-in-form .forgot-password:hover {
+    text-decoration: underline;
+}

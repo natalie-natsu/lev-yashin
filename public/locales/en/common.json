@@ -1,0 +1,22 @@
+{
+  "test": "Yeah, the test works !",
+  "project": {
+    "name": "WorldCup",
+    "shortName": "WCup"
+  },
+  "language": {
+    "en": "English",
+    "es": "Español",
+    "de": "Deutsch",
+    "fr": "Français"
+  },
+  "accessibility": {
+    "aria-label": {
+      "close": "Close",
+      "toggleNav": "Toggle navigation"
+    },
+    "sr-only": {
+      "current": "current"
+    }
+  }
+}

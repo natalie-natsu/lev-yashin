@@ -1,0 +1,10 @@
+{
+  "MainHeader": {
+    "modal-login": {
+      "title": "Let's sign in"
+    },
+    "navbarLanguageDropdown": {
+      "labelledBy": "Choose your language"
+    }
+  }
+}
