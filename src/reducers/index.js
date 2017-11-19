@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
+import { reducer as formReducer } from 'redux-form';
 import { SUCCESS_SIGN_IN } from '../actions/authentication';
 
 import app from './app';
 import authentication from './authentication';
 import entities from './entities';
-import { reducer as formReducer } from 'redux-form';
 
 export default combineReducers({
     app,
@@ -12,10 +12,10 @@ export default combineReducers({
     entities,
     form: formReducer.plugin({
         'sign-in-form': (state, action) => {
-            switch(action.type) {
-                case SUCCESS_SIGN_IN: return undefined;
-                default: return state;
+            switch (action.type) {
+            case SUCCESS_SIGN_IN: return undefined;
+            default: return state;
             }
-        }
-    })
+        },
+    }),
 });

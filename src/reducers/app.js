@@ -4,13 +4,13 @@ import {
     RESET_APP,
     SET_APP_TITLE,
     SET_APP_LOCALE,
-    VALIDATE_FIRST_VISIT
+    VALIDATE_FIRST_VISIT,
 } from '../actions/app';
 
 const initialAppPropertiesState = {
     firstVisit: false,
     locale: 'en',
-    title: 'React Bootstrap Boilerplate - Title'
+    title: 'React Bootstrap Boilerplate - Title',
 };
 
 function resetApp() {
@@ -20,21 +20,21 @@ function resetApp() {
 function setAppLocale(state, action) {
     return {
         ...state,
-        locale: action.locale
+        locale: action.locale,
     };
 }
 
 function setAppTitle(state, action) {
     return {
         ...state,
-        title: action.title
+        title: action.title,
     };
 }
 
 function validateFistVisit(state) {
     return {
         ...state,
-        firstVisit: true
+        firstVisit: true,
     };
 }
 

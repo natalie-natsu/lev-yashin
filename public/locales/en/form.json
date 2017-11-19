@@ -6,7 +6,22 @@
       "signOut": "Sign out"
     },
     "state": {
-      "isFetching": "Fetch user info..."
+      "isFetching": "Fetching user info...",
+      "isSigningIn": "Signing in..."
+    },
+    "link": {
+      "forgotPassword": "Forgot password?"
+    },
+    "errors": {
+      "incorrectPasswordUser": "Email or password are not correct",
+      "email": {
+        "required": "Email is required",
+        "invalid": "Email is invalid"
+      },
+      "password": {
+        "required": "Password is required",
+        "invalid": "Password is invalid"
+      }
     }
   }
 }

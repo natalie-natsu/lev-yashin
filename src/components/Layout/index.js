@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Helmet } from "react-helmet";
+import { Helmet } from 'react-helmet';
 
 import './Layout.css';
 import MainHeader from '../MainHeader';
@@ -10,7 +10,7 @@ const Layout = props => (
         <Helmet>
             <title>{props.title}</title>
         </Helmet>
-        <MainHeader signOut={props.signOut}/>
+        <MainHeader signOut={props.signOut} />
         <main className="page content-wrapper">
             {props.children}
         </main>
@@ -19,7 +19,8 @@ const Layout = props => (
 
 Layout.propTypes = {
     signOut: PropTypes.func.isRequired,
-    title: PropTypes.string.isRequired
+    title: PropTypes.string.isRequired,
+    children: PropTypes.element.isRequired,
 };
 
 export default Layout;

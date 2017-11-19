@@ -23,8 +23,8 @@ i18n
             wait: true,
             bindI18n: 'languageChanged loaded',
             bindStore: 'added removed',
-            nsMode: 'default'
-        }
+            nsMode: 'default',
+        },
     });
 
 export default i18n;

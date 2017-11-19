@@ -1,10 +1,74 @@
-// Bootstrap
 @import '../../custom';
 @import '../../../node_modules/bootstrap/scss/bootstrap';
-
-// Animate.css
 @import '../../../node_modules/animate.css';
-
-// FontAwesome
 $fa-font-path: '~font-awesome/fonts';
 @import '../../../node_modules/font-awesome/scss/font-awesome';
+
+/////////////////////////////////////
+//              Modal              //
+/////////////////////////////////////
+
+/*
+  We want the modal to fit the all screen in small device like mobile.
+  This is essential if the project is going to be exported for Cordova plugin.
+ */
+
+@media (max-width: 575px) {
+  .modal-dialog {
+    margin: 0;
+  }
+
+  .modal-header {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .modal-content {
+    min-height: 100vh;
+    overflow: hidden;
+    border: none;
+    border-radius: 0;
+  }
+}
+
+/////////////////////////////////////
+//           Visibility            //
+/////////////////////////////////////
+
+.hidden {
+  display: none !important;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.hidden-xs-down,
+.hidden-sm-down,
+.hidden-md-down,
+.hidden-lg-down {
+  display: none;
+}
+
+@media (max-width: 575px) {
+  .hidden-xs-down {
+    display: block;
+  }
+}
+
+@media (min-width: 768px) {
+  .hidden-sm-down {
+    display: block;
+  }
+}
+
+@media (min-width: 992px) {
+  .hidden-md-down {
+    display: block;
+  }
+}
+
+@media (min-width: 1200px) {
+  .hidden-lg-down {
+    display: block;
+  }
+}

@@ -9,13 +9,13 @@ const initialAuthenticationState = {
     isSigningIn: false,
     token: null,
     user: null,
-    userId: null
+    userId: null,
 };
 
 function requestSignIn() {
     return {
         ...initialAuthenticationState,
-        isSigningIn: true
+        isSigningIn: true,
     };
 }
 
@@ -27,7 +27,7 @@ function successSignIn(state, action) {
         isAuthenticated: true,
         isSigningIn: false,
         token,
-        userId
+        userId,
     };
 }
 
@@ -35,7 +35,7 @@ function failSignIn(state, action) {
     return {
         ...state,
         isSigningIn: false,
-        errors: action.errors
+        errors: action.errors,
     };
 }
 
@@ -47,7 +47,7 @@ function successFetchProfile(state, action) {
     return {
         ...state,
         isLoaded: true,
-        user: action.user
+        user: action.user,
     };
 }
 
@@ -56,5 +56,5 @@ export default createReducer(initialAuthenticationState, {
     [SUCCESS_SIGN_IN]: successSignIn,
     [FAIL_SIGN_IN]: failSignIn,
     [SIGN_OUT]: resetAuthentication,
-    [SUCCESS_FETCH_PROFILE]: successFetchProfile
+    [SUCCESS_FETCH_PROFILE]: successFetchProfile,
 });

@@ -10,9 +10,14 @@ import { requestSignIn, successSignIn, failSignIn, signOut, fetchProfileIfNeeded
 import './MainHeader.css';
 import SignInForm from '../Authentication/SignInForm';
 
-const $ = window.$;
+const { $ } = window;
 
 class MainHeader extends React.Component {
+    getLanguageItemClass(locale) {
+        const { i18n } = this.props;
+        return i18n.language === locale ? 'hidden' : 'visible';
+    }
+
     signIn(values) {
         const { dispatch } = this.props;
 
@@ -20,10 +25,10 @@ class MainHeader extends React.Component {
         return fetch(getEndpoint('signIn'), {
             method: 'POST',
             headers,
-            body: JSON.stringify(values)
+            body: JSON.stringify(values),
         })
-            .then(response => response.json()).then(data => {
-                if(data.error) {
+            .then(response => response.json()).then((data) => {
+                if (data.error) {
                     dispatch(failSignIn());
                     throw new SubmissionError({ _error: data.error });
                 } else {
@@ -36,38 +41,35 @@ class MainHeader extends React.Component {
 
     renderSignInButton() {
         const { authentication, dispatch, t } = this.props;
-        const { isAuthenticated, isLoaded, user } = authentication;
+        const { isAuthenticated, isLoaded, userId } = authentication;
 
-        if (!isAuthenticated) {
-            return (
-                <button
-                    type="button" className="btn btn-outline-primary"
-                    data-toggle="modal" data-target="#modal-mainHeader-login"
-                >
-                    <i className="fa fa-sign-in"/> {t('form:signIn.button.default')}
-                </button>
-            );
-        }
-        else if (!isLoaded) {
-            return (
-                <button type="button" className="btn btn-outline-primary" disabled={true}>
-                    <i className="fa fa-spinner fa-spin"/> {t('form:signIn.state.isFetching')}
-                </button>
-            );
-        }
-        else if (user) {
-            return (
-                <button type="button" className="btn btn-outline-default" onClick={() => dispatch(signOut())}>
-                    {t('form:signIn.button.signOut')}
-                </button>
+        if (isAuthenticated) {
+            if (!isLoaded) {
+                return (
+                    <button type="button" className="btn btn-outline-primary" disabled>
+                        <i className="fa fa-spinner fa-spin" /> {t('form:signIn.state.isFetching')}
+                    </button>
+                );
+            } else if (userId) {
+                return (
+                    <button type="button" className="btn btn-outline-default" onClick={() => dispatch(signOut())}>
+                        {t('form:signIn.button.signOut')}
+                    </button>
 
-            );
+                );
+            }
         }
-    }
 
-    getLanguageItemClass(locale) {
-        const { i18n } = this.props;
-        return i18n.language === locale ? 'hidden' : 'visible';
+        return (
+            <button
+                type="button"
+                className="btn btn-outline-primary"
+                data-toggle="modal"
+                data-target="#modal-mainHeader-login"
+            >
+                <i className="fa fa-sign-in" /> {t('form:signIn.button.default')}
+            </button>
+        );
     }
 
     render() {
@@ -90,7 +92,7 @@ class MainHeader extends React.Component {
                         <div className="modal-content">
                             <div className="modal-header">
                                 <h5 className="modal-title">
-                                    <i className="fa fa-user-circle-o"/> {t('component:MainHeader.modal-login.title')}
+                                    <i className="fa fa-user-circle-o" /> {t('component:MainHeader.modal-login.title')}
                                 </h5>
                                 <button
                                     type="button"
@@ -101,7 +103,7 @@ class MainHeader extends React.Component {
                                 </button>
                             </div>
                             <div className="modal-body">
-                                <SignInForm onSubmit={this.signIn.bind(this)}/>
+                                <SignInForm onSubmit={() => this.signIn()} />
                             </div>
                         </div>
                     </div>
@@ -109,14 +111,17 @@ class MainHeader extends React.Component {
 
                 <nav className="navbar navbar-expand-lg navbar-light bg-russia-light">
                     <div className="container">
-                        <a  href="/" className="navbar-brand">{t('project.name')}</a>
+                        <a href="/" className="navbar-brand">{t('project.name')}</a>
                         <button
-                            className="navbar-toggler" type="button"
-                            data-toggle="collapse" data-target="#navbarSupportedContent"
+                            className="navbar-toggler"
+                            type="button"
+                            data-toggle="collapse"
+                            data-target="#navbarSupportedContent"
                             aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label={t('accessibility.aria-label.toggleNav')}
+                            aria-expanded="false"
+                            aria-label={t('accessibility.aria-label.toggleNav')}
                         >
-                            <i className="fa fa-bars"/>
+                            <i className="fa fa-bars" />
                         </button>
                         <div className="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul className="navbar-nav mr-auto">
@@ -135,48 +140,54 @@ class MainHeader extends React.Component {
                                 <li className="nav-item dropdown">
                                     <a
                                         className="nav-link dropdown-toggle"
-                                        href="#" id="navbarLanguageDropdown"
+                                        href="#"
+                                        id="navbarLanguageDropdown"
                                         data-toggle="dropdown"
                                         aria-haspopup="true"
                                         aria-expanded="false"
                                     >
-                                        <span className={`flag-icon flag-icon-${localeToFlag}`}/>
+                                        <span className={`flag-icon flag-icon-${localeToFlag}`} />
                                     </a>
                                     <div
-                                        className="dropdown-menu" htmlFor="navbarLanguageDropdown"
+                                        className="dropdown-menu"
+                                        htmlFor="navbarLanguageDropdown"
                                         aria-labelledby={t('component:MainHeader.navbarLanguageDropdown.labelledBy')}
                                     >
                                         <a className="dropdown-item" href="#">
-                                            <span className={`flag-icon flag-icon-${localeToFlag}`}/>
+                                            <span className={`flag-icon flag-icon-${localeToFlag}`} />
                                             {t(`language.${i18n.language}`)}
                                         </a>
-                                        <div className="dropdown-divider"/>
+                                        <div className="dropdown-divider" />
                                         <a
                                             className={`dropdown-item ${this.getLanguageItemClass('en')}`}
-                                            href="#" onClick={() => i18n.changeLanguage('en')}
+                                            href="#"
+                                            onClick={() => i18n.changeLanguage('en')}
                                         >
-                                            <span className="flag-icon flag-icon-gb"/>
+                                            <span className="flag-icon flag-icon-gb" />
                                             {t('language.en')}
                                         </a>
                                         <a
                                             className={`dropdown-item ${this.getLanguageItemClass('fr')}`}
-                                            href="#" onClick={() => i18n.changeLanguage('fr')}
+                                            href="#"
+                                            onClick={() => i18n.changeLanguage('fr')}
                                         >
-                                            <span className="flag-icon flag-icon-fr"/>
+                                            <span className="flag-icon flag-icon-fr" />
                                             {t('language.fr')}
                                         </a>
                                         <a
                                             className={`dropdown-item ${this.getLanguageItemClass('es')}`}
-                                            href="#" onClick={() => i18n.changeLanguage('es')}
+                                            href="#"
+                                            onClick={() => i18n.changeLanguage('es')}
                                         >
-                                            <span className="flag-icon flag-icon-es"/>
+                                            <span className="flag-icon flag-icon-es" />
                                             {t('language.es')}
                                         </a>
                                         <a
                                             className={`dropdown-item ${this.getLanguageItemClass('de')}`}
-                                            href="#" onClick={() => i18n.changeLanguage('de')}
+                                            href="#"
+                                            onClick={() => i18n.changeLanguage('de')}
                                         >
-                                            <span className="flag-icon flag-icon-de"/>
+                                            <span className="flag-icon flag-icon-de" />
                                             {t('language.de')}
                                         </a>
                                     </div>
@@ -192,10 +203,19 @@ class MainHeader extends React.Component {
 }
 
 MainHeader.propTypes = {
-    signOut: PropTypes.func.isRequired
+    authentication: PropTypes.shape({
+        isAuthenticated: PropTypes.bool,
+        isLoaded: PropTypes.bool,
+        userId: PropTypes.string,
+    }).isRequired,
+    dispatch: PropTypes.func.isRequired,
+    i18n: PropTypes.shape({
+        changeLanguage: PropTypes.func,
+    }).isRequired,
+    t: PropTypes.func.isRequired,
 };
 
 export default translate(['common', 'component', 'form', 'route'])(connect(
     state => ({ authentication: state.authentication }),
-    dispatch => ({ dispatch })
+    dispatch => ({ dispatch }),
 )(MainHeader));

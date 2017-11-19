@@ -1,11 +1,10 @@
 export function createReducer(initialState, handlers, scope = undefined) {
     return function reducer(state = initialState, action) {
         if (action.scope === scope && handlers.hasOwnProperty(action.type)) {
-            return handlers[action.type](state, action)
-        } else {
-            return state
+            return handlers[action.type](state, action);
         }
-    }
+        return state;
+    };
 }
 
 export function removeObjectInState(state, object) {
@@ -25,5 +24,5 @@ export function updateObjectInState(state, object) {
     // Be sure that entities don't need id modifications like message entities
     // object.changes.id = object.id;
 
-    return {[object.changes.id || object.id]: {...item, ...object.changes}};
+    return { [object.changes.id || object.id]: { ...item, ...object.changes } };
 }

@@ -1,12 +1,12 @@
-export const RECEIVE_ENTITIES = "RECEIVE_ENTITIES";
-export const REMOVE_ENTITIES = "REMOVE_ENTITIES";
-export const RESET_ENTITIES = "RESET_ENTITIES";
-export const UPDATE_ENTITIES = "UPDATE_ENTITIES";
+export const RECEIVE_ENTITIES = 'RECEIVE_ENTITIES';
+export const REMOVE_ENTITIES = 'REMOVE_ENTITIES';
+export const RESET_ENTITIES = 'RESET_ENTITIES';
+export const UPDATE_ENTITIES = 'UPDATE_ENTITIES';
 
 export function receiveEntities(entities) {
     return {
         type: RECEIVE_ENTITIES,
-        entities
+        entities,
     };
 }
 
@@ -14,24 +14,20 @@ export function removeEntities(entities = [{ id: null }], entityType) {
     return {
         type: REMOVE_ENTITIES,
         entities,
-        entityType
+        entityType,
     };
 }
 
-export const resetEntities = () => {
-    return {
-        type: RESET_ENTITIES
-    };
-};
+export const resetEntities = () => ({
+    type: RESET_ENTITIES,
+});
 
 export function shouldFetchEntities(state) {
     return !state || state.info.needRefresh || (!state.ids && !state.info.isFetching);
 }
 
-export const updateEntities = (entities = [{id: null, changes: {}}], entityType) => {
-    return {
-        type: UPDATE_ENTITIES,
-        entities,
-        entityType
-    };
-};
+export const updateEntities = (entities = [{ id: null, changes: {} }], entityType) => ({
+    type: UPDATE_ENTITIES,
+    entities,
+    entityType,
+});

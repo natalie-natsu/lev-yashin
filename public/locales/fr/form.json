@@ -6,7 +6,22 @@
       "signOut": "Déconnexion"
     },
     "state": {
-      "isFetching": "En cours..."
+      "isFetching": "Récupération des infos...",
+      "isSigningIn": "En cours de connexion..."
+    },
+    "link": {
+      "forgotPassword": "Mot de passe oublié ?"
+    },
+    "errors": {
+      "incorrectPasswordUser": "Adresse email ou mot de pass incorect",
+      "email": {
+        "required": "Adresse email requise",
+        "invalid": "Adresse email invalide"
+      },
+      "password": {
+        "required": "Mot de passe requis",
+        "invalid": "Mot de pass invalide"
+      }
     }
   }
 }

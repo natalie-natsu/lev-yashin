@@ -1,14 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Proptypes from 'prop-types';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { I18nextProvider  } from 'react-i18next';
+import { I18nextProvider } from 'react-i18next';
+import 'flag-icon-css/css/flag-icon.min.css';
 import i18n from './i18n';
 
 import { signOut } from '../../actions/authentication';
 import { validateFirstVisit } from '../../actions/app';
 
 import './App.scss';
-import 'flag-icon-css/css/flag-icon.min.css';
 import Home from '../../pages/Home';
 import Layout from '../Layout';
 import FirstVisit from '../FirstVisit';
@@ -21,7 +22,7 @@ class App extends React.Component {
         if (!this.props.app.firstVisit) {
             const firstVisitModal = $('#modal-first-visit');
             firstVisitModal.modal('show');
-            firstVisitModal.on('hidden.bs.modal', () =>  this.props.dispatch(validateFirstVisit()));
+            firstVisitModal.on('hidden.bs.modal', () => this.props.dispatch(validateFirstVisit()));
         }
     }
 
@@ -33,20 +34,28 @@ class App extends React.Component {
                         <Switch>
                             <Layout title={this.props.app.title} signOut={() => this.props.dispatch(signOut())}>
                                 <Switch>
-                                    <Route exact path="/" component={Home}/>
-                                    <Route component={NoMatch}/>
+                                    <Route exact path="/" component={Home} />
+                                    <Route component={NoMatch} />
                                 </Switch>
                             </Layout>
                         </Switch>
                     </BrowserRouter>
-                    <FirstVisit/>
+                    <FirstVisit />
                 </div>
             </I18nextProvider>
         );
     }
 }
 
+App.propTypes = {
+    app: Proptypes.shape({
+        firstVisit: Proptypes.bool,
+        title: Proptypes.string,
+    }).isRequired,
+    dispatch: Proptypes.func.isRequired,
+};
+
 export default connect(
     state => ({ app: state.app }),
-    dispatch => ({ dispatch })
+    dispatch => ({ dispatch }),
 )(App);
