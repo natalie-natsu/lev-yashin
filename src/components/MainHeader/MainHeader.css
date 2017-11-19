@@ -18,6 +18,6 @@
     margin-right: 10px;
 }
 
-#main-header .dropdown-menu[for="navbarLanguageDropdown"] {
+#main-header .dropdown-menu[for='navbarLanguageDropdown'] {
     top: 0;
 }

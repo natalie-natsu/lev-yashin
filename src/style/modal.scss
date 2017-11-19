@@ -1,0 +1,23 @@
+/*
+  We want the modal to fit the all screen in small device like mobile.
+  This is essential if the project is going to be exported for Cordova plugin.
+ */
+
+@media (max-width: 575px) {
+    .modal-dialog {
+        margin: 0;
+    }
+
+    .modal-header {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .modal-content {
+        overflow: hidden;
+        min-height: 100vh;
+        border: none;
+        border-radius: 0;
+    }
+}

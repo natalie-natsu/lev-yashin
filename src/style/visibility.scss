@@ -1,0 +1,36 @@
+.hidden {
+    display: none !important;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.hidden-xs-down,
+.hidden-sm-down,
+.hidden-md-down,
+.hidden-lg-down {
+    display: none;
+}
+
+@media (max-width: 575px) {
+    .hidden-xs-down {
+        display: block;
+    }
+}
+
+@media (min-width: 768px) {
+    .hidden-sm-down {
+        display: block;
+    }
+}
+
+@media (min-width: 992px) {
+    .hidden-md-down {
+        display: block;
+    }
+}
+
+@media (min-width: 1200px) {
+    .hidden-lg-down {
+        display: block;
+    }
+}

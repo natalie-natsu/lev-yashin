@@ -1,0 +1,40 @@
+.pictured {
+    position: relative;
+    display: inline-block;
+    padding-top: 5px;
+    width: 100%;
+    text-align: justify;
+    text-justify: distribute;
+}
+
+.pictured .title {
+    margin-top: 0;
+    text-align: left;
+    font-size: 30px;
+}
+
+.pictured .picture {
+    display: block;
+    float: left;
+    margin: 0 30px 15px 0;
+}
+
+.pictured .picture.picture-right {
+    float: right;
+    margin: 0 0 15px 30px;
+}
+
+
+@media screen and (max-width: 991px) {
+    .pictured .title {
+        font-size: 20px;
+    }
+
+    .pictured .picture {
+        margin: 0 15px 15px 0;
+    }
+
+    .pictured .picture.picture-right {
+        margin: 0 0 15px 15px;
+    }
+}

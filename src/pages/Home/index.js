@@ -3,10 +3,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import Landing from './Landing';
+import Description from './Description';
+
 class Home extends React.Component {
     render() {
         return (
-            <div id="home" />
+            <div id="home">
+                <Landing />
+                <Description />
+            </div>
         );
     }
 }

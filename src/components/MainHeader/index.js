@@ -111,7 +111,7 @@ class MainHeader extends React.Component {
 
                 <nav className="navbar navbar-expand-lg navbar-light bg-russia-light">
                     <div className="container">
-                        <a href="/" className="navbar-brand">{t('project.name')}</a>
+                        <a href="/" className="navbar-brand hidden-sm-down">{t('project.name')}</a>
                         <button
                             className="navbar-toggler"
                             type="button"
@@ -193,8 +193,8 @@ class MainHeader extends React.Component {
                                     </div>
                                 </li>
                             </ul>
-                            {this.renderSignInButton()}
                         </div>
+                        {this.renderSignInButton()}
                     </div>
                 </nav>
             </header>

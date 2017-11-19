@@ -1,0 +1,33 @@
+#home-landing {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-top: -1.5rem;
+    padding: 50px 0;
+    min-height: 50vh;
+    text-align: center;
+
+    justify-content: center;
+}
+
+#home-landing::before {
+    display: none;
+}
+
+#home-landing::after {
+    width: 50px;
+    height: 50px;
+    bottom: -25px;
+}
+
+@media (min-width: 768px) {
+    #home-landing {
+        padding: 100px 0;
+    }
+
+    #home-landing::after {
+        width: 100px;
+        height: 100px;
+        bottom: -50px;
+    }
+}
