@@ -1,0 +1,15 @@
+.languages > button {
+    min-width: 160px;
+}
+
+.languages .flag-icon {
+    margin-right: 5px;
+}
+
+.languages .dropdown-item.hidden {
+    display: none;
+}
+
+.languages .dropdown-item .flag-icon {
+    margin-right: 10px;
+}

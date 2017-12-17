@@ -1,23 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { SubmissionError } from 'redux-form';
 import { translate } from 'react-i18next';
+import { SubmissionError } from 'redux-form';
+import { action as toggleMenu } from 'redux-burger-menu';
 
 import { getEndpoint, headers } from '../../helpers/endpoint';
 import { requestSignIn, successSignIn, failSignIn, signOut, fetchProfileIfNeeded } from '../../actions/authentication';
 
-import './MainHeader.css';
+import './MainHeader.scss';
 import SignInForm from '../Authentication/SignInForm';
+import Languages from './Languages';
 
 const { $ } = window;
 
 class MainHeader extends React.Component {
-    getLanguageItemClass(locale) {
-        const { i18n } = this.props;
-        return i18n.language === locale ? 'hidden' : 'visible';
-    }
-
     signIn(values) {
         const { dispatch } = this.props;
 
@@ -73,11 +70,7 @@ class MainHeader extends React.Component {
     }
 
     render() {
-        const { i18n, t } = this.props;
-
-        // TODO: maybe create a converting table between i18n locales and flag-icons
-        // en -> gb is the only case so far
-        const localeToFlag = i18n.language === 'en' ? 'gb' : i18n.language;
+        const { burgerMenu, dispatch, t } = this.props;
 
         return (
             <header id="main-header">
@@ -109,92 +102,42 @@ class MainHeader extends React.Component {
                     </div>
                 </div>
 
-                <nav className="navbar navbar-expand-lg navbar-light bg-russia-light">
-                    <div className="container">
-                        <a href="/" className="navbar-brand hidden-sm-down">{t('project.name')}</a>
+                <nav className="navbar navbar-expand-lg navbar-dark">
+                    <a href="/" className="navbar-brand mb-0 h1 hidden-sm-down">{t('project.name')}</a>
+                    <div className="btn-drawer my-2 ml-2 ml-sm-0 mr-2 mr-sm-3">
                         <button
-                            className="navbar-toggler"
+                            className="btn"
                             type="button"
-                            data-toggle="collapse"
-                            data-target="#navbarSupportedContent"
-                            aria-controls="navbarSupportedContent"
                             aria-expanded="false"
                             aria-label={t('accessibility.aria-label.toggleNav')}
+                            onClick={() => dispatch(toggleMenu(!burgerMenu.isOpen))}
+                            onKeyPress={() => dispatch(toggleMenu(!burgerMenu.isOpen))}
                         >
                             <i className="fa fa-bars" />
                         </button>
-                        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul className="navbar-nav mr-auto">
-                                <li className="nav-item active">
-                                    <a className="nav-link" href="#">
-                                        {t('route:home.text')}&nbsp;
-                                        <span className="sr-only">{t('accessibility.sr-only.current')}</span>
-                                    </a>
-                                </li>
-                                <li className="nav-item">
-                                    <a className="nav-link" href="#">{t('route:inventory.text')}</a>
-                                </li>
-                                <li className="nav-item">
-                                    <a className="nav-link" href="#">{t('route:games.text')}</a>
-                                </li>
-                                <li className="nav-item dropdown">
-                                    <a
-                                        className="nav-link dropdown-toggle"
-                                        href="#"
-                                        id="navbarLanguageDropdown"
-                                        data-toggle="dropdown"
-                                        aria-haspopup="true"
-                                        aria-expanded="false"
-                                    >
-                                        <span className={`flag-icon flag-icon-${localeToFlag}`} />
-                                    </a>
-                                    <div
-                                        className="dropdown-menu"
-                                        htmlFor="navbarLanguageDropdown"
-                                        aria-labelledby={t('component:MainHeader.navbarLanguageDropdown.labelledBy')}
-                                    >
-                                        <a className="dropdown-item" href="#">
-                                            <span className={`flag-icon flag-icon-${localeToFlag}`} />
-                                            {t(`language.${i18n.language}`)}
-                                        </a>
-                                        <div className="dropdown-divider" />
-                                        <a
-                                            className={`dropdown-item ${this.getLanguageItemClass('en')}`}
-                                            href="#"
-                                            onClick={() => i18n.changeLanguage('en')}
-                                        >
-                                            <span className="flag-icon flag-icon-gb" />
-                                            {t('language.en')}
-                                        </a>
-                                        <a
-                                            className={`dropdown-item ${this.getLanguageItemClass('fr')}`}
-                                            href="#"
-                                            onClick={() => i18n.changeLanguage('fr')}
-                                        >
-                                            <span className="flag-icon flag-icon-fr" />
-                                            {t('language.fr')}
-                                        </a>
-                                        <a
-                                            className={`dropdown-item ${this.getLanguageItemClass('es')}`}
-                                            href="#"
-                                            onClick={() => i18n.changeLanguage('es')}
-                                        >
-                                            <span className="flag-icon flag-icon-es" />
-                                            {t('language.es')}
-                                        </a>
-                                        <a
-                                            className={`dropdown-item ${this.getLanguageItemClass('de')}`}
-                                            href="#"
-                                            onClick={() => i18n.changeLanguage('de')}
-                                        >
-                                            <span className="flag-icon flag-icon-de" />
-                                            {t('language.de')}
-                                        </a>
-                                    </div>
-                                </li>
-                            </ul>
+                    </div>
+                    <span className="hidden-sm-down mr-3"><Languages /></span>
+                    <p className="navbar-text mx-auto">Je suis un text qui se veut être très long pour des tests</p>
+                    <div className="dropdown mx-0 mx-sm-1 mr-1 mr-sm-2">
+                        <button
+                            type="button"
+                            id="navbarEllipsisDropdown"
+                            className="btn"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                        >
+                            <i className="fa fa-ellipsis-v" />
+                        </button>
+                        <div
+                            htmlFor="navbarEllipsisDropdown"
+                            className="dropdown-menu dropdown-menu-right"
+                            aria-labelledby={t('component:MainHeader.navbarEllipsisDropdown.labelledBy')}
+                        >
+                            <button className="dropdown-item" type="button">Action</button>
+                            <button className="dropdown-item" type="button">Another action</button>
+                            <button className="dropdown-item" type="button">Something else here</button>
                         </div>
-                        {this.renderSignInButton()}
                     </div>
                 </nav>
             </header>
@@ -208,14 +151,14 @@ MainHeader.propTypes = {
         isLoaded: PropTypes.bool,
         userId: PropTypes.string,
     }).isRequired,
-    dispatch: PropTypes.func.isRequired,
-    i18n: PropTypes.shape({
-        changeLanguage: PropTypes.func,
+    burgerMenu: PropTypes.shape({
+        isOpen: PropTypes.bool.required,
     }).isRequired,
+    dispatch: PropTypes.func.isRequired,
     t: PropTypes.func.isRequired,
 };
 
 export default translate(['common', 'component', 'form', 'route'])(connect(
-    state => ({ authentication: state.authentication }),
+    state => ({ authentication: state.authentication, burgerMenu: state.burgerMenu }),
     dispatch => ({ dispatch }),
 )(MainHeader));

@@ -3,22 +3,76 @@
     display: flex;
     flex-direction: column;
     margin-top: -1.5rem;
-    padding: 100px 0;
-    min-height: 33vh;
+    padding: 50px 0;
+    min-height: 50vh;
 
     justify-content: center;
 }
 
-#home-description .picture i {
-    font-size: 45px;
+#home-description .col-md-6 {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+}
+
+#home-description .pictured {
+    padding: 0;
+}
+
+#home-description .picture {
+    float: none;
+    margin: auto;
+    text-align: center;
+    font-size: 50px;
+}
+
+#home-description .pictured .title {
+    text-align: center;
+}
+
+#home-description .pictured p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+@media (min-width: 576px) {
+    #home-description .picture {
+        font-size: 65px;
+    }
 }
 
 @media (min-width: 768px) {
-    .home-description {
+    #home-description {
         padding: 100px 0;
     }
+}
 
+@media (min-width: 992px) {
+    #home-description .col-md-6 {
+        padding: 0 3rem;
+    }
+
+    #home-description .picture {
+        float: left;
+        margin: 0 15px 15px 0;
+        text-align: left;
+    }
+
+    #home-description .pictured .title {
+        text-align: justify;
+    }
+
+    #home-description .pictured p {
+        overflow: visible;
+        white-space: normal;
+    }
+}
+
+@media (min-width: 1200px) {
     #home-description .picture i {
-        font-size: 72px;
+        font-size: 100px;
     }
 }

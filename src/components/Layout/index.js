@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 
 import './Layout.css';
+import Drawer from '../Drawer';
 import MainHeader from '../MainHeader';
 
 const Layout = props => (
@@ -10,8 +11,9 @@ const Layout = props => (
         <Helmet>
             <title>{props.title}</title>
         </Helmet>
+        <Drawer />
         <MainHeader signOut={props.signOut} />
-        <main className="page content-wrapper">
+        <main id="page" className="content-wrapper">
             {props.children}
         </main>
     </div>

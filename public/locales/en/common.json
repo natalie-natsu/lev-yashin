@@ -1,8 +1,8 @@
 {
   "test": "Yeah, the test works !",
   "project": {
-    "name": "WorldCup",
-    "shortName": "WCup"
+    "name": "WorldCup 400K",
+    "shortName": "WC400K"
   },
   "language": {
     "en": "English",

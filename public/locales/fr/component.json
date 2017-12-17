@@ -3,8 +3,10 @@
     "modal-login": {
       "title": "Se connecter"
     },
-    "navbarLanguageDropdown": {
-      "labelledBy": "Choisir une langue"
+    "Languages": {
+      "languagesDropdown": {
+        "labelledBy": "Choisir une langue"
+      }
     }
   }
 }

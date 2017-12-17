@@ -1,30 +1,32 @@
 import React from 'react';
 import './Description.css';
+import background from './assets/home-description-background.jpg';
 
 export default () => (
     <section id="home-description">
+        <div className="parallax" style={{ backgroundImage: `url("${background}")` }} />
         <div className="container">
             <div className="row">
-                <div className="col-sm-6">
+                <div className="col-md-6">
                     <div className="pictured">
-                        <div className="picture">
+                        <div className="picture text-custom-tertiary">
                             <i className="fa fa-star" />
                         </div>
                         <h2 className="title">
                             Qui aura la fameuse étoile<br />
                             <small>entre toi et tes amis ?</small>
                         </h2>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            Integer non enim justo. Proin bibendum mattis elit non consectetur.
+                            Praesent faucibus sed leo sit amet posuere. Nunc interdum orci ut consequat pretium.
+                            Ut eu mattis sem, nec eleifend tellus.
+                            Nullam venenatis tempus tortor, nec hendrerit felis tristique ut.
+                        </p>
                     </div>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Integer non enim justo. Proin bibendum mattis elit non consectetur.
-                        Praesent faucibus sed leo sit amet posuere. Nunc interdum orci ut consequat pretium.
-                        Ut eu mattis sem, nec eleifend tellus.
-                        Nullam venenatis tempus tortor, nec hendrerit felis tristique ut.
-                    </p>
                 </div>
-                <div className="col-sm-6">
-                    <div className="card">
+                <div className="col-md-6">
+                    <div className="card hidden-sm-down">
                         <div className="card-header">
                             Featured
                         </div>

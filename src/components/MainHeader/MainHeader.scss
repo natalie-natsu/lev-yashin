@@ -1,0 +1,54 @@
+@import '../../custom';
+
+#main-header {
+    z-index: 15;
+}
+
+#main-header .navbar {
+    -ms-flex-pack: start;
+    padding: 0;
+    background: darken(map-get($theme-colors, custom-secondary), 5%);
+    color: map-get($colors, white);
+
+    -webkit-box-direction: normal;
+    -webkit-box-orient: horizontal;
+    -webkit-box-pack: start;
+    -ms-flex-flow: row nowrap;
+        flex-flow: row nowrap;
+    justify-content: flex-start;
+}
+
+#main-header .navbar-brand {
+    padding: 1rem .5rem;
+    background: darken(map-get($theme-colors, custom-secondary), 7.5%);
+    color: map-get($colors, white);
+    text-align: center;
+}
+
+#main-header .btn-drawer .btn,
+#main-header #navbarEllipsisDropdown {
+    padding: 0;
+    width: 40px;
+    background-color: transparent;
+    color: inherit;
+    font-size: 24px;
+    line-height: 36px;
+    cursor: pointer;
+}
+#main-header .navbar-text {
+    overflow: hidden;
+    margin: 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 1em;
+}
+
+#main-header .dropdown-menu {
+    top: 0;
+}
+
+@media (min-width: 1024px) {
+    #main-header .navbar-text {
+        font-size: 1.25em;
+    }
+}
