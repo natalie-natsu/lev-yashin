@@ -5,12 +5,14 @@ import { SUCCESS_SIGN_IN } from '../actions/authentication';
 
 import app from './app';
 import authentication from './authentication';
+import components from './components';
 import entities from './entities';
 
 export default combineReducers({
     app,
     authentication,
     burgerMenu,
+    components,
     entities,
     form: formReducer.plugin({
         'sign-in-form': (state, action) => {

@@ -6,7 +6,7 @@ import { slide as Menu } from 'react-burger-menu';
 import { decorator as reduxBurgerMenu, action as toggleMenu } from 'redux-burger-menu';
 import './Drawer.css';
 
-import Languages from '../MainHeader/Languages';
+import Languages from '../Languages';
 
 const Drawer = ({ dispatch, isOpen, t }) => (
     <Menu

@@ -35,16 +35,13 @@
     line-height: 36px;
     cursor: pointer;
 }
+
 #main-header .navbar-text {
     overflow: hidden;
     margin: 0;
     text-overflow: ellipsis;
     white-space: nowrap;
     font-size: 1em;
-}
-
-#main-header .dropdown-menu {
-    top: 0;
 }
 
 @media (min-width: 1024px) {

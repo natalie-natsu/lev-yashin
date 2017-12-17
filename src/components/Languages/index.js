@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { translate } from 'react-i18next';
+import className from 'classnames';
 
 import './Languages.css';
 
@@ -8,12 +9,12 @@ import './Languages.css';
 const localeToFlag = i18n => (i18n.language === 'en' ? 'gb' : i18n.language);
 const getLanguageItemClass = (locale, i18n) => (i18n.language === locale ? 'hidden' : 'visible');
 
-const Languages = ({ i18n, t }) => (
+const Languages = ({ btnClass, i18n, t }) => (
     <div className="languages dropdown">
         <button
             type="button"
             id="languagesDropdown"
-            className="dropdown-toggle btn btn-outline-light"
+            className={className('dropdown-toggle', { [btnClass]: btnClass })}
             data-toggle="dropdown"
             aria-haspopup="true"
             aria-expanded="false"
@@ -26,11 +27,6 @@ const Languages = ({ i18n, t }) => (
             className="dropdown-menu"
             aria-labelledby={t('component:MainHeader.Languages.languagesDropdown.labelledBy')}
         >
-            <a className="dropdown-item" href="#">
-                <span className={`flag-icon flag-icon-${localeToFlag(i18n)}`} />
-                {t(`language.${i18n.language}`)}
-            </a>
-            <div className="dropdown-divider" />
             <a
                 className={`dropdown-item ${getLanguageItemClass('en', i18n)}`}
                 href="#"
@@ -68,10 +64,13 @@ const Languages = ({ i18n, t }) => (
 );
 
 Languages.propTypes = {
-    i18n: PropTypes.shape({
-        changeLanguage: PropTypes.func,
-    }).isRequired,
+    btnClass: PropTypes.string,
+    i18n: PropTypes.shape({ changeLanguage: PropTypes.func }).isRequired,
     t: PropTypes.func.isRequired,
+};
+
+Languages.defaultProps = {
+    btnClass: 'btn btn-outline-light',
 };
 
 export default translate(['common', 'component', 'form', 'route'])(Languages);

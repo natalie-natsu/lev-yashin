@@ -10,7 +10,7 @@ import { requestSignIn, successSignIn, failSignIn, signOut, fetchProfileIfNeeded
 
 import './MainHeader.scss';
 import SignInForm from '../Authentication/SignInForm';
-import Languages from './Languages';
+import Languages from '../Languages';
 
 const { $ } = window;
 
@@ -131,7 +131,7 @@ class MainHeader extends React.Component {
                         </button>
                         <div
                             htmlFor="navbarEllipsisDropdown"
-                            className="dropdown-menu dropdown-menu-right"
+                            className="dropdown-menu dropdown-menu-right pull-right"
                             aria-labelledby={t('component:MainHeader.navbarEllipsisDropdown.labelledBy')}
                         >
                             <button className="dropdown-item" type="button">Action</button>

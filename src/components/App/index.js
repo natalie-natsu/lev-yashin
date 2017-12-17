@@ -32,7 +32,7 @@ class App extends React.Component {
                 <div id="app">
                     <BrowserRouter>
                         <Switch>
-                            <Layout title={this.props.app.title} signOut={() => this.props.dispatch(signOut())}>
+                            <Layout signOut={() => this.props.dispatch(signOut())}>
                                 <Switch>
                                     <Route exact path="/" component={Home} />
                                     <Route component={NoMatch} />
@@ -48,10 +48,7 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-    app: Proptypes.shape({
-        firstVisit: Proptypes.bool,
-        title: Proptypes.string,
-    }).isRequired,
+    app: Proptypes.shape({ firstVisit: Proptypes.bool }).isRequired,
     dispatch: Proptypes.func.isRequired,
 };
 

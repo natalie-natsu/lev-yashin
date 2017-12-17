@@ -2,7 +2,6 @@ import { createReducer } from './utilities';
 import {
     scope,
     RESET_APP,
-    SET_APP_TITLE,
     SET_APP_LOCALE,
     VALIDATE_FIRST_VISIT,
 } from '../actions/app';
@@ -10,7 +9,6 @@ import {
 const initialAppPropertiesState = {
     firstVisit: false,
     locale: 'en',
-    title: 'React Bootstrap Boilerplate - Title',
 };
 
 function resetApp() {
@@ -24,13 +22,6 @@ function setAppLocale(state, action) {
     };
 }
 
-function setAppTitle(state, action) {
-    return {
-        ...state,
-        title: action.title,
-    };
-}
-
 function validateFistVisit(state) {
     return {
         ...state,
@@ -41,6 +32,5 @@ function validateFistVisit(state) {
 export default createReducer(initialAppPropertiesState, {
     [RESET_APP]: resetApp,
     [SET_APP_LOCALE]: setAppLocale,
-    [SET_APP_TITLE]: setAppTitle,
     [VALIDATE_FIRST_VISIT]: validateFistVisit,
 }, scope);
