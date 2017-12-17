@@ -1,5 +1,5 @@
 /* Modules & Bootstrap */
-@import '../../custom';
+@import '../../style/bootstrap';
 @import '../../../node_modules/bootstrap/scss/bootstrap';
 @import '../../../node_modules/animate.css';
 $fa-font-path: '~font-awesome/fonts';
@@ -11,3 +11,8 @@ $fa-font-path: '~font-awesome/fonts';
 @import '../../style/pictured';
 @import '../../style/separators';
 @import '../../style/visibility';
+
+/* Overriding elements */
+a {
+  color: $complementary;
+}

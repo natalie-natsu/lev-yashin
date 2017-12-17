@@ -1,4 +1,4 @@
-@import '../../custom';
+@import '../../theme';
 
 #main-header {
     z-index: 15;
@@ -7,8 +7,8 @@
 #main-header .navbar {
     -ms-flex-pack: start;
     padding: 0;
-    background: darken(map-get($theme-colors, custom-secondary), 5%);
-    color: map-get($colors, white);
+    background: darken($primary, 5%);
+    color: map-get($textColorForBg, primary);
 
     -webkit-box-direction: normal;
     -webkit-box-orient: horizontal;
@@ -20,13 +20,13 @@
 
 #main-header .navbar-brand {
     padding: 1rem .5rem;
-    background: darken(map-get($theme-colors, custom-secondary), 7.5%);
-    color: map-get($colors, white);
+    background: darken($primary, 7.5%);
+    color: map-get($textColorForBg, primary);
     text-align: center;
 }
 
 #main-header .btn-drawer .btn,
-#main-header #navbarEllipsisDropdown {
+#main-header-side-action-dom .btn-side-action {
     padding: 0;
     width: 40px;
     background-color: transparent;
@@ -34,6 +34,14 @@
     font-size: 24px;
     line-height: 36px;
     cursor: pointer;
+    outline: 0;
+    box-shadow: none;
+}
+
+#main-header-side-action-dom .dropdown-menu {
+    top: 0;
+    right: 0;
+    left: auto;
 }
 
 #main-header .navbar-text {

@@ -1,3 +1,5 @@
+@import '../../theme';
+
 /* Position and sizing of burger button */
 .bm-burger-button {
     display: none;
@@ -11,7 +13,7 @@
 
 /* Color/shape of close button cross */
 .bm-cross {
-    background: #bdc3c7;
+    background: $light;
 }
 
 /* General sidebar styles */
@@ -20,24 +22,39 @@
 }
 
 .bm-menu {
-    padding: 2.5em 1.5em 0;
-    background: #373a47;
+    padding: 2.5em 0;
+    background: $complementary;
     font-size: 1.15em;
 }
 
 /* Morph shape necessary with bubble or elastic */
 .bm-morph-shape {
-    fill: #373a47;
+    fill: $complementary;
 }
 
 /* Wrapper for item list */
 .bm-item-list {
-    padding: .8em;
-    color: #b8b7ad;
+    color: $light;
 }
 
 /* Styling of overlay */
 .bm-overlay {
     z-index: 20 !important;
     background: rgba(0, 0, 0, .3);
+}
+
+/* Inner item list */
+.bm-item-list ul {
+    padding: 0;
+}
+
+.bm-item-list .nav-link {
+    display: block;
+    color: $light;
+    padding: 0;
+}
+
+.bm-item-list .nav-link,
+.bm-item-list .nav-link i {
+    padding: .5rem 1rem;
 }

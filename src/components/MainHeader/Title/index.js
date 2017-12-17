@@ -2,12 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
-const sideActionRoot = () => document.getElementById('main-header-side-action-dom');
+const titleRoot = () => document.getElementById('main-header-title-dom');
 
-class SideAction extends React.Component {
+class Title extends React.Component {
     constructor(props) {
         super(props);
-        this.el = document.createElement('div');
+        this.el = document.createElement('span');
     }
 
     componentDidMount() {
@@ -19,11 +19,11 @@ class SideAction extends React.Component {
         // DOM node, or uses 'autoFocus' in a descendant, add
         // state to Modal and only render the children when Modal
         // is inserted in the DOM tree.
-        sideActionRoot().appendChild(this.el);
+        titleRoot().appendChild(this.el);
     }
 
     componentWillUnmount() {
-        sideActionRoot().removeChild(this.el);
+        titleRoot().removeChild(this.el);
     }
 
     render() {
@@ -34,8 +34,8 @@ class SideAction extends React.Component {
     }
 }
 
-SideAction.propTypes = {
-    children: PropTypes.element.isRequired,
+Title.propTypes = {
+    children: PropTypes.oneOfType([PropTypes.element, PropTypes.string]).isRequired,
 };
 
-export default SideAction;
+export default Title;
