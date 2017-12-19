@@ -29,13 +29,13 @@
 #main-header-side-action-dom .btn-side-action {
     padding: 0;
     width: 40px;
+    outline: 0;
     background-color: transparent;
+    box-shadow: none;
     color: inherit;
     font-size: 24px;
     line-height: 36px;
     cursor: pointer;
-    outline: 0;
-    box-shadow: none;
 }
 
 #main-header-side-action-dom .dropdown-menu {

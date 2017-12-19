@@ -19,7 +19,7 @@ const FirstVisit = () => (
                     <div className="modal-body container" />
                     <div className="modal-footer">
                         <button type="button" className="btn btn-success" data-dismiss="modal">
-                            <i className="fa fa-check-circle-o" /> Agreed
+                            <i className="fas fa-check-circle-o" /> Agreed
                         </button>
                     </div>
                 </div>

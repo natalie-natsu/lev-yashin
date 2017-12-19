@@ -1,11 +1,10 @@
 $primary: #891c15 !default;
-$complementary: #357FB7 !default;
+$complementary: #357fb7 !default;
 $neutral: #dcc38a !default;
 $light: #fefdfb !default;
 $dark: #333 !default;
 $success: #28a745;
 $info: #17a2b8;
-
 $textColorForBg: (
     primary: lighten($primary, 90%),
     complementary: lighten($complementary, 90%),

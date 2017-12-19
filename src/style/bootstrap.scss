@@ -1,5 +1,4 @@
 @import '../theme';
-
 $white: #fff !default;
 $gray-100: #f8f9fa !default;
 $gray-150: #f5f6f8 !default;
@@ -23,7 +22,6 @@ $grays: (
         800: $gray-800,
         900: $gray-900
 ) !default;
-
 $blue: #007bff !default;
 $indigo: #6610f2 !default;
 $purple: #6f42c1 !default;
@@ -34,7 +32,6 @@ $yellow: #ffc107 !default;
 $green: #28a745 !default;
 $teal: #20c997 !default;
 $cyan: #17a2b8 !default;
-
 $colors: (
         blue: $blue,
         indigo: $indigo,
@@ -50,7 +47,6 @@ $colors: (
         gray: $gray-600,
         gray-dark: $gray-800,
 ) !default;
-
 $theme-colors: (
         primary: $primary,
         secondary: $gray-600,
@@ -63,6 +59,5 @@ $theme-colors: (
         light: $gray-100,
         dark: $gray-800
 ) !default;
-
 $body-bg: $light !default;
 $body-color: $gray-900 !default;

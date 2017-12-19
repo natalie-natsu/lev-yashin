@@ -1,3 +1,9 @@
 {
-
+  "NoMatch": {
+    "card": {
+      "title": "Oops! Page not found.",
+      "text": "We couldn't fin the page you were searching for.",
+      "button": "Go home"
+    }
+  }
 }

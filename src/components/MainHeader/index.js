@@ -4,6 +4,10 @@ import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import { action as toggleMenu } from 'redux-burger-menu';
 
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import { faBars } from '@fortawesome/fontawesome-free-solid';
+import { faUserCircle } from '@fortawesome/fontawesome-free-regular';
+
 import './MainHeader.scss';
 import SignInForm from '../Authentication/SignInForm';
 import Languages from '../Languages';
@@ -25,7 +29,8 @@ class MainHeader extends React.Component {
                         <div className="modal-content">
                             <div className="modal-header">
                                 <h5 className="modal-title">
-                                    <i className="fa fa-user-circle-o" /> {t('component:MainHeader.modal-login.title')}
+                                    <FontAwesomeIcon icon={faUserCircle} />&nbsp;
+                                    {t('component:MainHeader.modal-login.title')}
                                 </h5>
                                 <button
                                     type="button"
@@ -53,7 +58,7 @@ class MainHeader extends React.Component {
                             onClick={() => dispatch(toggleMenu(!burgerMenu.isOpen))}
                             onKeyPress={() => dispatch(toggleMenu(!burgerMenu.isOpen))}
                         >
-                            <i className="fa fa-bars" />
+                            <FontAwesomeIcon icon={faBars} />
                         </button>
                     </div>
                     <span className="hidden-sm-down mr-3"><Languages /></span>

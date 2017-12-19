@@ -4,6 +4,9 @@ import { Field, reduxForm } from 'redux-form';
 import { translate } from 'react-i18next';
 import classNames from 'classnames';
 
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import { faExclamationTriangle, faSignInAlt, faSpinner } from '@fortawesome/fontawesome-free-solid';
+
 import './SignInForm.css';
 
 const form = 'sign-in-form';
@@ -65,7 +68,11 @@ class SignInForm extends React.Component {
 
     renderFormError() {
         const error = this.formErrors[this.props.error];
-        return error && <div className="alert alert-danger" role="alert"><i className="fa fa-warning" /> {error}</div>;
+        return error && (
+            <div className="alert alert-danger" role="alert">
+                <FontAwesomeIcon icon={faExclamationTriangle} /> {error}
+            </div>
+        );
     }
 
     render() {
@@ -99,8 +106,15 @@ class SignInForm extends React.Component {
                     </a>
                     <button type="submit" className="btn btn-success" disabled={pristine || submitting}>
                         {!submitting
-                            ? <span><i className="fa fa-sign-in" /> {t('form:signIn.button.default')}</span>
-                            : <span><i className="fa fa-spinner fa-spin" /> {t('form:signIn.state.isSigningIn')}.</span>
+                            ? (
+                                <span>
+                                    <FontAwesomeIcon icon={faSignInAlt} /> {t('form:signIn.button.default')}
+                                </span>
+                            ) : (
+                                <span>
+                                    <FontAwesomeIcon icon={faSpinner} spin /> {t('form:signIn.state.isSigningIn')}
+                                </span>
+                            )
                         }
                     </button>
                 </div>

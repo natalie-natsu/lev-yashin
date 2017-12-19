@@ -4,6 +4,9 @@ import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import { SubmissionError } from 'redux-form';
 
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import { faSpinner, faSignInAlt } from '@fortawesome/fontawesome-free-solid';
+
 import { failSignIn, fetchProfileIfNeeded, requestSignIn, signOut, successSignIn } from '../../actions/authentication';
 import { getEndpoint, headers } from '../../helpers/endpoint';
 
@@ -44,7 +47,7 @@ class Home extends React.Component {
             if (!isLoaded) {
                 return (
                     <button type="button" className="btn btn-outline-light" disabled>
-                        <i className="fa fa-spinner fa-spin" /> {t('form:signIn.state.isFetching')}
+                        <FontAwesomeIcon icon={faSpinner} spin /> {t('form:signIn.state.isFetching')}
                     </button>
                 );
             } else if (userId) {
@@ -64,7 +67,7 @@ class Home extends React.Component {
                 data-toggle="modal"
                 data-target="#modal-mainHeader-login"
             >
-                <i className="fa fa-sign-in" /> {t('form:signIn.button.default')}
+                <FontAwesomeIcon icon={faSignInAlt} /> {t('form:signIn.button.default')}
             </button>
         );
     }

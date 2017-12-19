@@ -2,17 +2,19 @@
 @import '../../style/bootstrap';
 @import '../../../node_modules/bootstrap/scss/bootstrap';
 @import '../../../node_modules/animate.css';
-$fa-font-path: '~font-awesome/fonts';
-@import '../../../node_modules/font-awesome/scss/font-awesome';
 
 /* Global style */
 @import '../../style/modal';
-@import '../../style/parallax.css';
+@import '../../style/parallax';
 @import '../../style/pictured';
 @import '../../style/separators';
 @import '../../style/visibility';
 
 /* Overriding elements */
 a {
-  color: $complementary;
+    color: $complementary;
+}
+
+button {
+  cursor: pointer;
 }

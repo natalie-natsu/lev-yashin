@@ -10,7 +10,7 @@ export default () => (
                 <div className="col-md-6">
                     <div className="pictured">
                         <div className="picture text-custom-tertiary">
-                            <i className="fa fa-star" />
+                            <i className="fas fa-star" />
                         </div>
                         <h2 className="title">
                             Qui aura la fameuse étoile<br />
