@@ -3,8 +3,6 @@ $drawerBackground: $complementary;
 $drawerColor: $light;
 $navItemMinHeight: 43px;
 $navItemPadding: .5rem 1rem;
-$navBarHeight: 54px;
-$navBarHeightSm: 62px;
 
 /* Position and sizing of burger button */
 .bm-burger-button {
@@ -25,6 +23,7 @@ $navBarHeightSm: 62px;
 /* General sidebar styles */
 .bm-menu-wrap {
     z-index: 30!important;
+    letter-spacing: 1px;
 }
 
 .bm-menu {
@@ -50,7 +49,8 @@ $navBarHeightSm: 62px;
 
 /* Inner item list */
 .bm-item-list ul {
-    padding: 0;
+    margin-bottom: 0;
+    padding: .5rem 0;
 }
 
 .bm-item-list .nav-item {
@@ -62,6 +62,11 @@ $navBarHeightSm: 62px;
     display: block;
     padding: 0;
     color: $light;
+    transition: linear .1s;
+}
+
+.bm-item-list .nav-link:hover {
+    color: $neutral;
 }
 
 .bm-item-list .nav-link .fa-li {
@@ -70,19 +75,20 @@ $navBarHeightSm: 62px;
 
 /* Container */
 #drawer-nav {
-  position: relative;
-  min-height: 100%;
-  padding-bottom: $navBarHeight;
+    position: relative;
+    padding-bottom: $navBarHeight;
+    min-height: 100%;
 }
 
 @media (min-width: 768px) {
-  #drawer-nav {
-    padding-bottom: $navBarHeightSm;
-  }
+    #drawer-nav {
+        padding-bottom: $navBarHeightSm;
+    }
 }
 
 /* Languages */
 #drawer-nav .languages .btn {
+    margin: .5rem 0;
     padding: .5rem 1rem;
     width: 100%;
     outline: 0;
@@ -100,8 +106,8 @@ $navBarHeightSm: 62px;
 }
 
 #drawer-nav .languages .dropdown-menu {
-  padding: 0;
-    margin: 0;
+    margin-top: .5rem;
+    padding: 0;
     width: 100%;
     border: none;
     border-radius: 0;
@@ -112,66 +118,69 @@ $navBarHeightSm: 62px;
 }
 
 #drawer-nav .languages .dropdown-menu a {
-    color: $drawerColor;
     padding: $navItemPadding;
+    color: $drawerColor;
 }
 
-@media (min-width: 768px) {
-    #drawer-nav .languages .btn {
-        display: none;
-    }
+#drawer-nav .languages .dropdown-menu a:hover {
+    color: $neutral;
+}
+
+#drawer-nav .languages .dropdown-menu .dropdown-item:focus,
+.dropdown-item:hover {
+    background-color: inherit;
 }
 
 /* Header */
 #drawer-nav header {
-  height: $navBarHeight;
-  line-height: $navBarHeight;
-  background-color: darken($drawerBackground, 15%);
-  padding-right: 2rem;
-  font-size: .85rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-#drawer-nav header .translate {
-  transform: translateX(-1.5rem);
-  transition: linear .3s;
-}
-
-#drawer-nav header:hover .translate {
-  transform: translateX(0);
-}
-
-#drawer-nav header img {
-  height: $navBarHeight * 1.20;
+    position: relative;
+    padding: 0 2rem 0 .5rem;
+    height: $navBarHeight;
+    background-color: darken($drawerBackground, 15%);
 }
 
 @media (min-width: 768px) {
-  #drawer-nav header {
-    height: $navBarHeightSm;
-    line-height: $navBarHeightSm;
-  }
-
-  #drawer-nav header img {
-    height: $navBarHeightSm * 1.20;
-  }
+    #drawer-nav header {
+        height: $navBarHeightSm;
+    }
 }
 
 /* Footer */
 #drawer-nav footer {
-  height: $navBarHeight;
-  line-height: $navBarHeight;
-  padding: 0 1rem;
-  background-color: darken($drawerBackground, 15%);
-  position: absolute;
-  bottom: 0;
-  width: 100%;
+    position: absolute;
+    bottom: 0;
+    padding: 0 1rem;
+    width: 100%;
+    height: $navBarHeight;
+    background-color: darken($drawerBackground, 15%);
+    text-align: center;
+    line-height: $navBarHeight;
+}
+
+#drawer-nav footer .nav-link {
+    display: inline-block;
+    margin: 0 1rem;
 }
 
 @media (min-width: 768px) {
-  #drawer-nav footer {
-    line-height: $navBarHeightSm;
-    height: $navBarHeightSm;
-  }
+    #drawer-nav footer {
+        height: $navBarHeightSm;
+        line-height: $navBarHeightSm;
+    }
+}
+
+/* Scrollbar */
+.bm-menu::-webkit-scrollbar-track {
+    background-color: darken($drawerBackground, 10%);
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+}
+
+.bm-menu::-webkit-scrollbar {
+    width: 10px;
+    background-color: darken($drawerBackground, 10%);
+}
+
+.bm-menu::-webkit-scrollbar-thumb {
+    border: 1px solid darken($drawerBackground, 25%);
+    background-color: darken($drawerBackground, 20%);
 }

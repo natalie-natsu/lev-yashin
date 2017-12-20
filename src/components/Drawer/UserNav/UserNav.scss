@@ -1,0 +1,16 @@
+@import '../../../theme';
+
+.user-nav {
+    height: 100%;
+}
+
+.user-nav img {
+    max-height: $navBarHeight;
+    height: calc(100% - 1rem);
+}
+
+@media (min-width: 768px) {
+    .user-nav img {
+        max-height: $navBarHeightSm;
+    }
+};

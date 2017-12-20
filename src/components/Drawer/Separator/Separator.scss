@@ -1,0 +1,9 @@
+@import '../../../theme';
+
+.drawer-separator {
+    background: darken($complementary, 5%);
+    color: lighten($complementary, 25%);
+    text-transform: uppercase;
+    font-size: .60em;
+    line-height: 3em;
+}

@@ -7,5 +7,14 @@
   },
   "games": {
     "text": "Current games"
+  },
+  "calendar": {
+    "text": "Events"
+  },
+  "shop": {
+    "text": "More bonuses"
+  },
+  "notifications": {
+    "text": "Notifications"
   }
 }

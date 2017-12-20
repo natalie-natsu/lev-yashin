@@ -8,5 +8,12 @@
         "labelledBy": "Choose your language"
       }
     }
+  },
+  "Drawer": {
+    "separators": {
+      "navigation": "Navigation",
+      "gifts": "Your rewards",
+      "settings": "Settings"
+    }
   }
 }

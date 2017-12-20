@@ -7,5 +7,14 @@
   },
   "games": {
     "text": "Parties en cours"
+  },
+  "calendar": {
+    "text": "Les matchs"
+  },
+  "shop": {
+    "text": "Plus de bonus"
+  },
+  "notifications": {
+    "text": "Notifications"
   }
 }

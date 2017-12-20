@@ -8,5 +8,12 @@
         "labelledBy": "Choisir une langue"
       }
     }
+  },
+  "Drawer": {
+    "separators": {
+      "navigation": "Navigation",
+      "gifts": "Tes récompenses",
+      "settings": "Paramètres"
+    }
   }
 }
