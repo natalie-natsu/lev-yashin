@@ -5,5 +5,11 @@
       "text": "Nous n'avons pas pu trouver la page que vous recherchez.",
       "button": "Retour à l'accueil"
     }
+  },
+  "Home": {
+    "Landing": {
+      "title": "Devient champion <1>du monde en Russie</1>",
+      "subtitle": "Jeu de fantasy football"
+    }
   }
 }

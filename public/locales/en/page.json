@@ -5,5 +5,11 @@
       "text": "We couldn't fin the page you were searching for.",
       "button": "Go home"
     }
+  },
+  "Home": {
+    "Landing": {
+      "title": "Win the <1>Russia</1> World Cup",
+      "subtitle": "<0>Casual</0> Fantasy football game"
+    }
   }
 }

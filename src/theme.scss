@@ -16,3 +16,8 @@ $textColorForBg: (
 ) !default;
 $navBarHeight: 54px;
 $navBarHeightSm: 62px;
+$fSecondary: 'World Cup 2018', sans-serif;
+
+.f-secondary {
+    font-family: $fSecondary;
+}

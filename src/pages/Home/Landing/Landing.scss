@@ -1,0 +1,51 @@
+@import '../../../theme';
+$squareSize: 50px;
+$squareSizeMd: 75px;
+
+#home-landing {
+    position: relative;
+    margin-top: -1.5rem;
+    padding: 4rem 0;
+    background: $primary;
+    background-position: center;
+    background-size: cover;
+    color: lighten($primary, 65%);
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+#home-landing .square {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    z-index: 10;
+    width: $squareSize;
+    height: $squareSize;
+    background: $primary;
+    transform: translate(-50%, 50%) rotate(45deg);
+}
+
+#home-landing h1 {
+    font-size: 1.5rem;
+}
+
+#home-landing h1 small {
+    font-size: 70%;
+}
+
+@media (min-width: 768px) {
+    #home-landing h1 {
+        font-size: 2rem;
+    }
+
+    #home-landing .square {
+        width: $squareSizeMd;
+        height: $squareSizeMd;
+    }
+}
+
+@media (min-width: 1024px) {
+    #home-landing h1 {
+        font-size: 3rem;
+    }
+}

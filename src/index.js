@@ -5,7 +5,9 @@ import { applyMiddleware, compose, createStore } from 'redux';
 import { persistStore, autoRehydrate } from 'redux-persist';
 import { createLogger } from 'redux-logger';
 import thunk from 'redux-thunk';
+
 import 'bootstrap';
+import './style/fonts';
 
 import reducers from './reducers';
 import App from './components/App';

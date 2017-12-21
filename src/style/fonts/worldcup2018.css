@@ -1,0 +1,4 @@
+@font-face {
+    font-family: 'World Cup 2018';
+    src: local('World Cup 2018'), url('./worldcup2018.ttf') format('truetype');
+}
