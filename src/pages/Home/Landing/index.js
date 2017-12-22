@@ -1,11 +1,11 @@
 import React from 'react';
 import { Trans, translate } from 'react-i18next';
 import './Landing.scss';
-import banner from './banner.svg';
+import banner from './assets/banner.png';
 
 const Landing = () => (
     <section id="home-landing" className="jumbotron-fluid" style={{ backgroundImage: `url(${banner})` }}>
-        <span className="square" />
+        <span className="square" style={{ backgroundImage: `url(${banner})` }} />
         <div className="container">
             <h1 className="animated fadeIn">
                 <span className="f-secondary">

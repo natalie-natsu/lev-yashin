@@ -1,12 +1,10 @@
 import React from 'react';
-import './OnBoarding.css';
+import './OnBoarding.scss';
 
 export default () => (
-    <div id="home-on-boarding">
-        <section className="bg-custom-primary">
-            <div className="container">
-                Toto
-            </div>
-        </section>
-    </div>
+    <section id="home-on-boarding" className="text-light">
+        <div className="container">
+            OnBoarding
+        </div>
+    </section>
 );

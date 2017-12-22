@@ -11,11 +11,13 @@ import { faUserCircle } from '@fortawesome/fontawesome-free-regular';
 import { failSignIn, fetchProfileIfNeeded, requestSignIn, signOut, successSignIn } from '../../actions/authentication';
 import { getEndpoint, headers } from '../../helpers/endpoint';
 
-import Landing from './Landing';
-import Description from './Description';
+
 import SideAction from '../../components/MainHeader/SideAction';
 import Title from '../../components/MainHeader/Title';
 import SignInForm from '../../components/Authentication/SignInForm';
+import Landing from './Landing';
+import Description from './Description';
+import OnBoarding from './OnBoarding';
 
 const { $ } = window;
 
@@ -110,6 +112,7 @@ class Home extends React.Component {
                 </div>
                 <Landing />
                 <Description />
+                <OnBoarding />
             </div>
         );
     }

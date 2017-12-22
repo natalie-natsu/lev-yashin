@@ -2,8 +2,9 @@
     position: relative;
     display: flex;
     flex-direction: column;
+    overflow-x: hidden;
     padding: 50px 0;
-    min-height: 50vh;
+    min-height: 66vh;
 
     justify-content: center;
 }
@@ -35,6 +36,13 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+#home-description .separator {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: calc(100% + 1rem);
 }
 
 @media (min-width: 576px) {

@@ -3,6 +3,7 @@ import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/fontawesome-free-solid';
 import './Description.css';
 import background from './assets/home-description-background.jpg';
+import separator from './assets/diagonal-separator.svg';
 
 export default () => (
     <section id="home-description">
@@ -27,24 +28,8 @@ export default () => (
                         </p>
                     </div>
                 </div>
-                <div className="col-md-6">
-                    <div className="card hidden-sm-down">
-                        <div className="card-header">
-                            Featured
-                        </div>
-                        <div className="card-body">
-                            <h4 className="card-title">Special title treatment</h4>
-                            <p className="card-text">
-                                With supporting text below as a natural lead-in to additional content.
-                            </p>
-                            <a href="#" className="btn btn-primary">Go somewhere</a>
-                        </div>
-                        <div className="card-footer text-muted">
-                            2 days ago
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
+        <img src={separator} className="separator" alt="diagonal-separator" />
     </section>
 );
