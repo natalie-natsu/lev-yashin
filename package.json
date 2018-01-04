@@ -53,6 +53,7 @@
     "normalizr": "^3.2.3",
     "numeral": "^2.0.6",
     "object-assign": "4.1.1",
+    "object-to-formdata": "^1.0.13",
     "popper.js": "^1.12.3",
     "postcss-flexbugs-fixes": "3.2.0",
     "postcss-loader": "2.0.6",

@@ -5,12 +5,11 @@ import { translate } from 'react-i18next';
 import { SubmissionError } from 'redux-form';
 
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import { faSpinner, faSignInAlt } from '@fortawesome/fontawesome-free-solid';
+import { faSpinner, faSignInAlt, faSignOutAlt } from '@fortawesome/fontawesome-free-solid';
 import { faUserCircle } from '@fortawesome/fontawesome-free-regular';
 
 import { failSignIn, fetchProfileIfNeeded, requestSignIn, signOut, successSignIn } from '../../actions/authentication';
 import { getEndpoint, headers } from '../../helpers/endpoint';
-
 
 import SideAction from '../../components/MainHeader/SideAction';
 import Title from '../../components/MainHeader/Title';
@@ -19,45 +18,46 @@ import Landing from './Landing';
 import Description from './Description';
 import OnBoarding from './OnBoarding';
 
-const { $ } = window;
+const $ = window.jQuery;
 
 class Home extends React.Component {
     signIn(values) {
-        const { dispatch } = this.props;
+        if (!values) { return false; }
 
+        const { dispatch } = this.props;
         dispatch(requestSignIn());
         return fetch(getEndpoint('signIn'), {
             method: 'POST',
             headers,
             body: JSON.stringify(values),
         })
-            .then(response => response.json()).then((data) => {
-                if (data.error) {
+            .then(response => response.json()).then((json) => {
+                if (json.error) {
                     dispatch(failSignIn());
-                    throw new SubmissionError({ _error: data.error });
+                    throw new SubmissionError({ _error: json.error });
                 } else {
-                    dispatch(successSignIn(data.token, data.userId));
+                    dispatch(successSignIn(json._id, json.token));
                     dispatch(fetchProfileIfNeeded());
-                    $('#modal-mainHeader-login').modal('hide');
+                    $('#modal-home-login').modal('hide');
                 }
             });
     }
 
     renderSignInButton() {
-        const { authentication, dispatch, t } = this.props;
-        const { isAuthenticated, isLoaded, userId } = authentication;
+        const { credentials, dispatch, profile, t } = this.props;
+        const { _id, token } = credentials;
 
-        if (isAuthenticated) {
-            if (!isLoaded) {
+        if (token) {
+            if (profile.isFetching) {
                 return (
                     <button type="button" className="btn btn-outline-light" disabled>
                         <FontAwesomeIcon icon={faSpinner} spin /> {t('form:signIn.state.isFetching')}
                     </button>
                 );
-            } else if (userId) {
+            } else if (_id) {
                 return (
                     <button type="button" className="btn btn-outline-light" onClick={() => dispatch(signOut())}>
-                        {t('form:signIn.button.signOut')}
+                        <FontAwesomeIcon icon={faSignOutAlt} /> {t('form:signIn.button.signOut')}
                     </button>
 
                 );
@@ -69,7 +69,7 @@ class Home extends React.Component {
                 type="button"
                 className="btn btn-outline-light"
                 data-toggle="modal"
-                data-target="#modal-mainHeader-login"
+                data-target="#modal-home-login"
             >
                 <FontAwesomeIcon icon={faSignInAlt} /> {t('form:signIn.button.default')}
             </button>
@@ -84,7 +84,7 @@ class Home extends React.Component {
                 <SideAction><div className="mx-2 mx-sm-3">{this.renderSignInButton()}</div></SideAction>
                 <div
                     className="modal fade"
-                    id="modal-mainHeader-login"
+                    id="modal-home-login"
                     tabIndex="-1"
                     role="dialog"
                     aria-labelledby={t('form:signIn.labelledBy')}
@@ -94,7 +94,7 @@ class Home extends React.Component {
                             <div className="modal-header">
                                 <h5 className="modal-title">
                                     <FontAwesomeIcon icon={faUserCircle} />&nbsp;
-                                    {t('component:MainHeader.modal-login.title')}
+                                    {t('page:Home.modal-login.title')}
                                 </h5>
                                 <button
                                     type="button"
@@ -105,7 +105,7 @@ class Home extends React.Component {
                                 </button>
                             </div>
                             <div className="modal-body">
-                                <SignInForm onSubmit={() => this.signIn()} />
+                                <SignInForm onSubmit={values => this.signIn(values)} />
                             </div>
                         </div>
                     </div>
@@ -119,16 +119,22 @@ class Home extends React.Component {
 }
 
 Home.propTypes = {
-    authentication: PropTypes.shape({
-        isAuthenticated: PropTypes.bool,
-        isLoaded: PropTypes.bool,
-        userId: PropTypes.string,
+    credentials: PropTypes.shape({
+        _id: PropTypes.string,
+        token: PropTypes.string,
+        profile: PropTypes.object,
     }).isRequired,
     dispatch: PropTypes.func.isRequired,
+    profile: PropTypes.shape({
+        isFetching: PropTypes.bool,
+    }).isRequired,
     t: PropTypes.func.isRequired,
 };
 
-export default translate(['common', 'component', 'form', 'route'])(connect(
-    state => ({ authentication: state.authentication }),
+export default translate(['common', 'form', 'page', 'route'])(connect(
+    state => ({
+        credentials: state.credentials,
+        profile: state.profile,
+    }),
     dispatch => ({ dispatch }),
 )(Home));

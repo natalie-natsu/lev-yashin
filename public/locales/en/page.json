@@ -10,6 +10,9 @@
     "Landing": {
       "title": "Win the <1>Russia</1> World Cup",
       "subtitle": "<0>Casual</0> Fantasy football game"
+    },
+    "modal-login": {
+      "title": "Let's sign in"
     }
   }
 }

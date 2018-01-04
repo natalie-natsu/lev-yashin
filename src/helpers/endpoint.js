@@ -1,16 +1,8 @@
 const endpoints = {
-    /**
-     * Fetch profile of current user
-     * @Method: GET @Params: none
-     * @return: Object
-     */
-    fetchProfile: () => '/user',
-    /**
-     * Sign in user
-     * @Method: POST @Body: String email, String password
-     * @return: Object { "token" , "userId" }
-     */
-    signIn: () => '/user/signIn',
+    // http://localhost:8000/documentation#!/user/postUserProfile
+    fetchProfile: () => '/user/profile',
+    // http://localhost:8000/documentation#!/user/postUserSignin
+    signIn: () => '/user/sign-in',
 };
 
 export const headers = {
@@ -19,17 +11,15 @@ export const headers = {
 };
 
 export const getEndpoint = (key, params) => {
-    if (endpoints[key]) {
-        return process.env.API_PATH + endpoints[key](params);
-    }
+    if (endpoints[key]) { return process.env.API_PATH + endpoints[key](params); }
 
     // eslint-disable-next-line no-console
     console.error(`"${key}" is not a valid endpoint.`);
     return null;
 };
 
-export const getHeaders = (authentication) => {
-    if (authentication && authentication.token) { headers.Authorization = authentication.token; }
+export const getHeaders = (credentials) => {
+    if (credentials && credentials.token) { headers.Authorization = `Bearer ${credentials.token}`; }
 
     return headers;
 };

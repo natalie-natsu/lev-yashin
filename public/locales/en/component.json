@@ -1,8 +1,5 @@
 {
   "MainHeader": {
-    "modal-login": {
-      "title": "Let's sign in"
-    },
     "Languages": {
       "languagesDropdown": {
         "labelledBy": "Choose your language"

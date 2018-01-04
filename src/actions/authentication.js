@@ -13,13 +13,13 @@ export function requestSignIn() {
     };
 }
 
-export function successSignIn(token, userId) {
+export function successSignIn(_id, token) {
     return (dispatch) => {
         dispatch({
             type: SUCCESS_SIGN_IN,
             authenticatedAt: Date.now(),
+            _id,
             token,
-            userId,
         });
     };
 }
@@ -39,8 +39,9 @@ export function signOut() {
 
 export function fetchProfileIfNeeded() {
     return (dispatch, getState) => {
-        const { isSigningIn, isLoaded, userId } = getState().authentication;
+        const { isFetching, needRefresh } = getState().profile;
+        const data = getState().credentials.profile;
 
-        if (!isSigningIn && userId && !isLoaded) { dispatch(fetchProfile()); }
+        if (!isFetching && (needRefresh || !data)) { dispatch(fetchProfile()); }
     };
 }

@@ -13,7 +13,7 @@ export const fetchUsers = (payload, scope) => (dispatch, getState) => {
 
     fetch(getEndpoint('fetchUsers'), {
         method: 'GET',
-        headers: getHeaders(getState().authentication),
+        headers: getHeaders(getState().credentials),
         body: JSON.stringify(payload),
     })
         .then(response => response.json()).then((response) => {
@@ -47,49 +47,46 @@ function failFetchUsers(response, payload, scope) {
     };
 }
 
-export const REQUEST_PROFILE = 'REQUEST_PROFILE';
+export const REQUEST_FETCH_PROFILE = 'REQUEST_FETCH_PROFILE';
 export const SUCCESS_FETCH_PROFILE = 'SUCCESS_FETCH_PROFILE';
 export const FAIL_FETCH_PROFILE = 'FAIL_FETCH_PROFILE';
 
 /**
  * Fetch current user profile with the context token
  * @param payload
- * @param scope
  */
-export const fetchProfile = (payload, scope) => (dispatch, getState) => {
-    dispatch({ type: REQUEST_PROFILE, payload, scope });
+export const fetchProfile = payload => (dispatch, getState) => {
+    dispatch({ type: REQUEST_FETCH_PROFILE, payload });
 
     fetch(getEndpoint('fetchProfile'), {
         method: 'GET',
-        headers: getHeaders(getState().authentication),
+        headers: getHeaders(getState().credentials),
     })
         .then(response => response.json()).then((response) => {
-            if (response.error) dispatch(failFetchProfile(response, payload, scope));
-            else successFetchProfile(response, payload, scope);
+            if (response.error) dispatch(failFetchProfile(response, payload));
+            else dispatch(successFetchProfile(response, payload));
         });
 };
 
-function successFetchProfile(response, payload, scope) {
-    return (dispatch) => {
-        const normalized = normalize(response, userSchema);
+function successFetchProfile(response, payload) {
+    return (dispatch, getState) => {
+        const normalized = normalize({ ...response, _id: getState().credentials._id }, userSchema);
 
         dispatch(receiveEntities(normalized.entities));
         dispatch({
             type: SUCCESS_FETCH_PROFILE,
             receivedAt: Date.now(),
-            user: response,
+            data: response,
             payload,
-            scope,
         });
     };
 }
 
-function failFetchProfile(response, payload, scope) {
+function failFetchProfile(response, payload) {
     return {
         type: FAIL_FETCH_PROFILE,
         receivedAt: Date.now(),
         error: response.error,
         payload,
-        scope,
     };
 }

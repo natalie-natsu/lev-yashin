@@ -33,7 +33,7 @@ class AppProvider extends React.Component {
     }
 
     componentWillMount() {
-        persistStore(store, { whitelist: ['app', 'authentication'] }, () => {
+        persistStore(store, { whitelist: ['app', 'credentials'] }, () => {
             this.setState({ rehydrated: true });
         });
     }

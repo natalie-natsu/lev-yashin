@@ -10,6 +10,9 @@
     "Landing": {
       "title": "Devient champion <1>du monde en Russie</1>",
       "subtitle": "Jeu de fantasy football"
+    },
+    "modal-login": {
+      "title": "Se connecter"
     }
   }
 }
