@@ -1,4 +1,5 @@
 import { persistStore } from 'redux-persist';
+import { toast } from 'react-toastify';
 import store from '../index';
 import { fetchProfile } from './entities/user';
 
@@ -31,17 +32,18 @@ export function failSignIn() {
 }
 
 export function signOut() {
-    persistStore(store).purge(['authentication']);
+    persistStore(store).purge(['credentials', 'profile']);
+    toast('See you next time', { position: toast.POSITION.BOTTOM_RIGHT });
     return {
         type: SIGN_OUT,
     };
 }
 
-export function fetchProfileIfNeeded() {
+export function fetchProfileIfNeeded(scope) {
     return (dispatch, getState) => {
         const { isFetching, needRefresh } = getState().profile;
         const data = getState().credentials.profile;
 
-        if (!isFetching && (needRefresh || !data)) { dispatch(fetchProfile()); }
+        if (!isFetching && (needRefresh || !data)) { dispatch(fetchProfile(scope)); }
     };
 }

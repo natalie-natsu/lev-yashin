@@ -1,8 +1,9 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import Proptypes from 'prop-types';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
 import 'flag-icon-css/css/flag-icon.min.css';
+import { ToastContainer } from 'react-toastify';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { I18nextProvider } from 'react-i18next';
 import i18n from './i18n';
 
@@ -30,6 +31,7 @@ class App extends React.Component {
         return (
             <I18nextProvider i18n={i18n}>
                 <div id="app">
+                    <ToastContainer />
                     <BrowserRouter>
                         <Switch>
                             <Layout signOut={() => this.props.dispatch(signOut())}>

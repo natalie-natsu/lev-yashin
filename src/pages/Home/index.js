@@ -10,6 +10,7 @@ import { faUserCircle } from '@fortawesome/fontawesome-free-regular';
 
 import { failSignIn, fetchProfileIfNeeded, requestSignIn, signOut, successSignIn } from '../../actions/authentication';
 import { getEndpoint, headers } from '../../helpers/endpoint';
+import scopes from '../../scopes';
 
 import SideAction from '../../components/MainHeader/SideAction';
 import Title from '../../components/MainHeader/Title';
@@ -37,8 +38,9 @@ class Home extends React.Component {
                     throw new SubmissionError({ _error: json.error });
                 } else {
                     dispatch(successSignIn(json._id, json.token));
-                    dispatch(fetchProfileIfNeeded());
+                    dispatch(fetchProfileIfNeeded(scopes.pages.Home));
                     $('#modal-home-login').modal('hide');
+                    if (document.activeElement !== document.body) { document.activeElement.blur(); }
                 }
             });
     }

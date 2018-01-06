@@ -6,7 +6,6 @@ const initialAuthenticationState = {
     authenticatedAt: null,
     errors: null,
     isAuthenticated: false,
-    isLoaded: false,
     isSigningIn: false,
     success: false,
 };

@@ -1,0 +1,20 @@
+{
+  "fetchProfile": {
+    "success": {
+      "text": {
+        "1": "Hey! it's you",
+        "2": "Always a pleasure to see you",
+        "3": "Welcome back!"
+      }
+    }
+  },
+  "signOut": {
+    "success": {
+      "text": {
+        "1": "See you soon!",
+        "2": "Leaving us already?",
+        "3": "See you next time!"
+      }
+    }
+  }
+}

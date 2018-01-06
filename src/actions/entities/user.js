@@ -53,22 +53,22 @@ export const FAIL_FETCH_PROFILE = 'FAIL_FETCH_PROFILE';
 
 /**
  * Fetch current user profile with the context token
- * @param payload
+ * @param scope
  */
-export const fetchProfile = payload => (dispatch, getState) => {
-    dispatch({ type: REQUEST_FETCH_PROFILE, payload });
+export const fetchProfile = scope => (dispatch, getState) => {
+    dispatch({ type: REQUEST_FETCH_PROFILE });
 
     fetch(getEndpoint('fetchProfile'), {
         method: 'GET',
         headers: getHeaders(getState().credentials),
     })
         .then(response => response.json()).then((response) => {
-            if (response.error) dispatch(failFetchProfile(response, payload));
-            else dispatch(successFetchProfile(response, payload));
+            if (response.error) dispatch(failFetchProfile(response, scope));
+            else dispatch(successFetchProfile(response, scope));
         });
 };
 
-function successFetchProfile(response, payload) {
+function successFetchProfile(response, scope) {
     return (dispatch, getState) => {
         const normalized = normalize({ ...response, _id: getState().credentials._id }, userSchema);
 
@@ -77,16 +77,16 @@ function successFetchProfile(response, payload) {
             type: SUCCESS_FETCH_PROFILE,
             receivedAt: Date.now(),
             data: response,
-            payload,
+            scope,
         });
     };
 }
 
-function failFetchProfile(response, payload) {
+function failFetchProfile(response, scope) {
     return {
         type: FAIL_FETCH_PROFILE,
         receivedAt: Date.now(),
         error: response.error,
-        payload,
+        scope,
     };
 }

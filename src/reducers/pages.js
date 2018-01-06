@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
-import MainHeader from './components/MainHeader';
+import Home from './pages/Home';
 
 export default combineReducers({
-    MainHeader,
+    Home,
 });
