@@ -8,6 +8,7 @@
   },
   "Drawer": {
     "separators": {
+      "authentication": "Authentification",
       "navigation": "Navigation",
       "gifts": "Tes récompenses",
       "settings": "Paramètres"

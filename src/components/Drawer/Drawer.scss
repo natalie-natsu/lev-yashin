@@ -137,11 +137,22 @@ $navItemPadding: .5rem 1rem;
     padding: 0 2rem 0 .5rem;
     height: $navBarHeight;
     background-color: darken($drawerBackground, 15%);
+
+    h3 {
+        height: 100%;
+        font-weight: 500;
+        font-size: 1.25rem;
+        line-height: $navBarHeight;
+    }
 }
 
 @media (min-width: 768px) {
     #drawer-nav header {
         height: $navBarHeightSm;
+
+        h3 {
+            line-height: $navBarHeightSm;
+        }
     }
 }
 

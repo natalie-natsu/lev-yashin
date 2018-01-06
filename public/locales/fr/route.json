@@ -16,5 +16,11 @@
   },
   "notifications": {
     "text": "Notifications"
+  },
+  "signIn": {
+    "text": "Se connecter"
+  },
+  "register": {
+    "text": "S'inscrire"
   }
 }

@@ -22,7 +22,6 @@ function updateCrendentials(state, { _id, authenticatedAt, token }) {
     };
 }
 
-
 function updateProfile(state, { data }) {
     return {
         ...state,

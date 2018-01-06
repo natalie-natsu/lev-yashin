@@ -5,8 +5,22 @@
 }
 
 .user-nav img {
-    max-height: $navBarHeight;
-    height: calc(100% - 1rem);
+    width: 42px;
+    height: 42px;
+    border: 2px solid #fff;
+}
+
+.user-nav .media-body {
+    position: relative;
+    display: block;
+    width: calc(100% -  42px);
+}
+
+.user-nav .media-body a {
+    overflow: hidden;
+    width: 100%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 @media (min-width: 768px) {
