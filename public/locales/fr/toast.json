@@ -1,20 +1,12 @@
 {
   "fetchProfile": {
     "success": {
-      "text": {
-        "1": "Hey !",
-        "2": "Nous revoilà",
-        "3": "Bienvenue"
-      }
+      "text": "Connecté avec succès !"
     }
   },
   "signOut": {
     "success": {
-      "text": {
-        "1": "À la prochaine !",
-        "2": "On se quitte déjà ?",
-        "3": "À très vite !"
-      }
+      "text": "À la prochaine {{name}} !"
     }
   }
 }

@@ -47,7 +47,7 @@ class Home extends React.Component {
 
     renderSignInButton() {
         const { credentials, dispatch, profile, t } = this.props;
-        const { _id, token } = credentials;
+        const { token } = credentials;
 
         if (token) {
             if (profile.isFetching) {
@@ -56,14 +56,13 @@ class Home extends React.Component {
                         <FontAwesomeIcon icon={faSpinner} spin /> {t('form:signIn.state.isFetching')}
                     </button>
                 );
-            } else if (_id) {
-                return (
-                    <button type="button" className="btn btn-outline-light" onClick={() => dispatch(signOut())}>
-                        <FontAwesomeIcon icon={faSignOutAlt} /> {t('form:signIn.button.signOut')}
-                    </button>
-
-                );
             }
+
+            return (
+                <button type="button" className="btn btn-outline-light" onClick={() => dispatch(signOut())}>
+                    <FontAwesomeIcon icon={faSignOutAlt} /> {t('form:signIn.button.signOut')}
+                </button>
+            );
         }
 
         return (

@@ -1,11 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './UserNav.scss';
+import { getName } from '../../../helpers/user';
 
-function generateName(email, userName, firstName, lastName) {
-    if (firstName && lastName) { return `${firstName} ${lastName}`; }
-    return email;
-}
+import './UserNav.scss';
 
 const UserNav = ({ email, userName, firstName, lastName, picture }) => (
     <div className="user-nav media">
@@ -14,13 +11,13 @@ const UserNav = ({ email, userName, firstName, lastName, picture }) => (
                 className="rounded-circle"
                 // eslint-disable-next-line max-len
                 src={picture}
-                alt={generateName(email, userName, firstName, lastName)}
+                alt={getName(email, userName, firstName, lastName)}
             />
         </a>
         <div className="media-body align-self-center">
             <p className="mb-0">
                 <a href="/" className="nav-link">
-                    {generateName(email, userName, firstName, lastName)}
+                    {getName(email, userName, firstName, lastName)}
                 </a>
             </p>
         </div>

@@ -1,7 +1,10 @@
+import React from 'react';
 import { persistStore } from 'redux-persist';
 import { toast } from 'react-toastify';
 import store from '../index';
 import { fetchProfile } from './entities/user';
+import { getName } from '../helpers/user';
+import ToastSignOutSuccess from '../components/Toast/SignOut/Success';
 
 export const REQUEST_SIGN_IN = 'REQUEST_SIGN_IN';
 export const SUCCESS_SIGN_IN = 'SUCCESS_SIGN_IN';
@@ -9,9 +12,7 @@ export const FAIL_SIGN_IN = 'FAIL_SIGN_IN';
 export const SIGN_OUT = 'SIGN_OUT';
 
 export function requestSignIn() {
-    return {
-        type: REQUEST_SIGN_IN,
-    };
+    return { type: REQUEST_SIGN_IN };
 }
 
 export function successSignIn(_id, token) {
@@ -26,16 +27,17 @@ export function successSignIn(_id, token) {
 }
 
 export function failSignIn() {
-    return {
-        type: FAIL_SIGN_IN,
-    };
+    return { type: FAIL_SIGN_IN };
 }
 
 export function signOut() {
-    persistStore(store).purge(['credentials', 'profile']);
-    toast('See you next time', { position: toast.POSITION.BOTTOM_RIGHT });
-    return {
-        type: SIGN_OUT,
+    return (dispatch, getState) => {
+        const { email, userName, firstName, lastName } = getState().credentials.profile;
+        const name = getName(email, userName, firstName, lastName);
+
+        persistStore(store).purge(['credentials', 'profile']);
+        toast(<ToastSignOutSuccess name={name} />, { position: toast.POSITION.BOTTOM_RIGHT });
+        dispatch({ type: SIGN_OUT });
     };
 }
 
