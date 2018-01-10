@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
 import { translate } from 'react-i18next';
 import classNames from 'classnames';
@@ -7,10 +8,12 @@ import classNames from 'classnames';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { faExclamationTriangle, faSignInAlt, faSpinner } from '@fortawesome/fontawesome-free-solid';
 
+import { routes } from '../../../helpers/routes';
 import './SignInForm.css';
 
-const form = 'sign-in-form';
 const $ = window.jQuery;
+
+const form = 'sign-in-form';
 const validate = (values) => {
     const errors = {};
     if (!values.email) {
@@ -41,11 +44,16 @@ class SignInForm extends React.Component {
         );
     }
 
+    static handleLinkClick() {
+        $('#modal-home-login').modal('hide');
+    }
+
     constructor(props) {
         super(props);
 
         this.formErrors = {
-            incorrectPasswordUser: this.props.t('form:signIn.errors.incorrectPasswordUser'),
+            notPrecise: this.props.t('request:error.notPrecise'),
+            badRequest: this.props.t('form:signIn.errors.badRequest'),
         };
 
         this.emailErrors = [{
@@ -54,6 +62,9 @@ class SignInForm extends React.Component {
         }, {
             key: 'invalid',
             message: this.props.t('form:signIn.errors.email.invalid'),
+        }, {
+            key: 'incorrect',
+            message: this.props.t('form:signIn.errors.email.incorrect'),
         }];
 
         this.passwordErrors = [{
@@ -62,6 +73,9 @@ class SignInForm extends React.Component {
         }, {
             key: 'invalid',
             message: this.props.t('form:signIn.errors.password.invalid'),
+        }, {
+            key: 'incorrect',
+            message: this.props.t('form:signIn.errors.password.incorrect'),
         }];
     }
 
@@ -95,29 +109,28 @@ class SignInForm extends React.Component {
                     errors={this.passwordErrors}
                 />
                 {this.renderFormError()}
-                <div className="text-right">
-                    <a
+                <div className="d-inline-block">
+                    <Link
                         className="forgot-password"
-                        data-dismiss="modal"
-                        href="#"
-                        onClick={() => setTimeout(() => $('#modal-home-forgot-password').modal('show'), 400)}
+                        to={routes.user.forgotPassword}
+                        onClick={() => SignInForm.handleLinkClick()}
                     >
                         {t('form:signIn.link.forgotPassword')}
-                    </a>
-                    <button type="submit" className="btn btn-success" disabled={pristine || submitting}>
-                        {!submitting
-                            ? (
-                                <span>
-                                    <FontAwesomeIcon icon={faSignInAlt} /> {t('form:signIn.button.default')}
-                                </span>
-                            ) : (
-                                <span>
-                                    <FontAwesomeIcon icon={faSpinner} spin /> {t('form:signIn.state.isSigningIn')}
-                                </span>
-                            )
-                        }
-                    </button>
+                    </Link><br />
+                    <Link
+                        className="register"
+                        to={routes.user.register}
+                        onClick={() => SignInForm.handleLinkClick()}
+                    >
+                        {t('form:signIn.link.register')}
+                    </Link>
                 </div>
+                <button type="submit" className="btn btn-success float-right" disabled={pristine || submitting}>
+                    {!submitting
+                        ? <span><FontAwesomeIcon icon={faSignInAlt} /> {t('form:signIn.button.default')}</span>
+                        : <span><FontAwesomeIcon icon={faSpinner} spin /> {t('form:signIn.state.isSigningIn')}</span>
+                    }
+                </button>
             </form>
         );
     }
@@ -135,4 +148,4 @@ SignInForm.defaultProps = {
     error: null,
 };
 
-export default translate(['common', 'form'])(reduxForm({ form, validate })(SignInForm));
+export default translate(['common', 'form', 'request'])(reduxForm({ form, validate })(SignInForm));

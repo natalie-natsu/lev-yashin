@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { translate } from 'react-i18next';
 import { slide as Menu } from 'react-burger-menu';
 import { decorator as reduxBurgerMenu, action as toggleMenu } from 'redux-burger-menu';
@@ -12,6 +13,8 @@ import {
 } from '@fortawesome/fontawesome-free-solid';
 import { faCalendarAlt } from '@fortawesome/fontawesome-free-regular';
 import { faFacebook, faTwitter, faYoutube } from '@fortawesome/fontawesome-free-brands';
+
+import { routes } from '../../helpers/routes';
 
 import './Drawer.scss';
 import Languages from '../Languages';
@@ -53,14 +56,14 @@ const Drawer = ({ credentials, dispatch, isOpen, t }) => (
                     <DrawerSeparator>{t('component:Drawer.separators.authentication')}</DrawerSeparator>
                     <ul className="fa-ul">
                         <li className="nav-item">
-                            <a className="nav-link" href="#">
+                            <Link className="nav-link" to={routes.user.signIn}>
                                 <FontAwesomeIcon icon={faSignInAlt} listItem />&nbsp;{t('route:signIn.text')}
-                            </a>
+                            </Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">
+                            <Link className="nav-link" to={routes.user.register}>
                                 <FontAwesomeIcon icon={faEdit} listItem />&nbsp;{t('route:register.text')}
-                            </a>
+                            </Link>
                         </li>
                     </ul>
                 </section>
@@ -69,28 +72,28 @@ const Drawer = ({ credentials, dispatch, isOpen, t }) => (
                 <DrawerSeparator>{t('component:Drawer.separators.navigation')}</DrawerSeparator>
                 <ul className="fa-ul">
                     <li className="nav-item">
-                        <a className="nav-link" href="#">
+                        <Link className="nav-link" to={routes.home}>
                             <FontAwesomeIcon icon={faHome} listItem />&nbsp;{t('route:home.text')}
-                        </a>
+                        </Link>
                     </li>
                     {credentials.token && (
                         <li className="nav-item">
-                            <a className="nav-link" href="#">
+                            <Link className="nav-link" to="#">
                                 <FontAwesomeIcon icon={faPlayCircle} listItem />&nbsp;{t('route:games.text')}
-                            </a>
+                            </Link>
                         </li>
                     )}
                     {credentials.token && (
                         <li className="nav-item">
-                            <a className="nav-link" href="#">
+                            <Link className="nav-link" to="#">
                                 <FontAwesomeIcon icon={faBell} listItem />&nbsp;{t('route:notifications.text')}
-                            </a>
+                            </Link>
                         </li>
                     )}
                     <li className="nav-item">
-                        <a className="nav-link" href="#">
+                        <Link className="nav-link" to="#">
                             <FontAwesomeIcon icon={faCalendarAlt} listItem />&nbsp;{t('route:calendar.text')}
-                        </a>
+                        </Link>
                     </li>
                 </ul>
             </section>
@@ -99,14 +102,14 @@ const Drawer = ({ credentials, dispatch, isOpen, t }) => (
                     <DrawerSeparator>{t('component:Drawer.separators.gifts')}</DrawerSeparator>
                     <ul className="fa-ul">
                         <li className="nav-item">
-                            <a className="nav-link" href="#">
+                            <Link className="nav-link" to="#">
                                 <FontAwesomeIcon icon={faArchive} listItem />&nbsp;{t('route:inventory.text')}
-                            </a>
+                            </Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">
+                            <Link className="nav-link" to="#">
                                 <FontAwesomeIcon icon={faGift} listItem />&nbsp;{t('route:shop.text')}
-                            </a>
+                            </Link>
                         </li>
                     </ul>
                 </section>
@@ -116,18 +119,18 @@ const Drawer = ({ credentials, dispatch, isOpen, t }) => (
                 <Languages />
             </section>
             <footer>
-                <a className="nav-link" href="#">
+                <a className="nav-link" href="#" target="_blank">
                     <FontAwesomeIcon icon={faFacebook} />
                 </a>
-                <a className="nav-link" href="#">
+                <a className="nav-link" href="#" target="_blank">
                     <FontAwesomeIcon icon={faTwitter} />
                 </a>
-                <a className="nav-link" href="#">
+                <a className="nav-link" href="#" target="_blank">
                     <FontAwesomeIcon icon={faYoutube} />
                 </a>
-                <a className="nav-link" href="#">
+                <Link className="nav-link" to="#">
                     <FontAwesomeIcon icon={faEnvelope} />
-                </a>
+                </Link>
             </footer>
         </nav>
     </Menu>

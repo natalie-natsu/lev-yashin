@@ -13,11 +13,12 @@ function resetCredentials() {
     return initialCredentialsState;
 }
 
-function updateCrendentials(state, { _id, authenticatedAt, token }) {
+function updateCrendentials(state, { _id, authenticatedAt, profile, token }) {
     return {
         ...state,
         _id,
         authenticatedAt,
+        profile,
         token,
     };
 }

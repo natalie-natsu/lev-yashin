@@ -1,10 +1,13 @@
-#sign-in-form .forgot-password {
+#sign-in-form .forgot-password,
+#sign-in-form .register {
     float: left;
     margin: 0 5px 5px 0;
     color: #4494ff;
     cursor: pointer;
+    font-size: 80%;
 }
 
-#sign-in-form .forgot-password:hover {
+#sign-in-form .forgot-password:hover,
+#sign-in-form .register:hover {
     text-decoration: underline;
 }

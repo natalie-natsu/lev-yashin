@@ -8,7 +8,6 @@ import authentication from './authentication';
 import credentials from './credentials';
 import entities from './entities';
 import pages from './pages';
-import profile from './profile';
 
 export default combineReducers({
     app,
@@ -17,7 +16,6 @@ export default combineReducers({
     credentials,
     entities,
     pages,
-    profile,
     form: formReducer.plugin({
         'sign-in-form': (state, action) => {
             switch (action.type) {

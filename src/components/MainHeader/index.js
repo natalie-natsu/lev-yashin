@@ -1,19 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { translate } from 'react-i18next';
 import { action as toggleMenu } from 'redux-burger-menu';
 
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/fontawesome-free-solid';
 
+import { routes } from '../../helpers/routes';
 import './MainHeader.scss';
 import Languages from '../Languages';
 
 const MainHeader = ({ burgerMenu, dispatch, t }) => (
     <header id="main-header">
         <nav className="navbar navbar-expand-lg navbar-dark">
-            <a href="/" className="navbar-brand mb-0 h1 hidden-sm-down">{t('project.name')}</a>
+            <Link to={routes.home} className="navbar-brand mb-0 h1 hidden-sm-down">{t('project.name')}</Link>
             <div className="btn-drawer my-2 ml-2 ml-sm-0 mr-2 mr-sm-3">
                 <button
                     className="btn"

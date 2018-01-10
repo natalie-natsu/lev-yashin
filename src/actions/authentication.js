@@ -15,13 +15,16 @@ export function requestSignIn() {
     return { type: REQUEST_SIGN_IN };
 }
 
-export function successSignIn(_id, token) {
+export function successSignIn(json, scope) {
+    const { _id, profile, token } = json;
     return (dispatch) => {
         dispatch({
             type: SUCCESS_SIGN_IN,
             authenticatedAt: Date.now(),
             _id,
+            profile,
             token,
+            scope,
         });
     };
 }

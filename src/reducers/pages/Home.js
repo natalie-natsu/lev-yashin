@@ -3,18 +3,18 @@ import { toast } from 'react-toastify';
 import { createReducer } from '../utilities';
 import scopes from '../../scopes';
 
-import { SUCCESS_FETCH_PROFILE } from '../../actions/entities/user';
-import Success from '../../components/Toast/FetchProfile/Success';
+import { SUCCESS_SIGN_IN } from '../../actions/authentication';
+import Success from '../../components/Toast/SignIn/Success';
 
-const initialHomeState = { toasted: false };
+const initialHomeState = { hasSignedIn: false };
 
-function notifyFetchProfileSuccess(state, { data }) {
-    toast(<Success email={data.email} picture={data.picture} {...data} />, {
+function notifyFetchProfileSuccess(state, { profile }) {
+    toast(<Success email={profile.email} picture={profile.picture} {...profile} />, {
         position: toast.POSITION.BOTTOM_RIGHT,
     });
-    return { ...state, toasted: true };
+    return { ...state, hasSignedIn: true };
 }
 
 export default createReducer(initialHomeState, {
-    [SUCCESS_FETCH_PROFILE]: notifyFetchProfileSuccess,
+    [SUCCESS_SIGN_IN]: notifyFetchProfileSuccess,
 }, scopes.pages.Home);

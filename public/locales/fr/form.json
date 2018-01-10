@@ -6,21 +6,23 @@
       "signOut": "Déconnexion"
     },
     "state": {
-      "isFetching": "Récupération des infos...",
       "isSigningIn": "En cours de connexion..."
     },
     "link": {
+      "register": "Inscription",
       "forgotPassword": "Mot de passe oublié ?"
     },
     "errors": {
-      "incorrectPasswordUser": "Adresse email ou mot de pass incorect",
+      "badRequest": "Adresse email ou mot de passe incorrects",
       "email": {
         "required": "Adresse email requise",
-        "invalid": "Adresse email invalide"
+        "invalid": "Adresse email invalide",
+        "incorrect": "Cette adresse email n'existe pas"
       },
       "password": {
         "required": "Mot de passe requis",
-        "invalid": "Mot de pass invalide"
+        "invalid": "Mot de pass invalide",
+        "incorrect": "Ce mot de passe est incorrect"
       }
     }
   }

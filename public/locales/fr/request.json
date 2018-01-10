@@ -1,0 +1,6 @@
+{
+  "error": {
+    "notPrecise": "Oops, une erreur est survenue, réessaye plus tard.",
+    "badRequest": "Cette requête est incorrecte."
+  }
+}

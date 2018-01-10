@@ -2,12 +2,10 @@ import React from 'react';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/fontawesome-free-solid';
 import './Description.css';
-import background from './assets/home-description-background.jpg';
-import separator from './assets/diagonal-separator.svg';
 
 export default () => (
     <section id="home-description">
-        <div className="parallax" style={{ backgroundImage: `url("${background}")` }} />
+        <div className="parallax" />
         <div className="container">
             <div className="row">
                 <div className="col-md-6">
@@ -30,6 +28,5 @@ export default () => (
                 </div>
             </div>
         </div>
-        <img src={separator} className="separator" alt="diagonal-separator" />
     </section>
 );
