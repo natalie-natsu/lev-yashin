@@ -2,7 +2,14 @@
   "NoMatch": {
     "card": {
       "title": "Oops! Page non trouvée.",
-      "text": "Nous n'avons pas pu trouver la page que vous recherchez.",
+      "text": "Nous n'avons pas pu trouver la page que tu recherches.",
+      "button": "Retour à l'accueil"
+    }
+  },
+  "NotAllowed": {
+    "card": {
+      "title": "Stop l'ami !",
+      "text": "Es-tu sûr d'avoir le droit d'accèder à cette page ?",
       "button": "Retour à l'accueil"
     }
   },

@@ -6,9 +6,9 @@ import { getName } from '../../../helpers/user';
 import { routes } from '../../../helpers/routes';
 import './UserNav.scss';
 
-const UserNav = ({ email, userName, firstName, lastName, picture }) => (
+const UserNav = ({ email, handleClick, userName, firstName, lastName, picture }) => (
     <div className="user-nav media">
-        <Link to={routes.user.profile} className="mr-3 align-self-center">
+        <Link to={routes.me.exact} className="mr-3 align-self-center" onClick={handleClick}>
             <img
                 className="rounded-circle"
                 // eslint-disable-next-line max-len
@@ -18,7 +18,7 @@ const UserNav = ({ email, userName, firstName, lastName, picture }) => (
         </Link>
         <div className="media-body align-self-center">
             <p className="mb-0">
-                <Link to={routes.user.profile} className="nav-link">
+                <Link to={routes.me.exact} className="nav-link" onClick={handleClick}>
                     {getName(email, userName, firstName, lastName)}
                 </Link>
             </p>
@@ -28,6 +28,7 @@ const UserNav = ({ email, userName, firstName, lastName, picture }) => (
 
 UserNav.propTypes = {
     email: PropTypes.string.isRequired,
+    handleClick: PropTypes.func,
     userName: PropTypes.string,
     firstName: PropTypes.string,
     lastName: PropTypes.string,
@@ -35,6 +36,7 @@ UserNav.propTypes = {
 };
 
 UserNav.defaultProps = {
+    handleClick: () => false,
     userName: null,
     firstName: null,
     lastName: null,

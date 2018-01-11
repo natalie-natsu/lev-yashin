@@ -8,8 +8,8 @@ import { faHome, faLongArrowAltLeft } from '@fortawesome/fontawesome-free-solid'
 import { routes } from '../../helpers/routes';
 import SideAction from '../../components/MainHeader/SideAction';
 
-const NoMatch = ({ history, t }) => (
-    <div id="no-match">
+const NotAllowed = ({ history, t }) => (
+    <div id="not-allowed">
         <SideAction>
             <div className="btn-side-action mx-2 mx-sm-3">
                 <button type="button" className="btn" onClick={() => history.goBack()}>
@@ -20,17 +20,17 @@ const NoMatch = ({ history, t }) => (
         <div className="container">
             <div className="row">
                 <div className="col-lg-5 col-md-6 mx-auto">
-                    <div className="card border-complementary animated bounceIn">
+                    <div className="card border-danger animated shake">
                         <div className="card-body">
-                            <h4 className="card-title text-complementary">
-                                404 <small>{t('page:NoMatch.card.title')}</small>
+                            <h4 className="card-title text-danger">
+                                403 <small>{t('page:NotAllowed.card.title')}</small>
                             </h4>
-                            <p className="card-text text-complementary">{t('page:NoMatch.card.text')}</p>
+                            <p className="card-text text-danger">{t('page:NotAllowed.card.text')}</p>
                             <Link
                                 to={routes.home}
-                                className="btn btn-outline-complementary float-right btn-block btn-previous-down"
+                                className="btn btn-outline-danger float-right btn-block btn-previous-down"
                             >
-                                <FontAwesomeIcon icon={faHome} /> {t('page:NoMatch.card.button')}
+                                <FontAwesomeIcon icon={faHome} /> {t('page:NotAllowed.card.button')}
                             </Link>
                         </div>
                     </div>
@@ -40,9 +40,9 @@ const NoMatch = ({ history, t }) => (
     </div>
 );
 
-NoMatch.propTypes = {
+NotAllowed.propTypes = {
     history: PropTypes.shape({ goBack: PropTypes.func.isRequired }).isRequired,
     t: PropTypes.func.isRequired,
 };
 
-export default translate(['page'])(NoMatch);
+export default translate(['page'])(NotAllowed);

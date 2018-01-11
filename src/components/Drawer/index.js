@@ -28,6 +28,10 @@ function fixBody(menuState) {
     else body.classList.remove('fixed');
 }
 
+function close(dispatch) {
+    dispatch(toggleMenu(false));
+}
+
 const Drawer = ({ credentials, dispatch, isOpen, t }) => (
     <Menu
         isOpen={isOpen}
@@ -44,6 +48,7 @@ const Drawer = ({ credentials, dispatch, isOpen, t }) => (
                     <UserNav
                         {...credentials.profile}
                         email={credentials.profile.email}
+                        handleClick={() => close(dispatch)}
                         picture={credentials.profile.picture}
                     />
                 )}
@@ -56,12 +61,12 @@ const Drawer = ({ credentials, dispatch, isOpen, t }) => (
                     <DrawerSeparator>{t('component:Drawer.separators.authentication')}</DrawerSeparator>
                     <ul className="fa-ul">
                         <li className="nav-item">
-                            <Link className="nav-link" to={routes.user.signIn}>
+                            <Link className="nav-link" to={routes.auth.signIn} onClick={() => close(dispatch)}>
                                 <FontAwesomeIcon icon={faSignInAlt} listItem />&nbsp;{t('route:signIn.text')}
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to={routes.user.register}>
+                            <Link className="nav-link" to={routes.auth.register} onClick={() => close(dispatch)}>
                                 <FontAwesomeIcon icon={faEdit} listItem />&nbsp;{t('route:register.text')}
                             </Link>
                         </li>
@@ -72,26 +77,26 @@ const Drawer = ({ credentials, dispatch, isOpen, t }) => (
                 <DrawerSeparator>{t('component:Drawer.separators.navigation')}</DrawerSeparator>
                 <ul className="fa-ul">
                     <li className="nav-item">
-                        <Link className="nav-link" to={routes.home}>
+                        <Link className="nav-link" to={routes.home} onClick={() => close(dispatch)}>
                             <FontAwesomeIcon icon={faHome} listItem />&nbsp;{t('route:home.text')}
                         </Link>
                     </li>
                     {credentials.token && (
                         <li className="nav-item">
-                            <Link className="nav-link" to="#">
+                            <Link className="nav-link" to="#" onClick={() => close(dispatch)}>
                                 <FontAwesomeIcon icon={faPlayCircle} listItem />&nbsp;{t('route:games.text')}
                             </Link>
                         </li>
                     )}
                     {credentials.token && (
                         <li className="nav-item">
-                            <Link className="nav-link" to="#">
+                            <Link className="nav-link" to="#" onClick={() => close(dispatch)}>
                                 <FontAwesomeIcon icon={faBell} listItem />&nbsp;{t('route:notifications.text')}
                             </Link>
                         </li>
                     )}
                     <li className="nav-item">
-                        <Link className="nav-link" to="#">
+                        <Link className="nav-link" to="#" onClick={() => close(dispatch)}>
                             <FontAwesomeIcon icon={faCalendarAlt} listItem />&nbsp;{t('route:calendar.text')}
                         </Link>
                     </li>
@@ -102,12 +107,12 @@ const Drawer = ({ credentials, dispatch, isOpen, t }) => (
                     <DrawerSeparator>{t('component:Drawer.separators.gifts')}</DrawerSeparator>
                     <ul className="fa-ul">
                         <li className="nav-item">
-                            <Link className="nav-link" to="#">
+                            <Link className="nav-link" to="#" onClick={() => close(dispatch)}>
                                 <FontAwesomeIcon icon={faArchive} listItem />&nbsp;{t('route:inventory.text')}
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="#">
+                            <Link className="nav-link" to="#" onClick={() => close(dispatch)}>
                                 <FontAwesomeIcon icon={faGift} listItem />&nbsp;{t('route:shop.text')}
                             </Link>
                         </li>
@@ -128,7 +133,7 @@ const Drawer = ({ credentials, dispatch, isOpen, t }) => (
                 <a className="nav-link" href="#" target="_blank">
                     <FontAwesomeIcon icon={faYoutube} />
                 </a>
-                <Link className="nav-link" to="#">
+                <Link className="nav-link" to="#" onClick={() => close(dispatch)}>
                     <FontAwesomeIcon icon={faEnvelope} />
                 </Link>
             </footer>

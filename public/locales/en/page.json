@@ -6,6 +6,13 @@
       "button": "Go home"
     }
   },
+  "NotAllowed": {
+    "card": {
+      "title": "You shall not pass !",
+      "text": "Are you sure to be granted for accessing that kind of page ?",
+      "button": "Go home"
+    }
+  },
   "Home": {
     "Landing": {
       "title": "Win the <1>Russia</1> World Cup",

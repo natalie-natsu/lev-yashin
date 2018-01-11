@@ -112,14 +112,14 @@ class SignInForm extends React.Component {
                 <div className="d-inline-block">
                     <Link
                         className="forgot-password"
-                        to={routes.user.forgotPassword}
+                        to={routes.auth.forgotPassword}
                         onClick={() => SignInForm.handleLinkClick()}
                     >
                         {t('form:signIn.link.forgotPassword')}
                     </Link><br />
                     <Link
                         className="register"
-                        to={routes.user.register}
+                        to={routes.auth.register}
                         onClick={() => SignInForm.handleLinkClick()}
                     >
                         {t('form:signIn.link.register')}

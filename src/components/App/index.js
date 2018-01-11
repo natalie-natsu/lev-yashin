@@ -9,12 +9,17 @@ import i18n from './i18n';
 
 import { signOut } from '../../actions/authentication';
 import { validateFirstVisit } from '../../actions/app';
+import { routes } from '../../helpers/routes';
 
 import './App.scss';
-import Home from '../../pages/Home';
 import Layout from '../Layout';
 import FirstVisit from '../FirstVisit';
+
+import NotAllowed from '../../pages/NotAllowed';
 import NoMatch from '../../pages/NoMatch';
+import Home from '../../pages/Home';
+import Auth from '../../pages/Auth';
+import Me from '../../pages/Me';
 
 const $ = window.jQuery;
 
@@ -33,14 +38,15 @@ class App extends React.Component {
                 <div id="app">
                     <ToastContainer />
                     <BrowserRouter>
-                        <Switch>
-                            <Layout signOut={() => this.props.dispatch(signOut())}>
-                                <Switch>
-                                    <Route exact path="/" component={Home} />
-                                    <Route component={NoMatch} />
-                                </Switch>
-                            </Layout>
-                        </Switch>
+                        <Layout signOut={() => this.props.dispatch(signOut())}>
+                            <Switch>
+                                <Route exact path={routes.home} component={Home} />
+                                <Route path={routes.auth.exact} component={Auth} />
+                                <Route path={routes.me.exact} component={Me} />
+                                <Route path={routes.notAllowed} component={NotAllowed} />
+                                <Route component={NoMatch} />
+                            </Switch>
+                        </Layout>
                     </BrowserRouter>
                     <FirstVisit />
                 </div>

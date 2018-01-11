@@ -4,5 +4,8 @@ export default {
     },
     pages: {
         Home: 'Home',
+        auth: {
+            SignIn: 'SignIn',
+        },
     },
 };
