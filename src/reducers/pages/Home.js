@@ -1,7 +1,7 @@
 import React from 'react';
 import { toast } from 'react-toastify';
 import { createReducer } from '../utilities';
-import scopes from '../../scopes';
+import { routes } from '../../helpers/routes';
 
 import { SUCCESS_SIGN_IN } from '../../actions/authentication';
 import Success from '../../components/Toast/SignIn/Success';
@@ -17,4 +17,4 @@ function notifyFetchProfileSuccess(state, { profile }) {
 
 export default createReducer(initialHomeState, {
     [SUCCESS_SIGN_IN]: notifyFetchProfileSuccess,
-}, scopes.pages.Home);
+}, routes.home);

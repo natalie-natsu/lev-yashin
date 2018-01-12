@@ -12,7 +12,6 @@ import { faUserCircle } from '@fortawesome/fontawesome-free-regular';
 import { failSignIn, requestSignIn, successSignIn } from '../../../actions/authentication';
 import { getEndpoint, headers } from '../../../helpers/endpoint';
 import { routes } from '../../../helpers/routes';
-import scopes from '../../../scopes';
 
 import SideAction from '../../../components/MainHeader/SideAction';
 import SignInForm from '../../../components/Authentication/SignInForm';
@@ -48,7 +47,7 @@ class SignIn extends React.Component {
                 if (json.error) {
                     dispatch(failSignIn());
                     throw new SubmissionError(handleSignInError(json));
-                } else { dispatch(successSignIn(json, scopes.pages.auth.SignIn)); }
+                } else { dispatch(successSignIn(json, routes.auth.signIn)); }
             });
     }
 
