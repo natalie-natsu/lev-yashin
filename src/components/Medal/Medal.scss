@@ -1,0 +1,78 @@
+.medal {
+    position: relative;
+    display: block;
+    padding-bottom: 200%;
+    width: 100%;
+
+    .medal-body {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 100%;
+
+        .ribbon {
+            position: absolute;
+            top: 0;
+            left: 12.5%;
+            width: 75%;
+            height: 53%;
+            background: #9bdbf6;
+
+            &:before {
+                position: absolute;
+                width: 100%;
+                height: 5%;
+                background: rgba(0, 0, 0, .1);
+                content: '';
+            }
+
+            &:after {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                z-index: -1;
+                padding-bottom: 50%;
+                width: 57.7%;
+                background-color: inherit;
+                content: '';
+                -webkit-transform: rotate(-30deg) skewX(30deg);
+                    -ms-transform: rotate(-30deg) skewX(30deg);
+                        transform: rotate(-30deg) skewX(30deg);
+                -webkit-transform-origin: 0 0;
+                    -ms-transform-origin: 0 0;
+                        transform-origin: 0 0;;
+            }
+        }
+
+        .circle {
+            position: absolute;
+            bottom: 0;
+            overflow: hidden;
+            width: 100%;
+            height: 50%;
+            border-radius: 50%;
+            background: #fbc56f;
+            color: #fff;
+
+            .filter {
+                position: absolute;
+                top: 33%;
+                left: -33%;
+                width: 100%;
+                height: 100%;
+                border-radius: 0 0 50% 50%;
+                background: rgba(0, 0, 0, .1);
+                transform: rotate(45deg);
+            }
+        }
+
+        svg {
+            position: absolute;
+            bottom: 10%;
+            left: 10%;
+            width: 80%;
+            height: 80%;
+            opacity: .5;
+        }
+    }
+}
