@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { translate } from 'react-i18next';
+
 import { getName } from '../../../../helpers/user';
 import './Success.scss';
 
@@ -15,8 +16,7 @@ const Success = ({ email, userName, firstName, lastName, picture, t }) => (
         </div>
         <div className="media-body align-self-center">
             <p className="mb-0">
-                {t('fetchProfile.success.text')}<br />
-                {getName({ email, userName, firstName, lastName })}
+                {t('register.success.text', { name: getName({ email, userName, firstName, lastName }) })}
             </p>
         </div>
     </div>

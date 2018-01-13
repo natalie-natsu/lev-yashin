@@ -8,5 +8,10 @@
     "success": {
       "text": "Se you next time {{name}}!"
     }
+  },
+  "register": {
+    "success": {
+      "text": "Welcome among us {{name}} !"
+    }
   }
 }

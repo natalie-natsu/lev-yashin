@@ -4,8 +4,9 @@ import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import { faStar, faTrophy, faCalculator, faQuestion } from '@fortawesome/fontawesome-free-solid';
 
-import banner from '../assets/me-banner.jpg';
-import { getPublicName } from '../../../helpers/user';
+import './Header.scss';
+import banner from './assets/banner.png';
+import { getName } from '../../../helpers/user';
 import Medal from '../../../components/Medal';
 import Title from '../../../components/MainHeader/Title';
 
@@ -15,10 +16,10 @@ class MeHeader extends React.Component {
         const { credentials, t } = this.props;
         const { profile } = credentials;
         const { picture } = profile;
-        const name = getPublicName(profile);
+        const name = getName(profile);
 
         return (
-            <div id="me-header">
+            <div id="user-header">
                 <Title>{t('page:Me.title')}</Title>
                 <header className="jumbotron jumbotron-fluid mb-0" style={{ backgroundImage: `url(${banner})` }}>
                     <div className="container text-center">
@@ -32,25 +33,23 @@ class MeHeader extends React.Component {
                             </span>
                             <span className="medal-container">
                                 <Medal
-                                    ribbonColor="#FFCE3D"
-                                    stripeColor="#FFC311"
-                                    circleColor="#E3DEDB"
+                                    ribbonColor="#891C15"
+                                    stripeColor="#731712"
                                     fa={faTrophy}
                                 />
                             </span>
                             <img className="rounded-circle gravatar" src={picture} alt={name} />
                             <span className="medal-container">
                                 <Medal
-                                    ribbonColor="#4545C2"
-                                    stripeColor="#2626B7"
-                                    circleColor="#E3DEDB"
+                                    ribbonColor="#891C15"
+                                    stripeColor="#731712"
                                     fa={faCalculator}
                                 />
                             </span>
                             <span className="medal-container">
                                 <Medal
-                                    ribbonColor="#FFAC3D"
-                                    stripeColor="#FF9911"
+                                    ribbonColor="#357FB7"
+                                    stripeColor="#1669A9"
                                     fa={faQuestion}
                                 />
                             </span>

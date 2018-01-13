@@ -1,5 +1,5 @@
 import { createReducer } from './utilities';
-import { SIGN_OUT, SUCCESS_SIGN_IN } from '../actions/authentication';
+import { SIGN_OUT, SUCCESS_REGISTER, SUCCESS_SIGN_IN } from '../actions/authentication';
 import { SUCCESS_FETCH_PROFILE } from '../actions/entities/user';
 
 const initialCredentialsState = {
@@ -33,5 +33,6 @@ function updateProfile(state, { data }) {
 export default createReducer(initialCredentialsState, {
     [SIGN_OUT]: resetCredentials,
     [SUCCESS_SIGN_IN]: updateCrendentials,
+    [SUCCESS_REGISTER]: updateCrendentials,
     [SUCCESS_FETCH_PROFILE]: updateProfile,
 });

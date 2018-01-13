@@ -1,6 +1,8 @@
 const endpoints = {
     // http://localhost:8000/documentation#!/user/postUserProfile
     fetchProfile: () => '/user/profile',
+    // http://localhost:8000/documentation#!/user/postUserRegister
+    register: () => '/user/register',
     // http://localhost:8000/documentation#!/user/postUserSignin
     signIn: () => '/user/sign-in',
 };

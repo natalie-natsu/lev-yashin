@@ -1,14 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { Field, reduxForm } from 'redux-form';
 import { translate } from 'react-i18next';
-import classNames from 'classnames';
-
+import { Field, reduxForm } from 'redux-form';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import { faExclamationTriangle, faSignInAlt, faSpinner } from '@fortawesome/fontawesome-free-solid';
+import { faSignInAlt, faSpinner } from '@fortawesome/fontawesome-free-solid';
 
 import { routes } from '../../../helpers/routes';
+import { renderFormError, renderInput } from '../../Form';
 import './SignInForm.css';
 
 const $ = window.jQuery;
@@ -16,34 +15,15 @@ const $ = window.jQuery;
 const form = 'sign-in-form';
 const validate = (values) => {
     const errors = {};
-    if (!values.email) {
-        errors.email = 'required';
-    } else if (values.email && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-        errors.email = 'invalid';
-    }
-    if (!values.password) {
-        errors.password = 'required';
-    }
+
+    if (!values.email) { errors.email = 'required'; }
+    if (values.email && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) { errors.email = 'invalid'; }
+
+    if (!values.password) { errors.password = 'required'; }
     return errors;
 };
 
 class SignInForm extends React.Component {
-    static renderInput({ input, placeholder, type, errors, meta: { touched, error } }) {
-        const getEClass = key => `invalid-feedback ${touched && error === key ? 'visible d-block' : 'hidden d-none'}`;
-        return (
-            <div className="form-group">
-                <input
-                    {...input}
-                    placeholder={placeholder}
-                    type={type}
-                    className={classNames('form-control', { [touched && error ? 'is-invalid' : 'is-valid']: touched })}
-                    autoComplete="off"
-                />
-                {errors.map(e => <div className={getEClass(e.key)} key={e.key}>{e.message}</div>)}
-            </div>
-        );
-    }
-
     static handleLinkClick() {
         $('#modal-home-login').modal('hide');
     }
@@ -52,63 +32,41 @@ class SignInForm extends React.Component {
         super(props);
 
         this.formErrors = {
-            notPrecise: this.props.t('request:error.notPrecise'),
-            badRequest: this.props.t('form:signIn.errors.badRequest'),
+            notPrecise: 'request:error.notPrecise',
+            badRequest: 'form:signIn.errors.badRequest',
         };
 
-        this.emailErrors = [{
-            key: 'required',
-            message: this.props.t('form:signIn.errors.email.required'),
-        }, {
-            key: 'invalid',
-            message: this.props.t('form:signIn.errors.email.invalid'),
-        }, {
-            key: 'incorrect',
-            message: this.props.t('form:signIn.errors.email.incorrect'),
-        }];
-
-        this.passwordErrors = [{
-            key: 'required',
-            message: this.props.t('form:signIn.errors.password.required'),
-        }, {
-            key: 'invalid',
-            message: this.props.t('form:signIn.errors.password.invalid'),
-        }, {
-            key: 'incorrect',
-            message: this.props.t('form:signIn.errors.password.incorrect'),
-        }];
-    }
-
-
-    renderFormError() {
-        const error = this.formErrors[this.props.error];
-        return error && (
-            <div className="alert alert-danger" role="alert">
-                <FontAwesomeIcon icon={faExclamationTriangle} /> {error}
-            </div>
-        );
+        this.emailErrors = [
+            { key: 'required', message: 'form:signIn.errors.email.required' },
+            { key: 'invalid', message: 'form:signIn.errors.email.invalid' },
+            { key: 'incorrect', message: 'form:signIn.errors.email.incorrect' },
+        ];
+        this.passwordErrors = [
+            { key: 'required', message: 'form:signIn.errors.password.required' },
+            { key: 'invalid', message: 'form:signIn.errors.password.invalid' },
+            { key: 'incorrect', message: 'form:signIn.errors.password.incorrect' },
+        ];
     }
 
     render() {
-        const { handleSubmit, pristine, submitting, t } = this.props;
-
+        const { error, handleSubmit, pristine, submitting, t } = this.props;
         return (
             <form id={form} onSubmit={handleSubmit}>
                 <Field
-                    component={SignInForm.renderInput}
+                    component={renderInput}
                     name="email"
                     type="email"
-                    placeholder="Email"
+                    placeholder={t('form:signIn.input.email.placeholder')}
                     errors={this.emailErrors}
                 />
                 <Field
-                    component={SignInForm.renderInput}
+                    component={renderInput}
                     name="password"
                     type="password"
-                    placeholder="Password"
+                    placeholder={t('form:signIn.input.password.placeholder')}
                     errors={this.passwordErrors}
                 />
-                {this.renderFormError()}
+                {renderFormError(this.formErrors, error)}
                 <div className="d-inline-block">
                     <Link
                         className="forgot-password"

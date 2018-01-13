@@ -1,0 +1,11 @@
+.toast-fetch-profile-success img {
+    width: 42px;
+    height: 42px;
+    border: 2px solid #eee;
+}
+
+.toast-fetch-profile-success .media-body {
+    position: relative;
+    display: block;
+    width: calc(100% -  42px);
+}

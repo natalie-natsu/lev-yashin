@@ -26,7 +26,7 @@
     "title": "Ton fabuleux profil",
     "link": {
       "update": "Éditer le profil",
-      "resetPassword": "Modifier le mot de passe",
+      "resetPassword": "Changer de mot de passe",
       "delete": "Supprimer le compte"
     },
     "Read": {

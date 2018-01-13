@@ -12,6 +12,14 @@
       "register": "Register",
       "forgotPassword": "Forgot password?"
     },
+    "input": {
+      "email": {
+        "placeholder": "Email"
+      },
+      "password": {
+        "placeholder": "Password"
+      }
+    },
     "errors": {
       "badRequest": "Email or password are not correct",
       "email": {
@@ -23,6 +31,48 @@
         "required": "Password is required",
         "invalid": "Password is invalid",
         "incorrect": "This password is incorrect"
+      }
+    }
+  },
+  "register": {
+    "labelledBy": "Register form",
+    "button": {
+      "save": "Save"
+    },
+    "state": {
+      "isRegistering": "Is registering..."
+    },
+    "link": {
+      "signIn": "Sign in"
+    },
+    "input": {
+      "email": {
+        "label": "Email address",
+        "placeholder": "gary@lineker.com"
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "6 minimum characters"
+      },
+      "passwordRepeat": {
+        "label": "The same password",
+        "placeholder": "Being sure this is the right one"
+      }
+    },
+    "errors": {
+      "email": {
+        "required": "Email is required",
+        "invalid": "Email is invalid",
+        "incorrect": "This email does not exist"
+      },
+      "password": {
+        "required": "Password is required",
+        "invalid": "6 minimum characters"
+      },
+      "passwordRepeat": {
+        "required": "Second password is required",
+        "invalid": "Second password is invalid",
+        "differs": "The two passwords differ"
       }
     }
   },

@@ -80,9 +80,6 @@ class MeRead extends React.Component {
                             </tbody>
                         </table>
                         <div className="card-body text-right">
-                            <Link to={routes.me.resetPassword} className="card-link">
-                                {t('page:Me.link.resetPassword')}
-                            </Link>
                             <Link to={routes.me.update} className="card-link">
                                 {t('page:Me.link.update')}
                             </Link>

@@ -12,6 +12,14 @@
       "register": "Inscription",
       "forgotPassword": "Mot de passe oublié ?"
     },
+    "input": {
+      "email": {
+        "placeholder": "Adresse email"
+      },
+      "password": {
+        "placeholder": "Mot de passe"
+      }
+    },
     "errors": {
       "badRequest": "Adresse email ou mot de passe incorrects",
       "email": {
@@ -21,8 +29,50 @@
       },
       "password": {
         "required": "Mot de passe requis",
-        "invalid": "Mot de pass invalide",
+        "invalid": "Mot de passe invalide",
         "incorrect": "Ce mot de passe est incorrect"
+      }
+    }
+  },
+  "register": {
+    "labelledBy": "Formulaire d'inscription",
+    "button": {
+      "save": "Valider"
+    },
+    "state": {
+      "isRegistering": "En cours d'enregistrement..."
+    },
+    "link": {
+      "signIn": "Connexion"
+    },
+    "input": {
+      "email": {
+        "label": "Adresse email",
+        "placeholder": "zinedine@zidane.com"
+      },
+      "password": {
+        "label": "Mot de passe",
+        "placeholder": "6 caractères minimum"
+      },
+      "passwordRepeat": {
+        "label": "Ce même mot de passe",
+        "placeholder": "Pour être sûr d'avoir le bon"
+      }
+    },
+    "errors": {
+      "email": {
+        "required": "Adresse email requise",
+        "invalid": "Adresse email invalide",
+        "alreadyTaken": "Cette adresse email est déjà utilisée"
+      },
+      "password": {
+        "required": "Mot de passe requis",
+        "invalid": "6 caractères minimum"
+      },
+      "passwordRepeat": {
+        "required": "Second mot de passe requis",
+        "invalid": "Second mot de passe invalide",
+        "differs": "Les deux mots de passe diffèrent"
       }
     }
   },
