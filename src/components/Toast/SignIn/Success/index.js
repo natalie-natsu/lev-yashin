@@ -9,15 +9,14 @@ const Success = ({ email, userName, firstName, lastName, picture, t }) => (
         <a href="/" className="mr-3 align-self-center">
             <img
                 className="rounded-circle"
-                // eslint-disable-next-line max-len
                 src={picture}
-                alt={getName(email, userName, firstName, lastName)}
+                alt={getName({ email, userName, firstName, lastName })}
             />
         </a>
         <div className="media-body align-self-center">
             <p className="mb-0">
                 {t('fetchProfile.success.text')}<br />
-                {getName(email, userName, firstName, lastName)}
+                {getName({ email, userName, firstName, lastName })}
             </p>
         </div>
     </div>

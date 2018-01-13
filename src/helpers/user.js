@@ -1,5 +1,8 @@
-// eslint-disable-next-line import/prefer-default-export
-export function getName(email, userName, firstName, lastName) {
+export function getName({ email, userName, firstName, lastName }) {
     if (firstName && lastName) { return `${firstName} ${lastName}`; }
-    return email;
+    return userName || email;
+}
+
+export function getPublicName({ userName, firstName }) {
+    return firstName || userName;
 }

@@ -21,5 +21,13 @@
     "modal-login": {
       "title": "Se connecter"
     }
+  },
+  "Me": {
+    "title": "Ton fabuleux profil",
+    "link": {
+      "update": "Éditer le profil",
+      "resetPassword": "Modifier le mot de passe",
+      "delete": "Supprimer le compte"
+    }
   }
 }

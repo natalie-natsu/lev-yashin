@@ -1,0 +1,46 @@
+#me .medal-container {
+    display: inline-block;
+    margin: .5rem .5rem 0 .5rem;
+    width: 35px;
+    vertical-align: top;
+    cursor: pointer;
+}
+
+#me .medal-container:not(.active) {
+    filter: grayscale(1);
+}
+
+#me .medal-container:nth-child(1),
+#me .medal-container:nth-child(5) {
+    margin: 0 .5rem 0 .5rem;
+}
+
+#me .gravatar {
+    margin: .5rem .5rem 0 .5rem;
+    width: 55px;
+    height: 55px;
+    border: 5px solid #eee;
+    vertical-align: top;
+}
+
+#me section {
+    padding: 1rem 0;
+}
+
+@media (min-width: 768px) {
+    #me .medal-container {
+        margin: 2rem 2rem 0 2rem;
+        width: 50px;
+    }
+
+    #me .medal-container:nth-child(1),
+    #me .medal-container:nth-child(5) {
+        margin: 0 2rem 0 2rem;
+    }
+
+    #me .gravatar {
+        margin: 2rem 2rem 0 2rem;
+        width: 80px;
+        height: 80px;
+    }
+}

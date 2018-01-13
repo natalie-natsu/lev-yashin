@@ -11,15 +11,14 @@ const UserNav = ({ email, handleClick, userName, firstName, lastName, picture })
         <Link to={routes.me.exact} className="mr-3 align-self-center" onClick={handleClick}>
             <img
                 className="rounded-circle"
-                // eslint-disable-next-line max-len
                 src={picture}
-                alt={getName(email, userName, firstName, lastName)}
+                alt={getName({ email, userName, firstName, lastName })}
             />
         </Link>
         <div className="media-body align-self-center">
             <p className="mb-0">
                 <Link to={routes.me.exact} className="nav-link" onClick={handleClick}>
-                    {getName(email, userName, firstName, lastName)}
+                    {getName({ email, userName, firstName, lastName })}
                 </Link>
             </p>
         </div>

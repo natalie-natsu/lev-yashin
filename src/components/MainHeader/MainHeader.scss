@@ -52,6 +52,12 @@
     font-size: 1em;
 }
 
+@media (min-width: 768px) {
+    #main-header-side-action-dom .dropdown-menu {
+        top: 100%;
+    }
+}
+
 @media (min-width: 1024px) {
     #main-header .navbar-text {
         font-size: 1.25em;

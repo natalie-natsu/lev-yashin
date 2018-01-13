@@ -35,8 +35,7 @@ export function failSignIn() {
 
 export function signOut() {
     return (dispatch, getState) => {
-        const { email, userName, firstName, lastName } = getState().credentials.profile;
-        const name = getName(email, userName, firstName, lastName);
+        const name = getName(getState().credentials.profile);
 
         persistStore(store).purge(['credentials', 'profile']);
         toast(<ToastSignOutSuccess name={name} />, { position: toast.POSITION.BOTTOM_RIGHT });

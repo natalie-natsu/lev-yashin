@@ -3,20 +3,15 @@ import PropTypes from 'prop-types';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import './Medal.scss';
 
-const ribbonBackground = (ribbonColor, stripeColor) => (
-    `repeating-linear-gradient(55deg, ${ribbonColor},${ribbonColor} 10%, ${stripeColor} 10%, ${stripeColor} 20%)`
+const stripes = (ribbon, stripe) => (
+    `repeating-linear-gradient(55deg, transparent, transparent 10%, ${stripe} 10%, ${stripe} 20%) ${ribbon}`
 );
 
 const Medal = ({ circleColor, ribbonColor, stripeColor, fa }) => (
     <div className="medal">
         <div className="medal-body">
-            <div
-                className="ribbon"
-                style={{
-                    background: ribbonBackground(ribbonColor, stripeColor),
-                    backgroundColor: ribbonColor,
-                }}
-            />
+            <div className="ribbon" style={{ backgroundColor: ribbonColor }} />
+            <div className="stripes" style={{ background: stripes(ribbonColor, stripeColor) }} />
             <div className="circle" style={{ backgroundColor: circleColor }}>
                 <i>{fa && <FontAwesomeIcon icon={fa} />}</i>
                 <div className="filter" />

@@ -21,5 +21,13 @@
     "modal-login": {
       "title": "Let's sign in"
     }
+  },
+  "Me": {
+    "title": "Your famous profile",
+    "link": {
+      "update": "Update profile",
+      "resetPassword": "Modify password",
+      "delete": "Delete account"
+    }
   }
 }

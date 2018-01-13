@@ -10,43 +10,45 @@
         width: 100%;
         height: 100%;
 
-        .ribbon {
+        .ribbon,
+        .stripes {
             position: absolute;
             top: 0;
             left: 12.5%;
             width: 75%;
             height: 53%;
             background: #9bdbf6;
+        }
 
-            &:before {
-                position: absolute;
-                width: 100%;
-                height: 5%;
-                background: rgba(0, 0, 0, .1);
-                content: '';
-            }
+        .stripes:before {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 5%;
+            background: rgba(0, 0, 0, .1);
+            content: '';
+        }
 
-            &:after {
-                position: absolute;
-                top: 100%;
-                left: 0;
-                z-index: -1;
-                padding-bottom: 50%;
-                width: 57.7%;
-                background-color: inherit;
-                content: '';
-                -webkit-transform: rotate(-30deg) skewX(30deg);
-                    -ms-transform: rotate(-30deg) skewX(30deg);
-                        transform: rotate(-30deg) skewX(30deg);
-                -webkit-transform-origin: 0 0;
-                    -ms-transform-origin: 0 0;
-                        transform-origin: 0 0;;
-            }
+        .ribbon:after {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            padding-bottom: 50%;
+            width: 57.7%;
+            background-color: inherit;
+            content: '';
+            -webkit-transform: rotate(-30deg) skewX(30deg);
+                -ms-transform: rotate(-30deg) skewX(30deg);
+                    transform: rotate(-30deg) skewX(30deg);
+            -webkit-transform-origin: 0 0;
+                -ms-transform-origin: 0 0;
+                    transform-origin: 0 0;;
         }
 
         .circle {
             position: absolute;
             bottom: 0;
+            z-index: 3;
             overflow: hidden;
             width: 100%;
             height: 50%;
@@ -68,10 +70,10 @@
 
         svg {
             position: absolute;
-            bottom: 10%;
-            left: 10%;
-            width: 80%;
-            height: 80%;
+            bottom: 15%;
+            left: 15%;
+            width: 70%;
+            height: 70%;
             opacity: .5;
         }
     }

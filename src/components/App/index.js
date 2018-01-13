@@ -15,6 +15,7 @@ import './App.scss';
 import Layout from '../Layout';
 import FirstVisit from '../FirstVisit';
 
+import PrivateRoute from '../PrivateRoute';
 import NotAllowed from '../../pages/NotAllowed';
 import NoMatch from '../../pages/NoMatch';
 import Home from '../../pages/Home';
@@ -42,7 +43,7 @@ class App extends React.Component {
                             <Switch>
                                 <Route exact path={routes.home} component={Home} />
                                 <Route path={routes.auth.exact} component={Auth} />
-                                <Route path={routes.me.exact} component={Me} />
+                                <PrivateRoute path={routes.me.exact} component={Me} />
                                 <Route path={routes.notAllowed} component={NotAllowed} />
                                 <Route component={NoMatch} />
                             </Switch>
