@@ -1,3 +1,9 @@
+.btn-outline-light:not([disabled]):not(.disabled):active,
+.btn-outline-light:not([disabled]):not(.disabled).active,
+.show > .btn-outline-light.dropdown-toggle {
+    color: #212529;
+}
+
 .languages .flag-icon {
     margin-right: 5px;
 }

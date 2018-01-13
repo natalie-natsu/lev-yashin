@@ -25,5 +25,21 @@
         "incorrect": "This password is incorrect"
       }
     }
+  },
+  "profile": {
+    "labelledBy": "Update your information",
+    "button": {
+      "save": "Save",
+      "cancel": "Cancel"
+    },
+    "state": {
+      "isSaving": "Is saving..."
+    },
+    "label": {
+      "email": "Email address",
+      "userName": "Username",
+      "firstName": "First name",
+      "lastName": "Last name"
+    }
   }
 }

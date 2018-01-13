@@ -28,6 +28,9 @@
       "update": "Update profile",
       "resetPassword": "Modify password",
       "delete": "Delete account"
+    },
+    "Read": {
+      "title": "Your information"
     }
   }
 }

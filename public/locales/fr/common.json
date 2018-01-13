@@ -1,5 +1,6 @@
 {
   "test": "Yeah, le test marche !",
+  "undefined": "Non défini",
   "project": {
     "name": "WorldCup 400K",
     "shortName": "WC400K"

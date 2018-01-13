@@ -28,6 +28,9 @@
       "update": "Éditer le profil",
       "resetPassword": "Modifier le mot de passe",
       "delete": "Supprimer le compte"
+    },
+    "Read": {
+      "title": "Tes informations"
     }
   }
 }

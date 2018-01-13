@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { translate } from 'react-i18next';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import { faHome, faLongArrowAltLeft } from '@fortawesome/fontawesome-free-solid';
+import { faHome, faArrowLeft } from '@fortawesome/fontawesome-free-solid';
 
 import { routes } from '../../helpers/routes';
 import SideAction from '../../components/MainHeader/SideAction';
@@ -13,7 +13,7 @@ const NoMatch = ({ history, t }) => (
         <SideAction>
             <div className="btn-side-action mx-2 mx-sm-3">
                 <button type="button" className="btn" onClick={() => history.goBack()}>
-                    <FontAwesomeIcon icon={faLongArrowAltLeft} />
+                    <FontAwesomeIcon icon={faArrowLeft} />
                 </button>
             </div>
         </SideAction>

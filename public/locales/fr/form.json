@@ -25,5 +25,21 @@
         "incorrect": "Ce mot de passe est incorrect"
       }
     }
+  },
+  "profile": {
+    "labelledBy": "Éditer les informations",
+    "button": {
+      "save": "Valider",
+      "cancel": "Annuler"
+    },
+    "state": {
+      "isSaving": "Sauvegarde en cours..."
+    },
+    "label": {
+      "email": "Adresse email",
+      "userName": "Pseudonyme",
+      "firstName": "Prénom",
+      "lastName": "Nom"
+    }
   }
 }

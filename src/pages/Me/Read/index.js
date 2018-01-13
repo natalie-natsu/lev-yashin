@@ -4,9 +4,11 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { translate } from 'react-i18next';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import { faEllipsisV } from '@fortawesome/fontawesome-free-solid';
+import { faEllipsisV, faQuestionCircle } from '@fortawesome/fontawesome-free-solid';
 
 import { routes } from '../../../helpers/routes';
+import './Read.scss';
+
 import SideAction from '../../../components/MainHeader/SideAction';
 
 // eslint-disable-next-line react/prefer-stateless-function
@@ -15,7 +17,7 @@ class MeRead extends React.Component {
         const { profile, t } = this.props;
         const { email, userName, firstName, lastName } = profile;
         return (
-            <div id="me-read">
+            <section id="me-read">
                 <SideAction>
                     <div className="btn-side-action mx-2 mx-sm-3">
                         <button
@@ -39,14 +41,55 @@ class MeRead extends React.Component {
                         </div>
                     </div>
                 </SideAction>
-                <p>Read</p>
-                <ul>
-                    <li>{email}</li>
-                    <li>{userName}</li>
-                    <li>{firstName}</li>
-                    <li>{lastName}</li>
-                </ul>
-            </div>
+                <div className="container">
+                    <div className="card">
+                        <div className="card-header">
+                            <h5 className="card-title mb-0">{t('page:Me.Read.title')}</h5>
+                        </div>
+                        <table className="table table-bordered mb-0">
+                            <tbody>
+                                <tr>
+                                    <th scope="row" className="label">
+                                        <Link to={routes.me.update}>{t('form:profile.label.email')}</Link>
+                                    </th>
+                                    <td className="value">{email}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="label">
+                                        <Link to={routes.me.update}>{t('form:profile.label.userName')}</Link>
+                                    </th>
+                                    <td className="value">{userName}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="label">
+                                        <Link to={routes.me.update}>{t('form:profile.label.firstName')}</Link>
+                                    </th>
+                                    <td className="value">{firstName || t('undefined')}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="label">
+                                        <Link to={routes.me.update}>{t('form:profile.label.lastName')}</Link>
+                                    </th>
+                                    <td className="value">
+                                        {lastName || t('undefined')}
+                                        <span className="float-right">
+                                            <FontAwesomeIcon icon={faQuestionCircle} />
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div className="card-body text-right">
+                            <Link to={routes.me.resetPassword} className="card-link">
+                                {t('page:Me.link.resetPassword')}
+                            </Link>
+                            <Link to={routes.me.update} className="card-link">
+                                {t('page:Me.link.update')}
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+            </section>
         );
     }
 }

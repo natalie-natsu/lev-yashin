@@ -87,7 +87,11 @@ SignIn.propTypes = {
     credentials: PropTypes.shape({ token: PropTypes.string }).isRequired,
     history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
     dispatch: PropTypes.func.isRequired,
-    location: PropTypes.shape({ state: PropTypes.shape({ from: PropTypes.string }) }).isRequired,
+    location: PropTypes.shape({
+        state: PropTypes.shape({
+            from: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+        }),
+    }).isRequired,
     t: PropTypes.func.isRequired,
 };
 
