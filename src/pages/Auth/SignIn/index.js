@@ -10,27 +10,12 @@ import { faEdit } from '@fortawesome/fontawesome-free-solid';
 import { faUserCircle } from '@fortawesome/fontawesome-free-regular';
 
 import { failSignIn, requestSignIn, successSignIn } from '../../../actions/authentication';
+import handleSignInError from '../../../components/Authentication/SignInForm/handleError';
 import { getEndpoint, headers } from '../../../helpers/endpoint';
 import { routes } from '../../../helpers/routes';
 
 import SideAction from '../../../components/MainHeader/SideAction';
 import SignInForm from '../../../components/Authentication/SignInForm';
-
-
-function handleSignInError(response) {
-    const submissionError = {};
-    switch (response.statusCode) {
-    case 400:
-        switch (response.message) {
-        case 'Invalid email.': submissionError.email = 'incorrect'; break;
-        case 'Invalid password.': submissionError.password = 'incorrect'; break;
-        default: submissionError._error = 'badRequest';
-        } break;
-    default: submissionError._error = 'notPrecise';
-    }
-
-    return submissionError;
-}
 
 class SignIn extends React.Component {
     signIn(values) {

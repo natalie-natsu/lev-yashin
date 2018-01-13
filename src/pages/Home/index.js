@@ -9,9 +9,9 @@ import { faSignInAlt, faSignOutAlt } from '@fortawesome/fontawesome-free-solid';
 import { faUserCircle } from '@fortawesome/fontawesome-free-regular';
 
 import { failSignIn, requestSignIn, signOut, successSignIn } from '../../actions/authentication';
+import handleSignInError from '../../components/Authentication/SignInForm/handleError';
 import { getEndpoint, headers } from '../../helpers/endpoint';
 import { routes } from '../../helpers/routes';
-
 
 import SideAction from '../../components/MainHeader/SideAction';
 import Title from '../../components/MainHeader/Title';
@@ -21,21 +21,6 @@ import Description from './Description';
 import OnBoarding from './OnBoarding';
 
 const $ = window.jQuery;
-
-function handleSignInError(response) {
-    const submissionError = {};
-    switch (response.statusCode) {
-    case 400:
-        switch (response.message) {
-        case 'Invalid email.': submissionError.email = 'incorrect'; break;
-        case 'Invalid password.': submissionError.password = 'incorrect'; break;
-        default: submissionError._error = 'badRequest';
-        } break;
-    default: submissionError._error = 'notPrecise';
-    }
-
-    return submissionError;
-}
 
 class Home extends React.Component {
     signIn(values) {
