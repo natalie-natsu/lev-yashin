@@ -4,8 +4,9 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { translate } from 'react-i18next';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import { faEllipsisV, faQuestionCircle } from '@fortawesome/fontawesome-free-solid';
+import { faEllipsisV, faQuestionCircle, faSync } from '@fortawesome/fontawesome-free-solid';
 
+import { refreshProfile } from '../../../actions/entities/user';
 import { routes } from '../../../helpers/routes';
 import './Read.scss';
 
@@ -14,7 +15,7 @@ import SideAction from '../../../components/MainHeader/SideAction';
 // eslint-disable-next-line react/prefer-stateless-function
 class MeRead extends React.Component {
     render() {
-        const { profile, t } = this.props;
+        const { dispatch, page, profile, t } = this.props;
         const { email, userName, firstName, lastName } = profile;
         return (
             <section id="me-read">
@@ -44,7 +45,14 @@ class MeRead extends React.Component {
                 <div className="container">
                     <div className="card">
                         <div className="card-header">
-                            <h5 className="card-title mb-0">{t('page:Me.Read.title')}</h5>
+                            <h5 className="card-title mb-0 d-inline-block">{t('page:Me.Read.title')}</h5>
+                            <button
+                                className="btn btn-link btn-sm float-right text-dark"
+                                onClick={() => dispatch(refreshProfile(routes.me))}
+                                disabled={page.isFetching}
+                            >
+                                <FontAwesomeIcon icon={faSync} spin={page.isFetching} />
+                            </button>
                         </div>
                         <table className="table table-bordered mb-0">
                             <tbody>
@@ -92,6 +100,10 @@ class MeRead extends React.Component {
 }
 
 MeRead.propTypes = {
+    dispatch: PropTypes.func.isRequired,
+    page: PropTypes.shape({
+        isFetching: PropTypes.bool,
+    }).isRequired,
     profile: PropTypes.shape({
         email: PropTypes.string.isRequired,
         userName: PropTypes.string,
@@ -102,6 +114,6 @@ MeRead.propTypes = {
 };
 
 export default translate(['common', 'page'])(connect(
-    state => ({ profile: state.credentials.profile }),
+    state => ({ profile: state.credentials.profile, page: state.pages.Me }),
     dispatch => ({ dispatch }),
 )(MeRead));

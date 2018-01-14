@@ -47,16 +47,24 @@ function failFetchUsers(response, payload, scope) {
     };
 }
 
+export const REFRESH_PROFILE = 'REFRESH_PROFILE';
 export const REQUEST_FETCH_PROFILE = 'REQUEST_FETCH_PROFILE';
 export const SUCCESS_FETCH_PROFILE = 'SUCCESS_FETCH_PROFILE';
 export const FAIL_FETCH_PROFILE = 'FAIL_FETCH_PROFILE';
+
+export function refreshProfile(scope) {
+    return {
+        type: REFRESH_PROFILE,
+        scope,
+    };
+}
 
 /**
  * Fetch current user profile with the context token
  * @param scope
  */
 export const fetchProfile = scope => (dispatch, getState) => {
-    dispatch({ type: REQUEST_FETCH_PROFILE });
+    dispatch({ type: REQUEST_FETCH_PROFILE, scope });
 
     fetch(getEndpoint('fetchProfile'), {
         method: 'GET',
@@ -76,7 +84,7 @@ function successFetchProfile(response, scope) {
         dispatch({
             type: SUCCESS_FETCH_PROFILE,
             receivedAt: Date.now(),
-            data: response,
+            response,
             scope,
         });
     };

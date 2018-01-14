@@ -13,7 +13,7 @@ function resetCredentials() {
     return initialCredentialsState;
 }
 
-function updateCrendentials(state, { _id, authenticatedAt, profile, token }) {
+function updateCredentials(state, { _id, authenticatedAt, profile, token }) {
     return {
         ...state,
         _id,
@@ -23,16 +23,16 @@ function updateCrendentials(state, { _id, authenticatedAt, profile, token }) {
     };
 }
 
-function updateProfile(state, { data }) {
+function updateProfile(state, { response }) {
     return {
         ...state,
-        profile: data,
+        profile: response,
     };
 }
 
 export default createReducer(initialCredentialsState, {
     [SIGN_OUT]: resetCredentials,
-    [SUCCESS_SIGN_IN]: updateCrendentials,
-    [SUCCESS_REGISTER]: updateCrendentials,
+    [SUCCESS_SIGN_IN]: updateCredentials,
+    [SUCCESS_REGISTER]: updateCredentials,
     [SUCCESS_FETCH_PROFILE]: updateProfile,
 });
