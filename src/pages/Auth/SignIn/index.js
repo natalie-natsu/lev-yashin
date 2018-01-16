@@ -56,8 +56,8 @@ class SignIn extends React.Component {
                     </div>
                 </SideAction>
                 <div className="container">
-                    <h3>
-                        <FontAwesomeIcon icon={faUserCircle} />&nbsp;
+                    <h3 className="form-title">
+                        <FontAwesomeIcon icon={faUserCircle} />
                         {t('form:signIn.labelledBy')}
                     </h3>
                     <hr />

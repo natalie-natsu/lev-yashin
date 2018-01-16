@@ -65,28 +65,28 @@ class RegisterForm extends React.Component {
                 <Field
                     component={renderInput}
                     formControl={{ id: 'email' }}
-                    label={t('form:register.input.email.label')}
+                    label="form:register.input.email.label"
                     name="email"
                     type="email"
-                    placeholder={t('form:register.input.email.placeholder')}
+                    placeholder="form:register.input.email.placeholder"
                     errors={this.emailErrors}
                 />
                 <Field
                     component={renderInput}
                     formControl={{ id: 'password' }}
-                    label={t('form:register.input.password.label')}
+                    label="form:register.input.password.label"
                     name="password"
                     type="password"
-                    placeholder={t('form:register.input.password.placeholder')}
+                    placeholder="form:register.input.password.placeholder"
                     errors={this.passwordErrors}
                 />
                 <Field
                     component={renderInput}
                     formControl={{ id: 'passwordRepeat' }}
-                    label={t('form:register.input.passwordRepeat.label')}
+                    label="form:register.input.passwordRepeat.label"
                     name="passwordRepeat"
                     type="password"
-                    placeholder={t('form:register.input.passwordRepeat.placeholder')}
+                    placeholder="form:register.input.passwordRepeat.placeholder"
                     errors={this.passwordRepeatErrors}
                 />
                 {renderFormError(this.formErrors, error)}

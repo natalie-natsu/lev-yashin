@@ -5,3 +5,30 @@
 #me-read .label a:hover {
     text-decoration: none;
 }
+
+#me-read .medals {
+    margin: 0  -.5rem;
+}
+
+#me-read .medal-container {
+    display: inline-block;
+    margin: 0 .5rem 1rem .5rem;
+    width: calc(20% - 1rem);
+    vertical-align: top;
+    cursor: pointer;
+}
+
+#me-read .medal-container:not(.active) {
+    filter: grayscale(1);
+}
+
+@media (min-width: 768px) {
+    #me-read .medals {
+        margin: 0  -.75rem;
+    }
+
+    #me-read .medal-container {
+        margin: 0 .75rem 1.5rem .75rem;
+        width: calc(10% - 1.5rem);
+    }
+}

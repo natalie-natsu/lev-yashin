@@ -2,23 +2,28 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { translate } from 'react-i18next';
+import { Trans, translate } from 'react-i18next';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import { faEllipsisV, faQuestionCircle, faSync } from '@fortawesome/fontawesome-free-solid';
+import {
+    faEllipsisV, faInfoCircle, faSync, faEdit,
+    faQuestion, faStar, faTrophy, faCalculator,
+} from '@fortawesome/fontawesome-free-solid';
 
 import { refreshProfile } from '../../../actions/entities/user';
 import { routes } from '../../../helpers/routes';
 import './Read.scss';
 
 import SideAction from '../../../components/MainHeader/SideAction';
+import UpdateProfileForm from '../Update/Form';
+import Header from '../Header';
+import Medal from '../../../components/Medal';
 
 // eslint-disable-next-line react/prefer-stateless-function
 class MeRead extends React.Component {
     render() {
-        const { dispatch, page, profile, t } = this.props;
-        const { email, userName, firstName, lastName } = profile;
+        const { dispatch, history, page, t } = this.props;
         return (
-            <section id="me-read">
+            <div id="me-read">
                 <SideAction>
                     <div className="btn-side-action mx-2 mx-sm-3">
                         <button
@@ -42,65 +47,126 @@ class MeRead extends React.Component {
                         </div>
                     </div>
                 </SideAction>
+                <Header />
                 <div className="container">
-                    <div className="card">
-                        <div className="card-header">
-                            <h5 className="card-title mb-0 d-inline-block">{t('page:Me.Read.title')}</h5>
+                    <section>
+                        <h3 className="section-title">
+                            <FontAwesomeIcon icon={faStar} />
+                            {t('page:Me.medals.title')}
+                        </h3>
+                        <small className="text-muted">
+                            <Trans i18nKey="page:Me.medals.text" parent="span">
+                                <span className="hidden-sm-down d-sm-inline">0</span>
+                            </Trans>
+                        </small>
+                        <hr />
+                        <div className="medals">
+                            <span className="medal-container">
+                                <Medal
+                                    ribbonColor="#357FB7"
+                                    stripeColor="#1669A9"
+                                    fa={faStar}
+                                />
+                            </span>
+                            <span className="medal-container">
+                                <Medal
+                                    ribbonColor="#891C15"
+                                    stripeColor="#731712"
+                                    fa={faTrophy}
+                                />
+                            </span>
+                            <span className="medal-container">
+                                <Medal
+                                    ribbonColor="#891C15"
+                                    stripeColor="#731712"
+                                    fa={faCalculator}
+                                />
+                            </span>
+                            <span className="medal-container">
+                                <Medal
+                                    ribbonColor="#357FB7"
+                                    stripeColor="#1669A9"
+                                    fa={faQuestion}
+                                />
+                            </span>
+                            <span className="medal-container">
+                                <Medal
+                                    ribbonColor="#357FB7"
+                                    stripeColor="#1669A9"
+                                    fa={faQuestion}
+                                />
+                            </span>
+                            <span className="medal-container">
+                                <Medal
+                                    ribbonColor="#357FB7"
+                                    stripeColor="#1669A9"
+                                    fa={faQuestion}
+                                />
+                            </span>
+                            <span className="medal-container">
+                                <Medal
+                                    ribbonColor="#357FB7"
+                                    stripeColor="#1669A9"
+                                    fa={faQuestion}
+                                />
+                            </span>
+                            <span className="medal-container">
+                                <Medal
+                                    ribbonColor="#357FB7"
+                                    stripeColor="#1669A9"
+                                    fa={faQuestion}
+                                />
+                            </span>
+                            <span className="medal-container">
+                                <Medal
+                                    ribbonColor="#357FB7"
+                                    stripeColor="#1669A9"
+                                    fa={faQuestion}
+                                />
+                            </span>
+                            <span className="medal-container">
+                                <Medal
+                                    ribbonColor="#357FB7"
+                                    stripeColor="#1669A9"
+                                    fa={faQuestion}
+                                />
+                            </span>
+                        </div>
+                    </section>
+                    <section className="pt-0">
+                        <h3 className="form-title">
+                            <FontAwesomeIcon icon={faInfoCircle} />
+                            {t('page:Me.Read.title')}
                             <button
-                                className="btn btn-link btn-sm float-right text-dark"
+                                className="btn btn-link text-complementary"
                                 onClick={() => dispatch(refreshProfile(routes.me))}
                                 disabled={page.isFetching}
                             >
                                 <FontAwesomeIcon icon={faSync} spin={page.isFetching} />
                             </button>
-                        </div>
-                        <table className="table table-bordered mb-0">
-                            <tbody>
-                                <tr>
-                                    <th scope="row" className="label">
-                                        <Link to={routes.me.update}>{t('form:profile.label.email')}</Link>
-                                    </th>
-                                    <td className="value">{email}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="label">
-                                        <Link to={routes.me.update}>{t('form:profile.label.userName')}</Link>
-                                    </th>
-                                    <td className="value">{userName}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="label">
-                                        <Link to={routes.me.update}>{t('form:profile.label.firstName')}</Link>
-                                    </th>
-                                    <td className="value">{firstName || t('undefined')}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="label">
-                                        <Link to={routes.me.update}>{t('form:profile.label.lastName')}</Link>
-                                    </th>
-                                    <td className="value">
-                                        {lastName || t('undefined')}
-                                        <span className="float-right">
-                                            <FontAwesomeIcon icon={faQuestionCircle} />
-                                        </span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div className="card-body text-right">
-                            <Link to={routes.me.update} className="card-link">
-                                {t('page:Me.link.update')}
-                            </Link>
-                        </div>
-                    </div>
+                        </h3>
+                        <hr />
+                        <UpdateProfileForm
+                            initialValues={this.props.profile}
+                            onSubmit={() => history.push(routes.me.update)}
+                            submitButton={{
+                                className: 'btn-complementary',
+                                disabled: false,
+                                icon: faEdit,
+                                text: t('page:Me.link.update'),
+                            }}
+                            disabled
+                        />
+                    </section>
                 </div>
-            </section>
+            </div>
         );
     }
 }
 
 MeRead.propTypes = {
     dispatch: PropTypes.func.isRequired,
+    history: PropTypes.shape({ goBack: PropTypes.func.isRequired }).isRequired,
     page: PropTypes.shape({
         isFetching: PropTypes.bool,
     }).isRequired,

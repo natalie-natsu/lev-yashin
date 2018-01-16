@@ -59,10 +59,6 @@ export function refreshProfile(scope) {
     };
 }
 
-/**
- * Fetch current user profile with the context token
- * @param scope
- */
 export const fetchProfile = scope => (dispatch, getState) => {
     dispatch({ type: REQUEST_FETCH_PROFILE, scope });
 
@@ -93,6 +89,55 @@ function successFetchProfile(response, scope) {
 function failFetchProfile(response, scope) {
     return {
         type: FAIL_FETCH_PROFILE,
+        receivedAt: Date.now(),
+        error: response.error,
+        scope,
+    };
+}
+
+export const REQUEST_UPDATE_PROFILE = 'REQUEST_UPDATE_PROFILE';
+export const SUCCESS_UPDATE_PROFILE = 'SUCCESS_UPDATE_PROFILE';
+export const FAIL_UPDATE_PROFILE = 'FAIL_UPDATE_PROFILE';
+
+export function successUpdateProfile(response, scope) {
+    return (dispatch, getState) => {
+        const normalized = normalize({ ...response, _id: getState().credentials._id }, userSchema);
+
+        dispatch(receiveEntities(normalized.entities));
+        dispatch({
+            type: SUCCESS_UPDATE_PROFILE,
+            receivedAt: Date.now(),
+            response,
+            scope,
+        });
+    };
+}
+
+export function failUpdateProfile(response, scope) {
+    return {
+        type: FAIL_UPDATE_PROFILE,
+        receivedAt: Date.now(),
+        error: response.error,
+        scope,
+    };
+}
+
+export const REQUEST_RESET_PASSWORD = 'REQUEST_RESET_PASSWORD';
+export const SUCCESS_RESET_PASSWORD = 'SUCCESS_RESET_PASSWORD';
+export const FAIL_RESET_PASSWORD = 'FAIL_RESET_PASSWORD';
+
+export function successResetPassword(response, scope) {
+    return {
+        type: SUCCESS_RESET_PASSWORD,
+        receivedAt: Date.now(),
+        response,
+        scope,
+    };
+}
+
+export function failResetPassword(response, scope) {
+    return {
+        type: FAIL_RESET_PASSWORD,
         receivedAt: Date.now(),
         error: response.error,
         scope,

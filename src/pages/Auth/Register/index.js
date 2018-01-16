@@ -53,8 +53,8 @@ class Register extends React.Component {
                     </div>
                 </SideAction>
                 <div className="container">
-                    <h3>
-                        <FontAwesomeIcon icon={faEdit} />&nbsp;
+                    <h3 className="form-title">
+                        <FontAwesomeIcon icon={faEdit} />
                         {t('form:register.labelledBy')}
                     </h3>
                     <hr />

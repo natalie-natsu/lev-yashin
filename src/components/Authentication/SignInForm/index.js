@@ -56,14 +56,14 @@ class SignInForm extends React.Component {
                     component={renderInput}
                     name="email"
                     type="email"
-                    placeholder={t('form:signIn.input.email.placeholder')}
+                    placeholder="form:signIn.input.email.placeholder"
                     errors={this.emailErrors}
                 />
                 <Field
                     component={renderInput}
                     name="password"
                     type="password"
-                    placeholder={t('form:signIn.input.password.placeholder')}
+                    placeholder="form:signIn.input.password.placeholder"
                     errors={this.passwordErrors}
                 />
                 {renderFormError(this.formErrors, error)}

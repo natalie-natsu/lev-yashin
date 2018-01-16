@@ -76,20 +76,90 @@
       }
     }
   },
-  "profile": {
+  "updateProfile": {
     "labelledBy": "Éditer les informations",
     "button": {
-      "save": "Valider",
-      "cancel": "Annuler"
+      "save": "Valider"
     },
     "state": {
       "isSaving": "Sauvegarde en cours..."
     },
-    "label": {
-      "email": "Adresse email",
-      "userName": "Pseudonyme",
-      "firstName": "Prénom",
-      "lastName": "Nom"
+    "input": {
+      "email": {
+        "label": "Adresse email",
+        "placeholder": "michel@platini.fr",
+        "help": "L'adresse qui te sert à te connecter et recevoir des emails qui peuvent être importants."
+      },
+      "userName": {
+        "label": "Pseudonyme",
+        "placeholder": "Platini86",
+        "help": "Obligatoire, ton pseudo s'affiche sur les sections publiques."
+      },
+      "firstName": {
+        "label": "Prénom",
+        "placeholder": "Michel"
+      },
+      "lastName": {
+        "label": "Nom",
+        "placeholder": "Platini",
+        "help": "Ton nom est optionnel et toujours privé."
+      }
+    },
+    "success": "Profil mis à jour avec succès !",
+    "errors": {
+      "badRequest": "Tes informations sont incorrectes.",
+      "email": {
+        "required": "Adresse email requise",
+        "invalid": "Adresse email invalide",
+        "alreadyTaken": "Cette adresse email est déjà utilisée"
+      },
+      "userName": {
+        "required": "Pseudo requis",
+        "toShort": "3 caractères minimum",
+        "toLong": "50 caractères maximum"
+      },
+      "firstName": {
+        "toLong": "50 caractères maximum"
+      },
+      "lastName": {
+        "toLong": "50 caractères maximum"
+      }
+    }
+  },
+  "resetPassword": {
+    "labelledBy": "Changer de mot de passe",
+    "button": {
+      "save": "Valider"
+    },
+    "state": {
+      "isSaving": "Changement en cours..."
+    },
+    "input": {
+      "oldPassword": {
+        "label": "Mot de passe actuel"
+      },
+      "newPassword": {
+        "label": "Nouveau mot de passe",
+        "placeholder": "6 caractères minimum"
+      },
+      "passwordRepeat": {
+        "label": "Ce même mot de passe"
+      }
+    },
+    "success": "Mot de passe changé avec succès !",
+    "errors": {
+      "oldPassword": {
+        "required": "Mot de passe actuel requis",
+        "incorrect": "Ce mot de passe n'est pas le bon"
+      },
+      "newPassword": {
+        "required": "Nouveau mot de passe requis",
+        "invalid": "6 caractères minimum"
+      },
+      "passwordRepeat": {
+        "required": "Second mot de passe requis",
+        "differs": "Les deux mots de passe diffèrent"
+      }
     }
   }
 }

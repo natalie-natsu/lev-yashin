@@ -63,33 +63,103 @@
       "email": {
         "required": "Email is required",
         "invalid": "Email is invalid",
-        "incorrect": "This email does not exist"
+        "alreadyTaken": "This email is already taken"
       },
       "password": {
         "required": "Password is required",
         "invalid": "6 minimum characters"
       },
       "passwordRepeat": {
-        "required": "Second password is required",
-        "invalid": "Second password is invalid",
+        "required": "Same password is required",
+        "invalid": "Same password is invalid",
         "differs": "The two passwords differ"
       }
     }
   },
-  "profile": {
+  "updateProfile": {
     "labelledBy": "Update your information",
     "button": {
-      "save": "Save",
-      "cancel": "Cancel"
+      "save": "Save"
     },
     "state": {
       "isSaving": "Is saving..."
     },
-    "label": {
-      "email": "Email address",
-      "userName": "Username",
-      "firstName": "First name",
-      "lastName": "Last name"
+    "input": {
+      "email": {
+        "label": "Email address",
+        "placeholder": "gary@lineker.en",
+        "help": "The email address used for authentication and important messages."
+      },
+      "userName": {
+        "label": "Username",
+        "placeholder": "Lineker86",
+        "help": "Required, your username is shown in public section."
+      },
+      "firstName": {
+        "label": "First name",
+        "placeholder": "Gary"
+      },
+      "lastName": {
+        "label": "Last name",
+        "placeholder": "Lineker",
+        "help": "Your last name is optional and always private."
+      }
+    },
+    "success": "Profile updated with success!",
+    "errors": {
+      "badRequest": "Tes informations sont incorrectes.",
+      "email": {
+        "required": "Email is required",
+        "invalid": "Email is invalid",
+        "alreadyTaken": "This email is already taken"
+      },
+      "userName": {
+        "required": "User name is required",
+        "toShort": "3 minimum characters",
+        "toLong": "50 maximum characters"
+      },
+      "firstName": {
+        "toLong": "50 maximum characters"
+      },
+      "lastName": {
+        "toLong": "50 maximum characters"
+      }
+    }
+  },
+  "resetPassword": {
+    "labelledBy": "Change password",
+    "button": {
+      "save": "Save"
+    },
+    "state": {
+      "isSaving": "Is saving..."
+    },
+    "input": {
+      "oldPassword": {
+        "label": "Current password"
+      },
+      "newPassword": {
+        "label": "New password",
+        "placeholder": "6 minimum characters"
+      },
+      "passwordRepeat": {
+        "label": "The same password"
+      }
+    },
+    "success": "Password changed with success!",
+    "errors": {
+      "oldPassword": {
+        "required": "Actual password is required",
+        "incorrect": "This password isn't the right one"
+      },
+      "newPassword": {
+        "required": "New password is required",
+        "invalid": "6 minimum characters"
+      },
+      "passwordRepeat": {
+        "required": "Same password is required",
+        "differs": "The two passwords differ"
+      }
     }
   }
 }

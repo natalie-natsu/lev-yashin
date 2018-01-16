@@ -9,7 +9,6 @@ import { routes } from '../../helpers/routes';
 import './Me.scss';
 
 import NoMatch from '../NoMatch';
-import Header from './Header';
 import Read from './Read';
 import Update from './Update';
 import ResetPassword from './ResetPassword';
@@ -31,7 +30,6 @@ class Me extends React.Component {
     render() {
         return (
             <div id="me">
-                <Route path={routes.me.exact} component={Header} />
                 <Switch>
                     <Route exact path={routes.me.exact} component={Read} />
                     <Route path={routes.me.update} component={Update} />
