@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet';
 import { translate } from 'react-i18next';
 
 import './Layout.css';
+import ScrollToTop from '../ScrollToTop';
 import Drawer from '../Drawer';
 import MainHeader from '../MainHeader';
 
@@ -12,6 +13,7 @@ const Layout = props => (
         <Helmet>
             <title>{props.t('project.name')}</title>
         </Helmet>
+        <ScrollToTop />
         <Drawer />
         <MainHeader signOut={props.signOut} />
         <main id="page" className="content-wrapper">
