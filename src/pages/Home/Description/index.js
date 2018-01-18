@@ -1,32 +1,92 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import classNames from 'classnames';
+import { Link } from 'react-router-dom';
+import { translate } from 'react-i18next';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import { faStar } from '@fortawesome/fontawesome-free-solid';
-import './Description.css';
+import { faFutbol, faArrowCircleRight } from '@fortawesome/fontawesome-free-solid';
 
-export default () => (
+import { routes } from '../../../helpers/routes';
+import './Description.scss';
+
+const listGroupClassName = 'list-group-item list-group-item-action flex-column align-items-start';
+
+const Description = ({ credentials, t }) => (
     <section id="home-description">
-        <div className="parallax" />
         <div className="container">
-            <div className="row">
-                <div className="col-md-6">
-                    <div className="pictured">
-                        <div className="picture text-neutral">
-                            <FontAwesomeIcon icon={faStar} />
+            <section className="how-to-play">
+                <h3 className="section-title">
+                    <FontAwesomeIcon icon={faFutbol} />
+                    {t('page:Home.Description.title')}
+                </h3>
+                <hr />
+                <div className="list-group">
+                    <Link
+                        to={routes.auth.register}
+                        className={classNames(listGroupClassName, {
+                            active: !credentials.token,
+                            disabled: credentials.token,
+                        })}
+                        disabled={credentials.token}
+                    >
+                        <div>
+                            <div className="d-flex w-100 justify-content-between">
+                                <h5 className="mb-1">{t('page:Home.Description.auth.title')}</h5>
+                                <small className="d-none d-sm-inline">{t('page:Home.Description.auth.aside')}</small>
+                            </div>
+                            <p className="mb-1">{t('page:Home.Description.auth.text')}</p>
+                            <small className={classNames({ 'd-none': credentials.token })}>
+                                <FontAwesomeIcon icon={faArrowCircleRight} /> {t('page:Home.Description.auth.help')}
+                            </small>
                         </div>
-                        <h2 className="title">
-                            Qui aura la fameuse étoile<br />
-                            <small>entre toi et tes amis ?</small>
-                        </h2>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            Integer non enim justo. Proin bibendum mattis elit non consectetur.
-                            Praesent faucibus sed leo sit amet posuere. Nunc interdum orci ut consequat pretium.
-                            Ut eu mattis sem, nec eleifend tellus.
-                            Nullam venenatis tempus tortor, nec hendrerit felis tristique ut.
-                        </p>
-                    </div>
+                    </Link>
+                    <Link
+                        to={routes.auth.register}
+                        className={classNames(listGroupClassName, {
+                            active: credentials.token,
+                            disabled: !credentials.token,
+                        })}
+                        disabled={!credentials.token}
+                    >
+                        <div>
+                            <div className="d-flex w-100 justify-content-between">
+                                <h5 className="mb-1">{t('page:Home.Description.game.title')}</h5>
+                                <small className="d-none d-sm-inline">{t('page:Home.Description.game.aside')}</small>
+                            </div>
+                            <p className="mb-1">{t('page:Home.Description.game.text')}</p>
+                            <small className={classNames({ 'd-none': !credentials.token })}>
+                                <FontAwesomeIcon icon={faArrowCircleRight} /> {t('page:Home.Description.game.help')}
+                            </small>
+                        </div>
+                    </Link>
+                    <Link
+                        to={routes.auth.register}
+                        className={classNames(listGroupClassName, {
+                            disabled: !credentials.token,
+                        })}
+                        disabled={!credentials.token}
+                    >
+                        <div>
+                            <div className="d-flex w-100 justify-content-between">
+                                <h5 className="mb-1">{t('page:Home.Description.cup.title')}</h5>
+                                <small className="d-none d-sm-inline">{t('page:Home.Description.cup.aside')}</small>
+                            </div>
+                            <p className="mb-1">{t('page:Home.Description.cup.text')}</p>
+                            <small>
+                                <FontAwesomeIcon icon={faArrowCircleRight} /> {t('page:Home.Description.cup.help')}
+                            </small>
+                        </div>
+                    </Link>
                 </div>
-            </div>
+            </section>
         </div>
     </section>
 );
+
+Description.propTypes = {
+    credentials: PropTypes.shape({ token: PropTypes.string.isRequired }).isRequired,
+    t: PropTypes.func.isRequired,
+};
+
+
+export default translate(['page'])(Description);

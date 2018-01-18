@@ -18,7 +18,6 @@ import Title from '../../components/MainHeader/Title';
 import SignInForm from '../../components/Authentication/SignInForm';
 import Landing from './Landing';
 import Description from './Description';
-import OnBoarding from './OnBoarding';
 
 const $ = window.jQuery;
 
@@ -69,10 +68,10 @@ class Home extends React.Component {
     }
 
     render() {
-        const { t } = this.props;
+        const { credentials, t } = this.props;
         return (
             <div id="home">
-                <Title>Hey ! Bienvenue sur la HomePage ma gueule. :-)</Title>
+                <Title>{t('page:Home.Landing.subtitle')}</Title>
                 <SideAction><div className="mx-2 mx-sm-3">{this.renderSignInButton()}</div></SideAction>
                 <div
                     className="modal animated slideInDown"
@@ -102,9 +101,8 @@ class Home extends React.Component {
                         </div>
                     </div>
                 </div>
-                <Landing />
-                <Description />
-                <OnBoarding />
+                <Landing credentials={credentials} />
+                <Description credentials={credentials} />
             </div>
         );
     }
@@ -121,9 +119,6 @@ Home.propTypes = {
 };
 
 export default translate(['common', 'form', 'page', 'route'])(connect(
-    state => ({
-        credentials: state.credentials,
-        profile: state.profile,
-    }),
+    state => ({ credentials: state.credentials }),
     dispatch => ({ dispatch }),
 )(Home));

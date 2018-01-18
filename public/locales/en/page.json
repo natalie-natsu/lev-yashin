@@ -15,11 +15,34 @@
   },
   "Home": {
     "Landing": {
-      "title": "Win the <1>Russia</1> World Cup",
-      "subtitle": "<0>Casual</0> Fantasy football game"
+      "title": "Win the <1>Russia </1>2018 World Cup",
+      "subtitle": "Fantasy football",
+      "register": "Let's go!",
+      "newGame": "New game"
     },
     "modal-login": {
       "title": "Let's sign in"
+    },
+    "Description": {
+      "title": "How do we play?",
+      "auth": {
+        "title": "Register or sign in",
+        "text": "It only takes an email and a password. 30 seconds to be done.",
+        "aside": "30 seconds",
+        "help": "Click to register"
+      },
+      "game": {
+        "title": "Start or join a game",
+        "text": "Play with three of your friends during 1 month of great sport.",
+        "aside": "4 players",
+        "help": "Click to begin"
+      },
+      "cup": {
+        "title": "Enjoy the world cup",
+        "text": "Feel differently the games of this big event.",
+        "aside": "64 matches",
+        "help": "Follow the games"
+      }
     }
   },
   "Me": {

@@ -22,6 +22,11 @@ a {
     color: $complementary;
 }
 
+a.disabled,
+a[disabled] {
+  pointer-events: none;
+}
+
 button {
     cursor: pointer;
 }
@@ -34,4 +39,26 @@ header .jumbotron {
 .form-control:focus {
     border-color: $complementary;
     box-shadow: 0 0 0 3px rgba($complementary, .25);
+}
+
+.section-title,
+.form-title {
+  font-size: 1.25rem;
+}
+
+.section-title svg,
+.form-title svg {
+  margin-right: .5rem;
+}
+
+.section-title .float-right svg,
+.form-title .float-right svg {
+  margin-right: 0;
+}
+
+@media (min-width: 768px) {
+  .section-title,
+  .form-title {
+    font-size: 1.75rem;
+  }
 }

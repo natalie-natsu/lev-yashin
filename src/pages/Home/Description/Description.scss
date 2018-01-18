@@ -1,0 +1,22 @@
+@import '../../../theme';
+
+#home-description {
+    padding: 1rem 0;
+}
+
+#home-description .list-group-item.active {
+    background: $complementary;
+    border-color: $complementary;
+}
+
+#home-description .list-group-item.disabled p {
+    white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (min-width: 768px) {
+    #home-description {
+        padding: 4rem 0;
+    }
+}

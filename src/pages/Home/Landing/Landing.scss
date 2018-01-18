@@ -5,7 +5,7 @@ $squareSizeMd: 75px;
 #home-landing {
     position: relative;
     margin-top: -1rem;
-    padding: 4rem 0;
+    padding: 2rem 0;
     background: $primary;
     background-repeat: repeat;
     color: lighten($primary, 65%);
@@ -34,6 +34,10 @@ $squareSizeMd: 75px;
 }
 
 @media (min-width: 768px) {
+  #home-landing {
+    padding: 3rem 0;
+  }
+
     #home-landing h1 {
         font-size: 2rem;
     }
@@ -45,6 +49,9 @@ $squareSizeMd: 75px;
 }
 
 @media (min-width: 1024px) {
+  #home-landing {
+    padding: 4rem 0;
+  }
     #home-landing h1 {
         font-size: 3rem;
     }

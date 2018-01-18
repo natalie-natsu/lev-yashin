@@ -1,25 +1,3 @@
-.section-title,
-.form-title {
-    font-size: 1.25rem;
-}
-
-.section-title svg,
-.form-title svg {
-    margin-right: .5rem;
-}
-
-.section-title .float-right svg,
-.form-title .float-right svg {
-    margin-right: 0;
-}
-
 .submit-label svg {
     margin-right: .5rem;
-}
-
-@media (min-width: 768px) {
-    .section-title,
-    .form-title {
-        font-size: 1.75rem;
-    }
 }
