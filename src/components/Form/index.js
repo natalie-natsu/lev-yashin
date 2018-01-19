@@ -26,26 +26,30 @@ export function renderInput({ formControl, helpBlock, input, label, placeholder,
     return (
         <I18n>
             {t => (
-                <div className="form-group">
-                    {label && <label htmlFor={formControl.id}>{t(label)}</label>}
+                <div className={type === 'checkbox' ? 'form-check' : 'form-group'}>
+                    {(label && type !== 'checkbox') && <label htmlFor={formControl.id}>{t(label)}</label>}
                     <input
                         {...input}
                         {...formControl}
                         placeholder={t(placeholder)}
                         type={type}
-                        className={classNames(
-                            'form-control',
-                            { [touched && error ? 'is-invalid' : 'is-valid']: touched },
-                        )}
+                        className={classNames({
+                            [touched && error ? 'is-invalid' : 'is-valid']: touched,
+                            'form-check-input': type === 'checkbox',
+                            'form-control': type !== 'checkbox',
+                        })}
                         autoComplete="off"
                         aria-describedby={helpBlock && helpBlock.id}
                     />
-                    {errors.map(e => <div className={getEClass(e.key)} key={e.key}>{t(e.message)}</div>)}
-                    {helpBlock && (
-                        <small id={helpBlock.id} className="form-text text-muted">
-                            {t(helpBlock.text)}
-                        </small>
-                    )}
+                    {(label && type === 'checkbox') && <label htmlFor={formControl.id}>{t(label)}</label>}
+                    <div>
+                        {errors && errors.map(e => <div className={getEClass(e.key)} key={e.key}>{t(e.message)}</div>)}
+                        {helpBlock && (
+                            <small id={helpBlock.id} className="form-text text-muted">
+                                {t(helpBlock.text)}
+                            </small>
+                        )}
+                    </div>
                 </div>
             )}
         </I18n>

@@ -24,7 +24,7 @@ a {
 
 a.disabled,
 a[disabled] {
-  pointer-events: none;
+    pointer-events: none;
 }
 
 button {
@@ -43,22 +43,22 @@ header .jumbotron {
 
 .section-title,
 .form-title {
-  font-size: 1.25rem;
+    font-size: 1.25rem;
 }
 
 .section-title svg,
 .form-title svg {
-  margin-right: .5rem;
+    margin-right: .5rem;
 }
 
 .section-title .float-right svg,
 .form-title .float-right svg {
-  margin-right: 0;
+    margin-right: 0;
 }
 
 @media (min-width: 768px) {
-  .section-title,
-  .form-title {
-    font-size: 1.75rem;
-  }
+    .section-title,
+    .form-title {
+        font-size: 1.75rem;
+    }
 }

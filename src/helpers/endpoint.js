@@ -1,11 +1,15 @@
 const endpoints = {
+    // Auth
+    register: () => '/user/register',
+    signIn: () => '/user/sign-in',
     // Profile
     fetchProfile: () => '/user/profile',
     updateProfile: () => '/user/profile',
     resetPassword: () => '/user/reset-password',
-    // Auth
-    register: () => '/user/register',
-    signIn: () => '/user/sign-in',
+    // Game
+    createGame: () => '/games',
+    fetchGame: id => `/games/${id}`,
+    joinGame: id => `/games/${id}/join`,
 };
 
 export const headers = {

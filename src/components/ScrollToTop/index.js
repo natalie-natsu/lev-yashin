@@ -14,11 +14,11 @@ class ScrollToTop extends React.Component {
 
 ScrollToTop.propTypes = {
     location: PropTypes.shape({ pathname: PropTypes.string }).isRequired,
-    children: PropTypes.func,
+    children: PropTypes.element,
 };
 
 ScrollToTop.defaultProps = {
-    children: () => false,
+    children: <span className="scroll-to-top d-none" />,
 };
 
 export default withRouter(ScrollToTop);

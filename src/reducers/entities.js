@@ -1,5 +1,5 @@
 // import merge from "lodash/merge";
-import map from 'lodash/merge';
+import map from 'lodash/map';
 
 import { createReducer, removeObjectInState, updateObjectInState } from './utilities';
 import { RECEIVE_ENTITIES, REMOVE_ENTITIES, RESET_ENTITIES, UPDATE_ENTITIES } from '../actions/entities';
@@ -8,6 +8,7 @@ import { RECEIVE_ENTITIES, REMOVE_ENTITIES, RESET_ENTITIES, UPDATE_ENTITIES } fr
 // but it's way more rigorous to add all entities of the app.
 const initialEntitiesState = {
     users: null,
+    games: null,
 };
 
 function receiveEntities(state, action) {

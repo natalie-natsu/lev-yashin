@@ -5,14 +5,18 @@
 }
 
 #home-description .list-group-item.active {
-    background: $complementary;
     border-color: $complementary;
+    background: $complementary;
 }
 
 #home-description .list-group-item.disabled p {
+    overflow: hidden;
+    text-overflow: ellipsis;
     white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+}
+
+#home-description .list-group-item small svg {
+    margin-right: 5px;
 }
 
 @media (min-width: 768px) {

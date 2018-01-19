@@ -29,7 +29,7 @@ const Landing = ({ credentials, t }) => (
             >
                 <FontAwesomeIcon icon={faTrophy} /> {t('page:Home.Landing.register')}
             </Link>
-            <Link to={routes.home} className={classNames(btnClass, { 'd-sm-inline-block': credentials.token })}>
+            <Link to={routes.game.create} className={classNames(btnClass, { 'd-sm-inline-block': credentials.token })}>
                 <FontAwesomeIcon icon={faPlusCircle} /> {t('page:Home.Landing.newGame')}
             </Link>
         </div>

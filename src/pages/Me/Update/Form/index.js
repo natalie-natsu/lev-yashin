@@ -27,11 +27,11 @@ const validate = (values) => {
         errors.userName = 'toLong';
     }
 
-    if (values.firstName.length > 50) {
+    if (values.firstName && values.firstName.length > 100) {
         errors.firstName = 'toLong';
     }
 
-    if (values.lastName.length > 50) {
+    if (values.lastName && values.lastName.length > 100) {
         errors.lastName = 'toLong';
     }
 

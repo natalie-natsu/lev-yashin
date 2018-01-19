@@ -21,6 +21,7 @@ import NoMatch from '../../pages/NoMatch';
 import Home from '../../pages/Home';
 import Auth from '../../pages/Auth';
 import Me from '../../pages/Me';
+import GameCreate from '../../pages/Game/Create';
 
 const $ = window.jQuery;
 
@@ -44,6 +45,7 @@ class App extends React.Component {
                                 <Route exact path={routes.home} component={Home} />
                                 <Route path={routes.auth.exact} component={Auth} />
                                 <PrivateRoute path={routes.me.exact} component={Me} />
+                                <PrivateRoute path={routes.game.create} component={GameCreate} />
                                 <Route path={routes.notAllowed} component={NotAllowed} />
                                 <Route component={NoMatch} />
                             </Switch>
