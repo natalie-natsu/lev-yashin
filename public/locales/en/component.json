@@ -13,5 +13,10 @@
       "gifts": "Your rewards",
       "settings": "Settings"
     }
+  },
+  "GameSlot": {
+    "join": {
+      "text": "Join this game"
+    }
   }
 }

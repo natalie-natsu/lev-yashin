@@ -13,5 +13,10 @@
       "gifts": "Tes récompenses",
       "settings": "Paramètres"
     }
+  },
+  "GameSlot": {
+    "join": {
+      "text": "Rejoindre cette partie"
+    }
   }
 }

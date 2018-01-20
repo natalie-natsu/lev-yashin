@@ -47,6 +47,22 @@ function failFetchUsers(response, payload, scope) {
     };
 }
 
+export const SUCCESS_FETCH_USER = 'SUCCESS_FETCH_USER';
+
+export function successFetchUser(response, scope) {
+    return (dispatch) => {
+        const normalized = normalize(response, userSchema);
+
+        dispatch(receiveEntities(normalized.entities));
+        dispatch({
+            type: SUCCESS_FETCH_USER,
+            receivedAt: Date.now(),
+            id: normalized.result,
+            scope,
+        });
+    };
+}
+
 export const REFRESH_PROFILE = 'REFRESH_PROFILE';
 export const REQUEST_FETCH_PROFILE = 'REQUEST_FETCH_PROFILE';
 export const SUCCESS_FETCH_PROFILE = 'SUCCESS_FETCH_PROFILE';

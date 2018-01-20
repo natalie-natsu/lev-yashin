@@ -97,7 +97,7 @@ const Description = ({ credentials, t }) => (
 );
 
 Description.propTypes = {
-    credentials: PropTypes.shape({ token: PropTypes.string.isRequired }).isRequired,
+    credentials: PropTypes.shape({ token: PropTypes.string }).isRequired,
     t: PropTypes.func.isRequired,
 };
 

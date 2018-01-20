@@ -1,12 +1,12 @@
 import { Client } from 'nes';
 
 export const getHeaders = (credentials) => {
-    const headers = { Accept: 'application/json', 'Content-Type': 'application/json' };
-    if (credentials && credentials.token) { headers.Authorization = `Bearer ${credentials.token}`; }
+    const headers = {};
+    if (credentials && credentials.token) { headers.authorization = `Bearer ${credentials.token}`; }
     return headers;
 };
 
-export const client = new Client('ws://localhost:3000');
+export const client = new Client(process.env.WS_PATH);
 
 export async function wsConnect(headers) {
     await client.connect({ auth: { headers } });

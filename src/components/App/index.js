@@ -11,6 +11,7 @@ import { signOut } from '../../actions/authentication';
 import { validateFirstVisit } from '../../actions/app';
 import { routes } from '../../helpers/routes';
 import { getHeaders, wsConnect, wsDisconnect } from '../../helpers/nes';
+import { successFetchUser } from '../../actions/entities/user';
 
 import './App.scss';
 import Layout from '../Layout';
@@ -29,8 +30,11 @@ const $ = window.jQuery;
 
 class App extends React.Component {
     componentDidMount() {
-        const { credentials } = this.props;
-        if (credentials.token) { wsConnect(getHeaders(credentials)); }
+        const { credentials, dispatch } = this.props;
+        if (credentials.token) {
+            wsConnect(getHeaders(credentials));
+            dispatch(successFetchUser(credentials));
+        }
 
         if (!this.props.app.firstVisit) {
             const firstVisitModal = $('#modal-first-visit');

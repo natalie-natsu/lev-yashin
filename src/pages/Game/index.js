@@ -6,7 +6,7 @@ import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { faCommentAlt } from '@fortawesome/fontawesome-free-solid';
 
 import selectEntities from '../../selectors/entities';
-import { fetchGame } from '../../actions/entities/game';
+import { fetchGame, updateGameEntity } from '../../actions/entities/game';
 import { routes } from '../../helpers/routes';
 import { client } from '../../helpers/nes';
 
@@ -14,6 +14,7 @@ import NoMatch from '../NoMatch';
 import Loader from '../../components/Loader';
 import Title from '../../components/MainHeader/Title';
 import SideAction from '../../components/MainHeader/SideAction';
+import Lobby from './Lobby';
 
 class Game extends React.Component {
     componentWillMount() {
@@ -21,12 +22,11 @@ class Game extends React.Component {
         if (!game) { dispatch(fetchGame({ id: match.params.id }, routes.game.read)); }
     }
     componentWillReceiveProps(nextProps) {
-        const { game } = this.props;
+        const { dispatch, game } = this.props;
         // If we're receiving game for the first time
         if (!game && game !== nextProps.game) {
-            client.subscribe(`/games/${nextProps.game._id}`, (update, flags) => {
-                // eslint-disable-next-line no-console
-                console.log(update, flags);
+            client.subscribe(`/games/${nextProps.game._id}`, (update) => {
+                if (!update.error) { dispatch(updateGameEntity(update)); }
             });
         }
     }
@@ -49,13 +49,15 @@ class Game extends React.Component {
                         </button>
                     </div>
                 </SideAction>
+                <div className="container">
+                    <Lobby game={game} />
+                </div>
             </div>
         );
     }
 }
 
 Game.propTypes = {
-    // credentials: PropTypes.shape({ token: PropTypes.string }).isRequired,
     dispatch: PropTypes.func.isRequired,
     game: PropTypes.shape({
         _id: PropTypes.string.isRequired,

@@ -21,8 +21,15 @@ if (!API_PATH) {
   );
 }
 
+const WS_PATH = process.env.WS_PATH;
+if (!WS_PATH) {
+  throw new Error(
+    'The WS_PATH string variable is required but was not specified.'
+  );
+}
+
 // https://github.com/bkeepers/dotenv#what-other-env-files-can-i-use
-var dotenvFiles = [
+const dotenvFiles = [
   `${paths.dotenv}.${NODE_ENV}.local`,
   `${paths.dotenv}.${NODE_ENV}`,
   // Don't include `.env.local` for `test` environment
@@ -82,6 +89,7 @@ function getClientEnvironment(publicUrl) {
         // images into the `src` and `import` them in code to get their paths.
         PUBLIC_URL: publicUrl,
         API_PATH: process.env.API_PATH,
+        WS_PATH: process.env.WS_PATH,
       }
     );
   // Stringify all values so we can feed into Webpack DefinePlugin

@@ -5,6 +5,7 @@ import store from '../index';
 import { getName } from '../helpers/user';
 import { getHeaders, wsConnect, wsDisconnect } from '../helpers/nes';
 import ToastSignOutSuccess from '../components/Toast/SignOut/Success';
+import { successFetchUser } from './entities/user';
 
 /**
  * SIGN_IN
@@ -21,6 +22,7 @@ export function successSignIn(json, scope) {
     const { _id, profile, token } = json;
     return (dispatch) => {
         wsConnect(getHeaders(json));
+        dispatch(successFetchUser(json));
         dispatch({
             type: SUCCESS_SIGN_IN,
             authenticatedAt: Date.now(),
@@ -50,6 +52,7 @@ export function requestRegister() {
 export function successRegister(json, scope) {
     const { _id, profile, token } = json;
     return (dispatch) => {
+        dispatch(successFetchUser(json));
         dispatch({
             type: SUCCESS_REGISTER,
             authenticatedAt: Date.now(),

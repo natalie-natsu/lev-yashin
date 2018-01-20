@@ -57,6 +57,13 @@ function failFetchGame(response, scope) {
     };
 }
 
+export function updateGameEntity(response) {
+    return (dispatch) => {
+        const normalized = normalize(response, gameSchema);
+        dispatch(receiveEntities(normalized.entities));
+    };
+}
+
 export const REQUEST_CREATE_GAME = 'REQUEST_CREATE_GAME';
 export const SUCCESS_CREATE_GAME = 'SUCCESS_CREATE_GAME';
 export const FAIL_CREATE_GAME = 'FAIL_CREATE_GAME';

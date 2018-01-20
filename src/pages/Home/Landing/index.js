@@ -37,7 +37,7 @@ const Landing = ({ credentials, t }) => (
 );
 
 Landing.propTypes = {
-    credentials: PropTypes.shape({ token: PropTypes.string.isRequired }).isRequired,
+    credentials: PropTypes.shape({ token: PropTypes.string }).isRequired,
     t: PropTypes.func.isRequired,
 };
 
