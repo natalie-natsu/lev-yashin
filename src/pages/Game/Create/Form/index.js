@@ -26,10 +26,7 @@ class GameCreateForm extends React.Component {
     constructor(props) {
         super(props);
 
-        this.formErrors = {
-            notPrecise: 'request:error.notPrecise',
-            badRequest: 'form:createGame.errors.badRequest',
-        };
+        this.formErrors = { notPrecise: 'request:error.notPrecise' };
 
         this.nameErrors = [
             { key: 'required', message: 'form:createGame.errors..required' },
@@ -66,6 +63,7 @@ class GameCreateForm extends React.Component {
                     component={renderInput}
                     formControl={{ id: 'name' }}
                     label="form:createGame.input.name.label"
+                    placeholder="form:createGame.input.name.placeholder"
                     name="name"
                     type="text"
                     errors={this.nameErrors}

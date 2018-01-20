@@ -161,5 +161,34 @@
         "differs": "The two passwords differ"
       }
     }
+  },
+  "createGame": {
+    "labelledBy": "Create a new game",
+    "button": {
+      "save": "Save"
+    },
+    "state": {
+      "isSaving": "Is creating..."
+    },
+    "input": {
+      "name": {
+        "label": "Name of the game",
+        "placeholder": "The sofa cup of football"
+      },
+      "isWithBonuses": {
+        "label": "With all bonuses"
+      },
+      "isPublic": {
+        "label": "Public game"
+      }
+    },
+    "success": "Game created with success!",
+    "errors": {
+      "name": {
+        "required": "Name is required",
+        "toShort": "Name must be 3 characters minimum",
+        "toLong": "Name must be 100 characters maximum"
+      }
+    }
   }
 }

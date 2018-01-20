@@ -2,9 +2,9 @@
     position: relative;
     width: 100%;
     text-align: center;
+    margin: 1rem 0;
 }
 
-.loader .fas {
-    padding: 2rem;
-    font-size: 30px;
+.loader svg {
+    font-size: 40px;
 }

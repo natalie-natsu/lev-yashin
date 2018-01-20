@@ -1,5 +1,5 @@
-import { createSelector } from "reselect";
-import { pickFromEntities } from "./utilities";
+import { createSelector } from 'reselect';
+import { pickFromEntities } from './utilities';
 
 /**
  * Memoize selector with reselect
@@ -9,24 +9,24 @@ import { pickFromEntities } from "./utilities";
  *
  * @param entities
  * @param ids
- * @param isObject
+ * @param returnObject
  */
 
-const isObject = (entities, ids, isObject = false) => isObject ;
-const getIds = (entities, ids = []) => ids ;
+const isObject = (entities, ids, returnObject = false) => returnObject;
+const getIds = (entities, ids = []) => ids;
 const getAll = (entities = {}) => entities;
 
 const selectEntities = createSelector(
-    [ getAll, getIds, isObject ],
-    (all, ids, isObject) => pickFromEntities(all, ids, isObject)
+    [getAll, getIds, isObject],
+    (all, ids, returnObject) => pickFromEntities(all, ids, returnObject),
 );
 
 // THIS IS JUST AN EXAMPLE TO REPRODUCE IN YOUR COMPONENT
-export const mapStateToPropsExample = state => {
+export const mapStateToPropsExample = (state) => {
     // If you want to select a user.
     const entities = state.entities.users;
-    const id = state.app.pages.home.user.id;
+    const { id } = state.app.pages.home.user;
     return { user: { entity: selectEntities(entities, [id]) } };
 };
 
-export default selectEntities
+export default selectEntities;

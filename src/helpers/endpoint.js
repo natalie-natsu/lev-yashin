@@ -8,8 +8,8 @@ const endpoints = {
     resetPassword: () => '/user/reset-password',
     // Game
     createGame: () => '/games',
-    fetchGame: id => `/games/${id}`,
-    joinGame: id => `/games/${id}/join`,
+    fetchGame: ({ id }) => `/games/${id}`,
+    joinGame: ({ id }) => `/games/${id}/join`,
 };
 
 export const headers = {

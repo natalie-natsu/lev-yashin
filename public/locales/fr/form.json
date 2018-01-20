@@ -161,5 +161,34 @@
         "differs": "Les deux mots de passe diffèrent"
       }
     }
+  },
+  "createGame": {
+    "labelledBy": "Créer une partie",
+    "button": {
+      "save": "Valider"
+    },
+    "state": {
+      "isSaving": "Création en cours..."
+    },
+    "input": {
+      "name": {
+        "label": "Nom de la partie",
+        "placeholder": "La coupe du monde dans son canap'"
+      },
+      "isWithBonuses": {
+        "label": "Aves tous les bonus"
+      },
+      "isPublic": {
+        "label": "Partie publique"
+      }
+    },
+    "success": "Partie crée avec succès !",
+    "errors": {
+      "name": {
+        "required": "Le nom de la partie est requis",
+        "toShort": "Le nom doit faire 3 caractères minimum",
+        "toLong": "Le nom doit faire 100 caractères maximum"
+      }
+    }
   }
 }

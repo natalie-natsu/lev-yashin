@@ -8,7 +8,7 @@ export const routes = {
     },
     game: {
         create: '/game/create',
-        read: id => `/game/${id}`,
+        read: '/game/:id',
     },
     home: '/',
     me: {

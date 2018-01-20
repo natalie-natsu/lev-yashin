@@ -50,6 +50,7 @@
     "lodash": "^4.17.4",
     "moment": "^2.19.2",
     "moment-timezone": "^0.5.14",
+    "nes": "^7.0.2",
     "normalizr": "^3.2.3",
     "numeral": "^2.0.6",
     "object-assign": "4.1.1",

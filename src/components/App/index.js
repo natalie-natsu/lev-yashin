@@ -1,5 +1,5 @@
 import React from 'react';
-import Proptypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import 'flag-icon-css/css/flag-icon.min.css';
 import { ToastContainer } from 'react-toastify';
@@ -10,6 +10,7 @@ import i18n from './i18n';
 import { signOut } from '../../actions/authentication';
 import { validateFirstVisit } from '../../actions/app';
 import { routes } from '../../helpers/routes';
+import { getHeaders, wsConnect, wsDisconnect } from '../../helpers/nes';
 
 import './App.scss';
 import Layout from '../Layout';
@@ -21,17 +22,26 @@ import NoMatch from '../../pages/NoMatch';
 import Home from '../../pages/Home';
 import Auth from '../../pages/Auth';
 import Me from '../../pages/Me';
+import Game from '../../pages/Game';
 import GameCreate from '../../pages/Game/Create';
 
 const $ = window.jQuery;
 
 class App extends React.Component {
     componentDidMount() {
+        const { credentials } = this.props;
+        if (credentials.token) { wsConnect(getHeaders(credentials)); }
+
         if (!this.props.app.firstVisit) {
             const firstVisitModal = $('#modal-first-visit');
             firstVisitModal.modal('show');
             firstVisitModal.on('hidden.bs.modal', () => this.props.dispatch(validateFirstVisit()));
         }
+    }
+
+    componentWillUnmount() {
+        const { token } = this.props.credentials;
+        if (token) { wsDisconnect(); }
     }
 
     render() {
@@ -46,6 +56,7 @@ class App extends React.Component {
                                 <Route path={routes.auth.exact} component={Auth} />
                                 <PrivateRoute path={routes.me.exact} component={Me} />
                                 <PrivateRoute path={routes.game.create} component={GameCreate} />
+                                <PrivateRoute path={routes.game.read} component={Game} />
                                 <Route path={routes.notAllowed} component={NotAllowed} />
                                 <Route component={NoMatch} />
                             </Switch>
@@ -59,11 +70,12 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-    app: Proptypes.shape({ firstVisit: Proptypes.bool }).isRequired,
-    dispatch: Proptypes.func.isRequired,
+    credentials: PropTypes.shape({ token: PropTypes.string }).isRequired,
+    app: PropTypes.shape({ firstVisit: PropTypes.bool }).isRequired,
+    dispatch: PropTypes.func.isRequired,
 };
 
 export default connect(
-    state => ({ app: state.app }),
+    state => ({ app: state.app, credentials: state.credentials }),
     dispatch => ({ dispatch }),
 )(App);

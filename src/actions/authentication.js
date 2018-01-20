@@ -3,6 +3,7 @@ import { persistStore } from 'redux-persist';
 import { toast } from 'react-toastify';
 import store from '../index';
 import { getName } from '../helpers/user';
+import { getHeaders, wsConnect, wsDisconnect } from '../helpers/nes';
 import ToastSignOutSuccess from '../components/Toast/SignOut/Success';
 
 /**
@@ -19,6 +20,7 @@ export function requestSignIn() {
 export function successSignIn(json, scope) {
     const { _id, profile, token } = json;
     return (dispatch) => {
+        wsConnect(getHeaders(json));
         dispatch({
             type: SUCCESS_SIGN_IN,
             authenticatedAt: Date.now(),
@@ -72,6 +74,7 @@ export function signOut() {
     return (dispatch, getState) => {
         const name = getName(getState().credentials.profile);
 
+        wsDisconnect();
         persistStore(store).purge(['credentials', 'profile']);
         toast(<ToastSignOutSuccess name={name} />, { position: toast.POSITION.BOTTOM_RIGHT });
         dispatch({ type: SIGN_OUT });

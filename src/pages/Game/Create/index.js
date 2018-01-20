@@ -40,7 +40,10 @@ class GameCreate extends React.Component {
                     throw new SubmissionError(handleCreateGameError(json));
                 } else {
                     dispatch(successCreateGame(json, scope));
-                    history.push(routes.home);
+                    history.push({
+                        pathname: routes.game.read.replace(':id', json._id),
+                        state: { game: json },
+                    });
                     toast.success(
                         t('form:createGame.success'),
                         { position: toast.POSITION.BOTTOM_RIGHT },
