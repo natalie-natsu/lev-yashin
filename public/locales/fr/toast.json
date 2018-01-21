@@ -1,4 +1,5 @@
 {
+  "hacker": "Un peu facile, tu ne crois pas ?",
   "fetchProfile": {
     "success": {
       "text": "Connecté avec succès !"

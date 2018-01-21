@@ -18,7 +18,7 @@ function receiveEntities(state, action) {
     let newState = state;
     map(entities, (entity, entityName) => {
         newState = {
-            ...state,
+            ...newState,
             [entityName]: {
                 ...state[entityName],
                 ...entity,

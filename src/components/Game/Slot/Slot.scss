@@ -4,7 +4,11 @@ $pictureSizeSm: 100px;
 
 .slot {
     width: 100%;
-    background: repeating-linear-gradient(55deg, transparent, transparent 5%, #eee 5%, #eee 10%) #f5f5f5;
+    background: repeating-linear-gradient(55deg, transparent, transparent 5%, #f5f5f5 5%, #f5f5f5 10%) #fafafa;
+
+    &.ready {
+        background: repeating-linear-gradient(55deg, transparent, transparent 5%, #c9e4b6 5%, #c9e4b6 10%) #f0ffe8;
+    }
 
     .player-picture {
         width: $pictureSize;
@@ -12,6 +16,8 @@ $pictureSizeSm: 100px;
     }
 
     .player-name {
+        font-weight: bold;
+        text-shadow: 0 0 4px #fff;
         overflow: hidden;
         /* container - picture - margin picture - button - margin button */
         max-width: calc(100% - 60px - 1rem - 42px - 1rem);
@@ -19,29 +25,18 @@ $pictureSizeSm: 100px;
         white-space: nowrap;
     }
 
-    &.join {
-        margin-top: 1rem;
-        padding: .5rem;
-        height: 60px;
-        border: none;
-        border-radius: 0;
-        background: #f5f5f5;
+    button.join.text-primary:active,
+    button.join.text-primary:hover {
+        color: $primary;
+    }
 
-        p {
-            border: 1px dashed $complementary;
-            color: $complementary;
-            text-transform: uppercase;
-            line-height: calc(60px - 1rem);
-            transition: linear .1s;
-        }
+    button.join.text-success:active,
+    button.join.text-success:hover {
+        color: $success;
+    }
 
-        &:hover {
-            background: lighten($complementary, 50%);
-        }
-
-        &:hover p {
-            letter-spacing: 1px;
-        }
+    button.join.disabled {
+        cursor: initial;
     }
 }
 
@@ -55,16 +50,6 @@ $pictureSizeSm: 100px;
         .player-name {
             max-width: calc(100% - 100px - 1rem - 42px - 1rem);
             font-size: 120%;
-        }
-
-        &.join {
-            padding: 1rem;
-            height: 100px;
-
-            p {
-                border: 2px dashed $complementary;
-                line-height: calc(100px - 2rem);
-            }
         }
     }
 }

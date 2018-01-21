@@ -21,18 +21,23 @@ class Game extends React.Component {
         const { dispatch, game, match } = this.props;
         if (!game) { dispatch(fetchGame({ id: match.params.id }, routes.game.read)); }
     }
+
     componentWillReceiveProps(nextProps) {
         const { dispatch, game } = this.props;
         // If we're receiving game for the first time
         if (!game && game !== nextProps.game) {
             client.subscribe(`/games/${nextProps.game._id}`, (update) => {
-                if (!update.error) { dispatch(updateGameEntity(update)); }
+                // eslint-disable-next-line no-console
+                console.log(update);
+                if (!update.error) { dispatch(updateGameEntity(update.payload)); }
             });
         }
     }
+
     async componentWillUnmount() {
         await client.unsubscribe(`/games/${this.props.game._id}`, null);
     }
+
     render() {
         const { game, page, t } = this.props;
 

@@ -2,7 +2,7 @@ import { createReducer } from '../utilities';
 import { routes } from '../../helpers/routes';
 import { FAIL_FETCH_GAME, REFRESH_GAME, REQUEST_FETCH_GAME, SUCCESS_FETCH_GAME } from '../../actions/entities/game';
 
-const initialMeState = {
+const initialGameState = {
     error: false,
     isFetching: false,
     needRefresh: false,
@@ -47,7 +47,7 @@ function failFetchGame(state, { response }) {
     };
 }
 
-export default createReducer(initialMeState, {
+export default createReducer(initialGameState, {
     [REFRESH_GAME]: refreshGame,
     [REQUEST_FETCH_GAME]: requestFetchGame,
     [SUCCESS_FETCH_GAME]: successFetchGame,

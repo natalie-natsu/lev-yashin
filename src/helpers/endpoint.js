@@ -10,6 +10,7 @@ const endpoints = {
     createGame: () => '/games',
     fetchGame: ({ id }) => `/games/${id}`,
     joinGame: ({ id }) => `/games/${id}/join`,
+    readyGame: ({ id }) => `/games/${id}/ready`,
 };
 
 export const headers = {
