@@ -73,8 +73,12 @@ export const FAIL_CREATE_GAME = 'FAIL_CREATE_GAME';
 
 export function successCreateGame(response, scope) {
     return (dispatch) => {
-        const normalized = normalize(response, gameSchema);
+        response.users = response.users.map(user => ({
+            _id: user._id,
+            profile: { userName: user.userName, picture: user.picture },
+        }));
 
+        const normalized = normalize(response, gameSchema);
         dispatch(receiveEntities(normalized.entities));
         dispatch({
             type: SUCCESS_CREATE_GAME,
