@@ -36,8 +36,8 @@ class Lobby extends React.Component {
 
         return players.map((player, index) => (
             <Slot
-                admin={player._id === game.admin}
                 index={index}
+                isAdmin={player._id === game.admin}
                 isGettingReady={page.isGettingReady}
                 isReady={game.readyUsers.includes(player._id)}
                 key={player._id}

@@ -16,13 +16,23 @@ $pictureSizeSm: 100px;
     }
 
     .player-name {
-        font-weight: bold;
-        text-shadow: 0 0 4px #fff;
-        overflow: hidden;
+        position: relative;
         /* container - picture - margin picture - button - margin button */
         max-width: calc(100% - 60px - 1rem - 42px - 1rem);
-        text-overflow: ellipsis;
-        white-space: nowrap;
+        text-shadow: 0 0 4px #fff;
+        font-weight: bold;
+
+        .text {
+            display: inline-block;
+            overflow: hidden;
+            width: 100%;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        button .text {
+            display: inline;
+        }
     }
 
     button.join.text-primary:active,

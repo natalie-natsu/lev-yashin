@@ -8,7 +8,7 @@ import { faCheck, faSpinner } from '@fortawesome/fontawesome-free-solid';
 import './Slot.scss';
 import { getPublicName } from '../../../helpers/user';
 
-const Slot = ({ index, isGettingReady, isReady, onReady, player, userId }) => (
+const Slot = ({ index, isAdmin, isGettingReady, isReady, onReady, player, userId }) => (
     <div
         className={classNames(
             'slot d-flex justify-content-between mb-3 animated slideInLeft',
@@ -21,7 +21,26 @@ const Slot = ({ index, isGettingReady, isReady, onReady, player, userId }) => (
             src={player.profile.picture}
             alt={getPublicName(player.profile)}
         />
-        <span className="player-name ml-3 mr-auto align-self-center">{getPublicName(player.profile)}</span>
+        <span className="player-name ml-3 mr-auto align-self-center">
+            {!isAdmin ? <span className="text">{getPublicName(player.profile)}</span> : (
+                <div className="dropdown btn-group">
+                    <button
+                        id={`${player._id}-dropdown`}
+                        type="button"
+                        className="btn btn-light dropdown-toggle"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                    >
+                        <span className="text">{getPublicName(player.profile)}</span>
+                    </button>
+                    <div className="dropdown-menu" htmlFor={`${player._id}-dropdown`}>
+                        <a className="dropdown-item" href="#">Action</a>
+                        <a className="dropdown-item text-danger" href="#">Another action</a>
+                    </div>
+                </div>
+            )}
+        </span>
         <button
             className={classNames('join btn btn-light align-self-center mx-3 bg-white', {
                 disabled: userId !== player._id,
@@ -44,6 +63,7 @@ const Slot = ({ index, isGettingReady, isReady, onReady, player, userId }) => (
 
 Slot.propTypes = {
     index: PropTypes.number.isRequired,
+    isAdmin: PropTypes.bool.isRequired,
     isGettingReady: PropTypes.bool.isRequired,
     isReady: PropTypes.bool.isRequired,
     onReady: PropTypes.func,

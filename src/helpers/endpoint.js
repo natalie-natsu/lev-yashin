@@ -11,6 +11,8 @@ const endpoints = {
     fetchGame: ({ id }) => `/games/${id}`,
     joinGame: ({ id }) => `/games/${id}/join`,
     readyGame: ({ id }) => `/games/${id}/ready`,
+    kickGameUser: ({ id }) => `/games/${id}/kick`,
+    banGameUser: ({ id }) => `/games/${id}/ban`,
 };
 
 export const headers = {

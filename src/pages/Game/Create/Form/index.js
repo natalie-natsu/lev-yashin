@@ -29,7 +29,7 @@ class GameCreateForm extends React.Component {
         this.formErrors = { notPrecise: 'request:error.notPrecise' };
 
         this.nameErrors = [
-            { key: 'required', message: 'form:createGame.errors..required' },
+            { key: 'required', message: 'form:createGame.errors.name.required' },
             { key: 'toShort', message: 'form:createGame.errors.name.toShort' },
             { key: 'toLong', message: 'form:createGame.errors.name.toLong' },
         ];
