@@ -61,9 +61,27 @@
   },
   "Game": {
     "notFound": "Oops ! We couldn't fin the game you were searching for.",
+    "user": {
+      "kicked": "Hum... It seems that you were kicked by the administrator of this room. You can join again if you want, nut maybe this is good to talk with the admin first.",
+      "banned": "Oh ! That's sad but you were banned by the administrator of this room. You can always try to join elsewhere."
+    },
     "Lobby": {
       "join": {
         "text": "Join this game"
+      },
+      "kick": {
+        "swal": {
+          "title": "Are you sure you want to kick {{name}}?",
+          "confirm": "Yes, kick!",
+          "cancel": "Maybe not"
+        }
+      },
+      "ban": {
+        "swal": {
+          "title": "Are you sure you want to ban {{name}}?",
+          "confirm": "Yes, ban!",
+          "cancel": "Maybe not"
+        }
       }
     }
   }

@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import { faCommentAlt, faExclamationTriangle } from '@fortawesome/fontawesome-free-solid';
+import { faCommentAlt, faSignOutAlt, faBan } from '@fortawesome/fontawesome-free-solid';
 
 import selectEntities from '../../selectors/entities';
 import { fetchGame, updateGameEntity } from '../../actions/entities/game';
@@ -25,40 +25,41 @@ class Game extends React.Component {
 
     componentWillMount() {
         const { dispatch, game, match } = this.props;
-        if (!game) { dispatch(fetchGame({ id: match.params.id }, routes.game.read)); }
+        if (!game._id) { dispatch(fetchGame({ id: match.params.id }, routes.game.read)); }
     }
 
     componentWillReceiveProps(nextProps) {
         const { credentials, dispatch, game } = this.props;
         // If we're receiving game for the first time
-        if (!game && game !== nextProps.game) {
+        if (!game._id && game !== nextProps.game) {
             client.subscribe(`/games/${nextProps.game._id}`, (update) => {
                 // eslint-disable-next-line no-console
                 console.log(update);
-                const { error, payload, type } = update;
+                const { error, payload } = update;
                 if (!error) {
                     dispatch(updateGameEntity(payload));
-                    switch (type) {
-                    case 'GAME_USER_KICKED':
-                        if (!payload.users.map(user => user._id).includes(credentials._id)) {
-                            this.setState({ alert: type });
-                        }
-                        break;
-                    case 'GAME_USER_BANNED':
-                        if (!payload.users.map(user => user._id).includes(credentials._id)) {
-                            this.setState({ alert: type });
-                        }
-                        break;
-                    default:
-                        break;
+                    const { lastAction } = update.payload;
+                    if (lastAction === 'GAME_USER_KICKED' && lastAction.userId === credentials._id) {
+                        // TODO register kicked notif
+                        this.setState({ alert: 'GAME_USER_KICKED' });
                     }
                 }
             });
+        }
+
+        const aUserWasBanned = game.bannedUsers !== nextProps.game.bannedUsers;
+        if (aUserWasBanned && this.userIsBanned(nextProps.game)) {
+            // TODO register notification
+            this.setState({ alert: 'GAME_USER_BANNED' });
         }
     }
 
     async componentWillUnmount() {
         await client.unsubscribe(`/games/${this.props.game._id}`, null);
+    }
+
+    userIsBanned(game = this.props.game, credentials = this.props.credentials) {
+        return game.bannedUsers.map(u => u._id).includes(credentials._id);
     }
 
     hideAlert(e) {
@@ -85,13 +86,13 @@ class Game extends React.Component {
         case 'GAME_USER_KICKED':
             return (
                 <div className={classNames(alertClass, 'alert-warning')} role="alert">
-                    <FontAwesomeIcon icon={faExclamationTriangle} /> {t('page.game.user.kicked')} {close}
+                    <FontAwesomeIcon icon={faSignOutAlt} /> {t('page:Game.user.kicked')} {close}
                 </div>
             );
         case 'GAME_USER_BANNED':
             return (
                 <div className={classNames(alertClass, 'alert-danger')} role="alert">
-                    <FontAwesomeIcon icon={faExclamationTriangle} /> {t('page.game.user.banned')} {close}
+                    <FontAwesomeIcon icon={faBan} /> {t('page:Game.user.banned')} {close}
                 </div>
             );
         default:
@@ -103,7 +104,7 @@ class Game extends React.Component {
         const { game, page, t } = this.props;
 
         if (page.isFetching) return <Loader />;
-        else if (!game) return <NoMatch message={t('page:Game.notFound')} />;
+        else if (!game._id) return <NoMatch message={t('page:Game.notFound')} />;
 
         return (
             <div id="game">
@@ -117,7 +118,7 @@ class Game extends React.Component {
                 </SideAction>
                 <div className="container">
                     {this.renderAlert()}
-                    <Lobby game={game} />
+                    <Lobby game={game} userIsBanned={this.userIsBanned()} />
                 </div>
             </div>
         );
@@ -130,10 +131,13 @@ Game.propTypes = {
     }).isRequired,
     dispatch: PropTypes.func.isRequired,
     game: PropTypes.shape({
-        _id: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
+        _id: PropTypes.string,
+        bannedUsers: PropTypes.arrayOf(PropTypes.shape({
+            _id: PropTypes.string.isRequired,
+        })).isRequired,
         isWithBonuses: PropTypes.bool.isRequired,
         isPublic: PropTypes.bool.isRequired,
+        name: PropTypes.string.isRequired,
     }),
     match: PropTypes.shape({ params: PropTypes.shape({ id: PropTypes.string }).isRequired }).isRequired,
     page: PropTypes.shape({ isFetching: PropTypes.bool }).isRequired,
@@ -141,7 +145,13 @@ Game.propTypes = {
 };
 
 Game.defaultProps = {
-    game: null,
+    game: {
+        _id: null,
+        bannedUsers: [],
+        isWithBonuses: true,
+        isPublic: false,
+        name: '',
+    },
 };
 
 export default translate()(connect(

@@ -13,5 +13,9 @@
       "gifts": "Tes récompenses",
       "settings": "Paramètres"
     }
+  },
+  "GameSlot": {
+    "kick": "Expulser",
+    "ban": "Bannir"
   }
 }

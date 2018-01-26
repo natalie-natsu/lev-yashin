@@ -14,5 +14,17 @@
     "success": {
       "text": "Bienvenue parmi nous {{name}} !"
     }
+  },
+  "game": {
+    "user": {
+      "kick": {
+        "success": "{{name}} a bien été expulsé !",
+        "error": "Désolé, nous n'avons pas pu expulser {{name}}."
+      },
+      "ban": {
+        "success": "{{name}} a bien été banni !",
+        "error": "Désolé, nous n'avons pas pu bannir {{name}}."
+      }
+    }
   }
 }

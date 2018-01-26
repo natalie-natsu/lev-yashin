@@ -61,9 +61,27 @@
   },
   "Game": {
     "notFound": "Oops ! Nous n'avons pas pu trouver la partie que tu recherches.",
+    "user": {
+      "kicked": "Hum... Apparemment tu as été expulser par l'administrateur de cette partie. Tu peux toujours rejoindre, mais il vaudrait mieux en discuter avec l'admin avant.",
+      "banned": "Oh ! C'est triste, mais tu as été banni de cette salle. Tu peux toujours tenter ta chance ailleurs."
+    },
     "Lobby": {
       "join": {
         "text": "Rejoindre cette partie"
+      },
+      "kick": {
+        "swal": {
+          "title": "Es-tu sur de vouloir expulser {{name}} ?",
+          "confirm": "Ciao !",
+          "cancel": "Finalement non"
+        }
+      },
+      "ban": {
+        "swal": {
+          "title": "Es-tu sur de vouloir bannir {{name}} ?",
+          "confirm": "Ciao !",
+          "cancel": "Finalement non"
+        }
       }
     }
   }

@@ -31,6 +31,25 @@ button {
     cursor: pointer;
 }
 
+button.no-style, input[type="submit"].no-style, input[type="reset"].no-style {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+
+.swal2-actions {
+  margin: 0 -.25rem;
+}
+
+.swal2-actions .btn {
+  margin: 0 .25rem;
+  min-width: 120px;
+}
+
 header.jumbotron,
 header .jumbotron {
     margin-top: -1rem;

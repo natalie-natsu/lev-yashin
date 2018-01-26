@@ -13,5 +13,9 @@
       "gifts": "Your rewards",
       "settings": "Settings"
     }
+  },
+  "GameSlot": {
+    "kick": "Kick",
+    "ban": "Ban"
   }
 }

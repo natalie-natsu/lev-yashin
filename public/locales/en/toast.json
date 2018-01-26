@@ -14,5 +14,17 @@
     "success": {
       "text": "Welcome among us {{name}}!"
     }
+  },
+  "game": {
+    "user": {
+      "kick": {
+        "success": "{{name}} was kicked with success!",
+        "error": "Sorry, we were unable to kick {{name}}."
+      },
+      "ban": {
+        "success": "{{name}} was banned with success!",
+        "error": "Sorry, we were unable to ban {{name}}."
+      }
+    }
   }
 }

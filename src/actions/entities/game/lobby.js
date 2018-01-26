@@ -1,4 +1,9 @@
+import { normalize } from 'normalizr';
+
 import { getEndpoint, getHeaders } from '../../../helpers/endpoint';
+import { gameSchema } from '../../../schemas/game';
+import { receiveEntities } from '../../entities';
+import { normalizeResponseUsersAsEntity } from '../game';
 
 export const REQUEST_JOIN_GAME = 'REQUEST_JOIN_GAME';
 export const SUCCESS_JOIN_GAME = 'SUCCESS_JOIN_GAME';
@@ -79,6 +84,102 @@ function successReadyGame(response, scope) {
 function failReadyGame(response, scope) {
     return {
         type: FAIL_READY_GAME,
+        receivedAt: Date.now(),
+        error: response.error,
+        scope,
+    };
+}
+
+export const REQUEST_KICK_USER = 'REQUEST_KICK_USER';
+export const SUCCESS_KICK_USER = 'SUCCESS_KICK_USER';
+export const FAIL_KICK_USER = 'FAIL_KICK_USER';
+
+export const kickUser = (payload, scope, onSuccess, onFailure) => (dispatch, getState) => {
+    dispatch({ type: REQUEST_KICK_USER, payload, scope });
+
+    fetch(getEndpoint('kickGameUser', payload), {
+        method: 'POST',
+        headers: getHeaders(getState().credentials),
+        body: JSON.stringify({ userId: payload.userId }),
+    })
+        .then(response => response.json()).then((response) => {
+            if (response.error) {
+                dispatch(failKickUser(response, scope));
+                if (onFailure) { onFailure(response); }
+            } else {
+                dispatch(successKickUser(response, scope));
+                if (onSuccess) { onSuccess(response); }
+            }
+        });
+};
+
+export function successKickUser(response, scope) {
+    return (dispatch) => {
+        response.users = normalizeResponseUsersAsEntity(response.users);
+
+        const normalized = normalize(response, gameSchema);
+        dispatch(receiveEntities(normalized.entities));
+
+        dispatch({
+            type: SUCCESS_KICK_USER,
+            receivedAt: Date.now(),
+            response,
+            scope,
+        });
+    };
+}
+
+export function failKickUser(response, scope) {
+    return {
+        type: FAIL_KICK_USER,
+        receivedAt: Date.now(),
+        error: response.error,
+        scope,
+    };
+}
+
+export const REQUEST_BAN_USER = 'REQUEST_BAN_USER';
+export const SUCCESS_BAN_USER = 'SUCCESS_BAN_USER';
+export const FAIL_BAN_USER = 'FAIL_BAN_USER';
+
+export const banUser = (payload, scope, onSuccess, onFailure) => (dispatch, getState) => {
+    dispatch({ type: REQUEST_BAN_USER, payload, scope });
+
+    fetch(getEndpoint('banGameUser', payload), {
+        method: 'POST',
+        headers: getHeaders(getState().credentials),
+        body: JSON.stringify({ userId: payload.userId, isBanned: payload.isBanned }),
+    })
+        .then(response => response.json()).then((response) => {
+            if (response.error) {
+                dispatch(failBanUser(response, scope));
+                if (onFailure) { onFailure(response); }
+            } else {
+                dispatch(successBanUser(response, scope));
+                if (onSuccess) { onSuccess(response); }
+            }
+        });
+};
+
+export function successBanUser(response, scope) {
+    return (dispatch) => {
+        response.users = normalizeResponseUsersAsEntity(response.users);
+
+        const normalized = normalize(response, gameSchema);
+        dispatch(receiveEntities(normalized.entities));
+
+        dispatch({
+            type: SUCCESS_BAN_USER,
+            receivedAt: Date.now(),
+            response,
+            scope,
+        });
+    };
+}
+
+export function failBanUser(response, scope) {
+    return {
+        type: FAIL_BAN_USER,
         receivedAt: Date.now(),
         error: response.error,
         scope,
