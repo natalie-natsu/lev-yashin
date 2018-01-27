@@ -9,6 +9,7 @@ export const routes = {
     game: {
         create: '/game/create',
         read: '/game/:id',
+        messages: '/game/:id/messages',
     },
     home: '/',
     me: {

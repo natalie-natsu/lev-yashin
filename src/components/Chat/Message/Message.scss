@@ -1,0 +1,103 @@
+.chat {
+    .messages {
+        position: relative;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .messages .message {
+        clear: both;
+        overflow: hidden;
+        margin-bottom: 20px;
+        opacity: 0;
+        transition: all .5s linear;
+    }
+
+    .messages .message.left .avatar {
+        float: left;
+        background-color: #f5886e;
+    }
+
+    .messages .message.left .text-wrapper {
+        margin-left: 20px;
+        background-color: #ffe6cb;
+    }
+
+    .messages .message.left .text-wrapper::after,
+    .messages .message.left .text-wrapper::before {
+        right: 100%;
+        border-right-color: #ffe6cb;
+    }
+
+    .messages .message.left .text {
+        color: #c48843;
+    }
+
+    .messages .message.right .avatar {
+        float: right;
+        background-color: #fdbf68;
+    }
+
+    .messages .message.right .text-wrapper {
+        float: right;
+        margin-right: 20px;
+        background-color: #c7eafc;
+    }
+
+    .messages .message.right .text-wrapper::after,
+    .messages .message.right .text-wrapper::before {
+        left: 100%;
+        border-left-color: #c7eafc;
+    }
+
+    .messages .message.right .text {
+        color: #45829b;
+    }
+
+    .messages .message.appeared {
+        opacity: 1;
+    }
+
+    .messages .message .avatar {
+        display: inline-block;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+    }
+
+    .messages .message .text-wrapper {
+        position: relative;
+        display: inline-block;
+        padding: 15px;
+        min-width: 100px;
+        width: calc(100% - 80px);
+        border-radius: 6px;
+    }
+
+    .messages .message .text-wrapper::after,
+    .messages .message .text-wrapper:before {
+        position: absolute;
+        top: 13px;
+        width: 0;
+        height: 0;
+        border: solid transparent;
+        content: ' ';
+        pointer-events: none;
+    }
+
+    .messages .message .text-wrapper::after {
+        margin-top: 0;
+        border-width: 13px;
+    }
+
+    .messages .message .text-wrapper::before {
+        margin-top: -2px;
+        border-width: 15px;
+    }
+
+    .messages .message .text-wrapper .text {
+        font-weight: 300;
+        font-size: 18px;
+    }
+}

@@ -12,9 +12,9 @@ import selectEntities from '../../../selectors/entities';
 import { routes } from '../../../helpers/routes';
 import {
     joinGame, readyGame,
-    REQUEST_KICK_USER, failKickUser, successKickUser, successBanUser, failBanUser, REQUEST_BAN_USER,
+    kickUser, failKickUser, successKickUser,
+    banUser, successBanUser, failBanUser,
 } from '../../../actions/entities/game/lobby';
-import { getEndpoint, getHeaders } from '../../../helpers/endpoint';
 import { getPublicName } from '../../../helpers/user';
 
 import Slot from '../../../components/Game/Slot';
@@ -38,7 +38,7 @@ class Lobby extends React.Component {
 
     handleKick(e, player) {
         if (e) { e.preventDefault(); }
-        const { credentials, dispatch, game, t } = this.props;
+        const { dispatch, game, t } = this.props;
 
         swal({
             type: 'warning',
@@ -55,28 +55,23 @@ class Lobby extends React.Component {
                 const payload = { id: game._id, userId: player._id };
                 const scope = routes.game.read;
 
-                dispatch({ type: REQUEST_KICK_USER, payload, scope });
-
-                fetch(getEndpoint('kickGameUser', payload), {
-                    method: 'POST',
-                    headers: getHeaders(credentials),
-                    body: JSON.stringify({ userId: payload.userId }),
-                })
-                    .then(response => response.json()).then((response) => {
-                        if (response.error) {
+                dispatch(kickUser(payload, scope, (response) => {
+                    if (response.error) {
+                        dispatch(failKickUser(response, scope, () => {
                             toast.error(
                                 t('toast:game.user.kick.error', { name: getPublicName(player.profile) }),
                                 { position: toast.POSITION.BOTTOM_RIGHT },
                             );
-                            dispatch(failKickUser(response, scope));
-                        } else {
+                        }));
+                    } else {
+                        dispatch(successKickUser(response, scope, () => {
                             toast.success(
                                 t('toast:game.user.kick.success', { name: getPublicName(player.profile) }),
                                 { position: toast.POSITION.BOTTOM_RIGHT },
                             );
-                            dispatch(successKickUser(response, scope));
-                        }
-                    });
+                        }));
+                    }
+                }));
             },
             allowOutsideClick: () => !swal.isLoading(),
         });
@@ -84,7 +79,7 @@ class Lobby extends React.Component {
 
     handleBan(e, player) {
         if (e) { e.preventDefault(); }
-        const { credentials, dispatch, game, t } = this.props;
+        const { dispatch, game, t } = this.props;
 
         swal({
             type: 'warning',
@@ -102,28 +97,23 @@ class Lobby extends React.Component {
                 const payload = { id: game._id, userId, isBanned: !game.bannedUsers.includes(userId) };
                 const scope = routes.game.read;
 
-                dispatch({ type: REQUEST_BAN_USER, payload, scope });
-
-                fetch(getEndpoint('banGameUser', payload), {
-                    method: 'POST',
-                    headers: getHeaders(credentials),
-                    body: JSON.stringify({ userId: payload.userId, isBanned: payload.isBanned }),
-                })
-                    .then(response => response.json()).then((response) => {
-                        if (response.error) {
+                dispatch(banUser(payload, scope, (response) => {
+                    if (response.error) {
+                        dispatch(failBanUser(response, scope, () => {
                             toast.error(
                                 t('toast:game.user.ban.error', { name: getPublicName(player.profile) }),
                                 { position: toast.POSITION.BOTTOM_RIGHT },
                             );
-                            dispatch(failBanUser(response, scope));
-                        } else {
+                        }));
+                    } else {
+                        dispatch(successBanUser(response, scope, () => {
                             toast.success(
                                 t('toast:game.user.ban.success', { name: getPublicName(player.profile) }),
                                 { position: toast.POSITION.BOTTOM_RIGHT },
                             );
-                            dispatch(successBanUser(response, scope));
-                        }
-                    });
+                        }));
+                    }
+                }));
             },
             allowOutsideClick: () => !swal.isLoading(),
         });
@@ -141,6 +131,7 @@ class Lobby extends React.Component {
                 isGettingReady={page.isGettingReady}
                 isReady={game.readyUsers.includes(player._id)}
                 key={player._id}
+                last={index === players.length - 1}
                 onBan={(e, p) => this.handleBan(e, p)}
                 onKick={(e, p) => this.handleKick(e, p)}
                 onReady={(isReady, e, playerId) => this.handleReady(isReady, e, playerId)}
@@ -151,14 +142,14 @@ class Lobby extends React.Component {
     }
 
     render() {
-        const { game, page, t, userId, userIsBanned } = this.props;
+        const { children, game, page, t, userId, userIsBanned } = this.props;
         const canJoin = !userIsBanned && game.users && !game.users.includes(userId);
 
         return (
             <section id="game-lobby">
                 {this.renderSlots()}
-                <div className="actions text-right">
-                    {canJoin && (
+                {canJoin && (
+                    <div className="actions text-right mt-3">
                         <button
                             className="btn btn-complementary"
                             onClick={e => this.handleJoin(e)}
@@ -167,15 +158,16 @@ class Lobby extends React.Component {
                             <FontAwesomeIcon icon={page.isJoining ? faSpinner : faSignInAlt} spin={page.isJoining} />
                             <span className="ml-2">{t('page:Game.Lobby.join.text')}</span>
                         </button>
-                    )}
-                </div>
+                    </div>
+                )}
+                {children}
             </section>
         );
     }
 }
 
 Lobby.propTypes = {
-    credentials: PropTypes.shape({ token: PropTypes.string.isRequired }).isRequired,
+    children: PropTypes.element,
     dispatch: PropTypes.func.isRequired,
     game: PropTypes.shape({
         _id: PropTypes.string.isRequired,
@@ -196,6 +188,7 @@ Lobby.propTypes = {
 };
 
 Lobby.defaultProps = {
+    children: null,
     players: [],
     userIsBanned: false,
 };

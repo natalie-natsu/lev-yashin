@@ -11,13 +11,13 @@ import { getPublicName } from '../../../helpers/user';
 const Slot = ({
     adminId, onBan, onKick, index,
     isAdmin, isGettingReady, isReady,
-    onReady, player, t, userId,
+    last, onReady, player, t, userId,
 }) => (
     <div
         className={classNames(
-            'slot d-flex justify-content-between mb-3 animated slideInLeft',
-            [`index-${index}`],
-            { ready: isReady },
+            `index-${index}`,
+            'slot d-flex justify-content-between',
+            { ready: isReady, 'animated slideInLeft': !isAdmin, last },
         )}
     >
         <img
@@ -80,6 +80,7 @@ Slot.propTypes = {
     isAdmin: PropTypes.bool.isRequired,
     isGettingReady: PropTypes.bool.isRequired,
     isReady: PropTypes.bool.isRequired,
+    last: PropTypes.bool.isRequired,
     onBan: PropTypes.func,
     onKick: PropTypes.func,
     onReady: PropTypes.func,

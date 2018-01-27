@@ -3,12 +3,16 @@ $pictureSize: 60px;
 $pictureSizeSm: 100px;
 
 .slot {
-  position: relative;
+    position: relative;
     width: 100%;
     background: repeating-linear-gradient(55deg, transparent, transparent 5%, #f5f5f5 5%, #f5f5f5 10%) #fafafa;
 
     &.ready {
         background: repeating-linear-gradient(55deg, transparent, transparent 5%, #c9e4b6 5%, #c9e4b6 10%) #f0ffe8;
+    }
+
+    &:not(.last) {
+        margin-bottom: 1rem;
     }
 
     .player-picture {
@@ -36,14 +40,14 @@ $pictureSizeSm: 100px;
         }
 
         .dropdown-menu.show {
-          transform: translate3d(0%, -35%, 0px) !important;
-          padding: 0;
-          left: -0.5rem !important;
+            left: -.5rem !important;
+            padding: 0;
+            transform: translate3d(0%, -35%, 0px) !important;
         }
 
-      .dropdown-item {
-        padding: 2px 0.75rem;
-      }
+        .dropdown-item {
+            padding: 2px .75rem;
+        }
     }
 
     button.join.text-primary:active,
@@ -72,14 +76,14 @@ $pictureSizeSm: 100px;
             max-width: calc(100% - 100px - 1rem - 42px - 1rem);
             font-size: 120%;
 
-          .dropdown-menu.show {
-            transform: translate3d(0%, -38%, 0px) !important;
-            left: 0 !important;
-          }
+            .dropdown-menu.show {
+                left: 0 !important;
+                transform: translate3d(0%, -38%, 0px) !important;
+            }
 
-          .dropdown-item {
-            padding: 0.25rem 1.5rem;
-          }
+            .dropdown-item {
+                padding: .25rem 1.5rem;
+            }
         }
     }
 }

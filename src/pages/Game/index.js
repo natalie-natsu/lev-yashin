@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
+import { Link, Switch } from 'react-router-dom';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import { faCommentAlt, faSignOutAlt, faBan } from '@fortawesome/fontawesome-free-solid';
+import { faCommentAlt, faSignOutAlt, faBan, faArrowLeft } from '@fortawesome/fontawesome-free-solid';
 
 import selectEntities from '../../selectors/entities';
 import { fetchGame, updateGameEntity } from '../../actions/entities/game';
@@ -12,10 +13,12 @@ import { routes } from '../../helpers/routes';
 import { client } from '../../helpers/nes';
 
 import NoMatch from '../NoMatch';
+import PrivateRoute from '../../components/PrivateRoute';
 import Loader from '../../components/Loader';
 import Title from '../../components/MainHeader/Title';
 import SideAction from '../../components/MainHeader/SideAction';
 import Lobby from './Lobby';
+import Chat from '../../components/Chat';
 
 class Game extends React.Component {
     constructor(props) {
@@ -62,6 +65,10 @@ class Game extends React.Component {
         return game.bannedUsers.map(u => u._id).includes(credentials._id);
     }
 
+    handleGameMessage() {
+        this.props.dispatch({ type: 'NEW_MESSAGE' });
+    }
+
     hideAlert(e) {
         if (e) { e.preventDefault(); }
         this.setState({ alert: false });
@@ -101,24 +108,44 @@ class Game extends React.Component {
     }
 
     render() {
-        const { game, page, t } = this.props;
+        const { credentials, game, page, t } = this.props;
 
         if (page.isFetching) return <Loader />;
         else if (!game._id) return <NoMatch message={t('page:Game.notFound')} />;
 
+        const chatButton = (
+            <SideAction>
+                <div className="btn-side-action mx-2 mx-sm-3">
+                    <Link to={routes.game.messages.replace(':id', game._id)} className="btn">
+                        <FontAwesomeIcon icon={faCommentAlt} />
+                    </Link>
+                </div>
+            </SideAction>
+        );
+
+        const lobbyProps = { game, userIsBanned: this.userIsBanned(), children: chatButton };
+        const chatProps = {
+            gameId: game._id,
+            onSubmit: values => this.handleGameMessage(values),
+            userId: credentials._id,
+            children: (
+                <SideAction>
+                    <div className="btn-side-action mx-2 mx-sm-3">
+                        <Link to={routes.game.read.replace(':id', game._id)} className="btn">
+                            <FontAwesomeIcon icon={faArrowLeft} />
+                        </Link>
+                    </div>
+                </SideAction>
+            ),
+        };
         return (
             <div id="game">
                 <Title>{game.name}</Title>
-                <SideAction>
-                    <div className="btn-side-action mx-2 mx-sm-3">
-                        <button type="button" className="btn">
-                            <FontAwesomeIcon icon={faCommentAlt} />
-                        </button>
-                    </div>
-                </SideAction>
                 <div className="container">
-                    {this.renderAlert()}
-                    <Lobby game={game} userIsBanned={this.userIsBanned()} />
+                    <Switch>
+                        <PrivateRoute exact path={routes.game.read} component={Lobby} componentProps={lobbyProps} />
+                        <PrivateRoute path={routes.game.messages} component={Chat} componentProps={chatProps} />
+                    </Switch>
                 </div>
             </div>
         );

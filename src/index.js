@@ -9,11 +9,12 @@ import thunk from 'redux-thunk';
 import 'bootstrap';
 import './style/fonts';
 
+import { vanillaPromise, readyStatePromise } from './middlewares/promise';
 import reducers from './reducers';
 import App from './components/App';
 import Loader from './components/Loader';
 
-const middleWares = [thunk];
+const middleWares = [thunk, vanillaPromise, readyStatePromise];
 if (process.env.NODE_ENV === 'development') {
     middleWares.push(createLogger());
 }
