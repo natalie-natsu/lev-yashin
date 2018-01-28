@@ -1,0 +1,21 @@
+{
+  "MainHeader": {
+    "Languages": {
+      "languagesDropdown": {
+        "labelledBy": "Choisir une langue"
+      }
+    }
+  },
+  "Drawer": {
+    "separators": {
+      "authentication": "Authentification",
+      "navigation": "Navigation",
+      "gifts": "Tes récompenses",
+      "settings": "Paramètres"
+    }
+  },
+  "GameSlot": {
+    "kick": "Expulser",
+    "ban": "Bannir"
+  }
+}
