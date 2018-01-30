@@ -1,6 +1,10 @@
 import { createReducer } from '../utilities';
 import { routes } from '../../helpers/routes';
-import { FAIL_FETCH_GAME, REFRESH_GAME, REQUEST_FETCH_GAME, SUCCESS_FETCH_GAME } from '../../actions/entities/game';
+import {
+    FAIL_FETCH_GAME, FAIL_SUBSCRIBE_GAME, REFRESH_GAME,
+    REQUEST_FETCH_GAME, REQUEST_SUBSCRIBE_GAME,
+    SUCCESS_FETCH_GAME, SUCCESS_SUBSCRIBE_GAME,
+} from '../../actions/entities/game';
 
 const initialGameState = {
     error: false,
@@ -50,6 +54,9 @@ function failFetchGame(state, { response }) {
 export default createReducer(initialGameState, {
     [REFRESH_GAME]: refreshGame,
     [REQUEST_FETCH_GAME]: requestFetchGame,
+    [REQUEST_SUBSCRIBE_GAME]: requestFetchGame,
     [SUCCESS_FETCH_GAME]: successFetchGame,
+    [SUCCESS_SUBSCRIBE_GAME]: successFetchGame,
     [FAIL_FETCH_GAME]: failFetchGame,
+    [FAIL_SUBSCRIBE_GAME]: failFetchGame,
 }, routes.game.read);

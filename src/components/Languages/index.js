@@ -9,7 +9,7 @@ import './Languages.css';
 const localeToFlag = i18n => (i18n.language === 'en' ? 'gb' : i18n.language);
 const getLanguageItemClass = (locale, i18n) => (i18n.language === locale ? 'hidden' : 'visible');
 
-const Languages = ({ btnClass, i18n, t }) => (
+const Languages = ({ btnClass, i18n, onChangeLanguage, t }) => (
     <div className="languages dropdown">
         <button
             type="button"
@@ -30,7 +30,7 @@ const Languages = ({ btnClass, i18n, t }) => (
             <a
                 className={`dropdown-item ${getLanguageItemClass('en', i18n)}`}
                 href="#"
-                onClick={() => i18n.changeLanguage('en')}
+                onClick={(e, lang = 'en') => { onChangeLanguage(lang); i18n.changeLanguage(lang); }}
             >
                 <span className="flag-icon flag-icon-gb" />
                 {t('language.en')}
@@ -38,7 +38,7 @@ const Languages = ({ btnClass, i18n, t }) => (
             <a
                 className={`dropdown-item ${getLanguageItemClass('fr', i18n)}`}
                 href="#"
-                onClick={() => i18n.changeLanguage('fr')}
+                onClick={(e, lang = 'fr') => { onChangeLanguage(lang); i18n.changeLanguage(lang); }}
             >
                 <span className="flag-icon flag-icon-fr" />
                 {t('language.fr')}
@@ -46,18 +46,10 @@ const Languages = ({ btnClass, i18n, t }) => (
             <a
                 className={`dropdown-item ${getLanguageItemClass('es', i18n)}`}
                 href="#"
-                onClick={() => i18n.changeLanguage('es')}
+                onClick={(e, lang = 'es') => { onChangeLanguage(lang); i18n.changeLanguage(lang); }}
             >
                 <span className="flag-icon flag-icon-es" />
                 {t('language.es')}
-            </a>
-            <a
-                className={`dropdown-item ${getLanguageItemClass('de', i18n)}`}
-                href="#"
-                onClick={() => i18n.changeLanguage('de')}
-            >
-                <span className="flag-icon flag-icon-de" />
-                {t('language.de')}
             </a>
         </div>
     </div>
@@ -66,7 +58,13 @@ const Languages = ({ btnClass, i18n, t }) => (
 Languages.propTypes = {
     btnClass: PropTypes.string,
     i18n: PropTypes.shape({ changeLanguage: PropTypes.func }).isRequired,
+    onChangeLanguage: PropTypes.func,
     t: PropTypes.func.isRequired,
+};
+
+
+Languages.defaultProps = {
+    onChangeLanguage: lang => lang,
 };
 
 Languages.defaultProps = {

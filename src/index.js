@@ -14,10 +14,13 @@ import reducers from './reducers';
 import App from './components/App';
 import Loader from './components/Loader';
 
-const middleWares = [thunk, vanillaPromise, readyStatePromise];
+const middleWares = [thunk];
 if (process.env.NODE_ENV === 'development') {
     middleWares.push(createLogger());
 }
+
+// Should be pushed after redux-logger.
+middleWares.concat([vanillaPromise, readyStatePromise]);
 
 const store = createStore(
     reducers,

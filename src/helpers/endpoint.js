@@ -13,6 +13,9 @@ const endpoints = {
     readyGame: ({ id }) => `/games/${id}/ready`,
     kickGameUser: ({ id }) => `/games/${id}/kick`,
     banGameUser: ({ id }) => `/games/${id}/ban`,
+    // Messages
+    fetchMessages: ({ id }) => `/games/${id}/messages`,
+    sendMessage: ({ id }) => `/games/${id}/messages`,
 };
 
 export const headers = {

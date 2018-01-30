@@ -7,19 +7,25 @@ import Message from './Message';
 class Chat extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { text: '' };
+        this.state = { content: '' };
     }
 
     handleSubmit(e) {
         e.preventDefault();
-        const { gameId, userId } = this.props;
-        this.props.onSubmit({ gameId, userId, text: this.state.text });
-        this.setState({ text: '' });
+        const { gameId } = this.props;
+        this.props.onSubmit({ id: gameId, message: this.state.content });
+        this.setState({ content: '' });
     }
 
     renderMessages() {
-        const { messages, userId } = this.props;
-        messages.map(message => <Message {...message} isUser={message.userId === userId} />);
+        const { messages, userId, users } = this.props;
+        return messages.map(message => (
+            <Message
+                {...message}
+                isUser={message.user === userId}
+                picture={users[message.user].profile.picture}
+            />
+        ));
     }
 
     render() {
@@ -28,36 +34,13 @@ class Chat extends React.Component {
             <div id={`chat-${gameId}`} className="chat">
                 <div className="chat-window">
                     <ul className="messages">
-                        <li className="message left appeared">
+                        <li className="message left">
                             <div className="avatar" />
                             <div className="text-wrapper">
                                 <div className="text">Hello Philip! :)</div>
                             </div>
                         </li>
-                        <li className="message right appeared">
-                            <div className="avatar" />
-                            <div className="text-wrapper">
-                                <div className="text">Hey hey</div>
-                            </div>
-                        </li>
-                        <li className="message left appeared">
-                            <div className="avatar" />
-                            <div className="text-wrapper">
-                                <div className="text">Hello Philip! :)</div>
-                            </div>
-                        </li>
-                        <li className="message left appeared">
-                            <div className="avatar" />
-                            <div className="text-wrapper">
-                                <div className="text">Hello Philip! :)</div>
-                            </div>
-                        </li>
-                        <li className="message left appeared">
-                            <div className="avatar" />
-                            <div className="text-wrapper">
-                                <div className="text">Hello Philip! :)</div>
-                            </div>
-                        </li>
+                        {this.renderMessages()}
                     </ul>
                     {children}
                     <form
@@ -67,11 +50,11 @@ class Chat extends React.Component {
                         <div className="row">
                             <div className="col-md-8 col-lg-10">
                                 <input
-                                    autoComplete={false}
                                     className="form-control"
-                                    name="text"
-                                    onChange={e => this.setState({ text: e.target.value })}
+                                    name="content"
+                                    onChange={e => this.setState({ content: e.target.value })}
                                     placeholder="Type your message here..."
+                                    value={this.state.content}
                                 />
                             </div>
                             <div className="col-md-4 col-lg-2">
@@ -95,17 +78,21 @@ Chat.propTypes = {
     gameId: PropTypes.string.isRequired,
     messages: PropTypes.arrayOf(PropTypes.shape({
         _id: PropTypes.string.isRequired,
-        userId: PropTypes.string.isRequired,
-        text: PropTypes.string.isRequired,
-        dateTime: PropTypes.string.isRequired,
+        content: PropTypes.string.isRequired,
+        sentAt: PropTypes.string.isRequired,
+        user: PropTypes.string.isRequired,
     })),
     onSubmit: PropTypes.func,
     userId: PropTypes.string.isRequired,
+    users: PropTypes.arrayOf(PropTypes.shape({
+        picture: PropTypes.string.isRequired,
+    })),
 };
 
 Chat.defaultProps = {
     children: null,
     messages: [],
+    users: [],
     // eslint-disable-next-line no-console
     onSubmit: () => console.log('Please provide an onSubmit callback.'),
 };

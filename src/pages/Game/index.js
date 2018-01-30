@@ -8,7 +8,12 @@ import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { faCommentAlt, faSignOutAlt, faBan, faArrowLeft } from '@fortawesome/fontawesome-free-solid';
 
 import selectEntities from '../../selectors/entities';
-import { fetchGame, updateGameEntity } from '../../actions/entities/game';
+import { failSubscribeGame, fetchGame, subscribeGame, successSubscribeGame } from '../../actions/entities/game';
+import {
+    failSendMessage, failSubscribeMessages,
+    fetchMessages, sendMessage, subscribeMessages,
+    successSendMessage, successSubscribeMessages,
+} from '../../actions/entities/messages';
 import { routes } from '../../helpers/routes';
 import { client } from '../../helpers/nes';
 
@@ -23,50 +28,89 @@ import Chat from '../../components/Chat';
 class Game extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { alert: false };
+        this.state = {
+            alert: false,
+            subscriptions: {
+                game: false,
+                messages: false,
+            },
+        };
     }
 
     componentWillMount() {
-        const { dispatch, game, match } = this.props;
-        if (!game._id) { dispatch(fetchGame({ id: match.params.id }, routes.game.read)); }
+        const { dispatch, match } = this.props;
+        const scope = routes.game.read;
+
+        dispatch(fetchGame({ id: match.params.id }, scope));
+        dispatch(fetchMessages({ id: match.params.id }, scope));
+
+        // dispatch(subscribeGame({ id: match.params.id }, scope, (update) => {
+        //     const { error, payload } = update;
+        //     if (error) dispatch(failSubscribeGame(error, scope));
+        //     else dispatch(successSubscribeGame(payload, scope, res => this.onSubscribeGameSuccess(res)));
+        // }));
     }
 
     componentWillReceiveProps(nextProps) {
-        const { credentials, dispatch, game } = this.props;
+        const { dispatch, game } = this.props;
+        const scope = routes.game.read;
+        const scopeMsg = routes.game.messages;
+
         // If we're receiving game for the first time
         if (!game._id && game !== nextProps.game) {
-            client.subscribe(`/games/${nextProps.game._id}`, (update) => {
-                // eslint-disable-next-line no-console
-                console.log(update);
+            // Subscribe to Game
+            dispatch(subscribeGame({ id: nextProps.game._id }, scope, (update) => {
                 const { error, payload } = update;
-                if (!error) {
-                    dispatch(updateGameEntity(payload));
-                    const { lastAction } = update.payload;
-                    if (lastAction === 'GAME_USER_KICKED' && lastAction.userId === credentials._id) {
-                        // TODO register kicked notif
-                        this.setState({ alert: 'GAME_USER_KICKED' });
-                    }
-                }
-            });
+                if (error) dispatch(failSubscribeGame(error, scope));
+                else dispatch(successSubscribeGame(payload, scope, res => this.onSubscribeGameSuccess(res)));
+            }));
+
+            // Subscribe to Game's Messages
+            dispatch(subscribeMessages({ id: nextProps.game._id }, scopeMsg, (update) => {
+                const { error, payload } = update;
+                if (error) dispatch(failSubscribeMessages(error, scopeMsg));
+                else dispatch(successSubscribeMessages(payload, scopeMsg, res => this.onSubscribeMessagesSuccess(res)));
+            }));
         }
 
         const aUserWasBanned = game.bannedUsers !== nextProps.game.bannedUsers;
         if (aUserWasBanned && this.userIsBanned(nextProps.game)) {
-            // TODO register notification
+            // TODO register notification.
             this.setState({ alert: 'GAME_USER_BANNED' });
         }
     }
 
     async componentWillUnmount() {
-        await client.unsubscribe(`/games/${this.props.game._id}`, null);
+        const id = this.props.game._id;
+        await client.unsubscribe(`/games/${id}`, null);
+        await client.unsubscribe(`/games/${id}/messages`, null);
+    }
+
+    onSubscribeGameSuccess({ lastAction }) {
+        const { credentials } = this.props;
+        this.setState({ subscriptions: { ...this.state.subscriptions, game: true } });
+
+        if (lastAction === 'GAME_USER_KICKED' && lastAction.userId === credentials._id) {
+            // TODO register notification.
+            this.setState({ alert: 'GAME_USER_KICKED' });
+        }
+    }
+
+    onSubscribeMessagesSuccess() {
+        this.setState({ subscriptions: { ...this.state.subscriptions, messages: true } });
     }
 
     userIsBanned(game = this.props.game, credentials = this.props.credentials) {
         return game.bannedUsers.map(u => u._id).includes(credentials._id);
     }
 
-    handleGameMessage() {
-        this.props.dispatch({ type: 'NEW_MESSAGE' });
+    handleGameMessage(message) {
+        const { dispatch } = this.props;
+        const scope = routes.game.messages;
+        this.props.dispatch(sendMessage(message, routes.game.messages, (response) => {
+            if (response.error) dispatch(failSendMessage(response.error, scope));
+            else dispatch(successSendMessage(response, scope));
+        }));
     }
 
     hideAlert(e) {
@@ -108,7 +152,7 @@ class Game extends React.Component {
     }
 
     render() {
-        const { credentials, game, page, t } = this.props;
+        const { credentials, game, messages, page, t } = this.props;
 
         if (page.isFetching) return <Loader />;
         else if (!game._id) return <NoMatch message={t('page:Game.notFound')} />;
@@ -126,8 +170,11 @@ class Game extends React.Component {
         const lobbyProps = { game, userIsBanned: this.userIsBanned(), children: chatButton };
         const chatProps = {
             gameId: game._id,
+            isSending: messages.isSending,
+            messages: messages.entities,
             onSubmit: values => this.handleGameMessage(values),
             userId: credentials._id,
+            users: messages.users,
             children: (
                 <SideAction>
                     <div className="btn-side-action mx-2 mx-sm-3">
@@ -142,6 +189,7 @@ class Game extends React.Component {
             <div id="game">
                 <Title>{game.name}</Title>
                 <div className="container">
+                    {this.renderAlert()}
                     <Switch>
                         <PrivateRoute exact path={routes.game.read} component={Lobby} componentProps={lobbyProps} />
                         <PrivateRoute path={routes.game.messages} component={Chat} componentProps={chatProps} />
@@ -167,6 +215,12 @@ Game.propTypes = {
         name: PropTypes.string.isRequired,
     }),
     match: PropTypes.shape({ params: PropTypes.shape({ id: PropTypes.string }).isRequired }).isRequired,
+    messages: PropTypes.shape({
+        isSending: PropTypes.bool.isRequired,
+        entities: PropTypes.arrayOf(PropTypes.shape({
+            _id: PropTypes.string.isRequired,
+        })).isRequired,
+    }),
     page: PropTypes.shape({ isFetching: PropTypes.bool }).isRequired,
     t: PropTypes.func.isRequired,
 };
@@ -179,13 +233,24 @@ Game.defaultProps = {
         isPublic: false,
         name: '',
     },
+    messages: { isSending: false, entities: [] },
 };
 
 export default translate()(connect(
-    (state, ownProps) => ({
-        credentials: state.credentials,
-        game: selectEntities(state.entities.games, [ownProps.match.params.id])[0],
-        page: state.pages.Game,
-    }),
+    (state, ownProps) => {
+        const { GameMessages } = state.pages;
+        const messageEntities = selectEntities(state.entities.messages, state.pages.GameMessages.ids);
+
+        return {
+            credentials: state.credentials,
+            game: selectEntities(state.entities.games, [ownProps.match.params.id])[0],
+            messages: {
+                ...GameMessages,
+                entities: messageEntities,
+                users: selectEntities(state.entities.users, messageEntities.map(msg => msg.user), true),
+            },
+            page: state.pages.Game,
+        };
+    },
     dispatch => ({ dispatch }),
 )(Game));

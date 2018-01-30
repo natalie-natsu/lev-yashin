@@ -15,6 +15,7 @@ import { faCalendarAlt } from '@fortawesome/fontawesome-free-regular';
 import { faFacebook, faTwitter, faYoutube } from '@fortawesome/fontawesome-free-brands';
 
 import { routes } from '../../helpers/routes';
+import { setAppLocale } from '../../actions/app';
 
 import './Drawer.scss';
 import Languages from '../Languages';
@@ -121,7 +122,7 @@ const Drawer = ({ credentials, dispatch, isOpen, t }) => (
             )}
             <section>
                 <DrawerSeparator>{t('component:Drawer.separators.settings')}</DrawerSeparator>
-                <Languages />
+                <Languages onChangeLanguage={lang => dispatch(setAppLocale(lang))} />
             </section>
             <footer>
                 <a className="nav-link" href="#" target="_blank">

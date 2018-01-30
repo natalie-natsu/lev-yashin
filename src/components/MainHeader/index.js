@@ -9,6 +9,7 @@ import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/fontawesome-free-solid';
 
 import { routes } from '../../helpers/routes';
+import { setAppLocale } from '../../actions/app';
 import './MainHeader.scss';
 import Languages from '../Languages';
 
@@ -28,7 +29,9 @@ const MainHeader = ({ burgerMenu, dispatch, t }) => (
                     <FontAwesomeIcon icon={faBars} />
                 </button>
             </div>
-            <span className="hidden-sm-down mr-3"><Languages /></span>
+            <span className="hidden-sm-down mr-3">
+                <Languages onChangeLanguage={lang => dispatch(setAppLocale(lang))} />
+            </span>
             <p id="main-header-title-dom" className="navbar-text mr-auto" />
             <div id="main-header-side-action-dom" />
         </nav>

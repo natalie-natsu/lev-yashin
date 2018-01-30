@@ -10,8 +10,6 @@
         clear: both;
         overflow: hidden;
         margin-bottom: 20px;
-        opacity: 0;
-        transition: all .5s linear;
     }
 
     .messages .message.left .avatar {
@@ -53,10 +51,6 @@
 
     .messages .message.right .text {
         color: #45829b;
-    }
-
-    .messages .message.appeared {
-        opacity: 1;
     }
 
     .messages .message .avatar {

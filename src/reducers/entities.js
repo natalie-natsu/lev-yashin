@@ -5,10 +5,11 @@ import { createReducer, removeObjectInState, updateObjectInState } from './utili
 import { RECEIVE_ENTITIES, REMOVE_ENTITIES, RESET_ENTITIES, UPDATE_ENTITIES } from '../actions/entities';
 
 // It's easier to let initialState as an empty object,
-// but it's way more rigorous to add all entities of the app.
+// but it's more rigorous to add all entities of the app.
 const initialEntitiesState = {
-    users: null,
     games: null,
+    messages: null,
+    users: null,
 };
 
 function receiveEntities(state, action) {

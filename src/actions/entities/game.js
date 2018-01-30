@@ -3,12 +3,22 @@ import { receiveEntities } from '../entities';
 import { gameSchema } from '../../schemas/game';
 
 import { getEndpoint, getHeaders } from '../../helpers/endpoint';
+import { client } from '../../helpers/nes';
 
 export function normalizeResponseUsersAsEntity(users) {
     return users.map(user => ({
         _id: user._id,
         profile: { userName: user.userName, picture: user.picture },
     }));
+}
+
+export function updateGameEntity(response) {
+    return (dispatch) => {
+        response.users = normalizeResponseUsersAsEntity(response.users);
+
+        const normalized = normalize(response, gameSchema);
+        dispatch(receiveEntities(normalized.entities));
+    };
 }
 
 export const REFRESH_GAME = 'REFRESH_GAME';
@@ -36,11 +46,7 @@ export const fetchGame = (payload, scope, onSuccess, onFailure) => (dispatch, ge
 
 function successFetchGame(response, scope) {
     return (dispatch) => {
-        response.users = normalizeResponseUsersAsEntity(response.users);
-
-        const normalized = normalize(response, gameSchema);
-        dispatch(receiveEntities(normalized.entities));
-
+        dispatch(updateGameEntity(response));
         dispatch({
             type: SUCCESS_FETCH_GAME,
             receivedAt: Date.now(),
@@ -59,12 +65,35 @@ function failFetchGame(response, scope) {
     };
 }
 
-export function updateGameEntity(response) {
-    return (dispatch) => {
-        response.users = normalizeResponseUsersAsEntity(response.users);
+export const REQUEST_SUBSCRIBE_GAME = 'REQUEST_SUBSCRIBE_GAME';
+export const SUCCESS_SUBSCRIBE_GAME = 'SUCCESS_SUBSCRIBE_GAME';
+export const FAIL_SUBSCRIBE_GAME = 'FAIL_SUBSCRIBE_GAME';
 
-        const normalized = normalize(response, gameSchema);
-        dispatch(receiveEntities(normalized.entities));
+export const subscribeGame = (payload, scope, then) => (dispatch) => {
+    dispatch({ type: REQUEST_SUBSCRIBE_GAME, payload, scope });
+    client.subscribe(`/games/${payload.id}`, update => then(update));
+};
+
+export function successSubscribeGame(response, scope, then) {
+    return (dispatch) => {
+        dispatch(updateGameEntity(response));
+        dispatch({
+            type: SUCCESS_SUBSCRIBE_GAME,
+            receivedAt: Date.now(),
+            response,
+            scope,
+            then,
+        });
+    };
+}
+
+export function failSubscribeGame(response, scope, then) {
+    return {
+        type: FAIL_SUBSCRIBE_GAME,
+        receivedAt: Date.now(),
+        error: response.error,
+        scope,
+        then,
     };
 }
 
@@ -74,10 +103,7 @@ export const FAIL_CREATE_GAME = 'FAIL_CREATE_GAME';
 
 export function successCreateGame(response, scope) {
     return (dispatch) => {
-        response.users = normalizeResponseUsersAsEntity(response.users);
-
-        const normalized = normalize(response, gameSchema);
-        dispatch(receiveEntities(normalized.entities));
+        dispatch(updateGameEntity(response));
         dispatch({
             type: SUCCESS_CREATE_GAME,
             receivedAt: Date.now(),
