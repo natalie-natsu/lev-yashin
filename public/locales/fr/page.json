@@ -16,33 +16,15 @@
   "Home": {
     "Landing": {
       "title": "Participe à la coupe<1> du monde 2018</1>",
-      "subtitle": "Fantasy football",
-      "register": "Let's go !",
-      "newGame": "Créer une partie"
+      "subtitle": "Fantasy football"
+    },
+    "Content": {
+      "register": "Pas encore inscrit ?",
+      "createGame": "Ou crée ta partie",
+      "enjoy": "Profite de la coupe"
     },
     "modal-login": {
       "title": "Se connecter"
-    },
-    "Description": {
-      "title": "Comment jouer ?",
-      "auth": {
-        "title": "Inscris-toi ou connecte-toi",
-        "text": "Cela demande juste ton email et un mot de passe.  En 30 secondes, le tour est joué !",
-        "aside": "30 secondes",
-        "help": "Clique pour t'enregistrer"
-      },
-      "game": {
-        "title": "Crée ou rejoins une partie",
-        "text": "Joue avec trois de tes amis pendant 1 mois de sport.",
-        "aside": "4 joueurs",
-        "help": "Clique pour commencer"
-      },
-      "cup": {
-        "title": "Profite de la coupe",
-        "text": "Vie autrement les rencontres de ce grand événement.",
-        "aside": "64 matchs",
-        "help": "Suivre les matchs"
-      }
     }
   },
   "Me": {

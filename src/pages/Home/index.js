@@ -17,7 +17,7 @@ import SideAction from '../../components/MainHeader/SideAction';
 import Title from '../../components/MainHeader/Title';
 import SignInForm from '../../components/Authentication/SignInForm';
 import Landing from './Landing';
-import Description from './Description';
+import Content from './Content';
 
 const $ = window.jQuery;
 
@@ -68,7 +68,7 @@ class Home extends React.Component {
     }
 
     render() {
-        const { credentials, t } = this.props;
+        const { history, t } = this.props;
         return (
             <div id="home">
                 <Title>{t('page:Home.Landing.subtitle')}</Title>
@@ -101,8 +101,8 @@ class Home extends React.Component {
                         </div>
                     </div>
                 </div>
-                <Landing credentials={credentials} />
-                <Description credentials={credentials} />
+                <Landing />
+                <Content history={history} />
             </div>
         );
     }
@@ -115,6 +115,7 @@ Home.propTypes = {
         profile: PropTypes.object,
     }).isRequired,
     dispatch: PropTypes.func.isRequired,
+    history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
     t: PropTypes.func.isRequired,
 };
 

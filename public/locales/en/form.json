@@ -190,5 +190,30 @@
         "toLong": "Name must be 100 characters maximum"
       }
     }
+  },
+  "joinGame": {
+    "labelledBy": "Join your friends",
+    "button": {
+      "save": "Join"
+    },
+    "state": {
+      "isSaving": "In progress..."
+    },
+    "input": {
+      "id": {
+        "label": "Game ID",
+        "placeholder": "5a7101883682391e30a425c3"
+      }
+    },
+    "success": "Game joined with success!",
+    "errors": {
+      "id": {
+        "required": "ID is required",
+        "invalid": "ID seems invalid"
+      },
+      "notFound": "This game does not exist",
+      "alreadyJoined": "You've already joined this game",
+      "alreadyStarted": "This game is full"
+    }
   }
 }

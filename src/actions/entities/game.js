@@ -101,7 +101,7 @@ export const REQUEST_CREATE_GAME = 'REQUEST_CREATE_GAME';
 export const SUCCESS_CREATE_GAME = 'SUCCESS_CREATE_GAME';
 export const FAIL_CREATE_GAME = 'FAIL_CREATE_GAME';
 
-export function successCreateGame(response, scope) {
+export function successCreateGame(response, scope, then) {
     return (dispatch) => {
         dispatch(updateGameEntity(response));
         dispatch({
@@ -109,15 +109,17 @@ export function successCreateGame(response, scope) {
             receivedAt: Date.now(),
             response,
             scope,
+            then,
         });
     };
 }
 
-export function failCreateGame(response, scope) {
+export function failCreateGame(response, scope, then) {
     return {
         type: FAIL_CREATE_GAME,
         receivedAt: Date.now(),
         error: response.error,
         scope,
+        then,
     };
 }

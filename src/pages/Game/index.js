@@ -2,20 +2,23 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
+import { denormalize } from 'normalizr';
 import { translate } from 'react-i18next';
 import { Link, Switch } from 'react-router-dom';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { faCommentAlt, faSignOutAlt, faBan, faArrowLeft } from '@fortawesome/fontawesome-free-solid';
 
 import selectEntities from '../../selectors/entities';
+import { messageListSchema } from '../../schemas/message';
+import { routes } from '../../helpers/routes';
+import { client } from '../../helpers/nes';
+
 import { failSubscribeGame, fetchGame, subscribeGame, successSubscribeGame } from '../../actions/entities/game';
 import {
     failSendMessage, failSubscribeMessages,
     fetchMessages, sendMessage, subscribeMessages,
     successSendMessage, successSubscribeMessages,
 } from '../../actions/entities/messages';
-import { routes } from '../../helpers/routes';
-import { client } from '../../helpers/nes';
 
 import NoMatch from '../NoMatch';
 import PrivateRoute from '../../components/PrivateRoute';
@@ -174,7 +177,6 @@ class Game extends React.Component {
             messages: messages.entities,
             onSubmit: values => this.handleGameMessage(values),
             userId: credentials._id,
-            users: messages.users,
             children: (
                 <SideAction>
                     <div className="btn-side-action mx-2 mx-sm-3">
@@ -237,20 +239,14 @@ Game.defaultProps = {
 };
 
 export default translate()(connect(
-    (state, ownProps) => {
-        const { GameMessages } = state.pages;
-        const messageEntities = selectEntities(state.entities.messages, state.pages.GameMessages.ids);
-
-        return {
-            credentials: state.credentials,
-            game: selectEntities(state.entities.games, [ownProps.match.params.id])[0],
-            messages: {
-                ...GameMessages,
-                entities: messageEntities,
-                users: selectEntities(state.entities.users, messageEntities.map(msg => msg.user), true),
-            },
-            page: state.pages.Game,
-        };
-    },
+    (state, ownProps) => ({
+        credentials: state.credentials,
+        game: selectEntities(state.entities.games, [ownProps.match.params.id])[0],
+        messages: {
+            ...state.pages.GameMessages,
+            entities: denormalize(state.pages.GameMessages.ids, messageListSchema, state.entities),
+        },
+        page: state.pages.Game,
+    }),
     dispatch => ({ dispatch }),
 )(Game));

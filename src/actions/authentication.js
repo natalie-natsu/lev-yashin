@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import store from '../index';
 import { getName } from '../helpers/user';
 import { getHeaders, wsConnect, wsDisconnect } from '../helpers/nes';
+import { headers, getEndpoint } from '../helpers/endpoint';
 import ToastSignOutSuccess from '../components/Toast/SignOut/Success';
 import { successFetchUser } from './entities/user';
 
@@ -49,10 +50,20 @@ export function requestRegister() {
     return { type: REQUEST_REGISTER };
 }
 
-export function successRegister(json, scope) {
-    const { _id, profile, token } = json;
+export const register = (payload, scope, then = () => false) => (dispatch) => {
+    dispatch({ type: REQUEST_REGISTER, payload, scope });
+
+    fetch(getEndpoint('register', payload), {
+        method: 'POST',
+        headers,
+        body: JSON.stringify({ email: payload.email, password: payload.password }),
+    }).then(response => response.json()).then(response => then(response));
+};
+
+export function successRegister(response, scope, then) {
+    const { _id, profile, token } = response;
     return (dispatch) => {
-        dispatch(successFetchUser(json));
+        dispatch(successFetchUser(response));
         dispatch({
             type: SUCCESS_REGISTER,
             authenticatedAt: Date.now(),
@@ -60,12 +71,18 @@ export function successRegister(json, scope) {
             profile,
             token,
             scope,
+            then,
         });
     };
 }
 
-export function failRegister() {
-    return { type: FAIL_REGISTER };
+export function failRegister(response, scope, then) {
+    return {
+        type: FAIL_REGISTER,
+        response,
+        scope,
+        then,
+    };
 }
 
 /**

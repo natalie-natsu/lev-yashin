@@ -22,7 +22,7 @@ export const joinGame = (payload, scope) => (dispatch, getState) => {
         });
 };
 
-function successJoinGame(response, scope) {
+export function successJoinGame(response, scope) {
     return (dispatch) => {
         dispatch({
             type: SUCCESS_JOIN_GAME,
@@ -33,7 +33,7 @@ function successJoinGame(response, scope) {
     };
 }
 
-function failJoinGame(response, scope) {
+export function failJoinGame(response, scope) {
     return {
         type: FAIL_JOIN_GAME,
         receivedAt: Date.now(),

@@ -176,7 +176,7 @@
         "placeholder": "La coupe du monde dans son canap'"
       },
       "isWithBonuses": {
-        "label": "Aves tous les bonus"
+        "label": "Avec tous les bonus"
       },
       "isPublic": {
         "label": "Partie publique"
@@ -189,6 +189,31 @@
         "toShort": "Le nom doit faire 3 caractères minimum",
         "toLong": "Le nom doit faire 100 caractères maximum"
       }
+    }
+  },
+  "joinGame": {
+    "labelledBy": "Rejoins tes amis",
+    "button": {
+      "save": "Rejoindre"
+    },
+    "state": {
+      "isSaving": "En cours..."
+    },
+    "input": {
+      "id": {
+        "label": "Référence de la partie",
+        "placeholder": "5a7101883682391e30a425c3"
+      }
+    },
+    "success": "Partie rejointe avec succès !",
+    "errors": {
+      "id": {
+        "required": "La référence est requise",
+        "invalid": "La référence semble incorrecte"
+      },
+      "notFound": "Cette partie n'existe pas",
+      "alreadyJoined": "Tu as déjà rejoins cette partie",
+      "alreadyStarted": "La partie est déjà complète"
     }
   }
 }
