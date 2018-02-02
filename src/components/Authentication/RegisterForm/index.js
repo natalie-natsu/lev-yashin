@@ -71,35 +71,37 @@ class RegisterForm extends React.Component {
                     placeholder="form:register.input.email.placeholder"
                     errors={this.emailErrors}
                 />
-                <Field
-                    component={renderInput}
-                    formControl={{ id: 'password' }}
-                    label="form:register.input.password.label"
-                    name="password"
-                    type="password"
-                    placeholder="form:register.input.password.placeholder"
-                    errors={this.passwordErrors}
-                />
-                <Field
-                    component={renderInput}
-                    formControl={{ id: 'passwordRepeat' }}
-                    label="form:register.input.passwordRepeat.label"
-                    name="passwordRepeat"
-                    type="password"
-                    placeholder="form:register.input.passwordRepeat.placeholder"
-                    errors={this.passwordRepeatErrors}
-                />
+                <div className="row">
+                    <div className="col-md-6">
+                        <Field
+                            component={renderInput}
+                            formControl={{ id: 'password' }}
+                            label="form:register.input.password.label"
+                            name="password"
+                            type="password"
+                            placeholder="form:register.input.password.placeholder"
+                            errors={this.passwordErrors}
+                        />
+                    </div>
+                    <div className="col-md-6">
+                        <Field
+                            component={renderInput}
+                            formControl={{ id: 'passwordRepeat' }}
+                            label="form:register.input.passwordRepeat.label"
+                            name="passwordRepeat"
+                            type="password"
+                            placeholder="form:register.input.passwordRepeat.placeholder"
+                            errors={this.passwordRepeatErrors}
+                        />
+                    </div>
+                </div>
                 {renderFormError(this.formErrors, error)}
                 <div className="text-right">
                     <button type="submit" className="btn btn-success" disabled={pristine || submitting || error}>
-                        {!submitting
-                            ? <span><FontAwesomeIcon icon={faPaperPlane} /> {t('form:register.button.save')}</span>
-                            : (
-                                <span>
-                                    <FontAwesomeIcon icon={faSpinner} /> {t('form:register.state.isRegistering')}
-                                </span>
-                            )
-                        }
+                        <span className="submit-label">
+                            <FontAwesomeIcon icon={submitting ? faSpinner : faPaperPlane} spin={submitting} />
+                            {t(`form:register.${submitting ? 'state.isRegistering' : 'button.save'}`)}
+                        </span>
                     </button>
                 </div>
             </form>

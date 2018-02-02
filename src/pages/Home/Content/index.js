@@ -15,7 +15,7 @@ import handleCreateGameError from '../../Game/Create/Form/handleError';
 import { failCreateGame, REQUEST_CREATE_GAME, successCreateGame } from '../../../actions/entities/game';
 
 import './Content.scss';
-import RegisterForm from '../../../components/Authentication/RegisterForm';
+import RegisterForm from '../../../components/Authentication/RegisterForm/container';
 import GameJoin from '../../Game/Join/';
 import GameCreateForm from '../../Game/Create/Form';
 
@@ -79,7 +79,7 @@ class Content extends React.Component {
                     {t('page:Home.Content.register')}
                 </h3>
                 <hr />
-                <RegisterForm onSubmit={values => this.register(values)} />
+                <RegisterForm scope={routes.home} />
             </section>
         );
     }

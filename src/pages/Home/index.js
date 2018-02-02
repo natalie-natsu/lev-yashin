@@ -2,47 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
-import { SubmissionError } from 'redux-form';
 
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { faSignInAlt, faSignOutAlt } from '@fortawesome/fontawesome-free-solid';
 import { faUserCircle } from '@fortawesome/fontawesome-free-regular';
 
-import { failSignIn, requestSignIn, signOut, successSignIn } from '../../actions/authentication';
-import handleSignInError from '../../components/Authentication/SignInForm/handleError';
-import { getEndpoint, headers } from '../../helpers/endpoint';
 import { routes } from '../../helpers/routes';
+import { signOut } from '../../actions/authentication';
 
 import SideAction from '../../components/MainHeader/SideAction';
 import Title from '../../components/MainHeader/Title';
-import SignInForm from '../../components/Authentication/SignInForm';
+import SignInForm from '../../components/Authentication/SignInForm/container';
 import Landing from './Landing';
 import Content from './Content';
 
-const $ = window.jQuery;
-
 class Home extends React.Component {
-    signIn(values) {
-        if (!values) { return false; }
-
-        const { dispatch } = this.props;
-        dispatch(requestSignIn());
-        return fetch(getEndpoint('signIn'), {
-            method: 'POST',
-            headers,
-            body: JSON.stringify(values),
-        })
-            .then(response => response.json()).then((json) => {
-                if (json.error) {
-                    dispatch(failSignIn());
-                    throw new SubmissionError(handleSignInError(json));
-                } else {
-                    dispatch(successSignIn(json, routes.home));
-                    $('#modal-home-login').modal('hide');
-                }
-            });
-    }
-
     renderSignInButton() {
         const { credentials, dispatch, t } = this.props;
         const { token } = credentials;
@@ -96,7 +70,7 @@ class Home extends React.Component {
                                 </button>
                             </div>
                             <div className="modal-body">
-                                <SignInForm onSubmit={values => this.signIn(values)} />
+                                <SignInForm scope={routes.home} />
                             </div>
                         </div>
                     </div>
