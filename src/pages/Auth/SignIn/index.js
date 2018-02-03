@@ -10,7 +10,7 @@ import { faUserCircle } from '@fortawesome/fontawesome-free-regular';
 
 import { routes } from '../../../helpers/routes';
 import SideAction from '../../../components/MainHeader/SideAction';
-import SignInForm from '../../../components/Authentication/SignInForm/container';
+import SignInForm from '../../../components/Authentication/SignInForm';
 
 const SignIn = ({ credentials, history, t }) => (credentials.token ? <Redirect to={routes.home} /> : (
     <div id="sign-in">

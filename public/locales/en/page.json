@@ -21,7 +21,8 @@
     "Content": {
       "register": "Not registered yet ?",
       "createGame": "Or create your game",
-      "enjoy": "Enjoy your world cup"
+      "enjoy": "Enjoy your world cup",
+      "worldCup": "World Cup representation over a blue background."
     },
     "modal-login": {
       "title": "Let's sign in"

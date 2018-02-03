@@ -35,28 +35,8 @@ class GameCreateForm extends React.Component {
         ];
     }
 
-    renderSubmitLabel() {
-        const { submitting, t } = this.props;
-
-        if (submitting) {
-            return (
-                <span className="submit-label">
-                    <FontAwesomeIcon icon={faSpinner} spin />
-                    {t('form:createGame.state.isSaving')}
-                </span>
-            );
-        }
-
-        return (
-            <span className="submit-label">
-                <FontAwesomeIcon icon={faPaperPlane} />
-                {t('form:createGame.button.save')}
-            </span>
-        );
-    }
-
     render() {
-        const { error, handleSubmit, pristine, submitting } = this.props;
+        const { error, handleSubmit, pristine, submitting, t } = this.props;
         return (
             <form id={form} onSubmit={handleSubmit}>
                 <Field
@@ -98,7 +78,10 @@ class GameCreateForm extends React.Component {
                 {renderFormError(this.formErrors, error)}
                 <div className="text-right">
                     <button type="submit" className="btn btn-success" disabled={pristine || submitting || error}>
-                        {this.renderSubmitLabel()}
+                        <span className="submit-label">
+                            <FontAwesomeIcon icon={submitting ? faSpinner : faPaperPlane} spin={submitting} />
+                            {t(`form:createGame.${submitting ? 'state.isSaving' : 'button.save'}`)}
+                        </span>
                     </button>
                 </div>
             </form>

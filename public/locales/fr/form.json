@@ -194,10 +194,8 @@
   "joinGame": {
     "labelledBy": "Rejoins tes amis",
     "button": {
+      "isSaving": "En cours...",
       "save": "Rejoindre"
-    },
-    "state": {
-      "isSaving": "En cours..."
     },
     "input": {
       "id": {

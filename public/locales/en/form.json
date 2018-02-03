@@ -194,10 +194,8 @@
   "joinGame": {
     "labelledBy": "Join your friends",
     "button": {
+      "isSaving": "In progress...",
       "save": "Join"
-    },
-    "state": {
-      "isSaving": "In progress..."
     },
     "input": {
       "id": {

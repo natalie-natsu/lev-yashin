@@ -21,7 +21,8 @@
     "Content": {
       "register": "Pas encore inscrit ?",
       "createGame": "Ou crée ta partie",
-      "enjoy": "Profite de la coupe"
+      "enjoy": "Profite de la coupe",
+      "worldCup": "Représentation de la coupe du monde sur flond bleu."
     },
     "modal-login": {
       "title": "Se connecter"

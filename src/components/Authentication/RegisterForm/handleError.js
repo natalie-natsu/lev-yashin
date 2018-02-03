@@ -1,4 +1,4 @@
-export default function handleSignInError(response) {
+export default function handleRegisterError(response) {
     const submissionError = {};
     switch (response.statusCode) {
     case 400:

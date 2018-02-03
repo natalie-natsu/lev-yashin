@@ -9,7 +9,7 @@ import { faEdit, faSignInAlt } from '@fortawesome/fontawesome-free-solid';
 
 import { routes } from '../../../helpers/routes';
 import SideAction from '../../../components/MainHeader/SideAction';
-import RegisterForm from '../../../components/Authentication/RegisterForm/container';
+import RegisterForm from '../../../components/Authentication/RegisterForm';
 
 const Register = ({ credentials, history, t }) => (credentials.token ? <Redirect to={routes.home} /> : (
     <div id="register">

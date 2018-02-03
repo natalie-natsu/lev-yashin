@@ -4,18 +4,17 @@ import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
 import { translate } from 'react-i18next';
 import { SubmissionError } from 'redux-form';
-import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import { faSignInAlt } from '@fortawesome/fontawesome-free-solid';
+import { withRouter } from 'react-router-dom';
 
-import { getEndpoint, getHeaders } from '../../../helpers/endpoint';
-import handleJoinGameError from './Form/handleError';
-import { routes } from '../../../helpers/routes';
-import { failJoinGame, REQUEST_JOIN_GAME, successJoinGame } from '../../../actions/entities/game/lobby';
+import handleJoinGameError from './handleError';
+import { routes } from '../../../../helpers/routes';
+import { getEndpoint, getHeaders } from '../../../../helpers/endpoint';
+import { failJoinGame, REQUEST_JOIN_GAME, successJoinGame } from '../../../../actions/entities/game/lobby';
 
-import GameJoinForm from './Form';
+import Form from './form';
 
-class GameJoin extends React.Component {
-    joinGame(values) {
+class RegisterForm extends React.Component {
+    handleSubmit(values) {
         if (!values) { return false; }
 
         const { credentials, dispatch, history, t } = this.props;
@@ -40,28 +39,30 @@ class GameJoin extends React.Component {
     }
 
     render() {
-        const { t } = this.props;
+        const { form: Component, ...rest } = this.props;
         return (
-            <div id="game-join">
-                <h3 className="form-title">
-                    <FontAwesomeIcon icon={faSignInAlt} />
-                    {t('form:joinGame.labelledBy')}
-                </h3>
-                <hr />
-                <GameJoinForm onSubmit={values => this.joinGame(values)} />
+            <div className="form-container">
+                <Component {...rest} onSubmit={values => this.handleSubmit(values)} />
             </div>
         );
     }
 }
 
-GameJoin.propTypes = {
+RegisterForm.propTypes = {
     credentials: PropTypes.shape({ token: PropTypes.string.isRequired }).isRequired,
     dispatch: PropTypes.func.isRequired,
     history: PropTypes.shape({ goBack: PropTypes.func.isRequired }).isRequired,
+    form: PropTypes.func,
+    scope: PropTypes.string,
     t: PropTypes.func.isRequired,
 };
 
-export default translate()(connect(
-    state => ({ locale: state.app.locale, credentials: state.credentials }),
+RegisterForm.defaultProps = {
+    form: Form,
+    scope: undefined,
+};
+
+export default translate()(withRouter(connect(
+    state => ({ credentials: state.credentials }),
     dispatch => ({ dispatch }),
-)(GameJoin));
+)(RegisterForm)));

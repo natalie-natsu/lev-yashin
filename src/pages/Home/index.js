@@ -12,7 +12,7 @@ import { signOut } from '../../actions/authentication';
 
 import SideAction from '../../components/MainHeader/SideAction';
 import Title from '../../components/MainHeader/Title';
-import SignInForm from '../../components/Authentication/SignInForm/container';
+import SignInForm from '../../components/Authentication/SignInForm';
 import Landing from './Landing';
 import Content from './Content';
 
