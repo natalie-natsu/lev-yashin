@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { translate } from 'react-i18next';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { faSpinner, faPaperPlane } from '@fortawesome/fontawesome-free-solid';
 
@@ -15,6 +16,14 @@ class Chat extends React.Component {
     componentWillReceiveProps(nextProps) {
         const { inputValue } = nextProps;
         if (inputValue !== this.props.inputValue) { this.setState({ content: inputValue }); }
+    }
+
+    componentDidUpdate(prevProps) {
+        const { gameId, messages } = this.props;
+        if (prevProps.messages.lenght < 1 && messages.length > 1) {
+            const chatDiv = document.getElementById(`chat-${gameId}`);
+            chatDiv.scrollTop = chatDiv.scrollHeight;
+        }
     }
 
     handleSubmit(e) {
@@ -40,7 +49,7 @@ class Chat extends React.Component {
     }
 
     render() {
-        const { children, gameId, isSending } = this.props;
+        const { children, gameId, isSending, t, userName } = this.props;
         return (
             <div id={`chat-${gameId}`} className="chat">
                 <div className="chat-window">
@@ -48,7 +57,9 @@ class Chat extends React.Component {
                         <li className="message left">
                             <div className="avatar" />
                             <div className="text-wrapper">
-                                <div className="text">Hello Philip! :)</div>
+                                <div className="text">
+                                    {t('component:Chat.helpText', { name: userName })}
+                                </div>
                             </div>
                         </li>
                         {this.renderMessages()}
@@ -63,7 +74,7 @@ class Chat extends React.Component {
                                 className="form-control"
                                 name="content"
                                 onChange={e => this.setState({ content: e.target.value })}
-                                placeholder="Type your message here..."
+                                placeholder={t('component:Chat.placeholder')}
                                 value={this.state.content}
                             />
                             <div className="input-group-append">
@@ -91,7 +102,9 @@ Chat.propTypes = {
         user: PropTypes.shape({ profile: PropTypes.shape({ picture: PropTypes.string.isRequired }).isRequired }),
     })),
     onSubmit: PropTypes.func,
+    t: PropTypes.func.isRequired,
     userId: PropTypes.string.isRequired,
+    userName: PropTypes.string.isRequired,
 };
 
 Chat.defaultProps = {
@@ -102,4 +115,4 @@ Chat.defaultProps = {
     onSubmit: () => console.log('Please provide an onSubmit callback.'),
 };
 
-export default Chat;
+export default translate()(Chat);

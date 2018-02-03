@@ -1,3 +1,5 @@
+@import '../../../theme';
+
 .chat {
     .messages {
         position: relative;
@@ -14,43 +16,44 @@
 
     .messages .message.left .avatar {
         float: left;
-        background-color: #f5886e;
+        background-color: $complementary;
     }
 
     .messages .message.left .text-wrapper {
         margin-left: 20px;
-        background-color: #ffe6cb;
+        background-color: lighten($complementary, 40%);
     }
 
     .messages .message.left .text-wrapper::after,
     .messages .message.left .text-wrapper::before {
         right: 100%;
-        border-right-color: #ffe6cb;
+        border-right-color: lighten($complementary, 40%);
     }
 
     .messages .message.left .text {
-        color: #c48843;
+        color: $complementary;
     }
 
     .messages .message.right .avatar {
         float: right;
-        background-color: #fdbf68;
+        background-color: $neutral;
     }
 
     .messages .message.right .text-wrapper {
         float: right;
         margin-right: 20px;
-        background-color: #c7eafc;
+        background-color: lighten($neutral, 20%);
     }
 
     .messages .message.right .text-wrapper::after,
     .messages .message.right .text-wrapper::before {
         left: 100%;
-        border-left-color: #c7eafc;
+        border-left-color: lighten($neutral, 20%);
     }
 
     .messages .message.right .text {
-        color: #45829b;
+        color: darken($neutral, 30%);
+      text-align: right;
     }
 
     .messages .message .avatar {
@@ -91,7 +94,6 @@
     }
 
     .messages .message .text-wrapper .text {
-        font-weight: 300;
         font-size: 18px;
     }
 }

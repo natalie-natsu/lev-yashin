@@ -37,7 +37,7 @@
   "register": {
     "labelledBy": "Register form",
     "button": {
-      "save": "Save"
+      "save": "Let's go!"
     },
     "state": {
       "isRegistering": "Is registering..."

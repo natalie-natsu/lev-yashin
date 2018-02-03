@@ -13,6 +13,7 @@ import { messageListSchema } from '../../schemas/message';
 import { routes } from '../../helpers/routes';
 import { client } from '../../helpers/nes';
 
+import { getPublicName } from '../../helpers/user';
 import { failSubscribeGame, fetchGame, subscribeGame, successSubscribeGame } from '../../actions/entities/game';
 import {
     failSendMessage, failSubscribeMessages,
@@ -177,6 +178,7 @@ class Game extends React.Component {
             messages: messages.entities,
             onSubmit: values => this.handleGameMessage(values),
             userId: credentials._id,
+            userName: getPublicName(credentials.profile),
             children: (
                 <SideAction>
                     <div className="btn-side-action mx-2 mx-sm-3">

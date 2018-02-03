@@ -20,7 +20,7 @@ class Content extends React.Component {
         if (credentials.token) { return false; }
 
         return (
-            <section className="register align-self-center">
+            <section className="register">
                 <h3 className="form-title">
                     <FontAwesomeIcon icon={faEdit} />
                     {t('page:Home.Content.register')}
@@ -36,7 +36,7 @@ class Content extends React.Component {
         if (!credentials.token) { return false; }
 
         return (
-            <section className="game align-self-center">
+            <section className="game">
                 <h3 className="form-title">
                     <FontAwesomeIcon icon={faSignInAlt} />
                     {t('form:joinGame.labelledBy')}
@@ -62,7 +62,7 @@ class Content extends React.Component {
                 <section id="home-content">
                     <div className="container">
                         <div className="row">
-                            <div className="col-md-6 d-flex">
+                            <div className="col-md-6 d-block">
                                 {this.renderRegister()}
                                 {this.renderGame()}
                             </div>
