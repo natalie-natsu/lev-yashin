@@ -12,8 +12,9 @@ const initialMessagesState = {
     ids: [],
     isFetching: false,
     isSending: false,
-    needRefresh: false,
     lastResponse: null,
+    needRefresh: false,
+    remainMessages: false,
     updatedAt: null,
 };
 
@@ -40,6 +41,7 @@ function successFetchMessages(state, { ids, response }) {
         isFetching: false,
         lastResponse: response,
         needRefresh: false,
+        remainMessages: response.remainMessages,
         updatedAt: Date.now(),
     };
 }

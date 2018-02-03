@@ -53,7 +53,7 @@
 
     .messages .message.right .text {
         color: darken($neutral, 30%);
-      text-align: right;
+        text-align: right;
     }
 
     .messages .message .avatar {
@@ -95,5 +95,19 @@
 
     .messages .message .text-wrapper .text {
         font-size: 18px;
+    }
+
+    .messages .message .text-wrapper .text .info {
+        font-size: 80%;
+        text-transform: uppercase;
+        letter-spacing: -1px;
+        font-weight: bold;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    .messages .message .text-wrapper .text .info time {
+        font-weight: 300;
     }
 }

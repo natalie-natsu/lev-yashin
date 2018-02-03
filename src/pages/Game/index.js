@@ -108,13 +108,19 @@ class Game extends React.Component {
         return game.bannedUsers.map(u => u._id).includes(credentials._id);
     }
 
-    handleGameMessage(message) {
+    sendMessage(message) {
         const { dispatch } = this.props;
         const scope = routes.game.messages;
         this.props.dispatch(sendMessage(message, routes.game.messages, (response) => {
             if (response.error) dispatch(failSendMessage(response.error, scope));
             else dispatch(successSendMessage(response, scope));
         }));
+    }
+
+    fetchMessages() {
+        const { dispatch, match } = this.props;
+        const scope = routes.game.messages;
+        dispatch(fetchMessages({ id: match.params.id }, scope));
     }
 
     hideAlert(e) {
@@ -174,9 +180,12 @@ class Game extends React.Component {
         const lobbyProps = { game, userIsBanned: this.userIsBanned(), children: chatButton };
         const chatProps = {
             gameId: game._id,
+            isFetching: messages.isFetching,
             isSending: messages.isSending,
             messages: messages.entities,
-            onSubmit: values => this.handleGameMessage(values),
+            onFetchMore: () => this.fetchMessages(),
+            onSubmit: values => this.sendMessage(values),
+            remainMessages: messages.remainMessages,
             userId: credentials._id,
             userName: getPublicName(credentials.profile),
             children: (

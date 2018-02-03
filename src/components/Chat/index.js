@@ -4,6 +4,7 @@ import { translate } from 'react-i18next';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { faSpinner, faPaperPlane } from '@fortawesome/fontawesome-free-solid';
 
+import { getPublicName } from '../../helpers/user';
 import './Chat.scss';
 import Message from './Message';
 
@@ -13,17 +14,28 @@ class Chat extends React.Component {
         this.state = { content: props.inputValue };
     }
 
+    componentDidMount() {
+        this.scrollToBottom();
+    }
+
     componentWillReceiveProps(nextProps) {
         const { inputValue } = nextProps;
         if (inputValue !== this.props.inputValue) { this.setState({ content: inputValue }); }
     }
 
-    componentDidUpdate(prevProps) {
-        const { gameId, messages } = this.props;
-        if (prevProps.messages.lenght < 1 && messages.length > 1) {
-            const chatDiv = document.getElementById(`chat-${gameId}`);
-            chatDiv.scrollTop = chatDiv.scrollHeight;
-        }
+    componentDidUpdate() {
+        this.scrollToBottom();
+    }
+
+    scrollToBottom() {
+        this.messagesEnd.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    handleFetchMore(e) {
+        e.preventDefault();
+        const { isFetching } = this.props;
+        if (!isFetching) { this.props.onFetchMore(); }
+        return false;
     }
 
     handleSubmit(e) {
@@ -44,16 +56,28 @@ class Chat extends React.Component {
                 isUser={message.user._id === userId}
                 key={message._id}
                 picture={message.user.profile.picture}
+                sentAt={message.sentAt}
+                userName={getPublicName(message.user.profile)}
             />
         ));
     }
 
     render() {
-        const { children, gameId, isSending, t, userName } = this.props;
+        const { children, gameId, isFetching, isSending, remainMessages, t, userName } = this.props;
         return (
             <div id={`chat-${gameId}`} className="chat">
                 <div className="chat-window">
                     <ul className="messages">
+                        <li className="fetch-more text-center mb-3">
+                            <button
+                                className="btn btn-link"
+                                disabled={!remainMessages || isFetching}
+                                onClick={e => this.handleFetchMore(e)}
+                                onKeyPress={e => this.handleFetchMore(e)}
+                            >
+                                {t(`component:Chat.${remainMessages ? 'fetchMore' : 'noMoreMessages'}`)}
+                            </button>
+                        </li>
                         <li className="message left">
                             <div className="avatar" />
                             <div className="text-wrapper">
@@ -63,6 +87,7 @@ class Chat extends React.Component {
                             </div>
                         </li>
                         {this.renderMessages()}
+                        <div ref={(el) => { this.messagesEnd = el; }} />
                     </ul>
                     {children}
                     <form
@@ -93,6 +118,7 @@ class Chat extends React.Component {
 Chat.propTypes = {
     children: PropTypes.element,
     gameId: PropTypes.string.isRequired,
+    isFetching: PropTypes.bool.isRequired,
     isSending: PropTypes.bool.isRequired,
     inputValue: PropTypes.string,
     messages: PropTypes.arrayOf(PropTypes.shape({
@@ -101,7 +127,9 @@ Chat.propTypes = {
         sentAt: PropTypes.string.isRequired,
         user: PropTypes.shape({ profile: PropTypes.shape({ picture: PropTypes.string.isRequired }).isRequired }),
     })),
+    onFetchMore: PropTypes.func,
     onSubmit: PropTypes.func,
+    remainMessages: PropTypes.bool,
     t: PropTypes.func.isRequired,
     userId: PropTypes.string.isRequired,
     userName: PropTypes.string.isRequired,
@@ -112,7 +140,10 @@ Chat.defaultProps = {
     inputValue: '',
     messages: [],
     // eslint-disable-next-line no-console
+    onFetchMore: () => console.log('Please provide an onFetchMore callback.'),
+    // eslint-disable-next-line no-console
     onSubmit: () => console.log('Please provide an onSubmit callback.'),
+    remainMessages: false,
 };
 
 export default translate()(Chat);

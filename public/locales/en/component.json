@@ -20,6 +20,8 @@
   },
   "Chat": {
     "helpText": "Hey {{name}}! In the lobby, messages aren't private, but the moment the game start, only your friend can see what you want to say to them.",
-    "placeholder": "Type your message here..."
+    "placeholder": "Type your message here...",
+    "fetchMore": "Load more messages...",
+    "noMoreMessages": "End of messages"
   }
 }
