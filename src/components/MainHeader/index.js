@@ -16,7 +16,7 @@ import Languages from '../Languages';
 const MainHeader = ({ burgerMenu, dispatch, t }) => (
     <header id="main-header">
         <nav className="navbar navbar-expand-lg navbar-dark">
-            <div className="container">
+            <div className="container position-relative">
                 <Link to={routes.home} className="navbar-brand mb-0 h1 hidden-sm-down">{t('project.name')}</Link>
                 <div className="btn-drawer my-2 ml-2 ml-sm-0 mr-2 mr-sm-3">
                     <button

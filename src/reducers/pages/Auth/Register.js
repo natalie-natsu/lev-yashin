@@ -1,7 +1,6 @@
 import React from 'react';
 import { toast } from 'react-toastify';
 import { createReducer } from '../../utilities';
-import { routes } from '../../../helpers/routes';
 
 import { SUCCESS_REGISTER } from '../../../actions/authentication';
 import Success from '../../../components/Toast/Register/Success';
@@ -17,4 +16,4 @@ function notifyFetchProfileSuccess(state, { profile }) {
 
 export default createReducer(initialHomeState, {
     [SUCCESS_REGISTER]: notifyFetchProfileSuccess,
-}, routes.auth.register);
+});
