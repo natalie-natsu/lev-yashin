@@ -1,11 +1,12 @@
 import React from 'react';
 import swal from 'sweetalert2';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
-import { translate } from 'react-i18next';
+import { Trans, translate } from 'react-i18next';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import { faSignInAlt, faSpinner } from '@fortawesome/fontawesome-free-solid';
+import { faSignInAlt, faSpinner, faEdit, faRocket } from '@fortawesome/fontawesome-free-solid';
 
 import './Lobby.scss';
 import selectEntities from '../../../selectors/entities';
@@ -18,6 +19,7 @@ import {
 import { getPublicName } from '../../../helpers/user';
 
 import Slot from '../../../components/Game/Slot';
+import UpdateGameForm from '../../../components/Game/Update/Form';
 
 class Lobby extends React.Component {
     handleJoin(e) {
@@ -119,6 +121,37 @@ class Lobby extends React.Component {
         });
     }
 
+    handleLaunch(e) {
+        if (e) { e.preventDefault(); }
+        const { game, t, userId } = this.props;
+        const isAdmin = userId === game.admin;
+        const canLaunch = isAdmin && game.readyUsers.length > 3;
+
+        if (!canLaunch) {
+            toast.error(t('toast:hacker'), { position: toast.POSITION.BOTTOM_RIGHT });
+            return false;
+        }
+
+        swal({
+            type: 'info',
+            title: t('page:Game.Lobby.launch.swal.title'),
+            showCancelButton: true,
+            confirmButtonText: t('page:Game.Lobby.launch.swal.confirm'),
+            cancelButtonText: t('page:Game.Lobby.launch.swal.cancel'),
+            confirmButtonClass: 'btn btn-success',
+            cancelButtonClass: 'btn btn-secondary',
+            buttonsStyling: false,
+            reverseButtons: true,
+            showLoaderOnConfirm: true,
+            preConfirm: () => {
+                // TODO call API
+            },
+            allowOutsideClick: () => !swal.isLoading(),
+        });
+
+        return false;
+    }
+
     renderSlots() {
         const { game, page, players, userId } = this.props;
         if (players.length < 1) { return false; }
@@ -141,25 +174,74 @@ class Lobby extends React.Component {
         ));
     }
 
+    renderAdminSection() {
+        const { game, t, userId } = this.props;
+        const isAdmin = userId === game.admin;
+
+        if (!isAdmin) { return false; }
+
+        return (
+            <div className="admin">
+                <div className="card border-complementary mb-3 mb-sm-0">
+                    <div className="card-header bg-complementary text-white">
+                        <FontAwesomeIcon icon={faEdit} /> {t('form:updateGame.labelledBy')}
+                    </div>
+                    <div className="card-body">
+                        <UpdateGameForm id={game._id} initialValues={game} scope={routes.game.read} />
+                    </div>
+                </div>
+                <div className="alert alert-complementary alert-dismissible fade show mt-3" role="alert">
+                    <Trans i18nKey="page:Game.Lobby.adminAlert" parent="span">
+                        1 <a href={routes.game.messages.replace(':id', game._id)} className="alert-link">2</a>
+                    </Trans>
+                    <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        );
+    }
+
     render() {
         const { children, game, page, t, userId, userIsBanned } = this.props;
+        const isAdmin = userId === game.admin;
+
         const canJoin = !userIsBanned && game.users && !game.users.includes(userId);
+        const canLaunch = isAdmin && game.readyUsers.length > 3;
 
         return (
             <section id="game-lobby">
-                {this.renderSlots()}
-                {canJoin && (
-                    <div className="actions text-right mt-3">
+                <div className="row">
+                    <div className={classNames('d-none', { 'd-block col-md-6': isAdmin })}>
+                        {this.renderAdminSection()}
+                    </div>
+                    <div className={classNames('col-sm-12', { 'col-md-6': isAdmin })}>
+                        {this.renderSlots()}
+                    </div>
+                </div>
+                <div className="actions text-right">
+                    {isAdmin && (
                         <button
-                            className="btn btn-complementary"
+                            className="btn btn-success mt-3 ml-3 animated slideInUp"
+                            onClick={e => this.handleLaunch(e)}
+                            onKeyPress={e => this.handleLaunch(e)}
+                            disabled={!canLaunch}
+                        >
+                            <FontAwesomeIcon icon={page.isLaunching ? faSpinner : faRocket} spin={page.isLaunching} />
+                            <span className="ml-2">{t('page:Game.Lobby.launch.text')}</span>
+                        </button>
+                    )}
+                    {canJoin && (
+                        <button
+                            className="btn btn-complementary mt-3 ml-3"
                             onClick={e => this.handleJoin(e)}
                             onKeyPress={e => this.handleJoin(e)}
                         >
                             <FontAwesomeIcon icon={page.isJoining ? faSpinner : faSignInAlt} spin={page.isJoining} />
                             <span className="ml-2">{t('page:Game.Lobby.join.text')}</span>
                         </button>
-                    </div>
-                )}
+                    )}
+                </div>
                 {children}
             </section>
         );

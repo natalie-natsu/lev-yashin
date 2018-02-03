@@ -191,6 +191,10 @@
       }
     }
   },
+  "updateGame": {
+    "labelledBy": "Modifier la partie",
+    "success": "Partie modifiée avec succès !"
+  },
   "joinGame": {
     "labelledBy": "Rejoins tes amis",
     "button": {

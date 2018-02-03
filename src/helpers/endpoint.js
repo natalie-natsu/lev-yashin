@@ -8,6 +8,7 @@ const endpoints = {
     resetPassword: () => '/user/reset-password',
     // Game
     createGame: () => '/games',
+    updateGame: ({ id }) => `/games/${id}`,
     fetchGame: ({ id }) => `/games/${id}`,
     joinGame: ({ id }) => `/games/${id}/join`,
     readyGame: ({ id }) => `/games/${id}/ready`,

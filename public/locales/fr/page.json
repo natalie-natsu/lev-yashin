@@ -49,8 +49,17 @@
       "banned": "Oh ! C'est triste, mais tu as été banni de cette salle. Tu peux toujours tenter ta chance ailleurs."
     },
     "Lobby": {
+      "adminAlert": "Bravo ! Tu es l'admin de cette partie alors tu pourrais peut-être te présenter <1> sur le tchat</1>.",
       "join": {
         "text": "Rejoindre cette partie"
+      },
+      "launch": {
+        "text": "Démarrer avec ces joueurs",
+        "swal": {
+          "title": "Es-tu prêt pour vivre une tout autre coupe du monde ?",
+          "confirm": "Carrément !",
+          "cancel": "Euh..."
+        }
       },
       "kick": {
         "swal": {

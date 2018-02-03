@@ -49,8 +49,17 @@
       "banned": "Oh ! That's sad but you were banned by the administrator of this room. You can always try to join elsewhere."
     },
     "Lobby": {
+      "adminAlert": "Well done! You're the mighty admin, so you could maybe present yourself <1> in the chat</1>.",
       "join": {
         "text": "Join this game"
+      },
+      "launch": {
+        "text": "Launch with this players",
+        "swal": {
+          "title": "Are you ready to begin a unique world cup?",
+          "confirm": "Hell yeah!",
+          "cancel": "Uh..."
+        }
       },
       "kick": {
         "swal": {

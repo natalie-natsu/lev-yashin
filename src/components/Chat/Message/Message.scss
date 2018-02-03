@@ -98,13 +98,13 @@
     }
 
     .messages .message .text-wrapper .text .info {
-        font-size: 80%;
+        overflow: hidden;
         text-transform: uppercase;
+        text-overflow: ellipsis;
+        white-space: nowrap;
         letter-spacing: -1px;
         font-weight: bold;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
+        font-size: 80%;
     }
 
     .messages .message .text-wrapper .text .info time {

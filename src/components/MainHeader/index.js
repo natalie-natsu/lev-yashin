@@ -16,24 +16,26 @@ import Languages from '../Languages';
 const MainHeader = ({ burgerMenu, dispatch, t }) => (
     <header id="main-header">
         <nav className="navbar navbar-expand-lg navbar-dark">
-            <Link to={routes.home} className="navbar-brand mb-0 h1 hidden-sm-down">{t('project.name')}</Link>
-            <div className="btn-drawer my-2 ml-2 ml-sm-0 mr-2 mr-sm-3">
-                <button
-                    className="btn"
-                    type="button"
-                    aria-expanded="false"
-                    aria-label={t('accessibility.aria-label.toggleNav')}
-                    onClick={() => dispatch(toggleMenu(!burgerMenu.isOpen))}
-                    onKeyPress={() => dispatch(toggleMenu(!burgerMenu.isOpen))}
-                >
-                    <FontAwesomeIcon icon={faBars} />
-                </button>
+            <div className="container">
+                <Link to={routes.home} className="navbar-brand mb-0 h1 hidden-sm-down">{t('project.name')}</Link>
+                <div className="btn-drawer my-2 ml-2 ml-sm-0 mr-2 mr-sm-3">
+                    <button
+                        className="btn"
+                        type="button"
+                        aria-expanded="false"
+                        aria-label={t('accessibility.aria-label.toggleNav')}
+                        onClick={() => dispatch(toggleMenu(!burgerMenu.isOpen))}
+                        onKeyPress={() => dispatch(toggleMenu(!burgerMenu.isOpen))}
+                    >
+                        <FontAwesomeIcon icon={faBars} />
+                    </button>
+                </div>
+                <span className="hidden-sm-down mr-3">
+                    <Languages onChangeLanguage={lang => dispatch(setAppLocale(lang))} />
+                </span>
+                <p id="main-header-title-dom" className="navbar-text mr-auto" />
+                <div id="main-header-side-action-dom" />
             </div>
-            <span className="hidden-sm-down mr-3">
-                <Languages onChangeLanguage={lang => dispatch(setAppLocale(lang))} />
-            </span>
-            <p id="main-header-title-dom" className="navbar-text mr-auto" />
-            <div id="main-header-side-action-dom" />
         </nav>
     </header>
 );

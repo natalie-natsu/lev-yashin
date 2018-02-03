@@ -16,8 +16,8 @@ const Slot = ({
     <div
         className={classNames(
             `index-${index}`,
-            'slot d-flex justify-content-between',
-            { ready: isReady, 'animated slideInLeft': !isAdmin, last },
+            'slot d-flex justify-content-between animated slideInRight',
+            { ready: isReady, last },
         )}
     >
         <img

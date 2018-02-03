@@ -191,6 +191,10 @@
       }
     }
   },
+  "updateGame": {
+    "labelledBy": "Update this game",
+    "success": "Game updated with success!"
+  },
   "joinGame": {
     "labelledBy": "Join your friends",
     "button": {

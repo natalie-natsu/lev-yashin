@@ -123,3 +123,30 @@ export function failCreateGame(response, scope, then) {
         then,
     };
 }
+
+export const REQUEST_UPDATE_GAME = 'REQUEST_UPDATE_GAME';
+export const SUCCESS_UPDATE_GAME = 'SUCCESS_UPDATE_GAME';
+export const FAIL_UPDATE_GAME = 'FAIL_UPDATE_GAME';
+
+export function successUpdateGame(response, scope, then) {
+    return (dispatch) => {
+        dispatch(updateGameEntity(response));
+        dispatch({
+            type: SUCCESS_UPDATE_GAME,
+            receivedAt: Date.now(),
+            response,
+            scope,
+            then,
+        });
+    };
+}
+
+export function failUpdateGame(response, scope, then) {
+    return {
+        type: FAIL_UPDATE_GAME,
+        receivedAt: Date.now(),
+        error: response.error,
+        scope,
+        then,
+    };
+}
