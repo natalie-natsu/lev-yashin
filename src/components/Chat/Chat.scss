@@ -18,6 +18,17 @@
             }
         }
 
+        .fetch-more {
+            .btn-link {
+                color: $complementary;
+                &[disabled] {
+                    color: inherit;
+                    text-decoration: none;
+                    cursor: auto;
+                }
+            }
+        }
+
         .bottom-wrapper {
             position: absolute;
             bottom: 0;

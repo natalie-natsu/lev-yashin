@@ -104,7 +104,7 @@ class Game extends React.Component {
         }));
     }
 
-    fetchMessages(limit = 50, skip = 0) {
+    fetchMessages(limit = 10, skip = 0) {
         const { dispatch, match } = this.props;
         const scope = routes.game.messages;
         const payload = { id: match.params.id, limit, skip };
@@ -176,9 +176,10 @@ class Game extends React.Component {
             isFetching: messages.isFetching,
             isSending: messages.isSending,
             messages: messages.entities,
-            onFetchMore: () => this.fetchMessages(),
+            onFetchMore: () => this.fetchMessages(10, messages.skip + 10),
             onSubmit: values => this.sendMessage(values),
             remainMessages: messages.entities.length < messages.totalMessages,
+            step: game.step,
             userId: credentials._id,
             userName: getPublicName(credentials.profile),
             children: (

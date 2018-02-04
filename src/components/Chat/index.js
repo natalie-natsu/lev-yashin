@@ -1,4 +1,5 @@
 import React from 'react';
+import { orderBy } from 'lodash';
 import PropTypes from 'prop-types';
 import { translate } from 'react-i18next';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
@@ -8,10 +9,12 @@ import { getPublicName } from '../../helpers/user';
 import './Chat.scss';
 import Message from './Message';
 
+const $ = window.jQuery;
+
 class Chat extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { content: props.inputValue };
+        this.state = { content: props.inputValue, wasAtBottom: false };
     }
 
     componentDidMount() {
@@ -21,10 +24,13 @@ class Chat extends React.Component {
     componentWillReceiveProps(nextProps) {
         const { inputValue } = nextProps;
         if (inputValue !== this.props.inputValue) { this.setState({ content: inputValue }); }
+
+        const element = $(this.messages);
+        this.setState({ wasAtBottom: element[0].scrollHeight - element.scrollTop() === element.outerHeight() });
     }
 
     componentDidUpdate() {
-        this.scrollToBottom();
+        if (this.state.wasAtBottom) { this.scrollToBottom(); }
     }
 
     scrollToBottom() {
@@ -50,7 +56,7 @@ class Chat extends React.Component {
 
     renderMessages() {
         const { messages, userId } = this.props;
-        return messages.map(message => (
+        return orderBy(messages, ['sentAt'], ['asc']).map(message => (
             <Message
                 {...message}
                 isUser={message.user._id === userId}
@@ -63,11 +69,22 @@ class Chat extends React.Component {
     }
 
     render() {
-        const { children, gameId, isFetching, isSending, remainMessages, t, userName } = this.props;
+        const { children, gameId, isFetching, isSending, remainMessages, step, t, userName } = this.props;
         return (
             <div id={`chat-${gameId}`} className="chat">
                 <div className="chat-window">
-                    <ul className="messages">
+                    <ul className="messages" ref={(el) => { this.messages = el; }}>
+                        {step === 'lobby' && (
+                            <li className="message left">
+                                <div className="avatar" />
+                                <div className="text-wrapper">
+                                    <div className="text">
+                                        {t('component:Chat.helpText', { name: userName })}
+                                    </div>
+                                </div>
+                                <hr className="mb-0" />
+                            </li>
+                        )}
                         <li className="fetch-more text-center mb-3">
                             <button
                                 className="btn btn-link"
@@ -75,16 +92,11 @@ class Chat extends React.Component {
                                 onClick={e => this.handleFetchMore(e)}
                                 onKeyPress={e => this.handleFetchMore(e)}
                             >
-                                {t(`component:Chat.${remainMessages ? 'fetchMore' : 'noMoreMessages'}`)}
+                                {isFetching && <FontAwesomeIcon icon={faSpinner} spin={isFetching} />}
+                                <span className="ml-2">
+                                    {t(`component:Chat.${remainMessages ? 'fetchMore' : 'noMoreMessages'}`)}
+                                </span>
                             </button>
-                        </li>
-                        <li className="message left">
-                            <div className="avatar" />
-                            <div className="text-wrapper">
-                                <div className="text">
-                                    {t('component:Chat.helpText', { name: userName })}
-                                </div>
-                            </div>
                         </li>
                         {this.renderMessages()}
                         <div ref={(el) => { this.messagesEnd = el; }} />
@@ -130,6 +142,7 @@ Chat.propTypes = {
     onFetchMore: PropTypes.func,
     onSubmit: PropTypes.func,
     remainMessages: PropTypes.bool,
+    step: PropTypes.oneOf(['lobby', 'draft', 'groupstage', 'knockout', 'reward']),
     t: PropTypes.func.isRequired,
     userId: PropTypes.string.isRequired,
     userName: PropTypes.string.isRequired,
@@ -144,6 +157,7 @@ Chat.defaultProps = {
     // eslint-disable-next-line no-console
     onSubmit: () => console.log('Please provide an onSubmit callback.'),
     remainMessages: false,
+    step: 'draft',
 };
 
 export default translate()(Chat);

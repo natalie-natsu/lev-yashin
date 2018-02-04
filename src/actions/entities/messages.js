@@ -47,6 +47,7 @@ export function successFetchMessages(response, scope, { limit, skip }) {
             type: SUCCESS_FETCH_MESSAGES,
             receivedAt: Date.now(),
             ids: normalized.result,
+            totalMessages: response.totalMessages,
             limit,
             response,
             scope,
@@ -74,13 +75,15 @@ export const subscribeMessages = (payload, scope, then = () => false) => (dispat
 };
 
 export function successSubscribeMessages(response, scope, then) {
-    return (dispatch) => {
+    return (dispatch, getState) => {
         const normalized = normalizeMessageEntities([response]);
         dispatch(updateMessageEntities([response], normalized));
         dispatch({
             type: SUCCESS_SUBSCRIBE_MESSAGES,
             receivedAt: Date.now(),
             ids: normalized.result,
+            totalMessages: getState().pages.GameMessages.totalMessages + 1,
+            skip: getState().pages.GameMessages.skip + 1,
             response,
             scope,
             then,

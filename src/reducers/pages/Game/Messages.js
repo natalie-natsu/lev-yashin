@@ -35,7 +35,7 @@ function requestFetchMessages(state) {
     };
 }
 
-function successFetchMessages(state, { ids, limit, response, skip }) {
+function successFetchMessages(state, { ids, limit, response, skip, totalMessages }) {
     return {
         ...state,
         error: null,
@@ -45,7 +45,7 @@ function successFetchMessages(state, { ids, limit, response, skip }) {
         limit,
         needRefresh: false,
         skip,
-        totalMessages: response.totalMessages,
+        totalMessages,
         updatedAt: Date.now(),
     };
 }
