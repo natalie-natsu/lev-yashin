@@ -13,8 +13,10 @@ const initialMessagesState = {
     isFetching: false,
     isSending: false,
     lastResponse: null,
+    limit: 50,
     needRefresh: false,
-    remainMessages: false,
+    skip: 0,
+    totalMessages: false,
     updatedAt: null,
 };
 
@@ -33,15 +35,17 @@ function requestFetchMessages(state) {
     };
 }
 
-function successFetchMessages(state, { ids, response }) {
+function successFetchMessages(state, { ids, limit, response, skip }) {
     return {
         ...state,
         error: null,
         ids: Array.from(new Set(state.ids.concat(ids))),
         isFetching: false,
         lastResponse: response,
+        limit,
         needRefresh: false,
-        remainMessages: response.remainMessages,
+        skip,
+        totalMessages: response.totalMessages,
         updatedAt: Date.now(),
     };
 }

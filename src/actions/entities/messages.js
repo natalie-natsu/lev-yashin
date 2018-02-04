@@ -39,16 +39,18 @@ export const fetchMessages = (payload, scope, then = () => false) => (dispatch, 
     }).then(response => response.json()).then(response => then(response));
 };
 
-export function successFetchMessages(response, scope) {
+export function successFetchMessages(response, scope, { limit, skip }) {
     return (dispatch) => {
-        const normalized = normalizeMessageEntities(response);
+        const normalized = normalizeMessageEntities(response.messages);
         dispatch(updateMessageEntities(response, normalized));
         dispatch({
             type: SUCCESS_FETCH_MESSAGES,
             receivedAt: Date.now(),
             ids: normalized.result,
+            limit,
             response,
             scope,
+            skip,
         });
     };
 }

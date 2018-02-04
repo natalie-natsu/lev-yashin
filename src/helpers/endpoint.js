@@ -15,7 +15,7 @@ const endpoints = {
     kickGameUser: ({ id }) => `/games/${id}/kick`,
     banGameUser: ({ id }) => `/games/${id}/ban`,
     // Messages
-    fetchMessages: ({ id }) => `/games/${id}/messages`,
+    fetchMessages: ({ id, skip = 0, limit = 50 }) => `/games/${id}/messages/${skip}/${limit}`,
     sendMessage: ({ id }) => `/games/${id}/messages`,
 };
 

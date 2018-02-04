@@ -14,10 +14,11 @@ import { routes } from '../../helpers/routes';
 import { client } from '../../helpers/nes';
 
 import { getPublicName } from '../../helpers/user';
-import { failSubscribeGame, fetchGame, subscribeGame, successSubscribeGame } from '../../actions/entities/game';
+import { failSubscribeGame, subscribeGame, successSubscribeGame } from '../../actions/entities/game';
 import {
+    failFetchMessages,
     failSendMessage, failSubscribeMessages,
-    fetchMessages, sendMessage, subscribeMessages,
+    fetchMessages, sendMessage, subscribeMessages, successFetchMessages,
     successSendMessage, successSubscribeMessages,
 } from '../../actions/entities/messages';
 
@@ -43,40 +44,25 @@ class Game extends React.Component {
 
     componentWillMount() {
         const { dispatch, match } = this.props;
+
         const scope = routes.game.read;
+        dispatch(subscribeGame({ id: match.params.id }, scope, (update) => {
+            const { error, payload } = update;
+            if (error) dispatch(failSubscribeGame(error, scope));
+            else dispatch(successSubscribeGame(payload, scope, res => this.onSubscribeGameSuccess(res)));
+        }));
 
-        dispatch(fetchGame({ id: match.params.id }, scope));
-        dispatch(fetchMessages({ id: match.params.id }, scope));
-
-        // dispatch(subscribeGame({ id: match.params.id }, scope, (update) => {
-        //     const { error, payload } = update;
-        //     if (error) dispatch(failSubscribeGame(error, scope));
-        //     else dispatch(successSubscribeGame(payload, scope, res => this.onSubscribeGameSuccess(res)));
-        // }));
+        this.fetchMessages();
+        const scopeMsg = routes.game.messages;
+        dispatch(subscribeMessages({ id: match.params.id }, scopeMsg, (update) => {
+            const { error, payload } = update;
+            if (error) dispatch(failSubscribeMessages(error, scopeMsg));
+            else dispatch(successSubscribeMessages(payload, scopeMsg, res => this.onSubscribeMessagesSuccess(res)));
+        }));
     }
 
     componentWillReceiveProps(nextProps) {
-        const { dispatch, game } = this.props;
-        const scope = routes.game.read;
-        const scopeMsg = routes.game.messages;
-
-        // If we're receiving game for the first time
-        if (!game._id && game !== nextProps.game) {
-            // Subscribe to Game
-            dispatch(subscribeGame({ id: nextProps.game._id }, scope, (update) => {
-                const { error, payload } = update;
-                if (error) dispatch(failSubscribeGame(error, scope));
-                else dispatch(successSubscribeGame(payload, scope, res => this.onSubscribeGameSuccess(res)));
-            }));
-
-            // Subscribe to Game's Messages
-            dispatch(subscribeMessages({ id: nextProps.game._id }, scopeMsg, (update) => {
-                const { error, payload } = update;
-                if (error) dispatch(failSubscribeMessages(error, scopeMsg));
-                else dispatch(successSubscribeMessages(payload, scopeMsg, res => this.onSubscribeMessagesSuccess(res)));
-            }));
-        }
-
+        const { game } = this.props;
         const aUserWasBanned = game.bannedUsers !== nextProps.game.bannedUsers;
         if (aUserWasBanned && this.userIsBanned(nextProps.game)) {
             // TODO register notification.
@@ -111,16 +97,23 @@ class Game extends React.Component {
     sendMessage(message) {
         const { dispatch } = this.props;
         const scope = routes.game.messages;
-        this.props.dispatch(sendMessage(message, routes.game.messages, (response) => {
+
+        dispatch(sendMessage(message, routes.game.messages, (response) => {
             if (response.error) dispatch(failSendMessage(response.error, scope));
             else dispatch(successSendMessage(response, scope));
         }));
     }
 
-    fetchMessages() {
+    fetchMessages(limit = 50, skip = 0) {
         const { dispatch, match } = this.props;
         const scope = routes.game.messages;
-        dispatch(fetchMessages({ id: match.params.id }, scope));
+        const payload = { id: match.params.id, limit, skip };
+        const then = (response) => {
+            if (response.error) dispatch(failFetchMessages(response.error, scope));
+            else dispatch(successFetchMessages(response, scope, payload));
+        };
+
+        dispatch(fetchMessages(payload, scope, then));
     }
 
     hideAlert(e) {
@@ -185,7 +178,7 @@ class Game extends React.Component {
             messages: messages.entities,
             onFetchMore: () => this.fetchMessages(),
             onSubmit: values => this.sendMessage(values),
-            remainMessages: messages.remainMessages,
+            remainMessages: messages.entities.length < messages.totalMessages,
             userId: credentials._id,
             userName: getPublicName(credentials.profile),
             children: (

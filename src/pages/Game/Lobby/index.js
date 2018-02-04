@@ -220,7 +220,7 @@ class Lobby extends React.Component {
                     </div>
                 </div>
                 <div className="actions text-right">
-                    {isAdmin && (
+                    {canLaunch && (
                         <button
                             className="btn btn-success mt-3 ml-3 animated slideInUp"
                             onClick={e => this.handleLaunch(e)}
