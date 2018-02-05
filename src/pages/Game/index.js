@@ -192,13 +192,32 @@ class Game extends React.Component {
                 </SideAction>
             ),
         };
+
+        let stepComponent;
+        let stepProps = {};
+
+        switch (game.step) {
+        case 'draft':
+            stepComponent = () => <p>Draft</p>;
+            break;
+        default:
+            stepComponent = Lobby;
+            stepProps = lobbyProps;
+            break;
+        }
+
         return (
             <div id="game">
                 <Title>{game.name}</Title>
                 <div className="container">
                     {this.renderAlert()}
                     <Switch>
-                        <PrivateRoute exact path={routes.game.read} component={Lobby} componentProps={lobbyProps} />
+                        <PrivateRoute
+                            exact
+                            path={routes.game.read}
+                            component={stepComponent}
+                            componentProps={stepProps}
+                        />
                         <PrivateRoute path={routes.game.messages} component={Chat} componentProps={chatProps} />
                     </Switch>
                 </div>

@@ -14,7 +14,7 @@ import { routes } from '../../../helpers/routes';
 import {
     joinGame, readyGame,
     kickUser, failKickUser, successKickUser,
-    banUser, successBanUser, failBanUser,
+    banUser, successBanUser, failBanUser, startGame, failStartGame, successStartGame,
 } from '../../../actions/entities/game/lobby';
 import { getPublicName } from '../../../helpers/user';
 
@@ -123,7 +123,7 @@ class Lobby extends React.Component {
 
     handleLaunch(e) {
         if (e) { e.preventDefault(); }
-        const { game, t, userId } = this.props;
+        const { dispatch, game, t, userId } = this.props;
         const isAdmin = userId === game.admin;
         const canLaunch = isAdmin && game.readyUsers.length > 3;
 
@@ -144,7 +144,13 @@ class Lobby extends React.Component {
             reverseButtons: true,
             showLoaderOnConfirm: true,
             preConfirm: () => {
-                // TODO call API
+                const payload = { id: game._id };
+                const scope = routes.game.read;
+
+                dispatch(startGame(payload, scope, (response) => {
+                    if (response.error) dispatch(failStartGame(response, scope));
+                    else dispatch(successStartGame(response, scope));
+                }));
             },
             allowOutsideClick: () => !swal.isLoading(),
         });

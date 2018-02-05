@@ -55,8 +55,8 @@ class Content extends React.Component {
     }
 
     render() {
-        const { t } = this.props;
-        return (
+        const { credentials, t } = this.props;
+        return (!credentials.token || !credentials.profile.isInStartedGame) && (
             <div className="position-relative">
                 <div className="parallax" style={{ backgroundImage: `url(${backgroundSrc}` }} />
                 <section id="home-content">

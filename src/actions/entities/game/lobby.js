@@ -161,3 +161,43 @@ export function failBanUser(response, scope, then) {
         then,
     };
 }
+
+export const REQUEST_START_GAME = 'REQUEST_START_GAME';
+export const SUCCESS_START_GAME = 'SUCCESS_START_GAME';
+export const FAIL_START_GAME = 'FAIL_START_GAME';
+
+export const startGame = (payload, scope, then) => (dispatch, getState) => {
+    dispatch({ type: REQUEST_START_GAME, payload, scope });
+
+    fetch(getEndpoint('startGame', payload), {
+        method: 'POST',
+        headers: getHeaders(getState().credentials),
+    }).then(response => response.json()).then(response => then(response));
+};
+
+export function successStartGame(response, scope, then) {
+    return (dispatch) => {
+        response.users = normalizeResponseUsersAsEntity(response.users);
+
+        const normalized = normalize(response, gameSchema);
+        dispatch(receiveEntities(normalized.entities));
+
+        dispatch({
+            type: SUCCESS_START_GAME,
+            receivedAt: Date.now(),
+            response,
+            scope,
+            then,
+        });
+    };
+}
+
+export function failStartGame(response, scope, then) {
+    return {
+        type: FAIL_START_GAME,
+        receivedAt: Date.now(),
+        error: response.error,
+        scope,
+        then,
+    };
+}
