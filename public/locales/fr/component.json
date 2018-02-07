@@ -19,8 +19,8 @@
     "ban": "Bannir"
   },
   "Chat": {
-    "helpText": "Salut {{name}} ! Dans la salle d'attente les messages sont publiques, mais dès que la partie commence, seuls tes amis peuvent voir ce que tu as à leur dire.",
-    "placeholder": "Tappe ton message ici...",
+    "helpText": "Salut {{name}} ! Dans la salle d'attente les messages sont publics, mais dès que la partie commence, seuls tes amis peuvent voir ce que tu as à leur dire.",
+    "placeholder": "Tape ton message ici...",
     "fetchMore": "Charger plus de messages...",
     "noMoreMessages": "Fin des messages"
   }

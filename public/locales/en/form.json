@@ -105,7 +105,7 @@
         "help": "Your last name is optional and always private."
       }
     },
-    "success": "Profile updated with success!",
+    "success": "Profile updated successfully!",
     "errors": {
       "badRequest": "Tes informations sont incorrectes.",
       "email": {
@@ -146,7 +146,7 @@
         "label": "The same password"
       }
     },
-    "success": "Password changed with success!",
+    "success": "Password changed successfully!",
     "errors": {
       "oldPassword": {
         "required": "Actual password is required",
@@ -173,7 +173,7 @@
     "input": {
       "name": {
         "label": "Name of the game",
-        "placeholder": "The sofa cup of football"
+        "placeholder": "A game with a NAME 😎"
       },
       "isWithBonuses": {
         "label": "With all bonuses"
@@ -182,7 +182,7 @@
         "label": "Public game"
       }
     },
-    "success": "Game created with success!",
+    "success": "Game created successfully!",
     "errors": {
       "name": {
         "required": "Name is required",
@@ -193,7 +193,7 @@
   },
   "updateGame": {
     "labelledBy": "Update this game",
-    "success": "Game updated with success!"
+    "success": "Game updated successfully!"
   },
   "joinGame": {
     "labelledBy": "Join your friends",
@@ -207,7 +207,7 @@
         "placeholder": "5a7101883682391e30a425c3"
       }
     },
-    "success": "Game joined with success!",
+    "success": "Game joined successfully!",
     "errors": {
       "id": {
         "required": "ID is required",

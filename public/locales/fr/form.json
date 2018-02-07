@@ -173,7 +173,7 @@
     "input": {
       "name": {
         "label": "Nom de la partie",
-        "placeholder": "La coupe du monde dans son canap'"
+        "placeholder": "Parti pour gagner 😎"
       },
       "isWithBonuses": {
         "label": "Avec tous les bonus"
@@ -182,7 +182,7 @@
         "label": "Partie publique"
       }
     },
-    "success": "Partie crée avec succès !",
+    "success": "Partie créée avec succès !",
     "errors": {
       "name": {
         "required": "Le nom de la partie est requis",

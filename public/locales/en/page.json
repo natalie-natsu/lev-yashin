@@ -15,7 +15,7 @@
   },
   "Home": {
     "Landing": {
-      "title": "Win the <1>Russia </1>2018 World Cup",
+      "title": "Win the 2018 <1>Russia </1>World Cup",
       "subtitle": "Fantasy football"
     },
     "Content": {
@@ -49,7 +49,7 @@
       "banned": "Oh ! That's sad but you were banned by the administrator of this room. You can always try to join elsewhere."
     },
     "Lobby": {
-      "adminAlert": "Well done! You're the mighty admin, so you could maybe present yourself <1> in the chat</1>.",
+      "adminAlert": "Well done! You're the mighty admin, so maybe you could introduce yourself <1> in the chat</1>.",
       "join": {
         "text": "Join this game"
       },

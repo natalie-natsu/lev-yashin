@@ -2,8 +2,9 @@
   "test": "Yeah, the test works !",
   "undefined": "Undefined",
   "project": {
-    "name": "WorldCup 400K",
-    "shortName": "WC400K"
+    "title": "World Cup 2018 - The Game",
+    "name": "worldcup.game",
+    "shortName": "W18"
   },
   "language": {
     "en": "English",
