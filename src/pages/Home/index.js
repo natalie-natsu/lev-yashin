@@ -15,6 +15,7 @@ import Title from '../../components/MainHeader/Title';
 import SignInForm from '../../components/Authentication/SignInForm';
 import Landing from './Landing';
 import Content from './Content';
+import End from './End';
 
 class Home extends React.Component {
     renderSignInButton() {
@@ -77,6 +78,7 @@ class Home extends React.Component {
                 </div>
                 <Landing />
                 <Content history={history} />
+                <End />
             </div>
         );
     }

@@ -11,7 +11,7 @@ import MainHeader from '../MainHeader';
 const Layout = props => (
     <div id="layout">
         <Helmet>
-            <title>{props.t('project.name')}</title>
+            <title>{props.t('project.title')}</title>
         </Helmet>
         <ScrollToTop />
         <Drawer />

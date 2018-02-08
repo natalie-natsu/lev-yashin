@@ -84,7 +84,7 @@ class SignInForm extends React.Component {
                     </Link>
                 </div>
                 <button type="submit" className="btn btn-success float-right" disabled={pristine || submitting}>
-                    <span className="submit-label">
+                    <span className="action submit-label">
                         <FontAwesomeIcon icon={submitting ? faSpinner : faSignInAlt} spin={submitting} />
                         {t(`form:signIn.${submitting ? 'state.isSigningIn' : 'button.default'}`)}
                     </span>

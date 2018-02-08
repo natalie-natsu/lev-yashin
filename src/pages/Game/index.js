@@ -21,6 +21,7 @@ import {
     fetchMessages, sendMessage, subscribeMessages, successFetchMessages,
     successSendMessage, successSubscribeMessages,
 } from '../../actions/entities/messages';
+import { resetMessages } from '../../actions/components/Game/Messages';
 
 import NoMatch from '../NoMatch';
 import PrivateRoute from '../../components/PrivateRoute';
@@ -74,16 +75,11 @@ class Game extends React.Component {
         const id = this.props.game._id;
         await client.unsubscribe(`/games/${id}`, null);
         await client.unsubscribe(`/games/${id}/messages`, null);
+        this.props.dispatch(resetMessages(routes.game.read));
     }
 
-    onSubscribeGameSuccess({ lastAction }) {
-        const { credentials } = this.props;
+    onSubscribeGameSuccess() {
         this.setState({ subscriptions: { ...this.state.subscriptions, game: true } });
-
-        if (lastAction === 'GAME_USER_KICKED' && lastAction.userId === credentials._id) {
-            // TODO register notification.
-            this.setState({ alert: 'GAME_USER_KICKED' });
-        }
     }
 
     onSubscribeMessagesSuccess() {
@@ -104,7 +100,7 @@ class Game extends React.Component {
         }));
     }
 
-    fetchMessages(limit = 10, skip = 0) {
+    fetchMessages(limit = 15, skip = 0) {
         const { dispatch, match } = this.props;
         const scope = routes.game.messages;
         const payload = { id: match.params.id, limit, skip };
@@ -176,10 +172,11 @@ class Game extends React.Component {
             isFetching: messages.isFetching,
             isSending: messages.isSending,
             messages: messages.entities,
-            onFetchMore: () => this.fetchMessages(10, messages.skip + 10),
+            onFetchMore: () => this.fetchMessages(15, messages.skip + 15),
             onSubmit: values => this.sendMessage(values),
             remainMessages: messages.entities.length < messages.totalMessages,
             step: game.step,
+            totalMessages: messages.totalMessages,
             userId: credentials._id,
             userName: getPublicName(credentials.profile),
             children: (

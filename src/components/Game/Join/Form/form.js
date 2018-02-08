@@ -48,7 +48,7 @@ class GameJoinForm extends React.Component {
                     errors={this.idErrors}
                 />
                 {renderFormError(this.formErrors, error)}
-                <div className="text-right">
+                <div className="action text-right">
                     <button type="submit" className="btn btn-success" disabled={pristine || submitting || error}>
                         <span className="submit-label">
                             <FontAwesomeIcon icon={submitting ? faSpinner : faSignInAlt} spin={submitting} />

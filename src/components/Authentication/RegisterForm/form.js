@@ -96,7 +96,7 @@ class RegisterForm extends React.Component {
                     </div>
                 </div>
                 {renderFormError(this.formErrors, error)}
-                <div className="text-right">
+                <div className="action text-right">
                     <button type="submit" className="btn btn-success" disabled={pristine || submitting || error}>
                         <span className="submit-label">
                             <FontAwesomeIcon icon={submitting ? faSpinner : faPaperPlane} spin={submitting} />

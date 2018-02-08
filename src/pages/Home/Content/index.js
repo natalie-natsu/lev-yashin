@@ -43,7 +43,7 @@ class Content extends React.Component {
                 </h3>
                 <hr />
                 <GameJoinForm scope={routes.home} />
-                <div className="mb-3" />
+                <div className="mb-4" />
                 <h3 className="form-title">
                     <FontAwesomeIcon icon={faPlusCircle} />
                     {t('page:Home.Content.createGame')}
@@ -60,20 +60,22 @@ class Content extends React.Component {
             <div className="position-relative">
                 <div className="parallax" style={{ backgroundImage: `url(${backgroundSrc}` }} />
                 <section id="home-content">
-                    <div className="container">
+                    <div className="container position-relative">
                         <div className="row">
-                            <div className="col-md-6 d-block">
-                                {this.renderRegister()}
-                                {this.renderGame()}
-                            </div>
-                            <div className="col-md-6 d-none d-sm-flex">
-                                <img
-                                    src={worldCupSrc}
-                                    alt={t('page:Home.Content.worldCup')}
-                                    className="img-fluid w-75 align-self-center mx-auto"
-                                />
+                            <div className="col-md-6 offset-md-3">
+                                <div className="card mb-3 animated fadeIn">
+                                    <div className="card-body">
+                                        {this.renderRegister()}
+                                        {this.renderGame()}
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                        <img
+                            src={worldCupSrc}
+                            alt={t('page:Home.Content.worldCup')}
+                            className="logo"
+                        />
                     </div>
                 </section>
             </div>

@@ -1,17 +1,47 @@
 @import '../../../theme';
 
 #home-content {
-    padding: 1rem 0;
-}
+    padding: 0 0 2rem 0;
 
-#home-content {
-    #create-game-form .row.mb-3 {
-        display: none;
+    .card {
+        margin-top: -1rem;
+
+        h3 {
+            text-align: center;
+        }
+
+        form .action {
+            .btn {
+                width: 100%;
+                border-color: #f8f9fa;
+                background-color: #f8f9fa;
+                color: #212529;
+            }
+            .btn:hover:not([disabled]) {
+                border-color: #dae0e5;
+                background-color: #e2e6ea;
+            }
+        }
     }
-}
 
-@media (min-width: 768px) {
-    #home-content {
-        padding: 4rem 0;
+    .logo {
+        position: absolute;
+        bottom: -4rem;
+        left: 50%;
+        height: 4rem;
+        transform: translateX(-50%);
+    }
+
+    @media (min-width: 768px) {
+        padding: 0 0 4rem 0;
+
+        .card {
+            margin-top: -2rem;
+        }
+
+        .logo {
+            bottom: -8rem;
+            height: 8rem;
+        }
     }
 }

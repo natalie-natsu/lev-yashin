@@ -34,7 +34,7 @@ class Chat extends React.Component {
     }
 
     scrollToBottom() {
-        this.messagesEnd.scrollIntoView({ behavior: 'smooth' });
+        this.messagesEnd.scrollIntoView({/* behavior: 'smooth' */});
     }
 
     handleFetchMore(e) {
@@ -69,11 +69,16 @@ class Chat extends React.Component {
     }
 
     render() {
-        const { children, gameId, isFetching, isSending, remainMessages, step, t, userName } = this.props;
+        const {
+            children, gameId, isFetching,
+            isSending, remainMessages, step,
+            t, totalMessages, userName,
+        } = this.props;
+
         return (
             <div id={`chat-${gameId}`} className="chat">
                 <div className="chat-window">
-                    <ul className="messages" ref={(el) => { this.messages = el; }}>
+                    <ul className="messages pt-3" ref={(el) => { this.messages = el; }}>
                         {step === 'lobby' && (
                             <li className="message left">
                                 <div className="avatar" />
@@ -85,19 +90,21 @@ class Chat extends React.Component {
                                 <hr className="mb-0" />
                             </li>
                         )}
-                        <li className="fetch-more text-center mb-3">
-                            <button
-                                className="btn btn-link"
-                                disabled={!remainMessages || isFetching}
-                                onClick={e => this.handleFetchMore(e)}
-                                onKeyPress={e => this.handleFetchMore(e)}
-                            >
-                                {isFetching && <FontAwesomeIcon icon={faSpinner} spin={isFetching} />}
-                                <span className="ml-2">
-                                    {t(`component:Chat.${remainMessages ? 'fetchMore' : 'noMoreMessages'}`)}
-                                </span>
-                            </button>
-                        </li>
+                        {totalMessages > 15 && (
+                            <li className="fetch-more text-center mb-3">
+                                <button
+                                    className="btn btn-link"
+                                    disabled={!remainMessages || isFetching}
+                                    onClick={e => this.handleFetchMore(e)}
+                                    onKeyPress={e => this.handleFetchMore(e)}
+                                >
+                                    {isFetching && <FontAwesomeIcon icon={faSpinner} spin={isFetching} />}
+                                    <span className="ml-2">
+                                        {t(`component:Chat.${remainMessages ? 'fetchMore' : 'noMoreMessages'}`)}
+                                    </span>
+                                </button>
+                            </li>
+                        )}
                         {this.renderMessages()}
                         <div ref={(el) => { this.messagesEnd = el; }} />
                     </ul>
@@ -106,8 +113,9 @@ class Chat extends React.Component {
                         className="bottom-wrapper clearfix"
                         onSubmit={e => this.handleSubmit(e)}
                     >
-                        <div className="input-group mb-3">
+                        <div className="input-group">
                             <input
+                                autoComplete="off"
                                 className="form-control"
                                 name="content"
                                 onChange={e => this.setState({ content: e.target.value })}
@@ -144,6 +152,7 @@ Chat.propTypes = {
     remainMessages: PropTypes.bool,
     step: PropTypes.oneOf(['lobby', 'draft', 'groupstage', 'knockout', 'reward']),
     t: PropTypes.func.isRequired,
+    totalMessages: PropTypes.number,
     userId: PropTypes.string.isRequired,
     userName: PropTypes.string.isRequired,
 };
@@ -158,6 +167,7 @@ Chat.defaultProps = {
     onSubmit: () => console.log('Please provide an onSubmit callback.'),
     remainMessages: false,
     step: 'draft',
+    totalMessages: 0,
 };
 
 export default translate()(Chat);

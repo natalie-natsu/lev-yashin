@@ -5,7 +5,6 @@ import banner from './assets/banner.png';
 
 const Landing = () => (
     <section id="home-landing" className="jumbotron-fluid" style={{ backgroundImage: `url(${banner})` }}>
-        <span className="square d-none d-sm-inline" style={{ backgroundImage: `url(${banner})` }} />
         <div className="container">
             <h1 className="animated fadeIn">
                 <span className="f-secondary">

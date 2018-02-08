@@ -2,11 +2,12 @@
 
 .chat {
     position: relative;
+    margin-top: -1rem;
+
     .chat-window {
         overflow: hidden;
-        padding-bottom: 55px;
-        min-height: calc(480px - 62px - .5rem);
-        height: calc(100vh - 62px - .5rem);
+        padding-bottom: 71px;
+        height: calc(100vh - 62px + .5rem);
 
         .messages {
             overflow-y: scroll;
@@ -33,18 +34,13 @@
             position: absolute;
             bottom: 0;
             left: 0;
-            padding: .5rem 0;
+            padding: 1rem 0;
             width: 100%;
+            border-top: 1px solid #d6d8db;
         }
 
         @media (min-width: 768px) {
-            padding-bottom: 71px;
-            min-height: calc(480px - 62px - 1rem);
-            height: calc(100vh - 62px - 1rem);
-
-            .bottom-wrapper {
-                padding: 1rem 0;
-            }
+            height: calc(100vh - 62px);
         }
     }
 }

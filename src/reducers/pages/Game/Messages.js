@@ -1,5 +1,6 @@
 import { createReducer } from '../../utilities/index';
 import { routes } from '../../../helpers/routes';
+import { RESET_MESSAGES } from '../../../actions/components/Game/Messages';
 import {
     FAIL_FETCH_MESSAGES, FAIL_SUBSCRIBE_MESSAGES, FAIL_SEND_MESSAGE,
     REQUEST_FETCH_MESSAGES, REQUEST_SUBSCRIBE_MESSAGES, REQUEST_SEND_MESSAGE,
@@ -13,12 +14,16 @@ const initialMessagesState = {
     isFetching: false,
     isSending: false,
     lastResponse: null,
-    limit: 50,
+    limit: 10,
     needRefresh: false,
     skip: 0,
     totalMessages: false,
     updatedAt: null,
 };
+
+function resetMessages() {
+    return initialMessagesState;
+}
 
 function refreshMessages(state) {
     return {
@@ -88,7 +93,9 @@ function failSendMessage(state, { response }) {
 }
 
 export default createReducer(initialMessagesState, {
+    [RESET_MESSAGES]: resetMessages,
     [REFRESH_MESSAGES]: refreshMessages,
+
     [REQUEST_FETCH_MESSAGES]: requestFetchMessages,
     [REQUEST_SUBSCRIBE_MESSAGES]: requestFetchMessages,
     [SUCCESS_FETCH_MESSAGES]: successFetchMessages,
