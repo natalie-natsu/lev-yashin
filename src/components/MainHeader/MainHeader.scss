@@ -2,64 +2,64 @@
 
 #main-header {
     z-index: 15;
-}
 
-#main-header .navbar {
-    -ms-flex-pack: start;
-    padding: 0;
-    background: darken($primary, 5%);
-    color: map-get($textColorForBg, primary);
+    .navbar {
+        -ms-flex-pack: start;
+        padding: 0;
+        background: darken($primary, 5%);
+        color: map-get($textColorForBg, primary);
 
-    -webkit-box-direction: normal;
-    -webkit-box-orient: horizontal;
-    -webkit-box-pack: start;
-    -ms-flex-flow: row nowrap;
-        flex-flow: row nowrap;
-    justify-content: flex-start;
-}
+        -webkit-box-direction: normal;
+        -webkit-box-orient: horizontal;
+        -webkit-box-pack: start;
+        -ms-flex-flow: row nowrap;
+            flex-flow: row nowrap;
+        justify-content: flex-start;
 
-#main-header .navbar-brand {
-    padding: 1rem .5rem;
-    background: darken($primary, 7.5%);
-    color: map-get($textColorForBg, primary);
-    text-align: center;
-}
+        .container {
+            flex-wrap: nowrap;
 
-#main-header .btn-drawer .btn,
-#main-header-side-action-dom .btn-side-action .btn {
-    padding: 0;
-    width: 40px;
-    outline: 0;
-    background-color: transparent;
-    box-shadow: none;
-    color: inherit;
-    font-size: 24px;
-    line-height: 36px;
-    cursor: pointer;
-}
-
-#main-header-side-action-dom .dropdown-menu {
-    top: 0;
-    right: 0;
-    left: auto;
-}
-
-#main-header .navbar-text {
-    overflow: hidden;
-    margin: 0;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    font-size: 1em;
-}
-
-@media (min-width: 768px) {
-    #main-header-side-action-dom .dropdown-menu {
-        top: 100%;
+            .navbar-brand {
+                padding: 1rem .5rem;
+                background: darken($primary, 7.5%);
+                color: map-get($textColorForBg, primary);
+                text-align: center;
+            }
+        }
     }
-}
 
-@media (min-width: 1024px) {
-    #main-header .navbar-text {
-        font-size: 1.25em;
+    .btn-drawer .btn,
+    #main-header-side-action-dom .btn-side-action .btn {
+        padding: 0;
+        width: 40px;
+        outline: 0;
+        background-color: transparent;
+        box-shadow: none;
+        color: inherit;
+        font-size: 24px;
+        line-height: 36px;
+        cursor: pointer;
+    }
+
+    #main-header-side-action-dom .dropdown-menu {
+        top: 0;
+        right: 0;
+        left: auto;
+
+        @media (min-width: 768px) {
+            top: 100%;
+        }
+    }
+
+    .navbar-text {
+        overflow: hidden;
+        margin: 0;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 1em;
+
+        @media (min-width: 1024px) {
+            font-size: 1.25em;
+        }
     }
 }
