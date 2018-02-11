@@ -6,10 +6,14 @@ export const routes = {
         register: '/auth/register',
         signIn: '/auth/sign-in',
     },
+    calendar: {
+        exact: '/calendar',
+        match: '/calendar/match/:id',
+    },
     game: {
-        create: '/game/create',
-        read: '/game/:id',
-        messages: '/game/:id/messages',
+        create: '/g/create',
+        read: '/g/:id',
+        messages: '/g/:id/messages',
     },
     home: '/',
     me: {
