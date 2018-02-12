@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { filter, last } from 'lodash';
 import { denormalize } from 'normalizr';
 import { translate } from 'react-i18next';
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import { faEllipsisV } from '@fortawesome/fontawesome-free-solid';
 
 import { failFetchCalendar, fetchCalendar, successFetchCalendar } from '../../actions/entities/match';
 import { calendarSchema } from '../../schemas/calendar';
@@ -23,19 +24,29 @@ class Calendar extends React.Component {
         }));
     }
 
-    getScrollTo() {
-        const lastMatchWithScores = last(filter(this.props.calendar.matches, match => match.scores));
-        return lastMatchWithScores && lastMatchWithScores.id;
-    }
-
     render() {
         const { calendar, t } = this.props;
         return (
             <div id="calendar">
                 <Title>{t('page:Calendar.title')}</Title>
-                <SideAction><div className="mx-2 mx-sm-3">toto</div></SideAction>
+                <SideAction>
+                    <div className="btn-side-action mx-2 mx-sm-3">
+                        <button
+                            type="button"
+                            className="btn"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                        >
+                            <FontAwesomeIcon icon={faEllipsisV} />
+                        </button>
+                        <div className="dropdown-menu">
+                            <div className="dropdown-divider" />
+                        </div>
+                    </div>
+                </SideAction>
                 <div className="container">
-                    <CalendarList {...calendar} scrollTo={this.getScrollTo()} />
+                    <CalendarList {...calendar} />
                 </div>
             </div>
         );
