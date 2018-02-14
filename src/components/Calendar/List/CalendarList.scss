@@ -13,6 +13,46 @@
 
         .group {
             border: 1px solid black;
+
+            &.A {
+              color: #1474bc;
+              border-color: #1474bc;
+            }
+
+            &.B {
+              color: #c42616;
+              border-color: #c42616;
+            }
+
+            &.C {
+              color: #0f96d3;
+              border-color: #0f96d3;
+            }
+
+            &.D {
+              color: #d5c8a3;
+              border-color: #d5c8a3;
+            }
+
+            &.E {
+              color: #443979;
+              border-color: #443979;
+            }
+
+            &.F {
+              color: #0c8544;
+              border-color: #0c8544;
+            }
+
+            &.G {
+              color: #50aa8a;
+              border-color: #50aa8a;
+            }
+
+            &.H {
+              color: #f7742b;
+              border-color: #f7742b;
+            }
         }
         .body {
             .name,
@@ -36,6 +76,10 @@
                     padding-bottom: 26.8%;
                     width: 50%;
                 }
+            }
+
+            .score {
+              font-size: 40px;
             }
         }
     }

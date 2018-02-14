@@ -23,5 +23,8 @@
     "placeholder": "Tape ton message ici...",
     "fetchMore": "Charger plus de messages...",
     "noMoreMessages": "Fin des messages"
+  },
+  "CalendarList": {
+    "endOfList": "Fin des matchs"
   }
 }

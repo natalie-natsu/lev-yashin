@@ -4,24 +4,46 @@ import { connect } from 'react-redux';
 import { denormalize } from 'normalizr';
 import { translate } from 'react-i18next';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import { faEllipsisV } from '@fortawesome/fontawesome-free-solid';
+import { faSync } from '@fortawesome/fontawesome-free-solid';
 
 import { failFetchCalendar, fetchCalendar, successFetchCalendar } from '../../actions/entities/match';
 import { calendarSchema } from '../../schemas/calendar';
 import { routes } from '../../helpers/routes';
 
+import './Calendar.scss';
 import SideAction from '../../components/MainHeader/SideAction';
 import Title from '../../components/MainHeader/Title';
 import CalendarList from '../../components/Calendar/List';
 
 class Calendar extends React.Component {
+    constructor(props) {
+        super(props);
+
+        // Refresh calendar data every minutes
+        // Todo refresh only if there is a live
+        const intervalId = setInterval(() => this.fetchCalendar(), 60 * 1000);
+        this.state = { intervalId };
+    }
+
     componentDidMount() {
-        const { dispatch } = this.props;
-        const scope = routes.calendar;
-        dispatch(fetchCalendar({}, scope, (response) => {
-            if (response.error) dispatch(failFetchCalendar(response, scope));
-            else dispatch(successFetchCalendar(response, scope));
-        }));
+        this.fetchCalendar();
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.state.intervalId);
+    }
+
+    fetchCalendar(e) {
+        if (e) { e.preventDefault(); }
+
+        const { calendar, dispatch } = this.props;
+        if (!calendar.isFetching) {
+            const scope = routes.calendar;
+            dispatch(fetchCalendar({}, scope, (response) => {
+                if (response.error) dispatch(failFetchCalendar(response, scope));
+                else dispatch(successFetchCalendar(response, scope));
+            }));
+        }
     }
 
     render() {
@@ -34,15 +56,12 @@ class Calendar extends React.Component {
                         <button
                             type="button"
                             className="btn"
-                            data-toggle="dropdown"
-                            aria-haspopup="true"
-                            aria-expanded="false"
+                            disabled={calendar.isFetching}
+                            onClick={e => this.fetchCalendar(e)}
+                            onKeyPress={e => this.fetchCalendar(e)}
                         >
-                            <FontAwesomeIcon icon={faEllipsisV} />
+                            <FontAwesomeIcon icon={faSync} spin={calendar.isFetching} />
                         </button>
-                        <div className="dropdown-menu">
-                            <div className="dropdown-divider" />
-                        </div>
                     </div>
                 </SideAction>
                 <div className="container">

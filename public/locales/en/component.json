@@ -23,5 +23,8 @@
     "placeholder": "Type your message here...",
     "fetchMore": "Load more messages...",
     "noMoreMessages": "End of messages"
+  },
+  "CalendarList": {
+    "endOfList": "End of games"
   }
 }

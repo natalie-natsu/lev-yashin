@@ -84,7 +84,7 @@ const Drawer = ({ credentials, dispatch, isOpen, t }) => (
                     </li>
                     {credentials.token && (
                         <li className="nav-item">
-                            <Link className="nav-link" to="#" onClick={() => close(dispatch)}>
+                            <Link className="nav-link" to={routes.calendar.exact} onClick={() => close(dispatch)}>
                                 <FontAwesomeIcon icon={faPlayCircle} listItem />&nbsp;{t('route:games.text')}
                             </Link>
                         </li>

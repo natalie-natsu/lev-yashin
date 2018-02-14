@@ -6,12 +6,13 @@ import { filter, last } from 'lodash';
 import { translate } from 'react-i18next';
 import countries from 'i18n-iso-countries';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import { faMapMarkerAlt, faMinus } from '@fortawesome/fontawesome-free-solid';
+import { faMapMarkerAlt, faCrosshairs } from '@fortawesome/fontawesome-free-solid';
 import { faClock } from '@fortawesome/fontawesome-free-regular';
 
 import { localeTo } from '../../../helpers/locales';
 import { routes } from '../../../helpers/routes';
 import './CalendarList.scss';
+import FloatingActionButton from '../../FloatingActionButton';
 
 countries.registerLocale(require('i18n-iso-countries/langs/en.json'));
 countries.registerLocale(require('i18n-iso-countries/langs/es.json'));
@@ -28,19 +29,21 @@ class CalendarList extends React.Component {
         if (matches !== this.props.matches) { this.setState({ scrollTo: this.getScrollTo(matches) }); }
     }
 
-    componentDidUpdate(prevProps) {
+    componentDidUpdate(prevProps, prevState) {
         const { scrollTo } = this.state;
-        const el = scrollTo === undefined && this[`match-${scrollTo}`];
-        if (el && prevProps.scrollTo !== scrollTo) {
-            el.scrollIntoView(prevProps.scrollTo ? { behavior: 'smooth' } : {});
-        }
+        if (prevState.scrollTo !== scrollTo) { this.scrollTo(scrollTo, prevState.scrollTo && 'smooth'); }
     }
 
     getScrollTo(matches = this.props.matches) {
         if (matches.length < 1) { return false; }
 
         const lastMatchWithScores = last(filter(matches, match => match.scores));
-        return lastMatchWithScores && lastMatchWithScores.id;
+        return lastMatchWithScores ? lastMatchWithScores.id : 1;
+    }
+
+    scrollTo(scrollTo = this.state.scrollTo, behavior) {
+        const el = scrollTo && this[`match-${scrollTo}`];
+        if (el) { el.scrollIntoView(behavior && { behavior }); }
     }
 
     renderMatches() {
@@ -59,14 +62,7 @@ class CalendarList extends React.Component {
                 >
                     <div className="d-flex w-100 justify-content-between">
                         <h5 className="mb-2">
-                            {group && (
-                                <span
-                                    className="badge mr-2 bg-white group"
-                                    style={{ color: group.color, borderColor: group.color }}
-                                >
-                                    {group.id}
-                                </span>
-                            )}
+                            {group && (<span className={`badge mr-2 bg-white group ${group.id}`}>{group.id}</span>)}
                             {team ? team.id : t('undefined')}-{against ? against.id : t('undefined')}
                         </h5>
                         <small>
@@ -84,13 +80,13 @@ class CalendarList extends React.Component {
                             </div>
                         </div>
                         <div className="col-2 d-flex">
-                            <div className="score-team align-self-center mx-auto">
-                                {scores ? scores.team : <FontAwesomeIcon icon={faMinus} />}
+                            <div className="score score-team align-self-center mx-auto">
+                                {scores ? scores.team : '_'}
                             </div>
                         </div>
                         <div className="col-2 d-flex">
-                            <div className="score-against align-self-center mx-auto">
-                                {scores ? scores.against : <FontAwesomeIcon icon={faMinus} />}
+                            <div className="score score-against align-self-center mx-auto">
+                                {scores ? scores.against : '_'}
                             </div>
                         </div>
                         <div className="col-4">
@@ -111,9 +107,16 @@ class CalendarList extends React.Component {
     }
 
     render() {
-        return (
+        const { matches, t } = this.props;
+        return matches.length > 0 && (
             <div className="calendar-list">
-                <div className="list-group">{this.renderMatches()}</div>
+                <FloatingActionButton
+                    fa={faCrosshairs}
+                    className="btn-complementary"
+                    onClick={() => this.scrollTo(undefined, 'smooth')}
+                />
+                <div className="list-group mb-3">{this.renderMatches()}</div>
+                <p className="mb-3 text-center">{t('component:CalendarList.endOfList')}</p>
             </div>
         );
     }
