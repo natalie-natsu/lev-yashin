@@ -5,17 +5,8 @@ import { gameSchema } from '../../schemas/game';
 import { getEndpoint, getHeaders } from '../../helpers/endpoint';
 import { client } from '../../helpers/nes';
 
-export function normalizeResponseUsersAsEntity(users) {
-    return users.map(user => ({
-        _id: user._id,
-        profile: { userName: user.userName, picture: user.picture },
-    }));
-}
-
 export function updateGameEntity(response) {
     return (dispatch) => {
-        response.users = normalizeResponseUsersAsEntity(response.users);
-
         const normalized = normalize(response, gameSchema);
         dispatch(receiveEntities(normalized.entities));
     };

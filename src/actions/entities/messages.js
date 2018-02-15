@@ -5,18 +5,8 @@ import { messageListSchema } from '../../schemas/message';
 import { getEndpoint, getHeaders } from '../../helpers/endpoint';
 import { client } from '../../helpers/nes';
 
-export function normalizeResponseUserAsEntity(user) {
-    return { _id: user._id, profile: { userName: user.userName, picture: user.picture } };
-}
-
 export function normalizeMessageEntities(response) {
-    const collection = response;
-    collection.map((doc, i) => {
-        collection[i].user = normalizeResponseUserAsEntity(doc.user);
-        return doc;
-    });
-
-    return normalize(collection, messageListSchema);
+    return normalize(response, messageListSchema);
 }
 
 export function updateMessageEntities(response, normalized = this.normalizeMessageEntities(response)) {
