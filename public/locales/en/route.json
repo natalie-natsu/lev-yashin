@@ -2,8 +2,11 @@
   "home": {
     "text": "Home"
   },
-  "inventory": {
-    "text": "Inventory"
+  "legends": {
+    "text": "FIFA Legends"
+  },
+  "newGame": {
+    "text": "New game"
   },
   "games": {
     "text": "Current games"
@@ -13,9 +16,6 @@
   },
   "shop": {
     "text": "More bonuses"
-  },
-  "notifications": {
-    "text": "Notifications"
   },
   "signIn": {
     "text": "Sign in"

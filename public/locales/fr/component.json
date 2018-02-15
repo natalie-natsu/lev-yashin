@@ -26,5 +26,8 @@
   },
   "CalendarList": {
     "endOfList": "Fin des matchs"
+  },
+  "CalendarMatch": {
+    "live": "En direct"
   }
 }

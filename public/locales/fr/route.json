@@ -2,8 +2,11 @@
   "home": {
     "text": "Accueil"
   },
-  "inventory": {
-    "text": "Inventaire"
+  "legends": {
+    "text": "Légendes FIFA"
+  },
+  "newGame": {
+    "text": "Nouvelle partie"
   },
   "games": {
     "text": "Parties en cours"
@@ -13,9 +16,6 @@
   },
   "shop": {
     "text": "Plus de bonus"
-  },
-  "notifications": {
-    "text": "Notifications"
   },
   "signIn": {
     "text": "Connexion"

@@ -8,8 +8,8 @@ import { decorator as reduxBurgerMenu, action as toggleMenu } from 'redux-burger
 
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import {
-    faBell, faEdit, faFutbol, faHome, faGift,
-    faArchive, faPlayCircle, faEnvelope, faSignInAlt,
+    faEdit, faFutbol, faHome, faGift, faTasks,
+    faUsers, faPlayCircle, faEnvelope, faSignInAlt,
 } from '@fortawesome/fontawesome-free-solid';
 import { faCalendarAlt } from '@fortawesome/fontawesome-free-regular';
 import { faFacebook, faTwitter, faYoutube } from '@fortawesome/fontawesome-free-brands';
@@ -84,20 +84,20 @@ const Drawer = ({ credentials, dispatch, isOpen, t }) => (
                     </li>
                     {credentials.token && (
                         <li className="nav-item">
-                            <Link className="nav-link" to={routes.calendar.exact} onClick={() => close(dispatch)}>
-                                <FontAwesomeIcon icon={faPlayCircle} listItem />&nbsp;{t('route:games.text')}
+                            <Link className="nav-link" to="#" onClick={() => close(dispatch)}>
+                                <FontAwesomeIcon icon={faPlayCircle} listItem />&nbsp;{t('route:newGame.text')}
                             </Link>
                         </li>
                     )}
                     {credentials.token && (
                         <li className="nav-item">
                             <Link className="nav-link" to="#" onClick={() => close(dispatch)}>
-                                <FontAwesomeIcon icon={faBell} listItem />&nbsp;{t('route:notifications.text')}
+                                <FontAwesomeIcon icon={faTasks} listItem />&nbsp;{t('route:games.text')}
                             </Link>
                         </li>
                     )}
                     <li className="nav-item">
-                        <Link className="nav-link" to="#" onClick={() => close(dispatch)}>
+                        <Link className="nav-link" to={routes.calendar.exact} onClick={() => close(dispatch)}>
                             <FontAwesomeIcon icon={faCalendarAlt} listItem />&nbsp;{t('route:calendar.text')}
                         </Link>
                     </li>
@@ -109,7 +109,7 @@ const Drawer = ({ credentials, dispatch, isOpen, t }) => (
                     <ul className="fa-ul">
                         <li className="nav-item">
                             <Link className="nav-link" to="#" onClick={() => close(dispatch)}>
-                                <FontAwesomeIcon icon={faArchive} listItem />&nbsp;{t('route:inventory.text')}
+                                <FontAwesomeIcon icon={faUsers} listItem />&nbsp;{t('route:legends.text')}
                             </Link>
                         </li>
                         <li className="nav-item">

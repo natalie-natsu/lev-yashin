@@ -26,5 +26,8 @@
   },
   "CalendarList": {
     "endOfList": "End of games"
+  },
+  "CalendarMatch": {
+    "live": "Live"
   }
 }
