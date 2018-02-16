@@ -31,6 +31,7 @@ import Me from '../../pages/Me';
 import Game from '../../pages/Game';
 import GameCreate from '../../pages/Game/Create';
 import Calendar from '../../pages/Calendar';
+import Match from '../../pages/Match';
 
 const $ = window.jQuery;
 
@@ -77,7 +78,8 @@ class App extends React.Component {
                                 <PrivateRoute path={routes.me.exact} component={Me} />
                                 <PrivateRoute path={routes.game.create} component={GameCreate} />
                                 <PrivateRoute path={routes.game.read} component={Game} />
-                                <Route path={routes.calendar.exact} component={Calendar} />
+                                <Route exact path={routes.calendar} component={Calendar} />
+                                <Route exact path={routes.match} component={Match} />
                                 <Route path={routes.notAllowed} component={NotAllowed} />
                                 <Route component={NoMatch} />
                             </Switch>

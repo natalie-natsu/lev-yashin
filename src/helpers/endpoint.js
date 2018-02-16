@@ -20,6 +20,7 @@ const endpoints = {
     sendMessage: ({ id }) => `/games/${id}/messages`,
     // FIFA
     fetchCalendar: () => '/fifa/calendar',
+    fetchMatch: ({ id }) => `/fifa/matches/${id}`,
     fetchMatches: () => '/fifa/matches',
 };
 

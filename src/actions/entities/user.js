@@ -19,7 +19,8 @@ export const fetchUsers = (payload, scope) => (dispatch, getState) => {
         .then(response => response.json()).then((response) => {
             if (response.error) dispatch(failFetchUsers(response, payload, scope));
             else successFetchUsers(response, payload, scope);
-        });
+        })
+        .catch(error => dispatch({ type: FAIL_FETCH_USERS, error, payload, scope }));
 };
 
 function successFetchUsers(response, payload, scope) {
@@ -85,7 +86,8 @@ export const fetchProfile = scope => (dispatch, getState) => {
         .then(response => response.json()).then((response) => {
             if (response.error) dispatch(failFetchProfile(response, scope));
             else dispatch(successFetchProfile(response, scope));
-        });
+        })
+        .catch(error => dispatch({ type: FAIL_FETCH_PROFILE, error, scope }));
 };
 
 function successFetchProfile(response, scope) {

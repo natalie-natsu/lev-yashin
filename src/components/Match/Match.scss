@@ -13,13 +13,18 @@
             display: block;
             padding-bottom: 53.6%;
             width: 100%;
-            border: 1px solid #ccc;
+            border: 1px solid #e9ecef;
             background-color: #eee;
             background-size: cover;
 
             @media (min-width: 768px) {
                 padding-bottom: 26.8%;
                 width: 50%;
+            }
+
+            @media (min-width: 1024px) {
+                padding-bottom: 17.7%;
+                width: 33%;
             }
         }
 

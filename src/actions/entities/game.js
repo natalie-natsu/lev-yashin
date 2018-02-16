@@ -32,7 +32,8 @@ export const fetchGame = (payload, scope, onSuccess, onFailure) => (dispatch, ge
                 dispatch(successFetchGame(response, scope));
                 if (onSuccess) { onSuccess(response); }
             }
-        });
+        })
+        .catch(error => dispatch({ type: FAIL_FETCH_GAME, error, payload, scope }));
 };
 
 function successFetchGame(response, scope) {

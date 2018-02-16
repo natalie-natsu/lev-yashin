@@ -26,7 +26,10 @@ export const fetchMessages = (payload, scope, then = () => false) => (dispatch, 
     fetch(getEndpoint('fetchMessages', payload), {
         method: 'GET',
         headers: getHeaders(getState().credentials),
-    }).then(response => response.json()).then(response => then(response));
+    })
+        .then(response => response.json())
+        .then(response => then(response))
+        .catch(error => dispatch({ type: FAIL_FETCH_MESSAGES, error, payload, scope }));
 };
 
 export function successFetchMessages(response, scope, { limit, skip }) {
@@ -102,7 +105,10 @@ export const sendMessage = (payload, scope, then = () => false) => (dispatch, ge
         method: 'POST',
         headers: getHeaders(getState().credentials),
         body: JSON.stringify({ message: payload.message }),
-    }).then(response => response.json()).then(response => then(response));
+    })
+        .then(response => response.json())
+        .then(response => then(response))
+        .catch(error => dispatch({ type: FAIL_SEND_MESSAGE, error, payload, scope }));
 };
 
 export function successSendMessage(response, scope, then) {

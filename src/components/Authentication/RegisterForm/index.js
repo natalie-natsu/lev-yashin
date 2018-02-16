@@ -25,7 +25,8 @@ class RegisterForm extends React.Component {
                     dispatch(failRegister());
                     throw new SubmissionError(handleRegisterError(json));
                 } else { dispatch(successRegister(json, this.props.scope)); }
-            });
+            })
+            .catch(error => dispatch(failRegister({ error }, this.props.scope)));
     }
 
     render() {

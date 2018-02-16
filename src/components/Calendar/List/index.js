@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import { Link } from 'react-router-dom';
 import { filter, last } from 'lodash';
 import { translate } from 'react-i18next';
 import { faCrosshairs } from '@fortawesome/fontawesome-free-solid';
 
 import { routes } from '../../../helpers/routes';
 import './CalendarList.scss';
-import CalendarMatch from '../Match';
+import Match from '../../Match';
 import FloatingActionButton from '../../FloatingActionButton';
 
 class CalendarList extends React.Component {
@@ -39,19 +39,22 @@ class CalendarList extends React.Component {
     }
 
     renderMatches() {
-        const listGroupItemClass = 'list-group-item list-group-item-action flex-column align-items-start';
         return this.props.matches.map((match) => {
             const { id } = match;
             return (
-                <a
+                <div
                     id={id}
                     key={id}
                     ref={(el) => { this[`match-${id}`] = el; }}
-                    href={routes.calendar.match.replace(':id', id)}
-                    className={classNames(listGroupItemClass)}
+                    className="list-group-item list-group-item-action flex-column align-items-start"
                 >
-                    <CalendarMatch {...match} />
-                </a>
+                    <Link
+                        to={routes.match.replace(':id', id)}
+                        className="list-group-item-action"
+                    >
+                        <Match {...match} />
+                    </Link>
+                </div>
             );
         });
     }

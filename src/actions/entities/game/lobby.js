@@ -18,7 +18,8 @@ export const joinGame = (payload, scope) => (dispatch, getState) => {
         .then(response => response.json()).then((response) => {
             if (response.error) dispatch(failJoinGame(response, scope));
             else dispatch(successJoinGame(response, scope));
-        });
+        })
+        .catch(error => dispatch({ type: FAIL_JOIN_GAME, error, payload, scope }));
 };
 
 export function successJoinGame(response, scope) {
@@ -56,7 +57,8 @@ export const readyGame = (payload, scope) => (dispatch, getState) => {
         .then(response => response.json()).then((response) => {
             if (response.error) dispatch(failReadyGame(response, scope));
             else dispatch(successReadyGame(response, scope));
-        });
+        })
+        .catch(error => dispatch({ type: FAIL_READY_GAME, error, payload, scope }));
 };
 
 function successReadyGame(response, scope) {
@@ -90,7 +92,10 @@ export const kickUser = (payload, scope, then) => (dispatch, getState) => {
         method: 'POST',
         headers: getHeaders(getState().credentials),
         body: JSON.stringify({ userId: payload.userId }),
-    }).then(response => response.json()).then(response => then(response));
+    })
+        .then(response => response.json())
+        .then(response => then(response))
+        .catch(error => dispatch({ type: FAIL_KICK_USER, error, payload, scope }));
 };
 
 export function successKickUser(response, scope, then) {
@@ -129,7 +134,10 @@ export const banUser = (payload, scope, then) => (dispatch, getState) => {
         method: 'POST',
         headers: getHeaders(getState().credentials),
         body: JSON.stringify({ userId: payload.userId, isBanned: payload.isBanned }),
-    }).then(response => response.json()).then(response => then(response));
+    })
+        .then(response => response.json())
+        .then(response => then(response))
+        .catch(error => dispatch({ type: FAIL_BAN_USER, error, payload, scope }));
 };
 
 export function successBanUser(response, scope, then) {
@@ -167,7 +175,10 @@ export const startGame = (payload, scope, then) => (dispatch, getState) => {
     fetch(getEndpoint('startGame', payload), {
         method: 'POST',
         headers: getHeaders(getState().credentials),
-    }).then(response => response.json()).then(response => then(response));
+    })
+        .then(response => response.json())
+        .then(response => then(response))
+        .catch(error => dispatch({ type: FAIL_START_GAME, error, payload, scope }));
 };
 
 export function successStartGame(response, scope, then) {

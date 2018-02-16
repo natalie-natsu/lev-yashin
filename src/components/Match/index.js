@@ -8,14 +8,14 @@ import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { faMapMarkerAlt, faCircle } from '@fortawesome/fontawesome-free-solid';
 import { faClock } from '@fortawesome/fontawesome-free-regular';
 
-import { localeTo } from '../../../helpers/locales';
-import './CalendarMatch.scss';
+import { localeTo } from '../../helpers/locales';
+import './Match.scss';
 
 countries.registerLocale(require('i18n-iso-countries/langs/en.json'));
 countries.registerLocale(require('i18n-iso-countries/langs/es.json'));
 countries.registerLocale(require('i18n-iso-countries/langs/fr.json'));
 
-const CalendarMatch = ({
+const Match = ({
     className, i18n, against, city, datetime, group, id, live, scores, stadium, team, timezone, t,
 }) => (
     <div className={classNames(`match match-${id}`, className)} data-match-id={id}>
@@ -27,7 +27,7 @@ const CalendarMatch = ({
             <small className={live ? 'live text-primary text-strong' : 'not-live'}>
                 <FontAwesomeIcon icon={live ? faCircle : faClock} className="mr-2" />
                 {live
-                    ? t('component:CalendarMatch.live')
+                    ? t('component:Match.live')
                     : moment.tz(datetime, timezone).tz(moment.tz.guess()).format('DD MMM HH:mm')
                 }
             </small>
@@ -67,7 +67,7 @@ const CalendarMatch = ({
     </div>
 );
 
-CalendarMatch.propTypes = {
+Match.propTypes = {
     against: PropTypes.shape({
         flagIcon: PropTypes.string,
         id: PropTypes.string.isRequired,
@@ -97,7 +97,7 @@ CalendarMatch.propTypes = {
     t: PropTypes.func.isRequired,
 };
 
-CalendarMatch.defaultProps = {
+Match.defaultProps = {
     city: '',
     className: '',
     group: null,
@@ -106,4 +106,4 @@ CalendarMatch.defaultProps = {
     stadium: '',
 };
 
-export default translate()(CalendarMatch);
+export default translate()(Match);

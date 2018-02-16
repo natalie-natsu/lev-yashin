@@ -9,7 +9,6 @@ import { routes } from '../../../helpers/routes';
 
 import './Content.scss';
 import worldCupSrc from './world-cup.svg';
-import backgroundSrc from './home-parallax.jpg';
 import RegisterForm from '../../../components/Authentication/RegisterForm';
 import GameCreateForm from '../../../components/Game/Create/Form';
 import GameJoinForm from '../../../components/Game/Join/Form';
@@ -57,28 +56,25 @@ class Content extends React.Component {
     render() {
         const { credentials, t } = this.props;
         return (!credentials.token || !credentials.profile.isInStartedGame) && (
-            <div className="position-relative">
-                <div className="parallax" style={{ backgroundImage: `url(${backgroundSrc}` }} />
-                <section id="home-content">
-                    <div className="container position-relative">
-                        <div className="row">
-                            <div className="col-md-10 offset-md-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3">
-                                <div className="card mb-3 mb-sm-4">
-                                    <div className="card-body">
-                                        {this.renderRegister()}
-                                        {this.renderGame()}
-                                    </div>
+            <section id="home-content">
+                <div className="container position-relative">
+                    <div className="row">
+                        <div className="col-md-10 offset-md-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3">
+                            <div className="card mb-3 mb-sm-4">
+                                <div className="card-body">
+                                    {this.renderRegister()}
+                                    {this.renderGame()}
                                 </div>
                             </div>
                         </div>
-                        <img
-                            src={worldCupSrc}
-                            alt={t('page:Home.Content.worldCup')}
-                            className="logo"
-                        />
                     </div>
-                </section>
-            </div>
+                    <img
+                        src={worldCupSrc}
+                        alt={t('page:Home.Content.worldCup')}
+                        className="logo"
+                    />
+                </div>
+            </section>
         );
     }
 }

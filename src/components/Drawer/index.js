@@ -97,7 +97,7 @@ const Drawer = ({ credentials, dispatch, isOpen, t }) => (
                         </li>
                     )}
                     <li className="nav-item">
-                        <Link className="nav-link" to={routes.calendar.exact} onClick={() => close(dispatch)}>
+                        <Link className="nav-link" to={routes.calendar} onClick={() => close(dispatch)}>
                             <FontAwesomeIcon icon={faCalendarAlt} listItem />&nbsp;{t('route:calendar.text')}
                         </Link>
                     </li>

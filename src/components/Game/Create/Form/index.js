@@ -41,7 +41,8 @@ class CreateGameForm extends React.Component {
                     history.push({ pathname: routes.game.read.replace(':id', json._id), state: { game: json } });
                     toast.success(t('form:createGame.success'), { position: toast.POSITION.BOTTOM_RIGHT });
                 }
-            });
+            })
+            .catch(error => dispatch(failCreateGame({ error }, this.props.scope)));
     }
 
     render() {

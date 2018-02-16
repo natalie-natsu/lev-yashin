@@ -31,7 +31,8 @@ class SignInForm extends React.Component {
                     dispatch(successSignIn(json, this.props.scope));
                     if (this.props.scope === routes.home) { $('#modal-home-login').modal('hide'); }
                 }
-            });
+            })
+            .catch(error => dispatch(failSignIn({ error }, this.props.scope)));
     }
 
     render() {

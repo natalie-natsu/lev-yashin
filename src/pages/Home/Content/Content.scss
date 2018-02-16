@@ -2,6 +2,7 @@
 
 #home-content {
     padding: 0 0 2rem 0;
+    background-color: darken($complementary, 3);
 
     .card {
         margin-top: -1rem;
@@ -13,13 +14,6 @@
         form .action {
             .btn {
                 width: 100%;
-                border-color: #f8f9fa;
-                background-color: #f8f9fa;
-                color: #212529;
-            }
-            .btn:hover:not([disabled]) {
-                border-color: #dae0e5;
-                background-color: #e2e6ea;
             }
         }
     }

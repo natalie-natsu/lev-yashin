@@ -79,5 +79,8 @@
   },
   "Calendar": {
     "title": "Matches calendar"
+  },
+  "Match": {
+    "title": "Match details ..."
   }
 }

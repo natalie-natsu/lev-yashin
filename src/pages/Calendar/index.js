@@ -1,9 +1,9 @@
 import React from 'react';
 import { some } from 'lodash';
 import PropTypes from 'prop-types';
+import moment from 'moment-timezone';
 import { connect } from 'react-redux';
 import { denormalize } from 'normalizr';
-import { Route } from 'react-router-dom';
 import { translate } from 'react-i18next';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { faSync } from '@fortawesome/fontawesome-free-solid';
@@ -16,7 +16,6 @@ import './Calendar.scss';
 import SideAction from '../../components/MainHeader/SideAction';
 import Title from '../../components/MainHeader/Title';
 import CalendarList from '../../components/Calendar/List';
-import CalendarModal from '../../components/Calendar/Modal';
 
 class Calendar extends React.Component {
     constructor(props) {
@@ -39,7 +38,17 @@ class Calendar extends React.Component {
         if (e) { e.preventDefault(); }
 
         const { calendar, dispatch } = this.props;
-        const live = some(calendar.matches, match => match.live);
+
+        // TODO: test deeply
+        const live = some(calendar.matches, (match) => {
+            // 1. Getting match datetime and timezone
+            let datetime = moment.tz(match.datetime, match.timezone);
+            // 2. Converting to user's timezone
+            datetime = datetime.tz(moment.tz.guess());
+            // 3. Compare actual user's time to match the match time
+            const range = moment().range(datetime.format(), datetime.add(1, 'h').add(50, 'm').format());
+            return match.live || range.contains(moment.tz(Date.now(), match.timezone));
+        });
 
         if (!calendar.isFetching || !liveRequired || (liveRequired && live)) {
             const scope = routes.calendar;
@@ -70,7 +79,6 @@ class Calendar extends React.Component {
                 </SideAction>
                 <div className="container">
                     <CalendarList {...calendar} />
-                    <Route path={routes.calendar.match} component={CalendarModal} />
                 </div>
             </div>
         );
