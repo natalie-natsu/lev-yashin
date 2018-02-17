@@ -1,10 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+
 import { applyMiddleware, compose, createStore } from 'redux';
 import { persistStore, autoRehydrate } from 'redux-persist';
+import createRavenMiddleware from 'raven-for-redux';
 import { createLogger } from 'redux-logger';
 import thunk from 'redux-thunk';
+import Raven from 'raven-js';
 
 import 'bootstrap';
 import './style/fonts';
@@ -14,13 +17,15 @@ import reducers from './reducers';
 import App from './components/App';
 import Loader from './components/Loader';
 
+Raven.config('https://f303676216684f9682cef9a377eb8e81@sentry.io/289608').install();
+
 const middleWares = [thunk];
 if (process.env.NODE_ENV === 'development') {
     middleWares.push(createLogger());
 }
 
 // Should be pushed after redux-logger.
-middleWares.concat([vanillaPromise, readyStatePromise]);
+middleWares.concat([vanillaPromise, readyStatePromise, createRavenMiddleware()]);
 
 const store = createStore(
     reducers,

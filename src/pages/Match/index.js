@@ -1,4 +1,5 @@
 import React from 'react';
+import Raven from 'raven-js';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { denormalize } from 'normalizr';
@@ -14,6 +15,7 @@ import { localeTo } from '../../helpers/locales';
 import { routes } from '../../helpers/routes';
 
 import './Match.scss';
+import RavenError from '../../components/RavenError';
 import SideAction from '../../components/MainHeader/SideAction';
 import Title from '../../components/MainHeader/Title';
 import MatchComponent from '../../components/Match';
@@ -25,17 +27,11 @@ countries.registerLocale(require('i18n-iso-countries/langs/fr.json'));
 class Match extends React.Component {
     constructor(props) {
         super(props);
-
-        const intervalId = setInterval(() => this.fetchMatch(null, true), 60 * 1000);
-        this.state = { intervalId };
+        this.state = { error: false };
     }
 
     componentDidMount() {
         if (!this.props.page.match) { this.fetchMatch(); }
-    }
-
-    componentWillUnmount() {
-        clearInterval(this.state.intervalId);
     }
 
     getMatchName() {
@@ -49,12 +45,17 @@ class Match extends React.Component {
         return `${teamName} - ${againstName}`;
     }
 
-    fetchMatch(e, liveRequired = false) {
+    componentDidCatch(error, errorInfo) {
+        this.setState({ error });
+        Raven.captureException(error, { extra: errorInfo });
+    }
+
+    fetchMatch(e) {
         if (e) { e.preventDefault(); }
 
         const { page, dispatch, match } = this.props;
 
-        if (!page.isFetching || !liveRequired || (liveRequired && match.live)) {
+        if (!page.isFetching) {
             const scope = routes.match;
             dispatch(fetchMatch({ id: match.params.id }, scope, (response) => {
                 if (response.error) dispatch(failFetchMatch(response, scope));
@@ -64,6 +65,8 @@ class Match extends React.Component {
     }
 
     render() {
+        if (this.state.error) { return <RavenError />; }
+
         const { history, location, match, page, t } = this.props;
 
         const gameSearchParam = new URLSearchParams(location.search.substring(1)).get('game');

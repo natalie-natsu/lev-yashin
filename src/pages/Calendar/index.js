@@ -1,7 +1,5 @@
 import React from 'react';
-import { some } from 'lodash';
 import PropTypes from 'prop-types';
-import moment from 'moment-timezone';
 import { connect } from 'react-redux';
 import { denormalize } from 'normalizr';
 import { translate } from 'react-i18next';
@@ -18,39 +16,16 @@ import Title from '../../components/MainHeader/Title';
 import CalendarList from '../../components/Calendar/List';
 
 class Calendar extends React.Component {
-    constructor(props) {
-        super(props);
-
-        // Refresh calendar data every minutes if there is a live
-        const intervalId = setInterval(() => this.fetchCalendar(null, true), 60 * 1000);
-        this.state = { intervalId };
-    }
-
     componentDidMount() {
         if (this.props.calendar.matches.length < 1) { this.fetchCalendar(); }
     }
 
-    componentWillUnmount() {
-        clearInterval(this.state.intervalId);
-    }
-
-    fetchCalendar(e, liveRequired = false) {
+    fetchCalendar(e) {
         if (e) { e.preventDefault(); }
 
         const { calendar, dispatch } = this.props;
 
-        // TODO: test deeply
-        const live = some(calendar.matches, (match) => {
-            // 1. Getting match datetime and timezone
-            let datetime = moment.tz(match.datetime, match.timezone);
-            // 2. Converting to user's timezone
-            datetime = datetime.tz(moment.tz.guess());
-            // 3. Compare actual user's time to match the match time
-            const range = moment().range(datetime.format(), datetime.add(1, 'h').add(50, 'm').format());
-            return match.live || range.contains(moment.tz(Date.now(), match.timezone));
-        });
-
-        if (!calendar.isFetching || !liveRequired || (liveRequired && live)) {
+        if (!calendar.isFetching) {
             const scope = routes.calendar;
             dispatch(fetchCalendar({}, scope, (response) => {
                 if (response.error) dispatch(failFetchCalendar(response, scope));
