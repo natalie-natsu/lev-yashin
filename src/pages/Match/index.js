@@ -13,6 +13,7 @@ import { failFetchMatch, fetchMatch, successFetchMatch } from '../../actions/ent
 import { matchCalendarSchema } from '../../schemas/calendar';
 import { localeTo } from '../../helpers/locales';
 import { routes } from '../../helpers/routes';
+import cityToPicture from './cityToPicture';
 
 import './Match.scss';
 import RavenError from '../../components/RavenError';
@@ -90,7 +91,10 @@ class Match extends React.Component {
                         )}
                     </div>
                 </SideAction>
-                <header className="jumbotron jumbotron-fluid">
+                <header
+                    className="jumbotron jumbotron-fluid bg-city"
+                    style={{ backgroundImage: `url(${cityToPicture[page.match && page.match.city]})` }}
+                >
                     <div className="container">
                         {page.match && (
                             <span className="animated fadeInUp">

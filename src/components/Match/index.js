@@ -33,7 +33,7 @@ const Match = ({
             </small>
         </div>
         <div className="row mb-1 body">
-            <div className="col-4">
+            <div className="col-3 col-sm-4">
                 <div className="team text-left">
                     <div className={`mr-auto flag-icon flag-icon-${team.flagIcon}`} />
                     <small className="name team-name font-italic">
@@ -41,17 +41,17 @@ const Match = ({
                     </small>
                 </div>
             </div>
-            <div className="col-2 d-flex">
-                <div className="score score-team align-self-center mx-auto">
-                    {scores ? scores.team : '_'}
+            <div className="col-3 col-sm-2 d-flex">
+                <div className="score score-team align-self-center mx-auto badge badge-secondary">
+                    {scores ? scores.team : '-'}
                 </div>
             </div>
-            <div className="col-2 d-flex">
-                <div className="score score-against align-self-center mx-auto">
-                    {scores ? scores.against : '_'}
+            <div className="col-3 col-sm-2 d-flex">
+                <div className="score score-against align-self-center mx-auto badge badge-secondary">
+                    {scores ? scores.against : '-'}
                 </div>
             </div>
-            <div className="col-4">
+            <div className="col-3 col-sm-4">
                 <div className="against text-right">
                     <div className={`ml-auto flag-icon flag-icon-${against.flagIcon}`} />
                     <small className="name against-name font-italic">
