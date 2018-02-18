@@ -1,0 +1,51 @@
+.group {
+    border: 1px solid black;
+
+    &.A {
+        border-color: #1474bc;
+        color: #1474bc;
+    }
+
+    &.B {
+        border-color: #c42616;
+        color: #c42616;
+    }
+
+    &.C {
+        border-color: #0f96d3;
+        color: #0f96d3;
+    }
+
+    &.D {
+        border-color: #d5c8a3;
+        color: #d5c8a3;
+    }
+
+    &.E {
+        border-color: #443979;
+        color: #443979;
+    }
+
+    &.F {
+        border-color: #0c8544;
+        color: #0c8544;
+    }
+
+    &.G {
+        border-color: #50aa8a;
+        color: #50aa8a;
+    }
+
+    &.H {
+        border-color: #f7742b;
+        color: #f7742b;
+    }
+
+    .flag-icon {
+        width: 100px;
+        height: 53.6px;
+        border: 1px solid #e9ecef;
+        background-color: #eee;
+        background-size: cover;
+    }
+}

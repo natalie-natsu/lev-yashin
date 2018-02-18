@@ -43,7 +43,7 @@ class App extends React.Component {
 
         if (credentials.token) {
             wsConnect(getHeaders(credentials));
-            dispatch(successFetchUser(credentials));
+            dispatch(successFetchUser(credentials, 'APP_DID_MOUNT'));
         }
 
         if (!this.props.app.firstVisit) {

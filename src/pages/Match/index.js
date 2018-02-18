@@ -127,7 +127,7 @@ Match.propTypes = {
             }).isRequired,
             city: PropTypes.string,
             datetime: PropTypes.string.isRequired,
-            group: PropTypes.shape({ id: PropTypes.string, teams: PropTypes.arrayOf(PropTypes.string) }),
+            group: PropTypes.shape({ id: PropTypes.string, teams: PropTypes.arrayOf(PropTypes.object) }),
             id: PropTypes.number.isRequired,
             live: PropTypes.bool,
             scores: PropTypes.shape({

@@ -9,6 +9,7 @@ import { faMapMarkerAlt, faCircle } from '@fortawesome/fontawesome-free-solid';
 import { faClock } from '@fortawesome/fontawesome-free-regular';
 
 import { localeTo } from '../../helpers/locales';
+import '../Group/Group.scss';
 import './Match.scss';
 
 countries.registerLocale(require('i18n-iso-countries/langs/en.json'));
@@ -42,12 +43,26 @@ const Match = ({
                 </div>
             </div>
             <div className="col-3 col-sm-2 d-flex">
-                <div className="score score-team align-self-center mx-auto badge badge-secondary">
+                <div
+                    className={classNames('score score-team align-self-center mx-auto badge', {
+                        'badge-secondary': !live && !scores,
+                        'badge-primary': live,
+                        'badge-complementary': !live && scores && scores.team > scores.against,
+                        'badge-light': !live && scores && scores.team <= scores.against,
+                    })}
+                >
                     {scores ? scores.team : '-'}
                 </div>
             </div>
             <div className="col-3 col-sm-2 d-flex">
-                <div className="score score-against align-self-center mx-auto badge badge-secondary">
+                <div
+                    className={classNames('score score-against align-self-center mx-auto badge', {
+                        'badge-secondary': !live && !scores,
+                        'badge-complementary': live,
+                        'badge-neutral': !live && scores && scores.against > scores.team,
+                        'badge-light': !live && scores && scores.against <= scores.team,
+                    })}
+                >
                     {scores ? scores.against : '-'}
                 </div>
             </div>
@@ -77,7 +92,7 @@ Match.propTypes = {
     city: PropTypes.string,
     className: PropTypes.string,
     datetime: PropTypes.string.isRequired,
-    group: PropTypes.shape({ id: PropTypes.string, teams: PropTypes.arrayOf(PropTypes.string) }),
+    group: PropTypes.shape({ id: PropTypes.string, teams: PropTypes.arrayOf(PropTypes.object) }),
     id: PropTypes.number.isRequired,
     i18n: PropTypes.shape({ language: PropTypes.string }).isRequired,
     live: PropTypes.bool,

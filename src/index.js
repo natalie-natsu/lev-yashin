@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
+import { createFilter } from 'redux-persist-transform-filter';
 import { applyMiddleware, compose, createStore } from 'redux';
 import { persistStore, autoRehydrate } from 'redux-persist';
 import createRavenMiddleware from 'raven-for-redux';
@@ -42,9 +43,16 @@ class AppProvider extends React.Component {
     }
 
     componentWillMount() {
-        persistStore(store, { whitelist: ['app', 'credentials'] }, () => {
-            this.setState({ rehydrated: true });
-        });
+        // store only a subset of the state of entities
+        const saveSubsetFilter = createFilter(
+            'entities',
+            ['groups', 'matches', 'teams'],
+        );
+
+        persistStore(store, {
+            whitelist: ['app', 'calendar', 'credentials', 'entities'],
+            transforms: [saveSubsetFilter],
+        }, () => { this.setState({ rehydrated: true }); });
     }
 
     render() {
