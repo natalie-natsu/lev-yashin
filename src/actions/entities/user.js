@@ -42,7 +42,7 @@ function failFetchUsers(response, payload, scope) {
     return {
         type: FAIL_FETCH_USERS,
         receivedAt: Date.now(),
-        error: response.error,
+        error: response,
         payload,
         scope,
     };
@@ -108,7 +108,7 @@ function failFetchProfile(response, scope) {
     return {
         type: FAIL_FETCH_PROFILE,
         receivedAt: Date.now(),
-        error: response.error,
+        error: response,
         scope,
     };
 }
@@ -135,7 +135,7 @@ export function failUpdateProfile(response, scope) {
     return {
         type: FAIL_UPDATE_PROFILE,
         receivedAt: Date.now(),
-        error: response.error,
+        error: response,
         scope,
     };
 }
@@ -157,7 +157,7 @@ export function failResetPassword(response, scope) {
     return {
         type: FAIL_RESET_PASSWORD,
         receivedAt: Date.now(),
-        error: response.error,
+        error: response,
         scope,
     };
 }

@@ -25,13 +25,13 @@ const Match = ({
                 {group && (<span className={`badge mr-2 bg-white group ${group.id}`}>{group.id}</span>)}
                 {team ? team.id : t('undefined')}-{against ? against.id : t('undefined')}
             </h5>
-            <small className={live ? 'live text-primary text-strong' : 'not-live'}>
+            <strong className={live ? 'live text-primary' : 'not-live'}>
                 <FontAwesomeIcon icon={live ? faCircle : faClock} className="mr-2" />
                 {live
                     ? t('component:Match.live')
                     : moment.tz(datetime, timezone).tz(moment.tz.guess()).format('DD MMM HH:mm')
                 }
-            </small>
+            </strong>
         </div>
         <div className="row mb-1 body">
             <div className="col-3 col-sm-4">

@@ -44,8 +44,7 @@ class MeResetPassword extends React.Component {
                         { position: toast.POSITION.BOTTOM_RIGHT },
                     );
                 }
-            })
-            .catch(error => dispatch(failResetPassword({ error }, scope)));
+            });
     }
 
     render() {

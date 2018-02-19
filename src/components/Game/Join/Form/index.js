@@ -35,8 +35,7 @@ class RegisterForm extends React.Component {
                     history.push({ pathname: routes.game.read.replace(':id', json._id), state: { game: json } });
                     toast.success(t('form:joinGame.success'), { position: toast.POSITION.BOTTOM_RIGHT });
                 }
-            })
-            .catch(error => dispatch(failJoinGame({ error }, this.props.scope)));
+            });
     }
 
     render() {

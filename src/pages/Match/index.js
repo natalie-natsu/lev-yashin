@@ -19,7 +19,9 @@ import './Match.scss';
 import RavenError from '../../components/RavenError';
 import SideAction from '../../components/MainHeader/SideAction';
 import Title from '../../components/MainHeader/Title';
+import Loader from '../../components/Loader';
 import MatchComponent from '../../components/Match';
+import Group from '../../components/Group';
 
 countries.registerLocale(require('i18n-iso-countries/langs/en.json'));
 countries.registerLocale(require('i18n-iso-countries/langs/es.json'));
@@ -66,7 +68,7 @@ class Match extends React.Component {
     }
 
     render() {
-        if (this.state.error) { return <RavenError />; }
+        if (this.state.error) { return <div className="container"><RavenError /></div>; }
 
         const { history, location, match, page, t } = this.props;
 
@@ -92,7 +94,7 @@ class Match extends React.Component {
                     </div>
                 </SideAction>
                 <header
-                    className="jumbotron jumbotron-fluid bg-city"
+                    className="jumbotron jumbotron-fluid bg-city mb-3"
                     style={{ backgroundImage: `url(${cityToPicture[page.match && page.match.city]})` }}
                 >
                     <div className="container">
@@ -104,8 +106,11 @@ class Match extends React.Component {
                     </div>
                 </header>
                 <div className="container">
-                    <p>TODO Game if one</p>
-                    <p>TODO Group</p>
+                    {page.isFetching || !page.match ? <Loader /> : (
+                        <div>
+                            {page.match.group && <Group {...page.match.group} className="mb-3" />}
+                        </div>
+                    )}
                 </div>
             </div>
         );

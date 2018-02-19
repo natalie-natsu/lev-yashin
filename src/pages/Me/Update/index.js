@@ -47,8 +47,7 @@ class MeUpdate extends React.Component {
                         { position: toast.POSITION.BOTTOM_RIGHT },
                     );
                 }
-            })
-            .catch(error => dispatch(failUpdateProfile({ error }, scope)));
+            });
     }
 
     render() {

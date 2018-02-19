@@ -53,7 +53,7 @@ export function failFetchMessages(response, scope) {
     return {
         type: FAIL_FETCH_MESSAGES,
         receivedAt: Date.now(),
-        error: response.error,
+        error: response,
         scope,
     };
 }
@@ -88,7 +88,7 @@ export function failSubscribeMessages(response, scope, then) {
     return {
         type: FAIL_SUBSCRIBE_MESSAGES,
         receivedAt: Date.now(),
-        error: response.error,
+        error: response,
         scope,
         then,
     };
@@ -130,7 +130,7 @@ export function failSendMessage(response, scope, then) {
     return {
         type: FAIL_SEND_MESSAGE,
         receivedAt: Date.now(),
-        error: response.error,
+        error: response,
         scope,
         then,
     };

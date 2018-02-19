@@ -86,6 +86,19 @@ export function failRegister(response, scope, then) {
 }
 
 /**
+ * RESET CREDENTIALS
+ */
+export const RESET_CREDENTIALS = 'RESET_CREDENTIALS';
+
+export function resetCredentials() {
+    return (dispatch) => {
+        wsDisconnect();
+        persistStore(store).purge(['credentials', 'profile']);
+        dispatch({ type: RESET_CREDENTIALS });
+    };
+}
+
+/**
  * SIGN_OUT
  */
 export const SIGN_OUT = 'SIGN_OUT';

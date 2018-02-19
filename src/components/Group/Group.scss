@@ -1,51 +1,168 @@
+$colorA: #1474bc;
+$colorB: #c42616;
+$colorC: #0f96d3;
+$colorD: #dcc38a;
+$colorE: #443979;
+$colorF: #0c8544;
+$colorG: #50aa8a;
+$colorH: #f7742b;
+
 .group {
-    border: 1px solid black;
+    border: 1px solid;
+    border-radius: .25rem;
+
+    .clickable {
+      cursor: pointer;
+    }
+
+    .table th,
+    .table td {
+        vertical-align: middle;
+        white-space: nowrap;
+    }
+
+    .table thead th {
+        color: white;
+    }
 
     &.A {
-        border-color: #1474bc;
-        color: #1474bc;
+        border-color: darken($colorA, 5);
+
+        .table thead th {
+            border-top: 1px solid darken($colorA, 5);
+            border-bottom: 1px solid darken($colorA, 5);
+            background-color: $colorA;
+        }
+
+        .badge,
+        &.badge {
+            border-color: darken($colorA, 10);
+            color: $colorA;
+        }
     }
 
     &.B {
-        border-color: #c42616;
-        color: #c42616;
+        border-color: darken($colorB, 5);
+
+        .table thead th {
+            border-top: 1px solid darken($colorB, 5);
+            border-bottom: 1px solid darken($colorB, 5);
+            background-color: $colorB;
+        }
+
+        .badge,
+        &.badge {
+            border-color: darken($colorB, 10);
+            color: $colorB;
+        }
     }
 
     &.C {
-        border-color: #0f96d3;
-        color: #0f96d3;
+        border-color: darken($colorC, 5);
+
+        .table thead th {
+            border-top: 1px solid darken($colorC, 5);
+            border-bottom: 1px solid darken($colorC, 5);
+            background-color: $colorC;
+        }
+
+        .badge,
+        &.badge {
+            border-color: darken($colorC, 10);
+            color: $colorC;
+        }
     }
 
     &.D {
-        border-color: #d5c8a3;
-        color: #d5c8a3;
+        border-color: darken($colorD, 5);
+
+        .table thead th {
+            border-top: 1px solid darken($colorD, 5);
+            border-bottom: 1px solid darken($colorD, 5);
+            background-color: $colorD;
+        }
+
+        .badge,
+        &.badge {
+            border-color: darken($colorD, 10);
+            color: $colorD;
+        }
     }
 
     &.E {
-        border-color: #443979;
-        color: #443979;
+        border-color: darken($colorE, 5);
+
+        .table thead th {
+            border-top: 1px solid darken($colorE, 5);
+            border-bottom: 1px solid darken($colorE, 5);
+            background-color: $colorE;
+        }
+
+        .badge,
+        &.badge {
+            border-color: darken($colorE, 10);
+            color: $colorE;
+        }
     }
 
     &.F {
-        border-color: #0c8544;
-        color: #0c8544;
+        border-color: darken($colorF, 5);
+
+        .table thead th {
+            border-top: 1px solid darken($colorF, 5);
+            border-bottom: 1px solid darken($colorF, 5);
+            background-color: $colorF;
+        }
+
+        .badge,
+        &.badge {
+            border-color: darken($colorF, 10);
+            color: $colorF;
+        }
     }
 
     &.G {
-        border-color: #50aa8a;
-        color: #50aa8a;
+        border-color: darken($colorG, 5);
+
+        .table thead th {
+            border-top: 1px solid darken($colorG, 5);
+            border-bottom: 1px solid darken($colorG, 5);
+            background-color: $colorG;
+        }
+
+        .badge,
+        &.badge {
+            border-color: darken($colorG, 10);
+            color: $colorG;
+        }
     }
 
     &.H {
-        border-color: #f7742b;
-        color: #f7742b;
+        border-color: darken($colorH, 5);
+
+        .table thead th {
+            border-top: 1px solid darken($colorH, 5);
+            border-bottom: 1px solid darken($colorH, 5);
+            background-color: $colorH;
+        }
+
+        .badge,
+        &.badge {
+            border-color: darken($colorH, 10);
+            color: $colorH;
+        }
     }
 
     .flag-icon {
-        width: 100px;
-        height: 53.6px;
+        width: 30px;
+        height: 25px;
         border: 1px solid #e9ecef;
         background-color: #eee;
         background-size: cover;
+
+        @media (min-width: 768px) {
+            width: 60px;
+            height: 45px;
+        }
     }
 }

@@ -29,5 +29,14 @@
   },
   "CalendarMatch": {
     "live": "Live"
+  },
+  "Group": {
+    "th": {
+      "name": "Nation",
+      "addOn": "More"
+    },
+    "td": {
+      "rank": "{{rank}}"
+    }
   }
 }

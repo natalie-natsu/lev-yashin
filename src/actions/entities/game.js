@@ -52,7 +52,7 @@ function failFetchGame(response, scope) {
     return {
         type: FAIL_FETCH_GAME,
         receivedAt: Date.now(),
-        error: response.error,
+        error: response,
         scope,
     };
 }
@@ -83,7 +83,7 @@ export function failSubscribeGame(response, scope, then) {
     return {
         type: FAIL_SUBSCRIBE_GAME,
         receivedAt: Date.now(),
-        error: response.error,
+        error: response,
         scope,
         then,
     };
@@ -110,7 +110,7 @@ export function failCreateGame(response, scope, then) {
     return {
         type: FAIL_CREATE_GAME,
         receivedAt: Date.now(),
-        error: response.error,
+        error: response,
         scope,
         then,
     };
@@ -137,7 +137,7 @@ export function failUpdateGame(response, scope, then) {
     return {
         type: FAIL_UPDATE_GAME,
         receivedAt: Date.now(),
-        error: response.error,
+        error: response,
         scope,
         then,
     };

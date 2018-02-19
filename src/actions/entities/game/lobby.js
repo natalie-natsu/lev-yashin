@@ -37,7 +37,7 @@ export function failJoinGame(response, scope) {
     return {
         type: FAIL_JOIN_GAME,
         receivedAt: Date.now(),
-        error: response.error,
+        error: response,
         scope,
     };
 }
@@ -76,7 +76,7 @@ function failReadyGame(response, scope) {
     return {
         type: FAIL_READY_GAME,
         receivedAt: Date.now(),
-        error: response.error,
+        error: response,
         scope,
     };
 }
@@ -117,7 +117,7 @@ export function failKickUser(response, scope, then) {
     return {
         type: FAIL_KICK_USER,
         receivedAt: Date.now(),
-        error: response.error,
+        error: response,
         scope,
         then,
     };
@@ -159,7 +159,7 @@ export function failBanUser(response, scope, then) {
     return {
         type: FAIL_BAN_USER,
         receivedAt: Date.now(),
-        error: response.error,
+        error: response,
         scope,
         then,
     };
@@ -200,7 +200,7 @@ export function failStartGame(response, scope, then) {
     return {
         type: FAIL_START_GAME,
         receivedAt: Date.now(),
-        error: response.error,
+        error: response,
         scope,
         then,
     };

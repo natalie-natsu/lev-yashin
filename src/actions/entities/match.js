@@ -39,7 +39,7 @@ export function failFetchMatch(response, scope, then) {
     return {
         type: FAIL_FETCH_MATCH,
         receivedAt: Date.now(),
-        error: response.error,
+        error: response,
         scope,
         then,
     };
@@ -79,7 +79,7 @@ export function failFetchMatches(response, scope, then) {
     return {
         type: FAIL_FETCH_MATCHES,
         receivedAt: Date.now(),
-        error: response.error,
+        error: response,
         scope,
         then,
     };
@@ -119,7 +119,7 @@ export function failFetchCalendar(response, scope, then) {
     return {
         type: FAIL_FETCH_CALENDAR,
         receivedAt: Date.now(),
-        error: response.error,
+        error: response,
         scope,
         then,
     };

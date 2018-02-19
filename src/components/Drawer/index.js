@@ -8,10 +8,10 @@ import { decorator as reduxBurgerMenu, action as toggleMenu } from 'redux-burger
 
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import {
-    faEdit, faFutbol, faHome, faGift, faTasks,
+    faEdit, faHome, faGift, faTasks,
     faUsers, faPlayCircle, faEnvelope, faSignInAlt,
 } from '@fortawesome/fontawesome-free-solid';
-import { faCalendarAlt } from '@fortawesome/fontawesome-free-regular';
+import { faCalendarAlt, faFutbol } from '@fortawesome/fontawesome-free-regular';
 import { faFacebook, faTwitter, faYoutube } from '@fortawesome/fontawesome-free-brands';
 
 import { routes } from '../../helpers/routes';
@@ -84,7 +84,7 @@ const Drawer = ({ credentials, dispatch, isOpen, t }) => (
                     </li>
                     {credentials.token && (
                         <li className="nav-item">
-                            <Link className="nav-link" to="#" onClick={() => close(dispatch)}>
+                            <Link className="nav-link" to={routes.game.create} onClick={() => close(dispatch)}>
                                 <FontAwesomeIcon icon={faPlayCircle} listItem />&nbsp;{t('route:newGame.text')}
                             </Link>
                         </li>

@@ -14,6 +14,7 @@ import 'bootstrap';
 import './style/fonts';
 
 import { vanillaPromise, readyStatePromise } from './middlewares/promise';
+import errorMiddleware from './middlewares/errorMiddleware';
 import reducers from './reducers';
 import App from './components/App';
 import Loader from './components/Loader';
@@ -26,7 +27,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // Should be pushed after redux-logger.
-middleWares.concat([vanillaPromise, readyStatePromise, createRavenMiddleware()]);
+middleWares.concat([errorMiddleware, vanillaPromise, readyStatePromise, createRavenMiddleware()]);
 
 const store = createStore(
     reducers,
