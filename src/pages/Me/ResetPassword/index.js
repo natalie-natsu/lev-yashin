@@ -34,7 +34,6 @@ class MeResetPassword extends React.Component {
         })
             .then(response => response.json()).then((json) => {
                 if (json.error) {
-                    dispatch(failResetPassword(json, scope));
                     throw new SubmissionError(handleResetPasswordError(json));
                 } else {
                     dispatch(successResetPassword(json, scope));
@@ -44,6 +43,9 @@ class MeResetPassword extends React.Component {
                         { position: toast.POSITION.BOTTOM_RIGHT },
                     );
                 }
+            }).catch((error) => {
+                dispatch(failResetPassword({ error }, scope));
+                if (error instanceof SubmissionError) { throw error; }
             });
     }
 

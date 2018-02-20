@@ -37,7 +37,6 @@ class MeUpdate extends React.Component {
         })
             .then(response => response.json()).then((json) => {
                 if (json.error) {
-                    dispatch(failUpdateProfile(json, scope));
                     throw new SubmissionError(handleUpdateProfileError(json));
                 } else {
                     dispatch(successUpdateProfile(json, scope));
@@ -47,6 +46,9 @@ class MeUpdate extends React.Component {
                         { position: toast.POSITION.BOTTOM_RIGHT },
                     );
                 }
+            }).catch((error) => {
+                dispatch(failUpdateProfile({ error }, scope));
+                if (error instanceof SubmissionError) { throw error; }
             });
     }
 

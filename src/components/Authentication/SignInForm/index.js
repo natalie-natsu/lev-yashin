@@ -25,12 +25,14 @@ class SignInForm extends React.Component {
         })
             .then(response => response.json()).then((json) => {
                 if (json.error) {
-                    dispatch(failSignIn());
                     throw new SubmissionError(handleSignInError(json));
                 } else {
                     dispatch(successSignIn(json, this.props.scope));
                     if (this.props.scope === routes.home) { $('#modal-home-login').modal('hide'); }
                 }
+            }).catch((error) => {
+                dispatch(failSignIn());
+                if (error instanceof SubmissionError) { throw error; }
             });
     }
 
