@@ -19,15 +19,13 @@ import reducers from './reducers';
 import App from './components/App';
 import Loader from './components/Loader';
 
-Raven.config('https://f303676216684f9682cef9a377eb8e81@sentry.io/289608').install();
-
-const middleWares = [thunk];
+const middleWares = [thunk, errorMiddleware];
 if (process.env.NODE_ENV === 'development') {
     middleWares.push(createLogger());
-}
+} else { Raven.config('https://f303676216684f9682cef9a377eb8e81@sentry.io/289608').install(); }
 
 // Should be pushed after redux-logger.
-middleWares.concat([errorMiddleware, vanillaPromise, readyStatePromise, createRavenMiddleware()]);
+middleWares.concat([vanillaPromise, readyStatePromise, createRavenMiddleware()]);
 
 const store = createStore(
     reducers,

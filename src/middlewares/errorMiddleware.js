@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import { resetCredentials } from '../actions/authentication';
 
 /**
@@ -8,6 +9,9 @@ export default store => next => (action) => {
         switch (action.error.message) {
         case 'Bad token':
             store.dispatch(resetCredentials());
+            toast.error('Your token was invalid, please try to log in again', {
+                position: toast.POSITION.BOTTOM_RIGHT,
+            });
             break;
         default:
             break;
