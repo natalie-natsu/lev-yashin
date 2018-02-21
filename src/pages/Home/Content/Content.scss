@@ -3,6 +3,9 @@
 #home-content {
     padding: 0 0 2rem 0;
     background-color: darken($complementary, 3);
+    background-position: bottom;
+    background-size: contain;
+    background-repeat: no-repeat;
 
     .card {
         margin-top: -1rem;
