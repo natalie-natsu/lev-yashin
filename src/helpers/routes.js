@@ -9,7 +9,10 @@ export const routes = {
     calendar: '/calendar',
     game: {
         create: '/g/create',
-        read: '/g/:id',
+        read: '/g/:id/:step?',
+        lobby: '/g/:id/lobby',
+        draft: '/g/:id/draft',
+        onGoing: '/g/:id/onGoing',
         messages: '/g/:id/messages',
     },
     home: '/',

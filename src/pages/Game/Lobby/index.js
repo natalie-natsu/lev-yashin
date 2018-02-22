@@ -4,9 +4,10 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
 import { Trans, translate } from 'react-i18next';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import { faSignInAlt, faSpinner, faEdit, faRocket } from '@fortawesome/fontawesome-free-solid';
+import { faSignInAlt, faSpinner, faEdit, faRocket, faCommentAlt } from '@fortawesome/fontawesome-free-solid';
 
 import './Lobby.scss';
 import { routes } from '../../../helpers/routes';
@@ -19,8 +20,13 @@ import { getPublicName } from '../../../helpers/user';
 
 import Slot from '../../../components/Game/Slot';
 import UpdateGameForm from '../../../components/Game/Update/Form';
+import SideAction from '../../../components/MainHeader/SideAction';
 
 class Lobby extends React.Component {
+    userIsBanned(game = this.props.game, credentials = this.props.credentials) {
+        return game.bannedUsers.map(u => u._id).includes(credentials._id);
+    }
+
     handleJoin(e) {
         e.preventDefault();
         const { dispatch, game, userId } = this.props;
@@ -210,14 +216,21 @@ class Lobby extends React.Component {
     }
 
     render() {
-        const { children, game, page, t, userId, userIsBanned } = this.props;
+        const { game, page, t, userId } = this.props;
         const isAdmin = userId === game.admin;
 
-        const canJoin = !userIsBanned && game.users && !game.users.map(u => u._id).includes(userId);
+        const canJoin = !this.userIsBanned() && game.users && !game.users.map(u => u._id).includes(userId);
         const canLaunch = isAdmin && game.readyUsers.length > 3;
 
         return (
             <section id="game-lobby">
+                <SideAction>
+                    <div className="btn-side-action mx-2 mx-sm-3">
+                        <Link to={routes.game.messages.replace(':id', game._id)} className="btn">
+                            <FontAwesomeIcon icon={faCommentAlt} />
+                        </Link>
+                    </div>
+                </SideAction>
                 <div className="row">
                     <div className={classNames('d-none', { 'd-block col-md-6': isAdmin })}>
                         {this.renderAdminSection()}
@@ -249,14 +262,15 @@ class Lobby extends React.Component {
                         </button>
                     )}
                 </div>
-                {children}
             </section>
         );
     }
 }
 
 Lobby.propTypes = {
-    children: PropTypes.element,
+    credentials: PropTypes.shape({
+        _id: PropTypes.string.isRequired,
+    }).isRequired,
     dispatch: PropTypes.func.isRequired,
     game: PropTypes.shape({
         _id: PropTypes.string.isRequired,
@@ -272,12 +286,6 @@ Lobby.propTypes = {
     page: PropTypes.shape({ isGettingReady: PropTypes.bool }).isRequired,
     t: PropTypes.func.isRequired,
     userId: PropTypes.string.isRequired,
-    userIsBanned: PropTypes.bool,
-};
-
-Lobby.defaultProps = {
-    children: null,
-    userIsBanned: false,
 };
 
 export default translate(['page', 'toast'])(connect(

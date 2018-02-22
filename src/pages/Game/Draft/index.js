@@ -1,9 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { translate } from 'react-i18next';
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import { faCommentAlt } from '@fortawesome/fontawesome-free-solid';
+
+import { routes } from '../../../helpers/routes';
 
 import DraftSelection from './Selection';
+import SideAction from '../../../components/MainHeader/SideAction';
 
 // eslint-disable-next-line react/prefer-stateless-function
 class Draft extends React.Component {
@@ -11,6 +17,13 @@ class Draft extends React.Component {
         const { children, game } = this.props;
         return (
             <section id="game-draft">
+                <SideAction>
+                    <div className="btn-side-action mx-2 mx-sm-3">
+                        <Link to={routes.game.messages.replace(':id', game._id)} className="btn">
+                            <FontAwesomeIcon icon={faCommentAlt} />
+                        </Link>
+                    </div>
+                </SideAction>
                 <DraftSelection game={game} />
                 {children}
             </section>

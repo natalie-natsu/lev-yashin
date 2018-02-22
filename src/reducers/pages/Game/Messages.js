@@ -17,7 +17,7 @@ const initialMessagesState = {
     limit: 10,
     needRefresh: false,
     skip: 0,
-    totalMessages: false,
+    totalMessages: 0,
     updatedAt: null,
 };
 

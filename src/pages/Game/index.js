@@ -4,33 +4,23 @@ import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { denormalize } from 'normalizr';
 import { translate } from 'react-i18next';
-import { Link, Switch } from 'react-router-dom';
+import { Redirect, Switch } from 'react-router-dom';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import { faCommentAlt, faSignOutAlt, faBan, faArrowLeft } from '@fortawesome/fontawesome-free-solid';
+import { faSignOutAlt, faBan } from '@fortawesome/fontawesome-free-solid';
 
-import { messageListSchema } from '../../schemas/message';
 import { gameSchema } from '../../schemas/game';
 import { routes } from '../../helpers/routes';
 import { client } from '../../helpers/nes';
 
-import { getPublicName } from '../../helpers/user';
 import { failSubscribeGame, subscribeGame, successSubscribeGame } from '../../actions/entities/game';
-import {
-    failFetchMessages,
-    failSendMessage, failSubscribeMessages,
-    fetchMessages, sendMessage, subscribeMessages, successFetchMessages,
-    successSendMessage, successSubscribeMessages,
-} from '../../actions/entities/messages';
-import { resetMessages } from '../../actions/components/Game/Messages';
 
 import NoMatch from '../NoMatch';
 import PrivateRoute from '../../components/PrivateRoute';
 import Loader from '../../components/Loader';
 import Title from '../../components/MainHeader/Title';
-import SideAction from '../../components/MainHeader/SideAction';
 import Lobby from './Lobby';
 import Draft from './Draft';
-import Chat from '../../components/Chat';
+import Messages from './Messages';
 
 class Game extends React.Component {
     constructor(props) {
@@ -53,21 +43,12 @@ class Game extends React.Component {
             if (error) dispatch(failSubscribeGame(error, scope));
             else dispatch(successSubscribeGame(payload, scope, res => this.onSubscribeGameSuccess(res)));
         }));
-
-        this.fetchMessages();
-        const scopeMsg = routes.game.messages;
-        dispatch(subscribeMessages({ id: match.params.id }, scopeMsg, (update) => {
-            const { error, payload } = update;
-            if (error) dispatch(failSubscribeMessages(error, scopeMsg));
-            else dispatch(successSubscribeMessages(payload, scopeMsg, res => this.onSubscribeMessagesSuccess(res)));
-        }));
     }
 
     componentWillReceiveProps(nextProps) {
         const { game } = this.props;
         const aUserWasBanned = game.bannedUsers !== nextProps.game.bannedUsers;
         if (aUserWasBanned && this.userIsBanned(nextProps.game)) {
-            // TODO register notification.
             this.setState({ alert: 'GAME_USER_BANNED' });
         }
     }
@@ -75,8 +56,6 @@ class Game extends React.Component {
     async componentWillUnmount() {
         const id = this.props.game._id;
         await client.unsubscribe(`/games/${id}`, null);
-        await client.unsubscribe(`/games/${id}/messages`, null);
-        this.props.dispatch(resetMessages(routes.game.read));
     }
 
     onSubscribeGameSuccess() {
@@ -89,28 +68,6 @@ class Game extends React.Component {
 
     userIsBanned(game = this.props.game, credentials = this.props.credentials) {
         return game.bannedUsers.map(u => u._id).includes(credentials._id);
-    }
-
-    sendMessage(message) {
-        const { dispatch } = this.props;
-        const scope = routes.game.messages;
-
-        dispatch(sendMessage(message, routes.game.messages, (response) => {
-            if (response.error) dispatch(failSendMessage(response.error, scope));
-            else dispatch(successSendMessage(response, scope));
-        }));
-    }
-
-    fetchMessages(limit = 15, skip = 0) {
-        const { dispatch, match } = this.props;
-        const scope = routes.game.messages;
-        const payload = { id: match.params.id, limit, skip };
-        const then = (response) => {
-            if (response.error) dispatch(failFetchMessages(response.error, scope));
-            else dispatch(successFetchMessages(response, scope, payload));
-        };
-
-        dispatch(fetchMessages(payload, scope, then));
     }
 
     hideAlert(e) {
@@ -152,58 +109,15 @@ class Game extends React.Component {
     }
 
     render() {
-        const { credentials, game, messages, page, t } = this.props;
+        const { game, match, page, t } = this.props;
 
-        if (page.isFetching) return <Loader />;
-        else if (!game._id) return <NoMatch message={t('page:Game.notFound')} />;
-
-        const chatButton = (
-            <SideAction>
-                <div className="btn-side-action mx-2 mx-sm-3">
-                    <Link to={routes.game.messages.replace(':id', game._id)} className="btn">
-                        <FontAwesomeIcon icon={faCommentAlt} />
-                    </Link>
-                </div>
-            </SideAction>
-        );
-
-        const lobbyProps = { game, userIsBanned: this.userIsBanned(), children: chatButton };
-        const draftProps = { game, children: chatButton };
-        const chatProps = {
-            gameId: game._id,
-            isFetching: messages.isFetching,
-            isSending: messages.isSending,
-            messages: messages.entities,
-            onFetchMore: () => this.fetchMessages(15, messages.skip + 15),
-            onSubmit: values => this.sendMessage(values),
-            remainMessages: messages.entities.length < messages.totalMessages,
-            step: game.step,
-            totalMessages: messages.totalMessages,
-            userId: credentials._id,
-            userName: getPublicName(credentials.profile),
-            children: (
-                <SideAction>
-                    <div className="btn-side-action mx-2 mx-sm-3">
-                        <Link to={routes.game.read.replace(':id', game._id)} className="btn">
-                            <FontAwesomeIcon icon={faArrowLeft} />
-                        </Link>
-                    </div>
-                </SideAction>
-            ),
-        };
-
-        let stepComponent;
-        let stepProps = {};
-
-        switch (game.step) {
-        case 'draft':
-            stepComponent = Draft;
-            stepProps = draftProps;
-            break;
-        default:
-            stepComponent = Lobby;
-            stepProps = lobbyProps;
-            break;
+        if (page.isFetching) {
+            return <Loader />;
+        } else if (!game._id) {
+            return <NoMatch message={t('page:Game.notFound')} />;
+        } else if (match.params.step !== 'messages' && game.step !== match.params.step) {
+            const redirectTo = routes.game.read.replace(':id', match.params.id).replace(':step', game.step);
+            return <Redirect to={redirectTo} />;
         }
 
         return (
@@ -213,12 +127,20 @@ class Game extends React.Component {
                     {this.renderAlert()}
                     <Switch>
                         <PrivateRoute
-                            exact
-                            path={routes.game.read}
-                            component={stepComponent}
-                            componentProps={stepProps}
+                            path={routes.game.lobby}
+                            component={Lobby}
+                            componentProps={{ game }}
                         />
-                        <PrivateRoute path={routes.game.messages} component={Chat} componentProps={chatProps} />
+                        <PrivateRoute
+                            path={routes.game.draft}
+                            component={Draft}
+                            componentProps={{ game }}
+                        />
+                        <PrivateRoute
+                            path={routes.game.messages}
+                            component={Messages}
+                            componentProps={{ game }}
+                        />
                     </Switch>
                 </div>
             </div>
@@ -240,13 +162,12 @@ Game.propTypes = {
         isPublic: PropTypes.bool.isRequired,
         name: PropTypes.string.isRequired,
     }),
-    match: PropTypes.shape({ params: PropTypes.shape({ id: PropTypes.string }).isRequired }).isRequired,
-    messages: PropTypes.shape({
-        isSending: PropTypes.bool.isRequired,
-        entities: PropTypes.arrayOf(PropTypes.shape({
-            _id: PropTypes.string.isRequired,
-        })).isRequired,
-    }),
+    match: PropTypes.shape({
+        params: PropTypes.shape({
+            id: PropTypes.string,
+            step: PropTypes.string,
+        }).isRequired,
+    }).isRequired,
     page: PropTypes.shape({ isFetching: PropTypes.bool }).isRequired,
     t: PropTypes.func.isRequired,
 };
@@ -259,17 +180,12 @@ Game.defaultProps = {
         isPublic: false,
         name: '',
     },
-    messages: { isSending: false, entities: [] },
 };
 
 export default translate()(connect(
     (state, ownProps) => ({
         credentials: state.credentials,
         game: denormalize(ownProps.match.params.id, gameSchema, state.entities),
-        messages: {
-            ...state.pages.GameMessages,
-            entities: denormalize(state.pages.GameMessages.ids, messageListSchema, state.entities),
-        },
         page: state.pages.Game,
     }),
     dispatch => ({ dispatch }),
