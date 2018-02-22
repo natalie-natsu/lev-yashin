@@ -8,8 +8,8 @@ import { Link, Switch } from 'react-router-dom';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { faCommentAlt, faSignOutAlt, faBan, faArrowLeft } from '@fortawesome/fontawesome-free-solid';
 
-import selectEntities from '../../selectors/entities';
 import { messageListSchema } from '../../schemas/message';
+import { gameSchema } from '../../schemas/game';
 import { routes } from '../../helpers/routes';
 import { client } from '../../helpers/nes';
 
@@ -29,6 +29,7 @@ import Loader from '../../components/Loader';
 import Title from '../../components/MainHeader/Title';
 import SideAction from '../../components/MainHeader/SideAction';
 import Lobby from './Lobby';
+import Draft from './Draft';
 import Chat from '../../components/Chat';
 
 class Game extends React.Component {
@@ -167,6 +168,7 @@ class Game extends React.Component {
         );
 
         const lobbyProps = { game, userIsBanned: this.userIsBanned(), children: chatButton };
+        const draftProps = { game, children: chatButton };
         const chatProps = {
             gameId: game._id,
             isFetching: messages.isFetching,
@@ -195,7 +197,8 @@ class Game extends React.Component {
 
         switch (game.step) {
         case 'draft':
-            stepComponent = () => <p>Draft</p>;
+            stepComponent = Draft;
+            stepProps = draftProps;
             break;
         default:
             stepComponent = Lobby;
@@ -262,7 +265,7 @@ Game.defaultProps = {
 export default translate()(connect(
     (state, ownProps) => ({
         credentials: state.credentials,
-        game: selectEntities(state.entities.games, [ownProps.match.params.id])[0],
+        game: denormalize(ownProps.match.params.id, gameSchema, state.entities),
         messages: {
             ...state.pages.GameMessages,
             entities: denormalize(state.pages.GameMessages.ids, messageListSchema, state.entities),

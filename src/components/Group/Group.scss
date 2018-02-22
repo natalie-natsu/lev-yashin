@@ -1,11 +1,11 @@
-$colorA: #1474bc;
-$colorB: #c42616;
-$colorC: #0f96d3;
-$colorD: #dcc38a;
-$colorE: #443979;
-$colorF: #0c8544;
-$colorG: #50aa8a;
-$colorH: #f7742b;
+$colorA: #891c15;
+$colorB: #006711;
+$colorC: #24207D;
+$colorD: #7DA7DD;
+$colorE: #259E4A;
+$colorF: #F8D228;
+$colorG: #ED3037;
+$colorH: #E8E7E6;
 
 .group {
     border: 1px solid;
@@ -15,14 +15,20 @@ $colorH: #f7742b;
         cursor: pointer;
     }
 
-    .table th,
-    .table td {
-        vertical-align: middle;
-        white-space: nowrap;
-    }
+    .table {
+        th,
+        td {
+            vertical-align: middle;
+            white-space: nowrap;
 
-    .table thead th {
-        color: white;
+            &.addOn {
+                text-align: right;
+            }
+        }
+
+        thead th {
+            color: white;
+        }
     }
 
     &.A {
@@ -141,6 +147,7 @@ $colorH: #f7742b;
         border-color: darken($colorH, 5);
 
         .table thead th {
+            color: darken($colorH, 30);
             border-top: 1px solid darken($colorH, 5);
             border-bottom: 1px solid darken($colorH, 5);
             background-color: $colorH;
@@ -149,7 +156,7 @@ $colorH: #f7742b;
         .badge,
         &.badge {
             border-color: darken($colorH, 10);
-            color: $colorH;
+            color: darken($colorH, 30);
         }
     }
 

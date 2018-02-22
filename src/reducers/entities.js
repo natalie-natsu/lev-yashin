@@ -7,9 +7,11 @@ import { RECEIVE_ENTITIES, REMOVE_ENTITIES, RESET_ENTITIES, UPDATE_ENTITIES } fr
 // It's easier to let initialState as an empty object,
 // but it's more rigorous to add all entities of the app.
 const initialEntitiesState = {
-    games: null,
-    messages: null,
-    users: null,
+    games: {},
+    groups: {},
+    messages: {},
+    teams: {},
+    users: {},
 };
 
 function receiveEntities(state, action) {

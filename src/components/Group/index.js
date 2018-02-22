@@ -23,9 +23,11 @@ const getStars = (team) => {
     return stars;
 };
 
+const getName = (team, i18n) => countries.getName(team.flagIcon, localeTo(i18n.language, 'i18n')) || 'England';
+
 const Group = ({ addOnTitle, className, i18n, id, onTeamClick, t, teams }) => (
     <div className={classNames(`table-responsive group ${id}`, className)} data-group-id={id}>
-        <table className={classNames('table table-striped mb-0', { 'table-hover': onTeamClick })}>
+        <table className={classNames('table table-striped mb-0 bg-white', { 'table-hover': onTeamClick })}>
             <thead>
                 <tr>
                     <th scope="col">
@@ -35,9 +37,11 @@ const Group = ({ addOnTitle, className, i18n, id, onTeamClick, t, teams }) => (
                     </th>
                     <th scope="col"><FontAwesomeIcon icon={faHashtag} /></th>
                     <th scope="col">{t('component:Group.th.name')}</th>
-                    <th scope="col" className="text-right"><FontAwesomeIcon icon={faStar} /></th>
+                    <th scope="col" className="text-center stars"><FontAwesomeIcon icon={faStar} /></th>
                     {some(teams, team => team.addOn) &&
-                        <th scope="col">{addOnTitle || t('component:Group.th.addOn')}</th>
+                        <th scope="col" className="addOn">
+                            {addOnTitle || t('component:Group.th.addOn')}
+                        </th>
                     }
                 </tr>
             </thead>
@@ -54,9 +58,9 @@ const Group = ({ addOnTitle, className, i18n, id, onTeamClick, t, teams }) => (
                     >
                         <td><span className={`my-1 flag-icon flag-icon-${team.flagIcon}`} /></td>
                         <th scope="row">{team.id}</th>
-                        <td>{countries.getName(team.flagIcon, localeTo(i18n.language, 'i18n'))}</td>
-                        <td className="text-right">{getStars(team)}</td>
-                        {team.addOn && <td>{team.addOn}</td>}
+                        <td>{getName(team, i18n).replace(', République', '')}</td>
+                        <td className="text-center stars">{getStars(team)}</td>
+                        {team.addOn && <td className="addOn">{team.addOn}</td>}
                     </tr>
                 ))}
             </tbody>

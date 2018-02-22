@@ -54,7 +54,12 @@ const Drawer = ({ credentials, dispatch, isOpen, t }) => (
                     />
                 )}
                 {!credentials.profile && (
-                    <h3><FontAwesomeIcon icon={faFutbol} className="mr-3 " />{t('project.name')}</h3>
+                    <Link to={routes.home} className="nav-link" onClick={() => close(dispatch)}>
+                        <h3>
+                            <FontAwesomeIcon icon={faHome} />&nbsp;
+                            worldcup <small><FontAwesomeIcon icon={faFutbol} /></small> game
+                        </h3>
+                    </Link>
                 )}
             </header>
             {!credentials.token && (
@@ -77,11 +82,13 @@ const Drawer = ({ credentials, dispatch, isOpen, t }) => (
             <section>
                 <DrawerSeparator>{t('component:Drawer.separators.navigation')}</DrawerSeparator>
                 <ul className="fa-ul">
-                    <li className="nav-item">
-                        <Link className="nav-link" to={routes.home} onClick={() => close(dispatch)}>
-                            <FontAwesomeIcon icon={faHome} listItem />&nbsp;{t('route:home.text')}
-                        </Link>
-                    </li>
+                    {credentials.token && (
+                        <li className="nav-item">
+                            <Link className="nav-link" to={routes.home} onClick={() => close(dispatch)}>
+                                <FontAwesomeIcon icon={faHome} listItem />&nbsp;{t('route:home.text')}
+                            </Link>
+                        </li>
+                    )}
                     {credentials.token && (
                         <li className="nav-item">
                             <Link className="nav-link" to={routes.game.create} onClick={() => close(dispatch)}>

@@ -9,7 +9,6 @@ import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { faSignInAlt, faSpinner, faEdit, faRocket } from '@fortawesome/fontawesome-free-solid';
 
 import './Lobby.scss';
-import selectEntities from '../../../selectors/entities';
 import { routes } from '../../../helpers/routes';
 import {
     joinGame, readyGame,
@@ -26,7 +25,7 @@ class Lobby extends React.Component {
         e.preventDefault();
         const { dispatch, game, userId } = this.props;
 
-        const canJoin = !game.users.includes(userId);
+        const canJoin = !game.users.map(u => u._id).includes(userId);
         if (canJoin) { dispatch(joinGame({ id: game._id }, routes.game.read)); }
     }
 
@@ -159,8 +158,10 @@ class Lobby extends React.Component {
     }
 
     renderSlots() {
-        const { game, page, players, userId } = this.props;
-        if (players.length < 1) { return false; }
+        const { game, page, userId } = this.props;
+        const players = game.users;
+
+        if (!players || players.length < 1) { return false; }
 
         return players.map((player, index) => (
             <Slot
@@ -212,7 +213,7 @@ class Lobby extends React.Component {
         const { children, game, page, t, userId, userIsBanned } = this.props;
         const isAdmin = userId === game.admin;
 
-        const canJoin = !userIsBanned && game.users && !game.users.includes(userId);
+        const canJoin = !userIsBanned && game.users && !game.users.map(u => u._id).includes(userId);
         const canLaunch = isAdmin && game.readyUsers.length > 3;
 
         return (
@@ -260,16 +261,15 @@ Lobby.propTypes = {
     game: PropTypes.shape({
         _id: PropTypes.string.isRequired,
         admin: PropTypes.string.isRequired,
-        users: PropTypes.arrayOf(PropTypes.string).isRequired,
+        users: PropTypes.arrayOf(PropTypes.shape({
+            _id: PropTypes.string.isRequired,
+            profile: PropTypes.shape({
+                userName: PropTypes.string.isRequired,
+                picture: PropTypes.string.isRequired,
+            }).isRequired,
+        })).isRequired,
     }).isRequired,
     page: PropTypes.shape({ isGettingReady: PropTypes.bool }).isRequired,
-    players: PropTypes.arrayOf(PropTypes.shape({
-        _id: PropTypes.string.isRequired,
-        profile: PropTypes.shape({
-            userName: PropTypes.string.isRequired,
-            picture: PropTypes.string.isRequired,
-        }).isRequired,
-    })),
     t: PropTypes.func.isRequired,
     userId: PropTypes.string.isRequired,
     userIsBanned: PropTypes.bool,
@@ -277,15 +277,13 @@ Lobby.propTypes = {
 
 Lobby.defaultProps = {
     children: null,
-    players: [],
     userIsBanned: false,
 };
 
 export default translate(['page', 'toast'])(connect(
-    (state, ownProps) => ({
+    state => ({
         credentials: state.credentials,
         page: state.pages.GameLobby,
-        players: selectEntities(state.entities.users, ownProps.game.users),
         userId: state.credentials._id,
     }),
     dispatch => ({ dispatch }),

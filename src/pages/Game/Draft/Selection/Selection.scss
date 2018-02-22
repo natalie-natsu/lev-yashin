@@ -1,0 +1,13 @@
+#game-draft-selection {
+  table {
+    tbody {
+      th,
+      td:not(.addOn) {
+        width: 60px;
+      }
+    }
+    .stars {
+      display: none;
+    }
+  }
+}
