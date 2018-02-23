@@ -1,6 +1,7 @@
 import React from 'react';
 import swal from 'sweetalert2';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
 import { denormalize } from 'normalizr';
@@ -77,12 +78,13 @@ class DraftSelection extends React.Component {
     }
 
     render() {
+        const { notUserTurn } = this.props;
         return (
-            <section id="game-draft-selection">
+            <div id="game-draft-selection" className={classNames({ notUserTurn })}>
                 <div className="row">
                     {this.renderGroups()}
                 </div>
-            </section>
+            </div>
         );
     }
 }
@@ -92,11 +94,13 @@ DraftSelection.propTypes = {
     credentials: PropTypes.shape({ _id: PropTypes.string }).isRequired,
     game: PropTypes.shape({ _id: PropTypes.string }).isRequired,
     groups: PropTypes.arrayOf(PropTypes.shape({ id: PropTypes.string, teams: PropTypes.arrayOf(PropTypes.object) })),
+    notUserTurn: PropTypes.bool,
     t: PropTypes.func.isRequired,
 };
 
 DraftSelection.defaultProps = {
     groups: [],
+    notUserTurn: false,
 };
 
 export default translate(['component'])(connect(

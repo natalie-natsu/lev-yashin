@@ -8,13 +8,16 @@ import { faCommentAlt } from '@fortawesome/fontawesome-free-solid';
 
 import { routes } from '../../../helpers/routes';
 
-import DraftSelection from './Selection';
+import Selection from './Selection';
+import StandBy from './StandBy';
 import SideAction from '../../../components/MainHeader/SideAction';
 
 // eslint-disable-next-line react/prefer-stateless-function
 class Draft extends React.Component {
     render() {
-        const { children, game } = this.props;
+        const { credentials, game } = this.props;
+        const isUserTurn = game.draftOrder[0]._id === credentials._id;
+
         return (
             <section id="game-draft">
                 <SideAction>
@@ -24,16 +27,18 @@ class Draft extends React.Component {
                         </Link>
                     </div>
                 </SideAction>
-                <DraftSelection game={game} />
-                {children}
+                <Selection game={game} notUserTurn={!isUserTurn} />
+                {!isUserTurn && <StandBy game={game} />}
             </section>
         );
     }
 }
 
 Draft.propTypes = {
-    children: PropTypes.element,
     // dispatch: PropTypes.func.isRequired,
+    credentials: PropTypes.shape({
+        _id: PropTypes.string.isRequired,
+    }).isRequired,
     game: PropTypes.shape({
         _id: PropTypes.string.isRequired,
         admin: PropTypes.string.isRequired,
@@ -45,10 +50,6 @@ Draft.propTypes = {
             }).isRequired,
         })).isRequired,
     }).isRequired,
-};
-
-Draft.defaultProps = {
-    children: null,
 };
 
 export default translate()(connect(

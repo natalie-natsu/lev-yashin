@@ -1,0 +1,40 @@
+@import '../../../../theme';
+
+#game-draft-standBy {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 54px);
+    background-color: transparentize($primary, .1);
+
+    @media (min-width: 768px) {
+        height: calc(100vh - 62px);
+    }
+
+    .player {
+        h5 {
+            overflow: hidden;
+            width: 200px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+
+            @media (min-width: 768px) {
+                width: 400px;
+            }
+        }
+        img {
+            width: 55px;
+            height: 55px;
+
+            @media (min-width: 768px) {
+                width: 75px;
+                height: 75px;
+            }
+        }
+    }
+
+    .player-teams {
+        max-width: 375px;
+    }
+}

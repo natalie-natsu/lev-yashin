@@ -11,7 +11,6 @@ import { messageListSchema } from '../../../schemas/message';
 import { getPublicName } from '../../../helpers/user';
 import { routes } from '../../../helpers/routes';
 import { client } from '../../../helpers/nes';
-import { resetMessages } from '../../../actions/components/Game/Messages';
 import {
     failFetchMessages, failSendMessage, failSubscribeMessages,
     fetchMessages, sendMessage, subscribeMessages,
@@ -36,7 +35,6 @@ class Messages extends React.Component {
     async componentWillUnmount() {
         const id = this.props.game._id;
         await client.unsubscribe(`/games/${id}/messages`, null);
-        this.props.dispatch(resetMessages(routes.game.messages));
     }
 
     sendMessage(message) {

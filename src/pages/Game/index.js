@@ -13,6 +13,7 @@ import { routes } from '../../helpers/routes';
 import { client } from '../../helpers/nes';
 
 import { failSubscribeGame, subscribeGame, successSubscribeGame } from '../../actions/entities/game';
+import { resetMessages } from '../../actions/components/Game/Messages';
 
 import NoMatch from '../NoMatch';
 import PrivateRoute from '../../components/PrivateRoute';
@@ -47,6 +48,7 @@ class Game extends React.Component {
 
     componentWillReceiveProps(nextProps) {
         const { game } = this.props;
+
         const aUserWasBanned = game.bannedUsers !== nextProps.game.bannedUsers;
         if (aUserWasBanned && this.userIsBanned(nextProps.game)) {
             this.setState({ alert: 'GAME_USER_BANNED' });
@@ -56,6 +58,7 @@ class Game extends React.Component {
     async componentWillUnmount() {
         const id = this.props.game._id;
         await client.unsubscribe(`/games/${id}`, null);
+        this.props.dispatch(resetMessages(routes.game.messages));
     }
 
     onSubscribeGameSuccess() {
@@ -161,6 +164,7 @@ Game.propTypes = {
         isWithBonuses: PropTypes.bool.isRequired,
         isPublic: PropTypes.bool.isRequired,
         name: PropTypes.string.isRequired,
+        step: PropTypes.string,
     }),
     match: PropTypes.shape({
         params: PropTypes.shape({

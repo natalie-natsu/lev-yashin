@@ -75,6 +75,13 @@
           "cancel": "Maybe not"
         }
       }
+    },
+    "Draft": {
+      "StandBy": {
+        "title": "{{name}} is choosing a team",
+        "description": "Patience, your turn is soon.",
+        "next": "You're the next, do you know what to choose ?"
+      }
     }
   },
   "Calendar": {

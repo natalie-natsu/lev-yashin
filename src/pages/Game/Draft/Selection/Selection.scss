@@ -1,13 +1,19 @@
 #game-draft-selection {
-  table {
-    tbody {
-      th,
-      td:not(.addOn) {
-        width: 60px;
-      }
+    &.notUserTurn {
+        position: fixed;
+        overflow: hidden;
+        filter: blur(5px);
     }
-    .stars {
-      display: none;
+
+    table {
+        tbody {
+            th,
+            td:not(.addOn) {
+                width: 60px;
+            }
+        }
+        .stars {
+            display: none;
+        }
     }
-  }
 }
