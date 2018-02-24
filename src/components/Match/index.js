@@ -3,22 +3,15 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import moment from 'moment-timezone';
 import { translate } from 'react-i18next';
-import countries from 'i18n-iso-countries';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { faMapMarkerAlt, faCircle } from '@fortawesome/fontawesome-free-solid';
 import { faClock } from '@fortawesome/fontawesome-free-regular';
 
-import { localeTo } from '../../helpers/locales';
+import { getTeamName } from '../../helpers/team';
 import '../Group/Group.scss';
 import './Match.scss';
 
-countries.registerLocale(require('i18n-iso-countries/langs/en.json'));
-countries.registerLocale(require('i18n-iso-countries/langs/es.json'));
-countries.registerLocale(require('i18n-iso-countries/langs/fr.json'));
-
-const Match = ({
-    className, i18n, against, city, datetime, group, id, live, scores, stadium, team, timezone, t,
-}) => (
+const Match = ({ className, against, city, datetime, group, id, live, scores, stadium, team, timezone, t }) => (
     <div className={classNames(`match match-${id}`, className)} data-match-id={id}>
         <div className="d-flex w-100 justify-content-between">
             <h5 className="mb-2">
@@ -37,9 +30,7 @@ const Match = ({
             <div className="col-3 col-sm-4">
                 <div className="team text-left">
                     <div className={`mr-auto flag-icon flag-icon-${team.flagIcon}`} />
-                    <small className="name team-name font-italic">
-                        {countries.getName(team.flagIcon, localeTo(i18n.language, 'i18n'))}
-                    </small>
+                    <small className="name team-name font-italic">{getTeamName(team)}</small>
                 </div>
             </div>
             <div className="col-3 col-sm-2 d-flex">
@@ -70,7 +61,7 @@ const Match = ({
                 <div className="against text-right">
                     <div className={`ml-auto flag-icon flag-icon-${against.flagIcon}`} />
                     <small className="name against-name font-italic">
-                        {countries.getName(against.flagIcon, localeTo(i18n.language, 'i18n'))}
+                        {getTeamName(against)}
                     </small>
                 </div>
             </div>
@@ -94,7 +85,6 @@ Match.propTypes = {
     datetime: PropTypes.string.isRequired,
     group: PropTypes.shape({ id: PropTypes.string, teams: PropTypes.arrayOf(PropTypes.object) }),
     id: PropTypes.number.isRequired,
-    i18n: PropTypes.shape({ language: PropTypes.string }).isRequired,
     live: PropTypes.bool,
     scores: PropTypes.shape({
         against: PropTypes.number.isRequired,

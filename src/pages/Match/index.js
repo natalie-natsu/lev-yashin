@@ -5,14 +5,13 @@ import { connect } from 'react-redux';
 import { denormalize } from 'normalizr';
 import { Link } from 'react-router-dom';
 import { translate } from 'react-i18next';
-import countries from 'i18n-iso-countries';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faCalendarAlt } from '@fortawesome/fontawesome-free-solid/index';
 
 import { failFetchMatch, fetchMatch, successFetchMatch } from '../../actions/entities/match';
 import { matchCalendarSchema } from '../../schemas/calendar';
-import { localeTo } from '../../helpers/locales';
 import { routes } from '../../helpers/routes';
+import { getTeamName } from '../../helpers/team';
 import cityToPicture from './cityToPicture';
 
 import './Match.scss';
@@ -22,10 +21,6 @@ import Title from '../../components/MainHeader/Title';
 import Loader from '../../components/Loader';
 import MatchComponent from '../../components/Match';
 import Group from '../../components/Group';
-
-countries.registerLocale(require('i18n-iso-countries/langs/en.json'));
-countries.registerLocale(require('i18n-iso-countries/langs/es.json'));
-countries.registerLocale(require('i18n-iso-countries/langs/fr.json'));
 
 class Match extends React.Component {
     constructor(props) {
@@ -38,14 +33,12 @@ class Match extends React.Component {
     }
 
     getMatchName() {
-        const { i18n, page } = this.props;
+        const { page } = this.props;
 
         if (!page.match) { return false; }
 
         const { against, team } = this.props.page.match;
-        const againstName = countries.getName(against.flagIcon, localeTo(i18n.language, 'i18n'));
-        const teamName = countries.getName(team.flagIcon, localeTo(i18n.language, 'i18n'));
-        return `${teamName} - ${againstName}`;
+        return `${getTeamName(team)} - ${getTeamName(against)}`;
     }
 
     componentDidCatch(error, errorInfo) {

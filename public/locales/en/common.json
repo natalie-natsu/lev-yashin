@@ -20,5 +20,8 @@
     "sr-only": {
       "current": "current"
     }
+  },
+  "team": {
+    "gb-eng": "England"
   }
 }

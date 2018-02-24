@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
 import { denormalize } from 'normalizr';
 import { translate } from 'react-i18next';
+import ReactDOMServer from 'react-dom/server';
 
 import { groupListSchema } from '../../../../schemas/group';
 import { routes } from '../../../../helpers/routes';
@@ -18,7 +19,7 @@ import Group from '../../../../components/Group';
 const groupsIds = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
 
 class DraftSelection extends React.Component {
-    handleSelect(team, e) {
+    handleSelect(team, group, e) {
         if (e) { e.preventDefault(); }
         const { dispatch, game, t } = this.props;
 
@@ -30,8 +31,8 @@ class DraftSelection extends React.Component {
         }
 
         swal({
-            type: 'info',
-            title: t('page:Game.Draft.Selection.select.swal.title'),
+            title: t('page:Game.Draft.Selection.select.swal.title', { choice: team.id }),
+            html: ReactDOMServer.renderToStaticMarkup(this.renderSwalHtml(team, group)),
             showCancelButton: true,
             confirmButtonText: t('page:Game.Draft.Selection.select.swal.confirm'),
             cancelButtonText: t('page:Game.Draft.Selection.select.swal.cancel'),
@@ -55,6 +56,19 @@ class DraftSelection extends React.Component {
         return false;
     }
 
+    renderSwalHtml(team, group) {
+        const { t } = this.props;
+        const groupStage = true;
+        const groupText = t('page:Game.Draft.Selection.select.swal.group', { group: group.id });
+
+        return team && (
+            <div className="swal2-html">
+                <i className={`flag-icon flag-icon-${team.flagIcon}`} />
+                {groupStage && <p className="mt-3 mb-0">{groupText}</p>}
+            </div>
+        );
+    }
+
     renderGroups() {
         const { credentials, groups, t } = this.props;
         return groups.map((group) => {
@@ -68,7 +82,7 @@ class DraftSelection extends React.Component {
                 <div key={`draft-selection-group-${group.id}`} className="col-md-6 mb-3">
                     <Group
                         addOnTitle={t('component:DraftSelection.addOnTitle')}
-                        onTeamClick={(team, e) => this.handleSelect(team, e)}
+                        onTeamClick={(team, e) => this.handleSelect(team, group, e)}
                         className="table-hover"
                         {...groupWithAddOn}
                     />

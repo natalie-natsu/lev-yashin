@@ -3,16 +3,11 @@ import { some } from 'lodash';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { translate } from 'react-i18next';
-import countries from 'i18n-iso-countries';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { faStar, faHashtag } from '@fortawesome/fontawesome-free-solid';
 
-import { localeTo } from '../../helpers/locales';
+import { getTeamName } from '../../helpers/team';
 import './Group.scss';
-
-countries.registerLocale(require('i18n-iso-countries/langs/en.json'));
-countries.registerLocale(require('i18n-iso-countries/langs/es.json'));
-countries.registerLocale(require('i18n-iso-countries/langs/fr.json'));
 
 const getStars = (team) => {
     const stars = [];
@@ -23,9 +18,7 @@ const getStars = (team) => {
     return stars;
 };
 
-const getName = (team, i18n) => countries.getName(team.flagIcon, localeTo(i18n.language, 'i18n')) || 'England';
-
-const Group = ({ addOnTitle, className, i18n, id, onTeamClick, t, teams }) => (
+const Group = ({ addOnTitle, className, id, onTeamClick, t, teams }) => (
     <div className={classNames(`table-responsive group ${id}`, className)} data-group-id={id}>
         <table className={classNames('table table-striped mb-0 bg-white', { 'table-hover': onTeamClick })}>
             <thead>
@@ -58,7 +51,7 @@ const Group = ({ addOnTitle, className, i18n, id, onTeamClick, t, teams }) => (
                     >
                         <td><span className={`my-1 flag-icon flag-icon-${team.flagIcon}`} /></td>
                         <th scope="row">{team.id}</th>
-                        <td>{getName(team, i18n).replace(', République', '')}</td>
+                        <td>{getTeamName(team)}</td>
                         <td className="text-center stars">{getStars(team)}</td>
                         {team.addOn && <td className="addOn">{team.addOn}</td>}
                     </tr>
@@ -72,7 +65,6 @@ Group.propTypes = {
     addOnTitle: PropTypes.string,
     className: PropTypes.string,
     id: PropTypes.string.isRequired,
-    i18n: PropTypes.shape({ language: PropTypes.string }).isRequired,
     onTeamClick: PropTypes.func,
     t: PropTypes.func.isRequired,
     teams: PropTypes.arrayOf(PropTypes.shape({

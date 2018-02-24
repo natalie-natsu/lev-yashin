@@ -80,7 +80,17 @@
       "StandBy": {
         "title": "{{name}} is choosing a team",
         "description": "Patience, your turn is soon.",
-        "next": "You're the next, do you know what to choose ?"
+        "next": "You're next, ready to choose a team ?"
+      },
+      "Selection": {
+        "select": {
+          "swal": {
+            "title": "Are you sur of {{choice}} ?",
+            "group": "You will not be able to chose another team of group {{group}}",
+            "confirm": "Yes",
+            "cancel": "Not really"
+          }
+        }
       }
     }
   },

@@ -23,5 +23,8 @@
       "current_female": "actuelle",
       "current_female_plural": "actuelles"
     }
+  },
+  "team": {
+    "gb-eng": "Angleterre"
   }
 }
