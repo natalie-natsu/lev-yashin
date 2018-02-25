@@ -4,6 +4,8 @@ import { matchListSchema, matchSchema } from '../../schemas/match';
 import { calendarSchema } from '../../schemas/calendar';
 
 import { getEndpoint, getHeaders } from '../../helpers/endpoint';
+import { teamListSchema } from '../../schemas/team';
+import { groupSchema } from '../../schemas/group';
 
 export const REQUEST_FETCH_MATCH = 'REQUEST_FETCH_MATCH';
 export const SUCCESS_FETCH_MATCH = 'SUCCESS_FETCH_MATCH';
@@ -23,7 +25,11 @@ export const fetchMatch = (payload, scope, then = () => false) => (dispatch, get
 
 export function successFetchMatch(response, scope, then) {
     return (dispatch) => {
-        const normalized = normalize(response, matchSchema);
+        const normalized = normalize(response, {
+            match: matchSchema,
+            teams: teamListSchema,
+            group: groupSchema,
+        });
         dispatch(receiveEntities(normalized.entities));
         dispatch({
             type: SUCCESS_FETCH_MATCH,

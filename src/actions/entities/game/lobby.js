@@ -3,6 +3,7 @@ import { normalize } from 'normalizr';
 import { getEndpoint, getHeaders } from '../../../helpers/endpoint';
 import { gameSchema } from '../../../schemas/game';
 import { receiveEntities } from '../../entities';
+import { userListSchema } from '../../../schemas/user';
 
 export const REQUEST_JOIN_GAME = 'REQUEST_JOIN_GAME';
 export const SUCCESS_JOIN_GAME = 'SUCCESS_JOIN_GAME';
@@ -100,7 +101,10 @@ export const kickUser = (payload, scope, then) => (dispatch, getState) => {
 
 export function successKickUser(response, scope, then) {
     return (dispatch) => {
-        const normalized = normalize(response, gameSchema);
+        const normalized = normalize(response, {
+            game: gameSchema,
+            users: userListSchema,
+        });
         dispatch(receiveEntities(normalized.entities));
 
         dispatch({
@@ -142,7 +146,10 @@ export const banUser = (payload, scope, then) => (dispatch, getState) => {
 
 export function successBanUser(response, scope, then) {
     return (dispatch) => {
-        const normalized = normalize(response, gameSchema);
+        const normalized = normalize(response, {
+            game: gameSchema,
+            users: userListSchema,
+        });
         dispatch(receiveEntities(normalized.entities));
 
         dispatch({
@@ -183,7 +190,10 @@ export const startGame = (payload, scope, then) => (dispatch, getState) => {
 
 export function successStartGame(response, scope, then) {
     return (dispatch) => {
-        const normalized = normalize(response, gameSchema);
+        const normalized = normalize(response, {
+            game: gameSchema,
+            users: userListSchema,
+        });
         dispatch(receiveEntities(normalized.entities));
 
         dispatch({

@@ -3,6 +3,7 @@ import { normalize } from 'normalizr';
 import { getEndpoint, getHeaders } from '../../../helpers/endpoint';
 import { gameSchema } from '../../../schemas/game';
 import { receiveEntities } from '../../entities';
+import { userListSchema } from '../../../schemas/user';
 
 export const REQUEST_SELECT_DRAFT_TEAM = 'REQUEST_SELECT_DRAFT_TEAM';
 export const SUCCESS_SELECT_DRAFT_TEAM = 'SUCCESS_SELECT_DRAFT_TEAM';
@@ -23,7 +24,10 @@ export const selectDraftTeam = (payload, scope, then) => (dispatch, getState) =>
 
 export function successSelectDraftTeam(response, scope, then) {
     return (dispatch) => {
-        const normalized = normalize(response, gameSchema);
+        const normalized = normalize(response, {
+            game: gameSchema,
+            users: userListSchema,
+        });
         dispatch(receiveEntities(normalized.entities));
 
         dispatch({

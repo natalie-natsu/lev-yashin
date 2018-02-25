@@ -1,12 +1,16 @@
 import { normalize } from 'normalizr';
 import { receiveEntities } from '../entities';
-import { messageListSchema } from '../../schemas/message';
+import { messageListSchema, messageSchema } from '../../schemas/message';
 
 import { getEndpoint, getHeaders } from '../../helpers/endpoint';
 import { client } from '../../helpers/nes';
+import { userListSchema, userSchema } from '../../schemas/user';
 
 export function normalizeMessageEntities(response) {
-    return normalize(response, messageListSchema);
+    return normalize(response, {
+        messages: messageListSchema,
+        users: userListSchema,
+    });
 }
 
 export function updateMessageEntities(response, normalized = this.normalizeMessageEntities(response)) {
@@ -113,8 +117,12 @@ export const sendMessage = (payload, scope, then = () => false) => (dispatch, ge
 
 export function successSendMessage(response, scope, then) {
     return (dispatch) => {
-        const normalized = normalizeMessageEntities([response]);
-        dispatch(updateMessageEntities([response], normalized));
+        const normalized = normalize(response, {
+            message: messageSchema,
+            user: userSchema,
+        });
+
+        dispatch(updateMessageEntities(response, normalized));
         dispatch({
             type: SUCCESS_SEND_MESSAGE,
             receivedAt: Date.now(),
