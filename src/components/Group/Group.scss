@@ -172,4 +172,14 @@ $colorH: #e8e7e6;
             height: 45px;
         }
     }
+
+    .group-team img {
+        width: 32px;
+        height: 32px;
+
+        @media (min-width: 768px) {
+            width: 45px;
+            height: 45px;
+        }
+    }
 }

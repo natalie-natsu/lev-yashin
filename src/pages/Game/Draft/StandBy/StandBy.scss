@@ -12,6 +12,13 @@
         height: calc(100vh - 62px);
     }
 
+    .section-title {
+        overflow: hidden;
+        width: 100%;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
     .player {
         h5 {
             overflow: hidden;

@@ -43,11 +43,14 @@ const Group = ({ addOnTitle, className, id, onTeamClick, t, teams }) => (
                     <tr
                         key={team.id}
                         tabIndex={onTeamClick && index}
-                        role={onTeamClick ? 'button' : 'row'}
+                        role={onTeamClick && !team.disabled ? 'button' : 'row'}
                         data-team-id={team.id}
-                        className={classNames('group-team', { clickable: onTeamClick })}
-                        onClick={() => onTeamClick && onTeamClick(team)}
-                        onKeyPress={() => onTeamClick && onTeamClick(team)}
+                        className={classNames('group-team', {
+                            clickable: onTeamClick && !team.disabled,
+                            disabled: team.disabled,
+                        })}
+                        onClick={() => onTeamClick && !team.disabled && onTeamClick(team)}
+                        onKeyPress={() => onTeamClick && !team.disabled && onTeamClick(team)}
                     >
                         <td><span className={`my-1 flag-icon flag-icon-${team.flagIcon}`} /></td>
                         <th scope="row">{team.id}</th>
@@ -69,6 +72,7 @@ Group.propTypes = {
     t: PropTypes.func.isRequired,
     teams: PropTypes.arrayOf(PropTypes.shape({
         addOn: PropTypes.oneOfType([PropTypes.element, PropTypes.string, PropTypes.func]),
+        disabled: PropTypes.bool,
         flagIcon: PropTypes.string,
         id: PropTypes.string.isRequired,
         nbChampion: PropTypes.number,

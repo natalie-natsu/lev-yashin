@@ -80,7 +80,7 @@
       "StandBy": {
         "title": "{{name}} choisis une équipe",
         "description": "Patience, c'est bientôt ton tour.",
-        "next": "Tu es le suivant, prêt pour choisir une équipe ?"
+        "next": "Tu es le suivant, prêt à choisir une équipe ?"
       },
       "Selection": {
         "select": {
@@ -89,6 +89,14 @@
             "group": "Tu ne pourras plus choisir d'autre équipe du groupe {{group}}",
             "confirm": "Oui",
             "cancel": "Pas vraiment"
+          }
+        },
+        "turn": {
+          "swal": {
+            "title": "À ton tour {{name}} !",
+            "text": "C'est le moment de choisir une équipe. Simplement clique ou touche celle que tu veux.",
+            "groupStageText": "C'est le moment de choisir une équipe. Clique ou touche celle que tu veux, mais attention, tu ne peux choisir qu'une équipe par groupe.",
+            "confirm": "Ok"
           }
         }
       }

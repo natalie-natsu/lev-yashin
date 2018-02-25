@@ -8,11 +8,11 @@ import './AddOn.scss';
 
 const AddOn = ({ disabled, selectedBy, userId }) => (
     <div className="group-team-addOn">
-        {!disabled && selectedBy && selectedBy._id === userId && (
+        {disabled && selectedBy && selectedBy._id === userId && (
             <FontAwesomeIcon icon={faCheck} size="2x" className="text-success" />
         )}
-        {!disabled && selectedBy && selectedBy._id !== userId && (
-            <img alt={selectedBy.userName} src={selectedBy.picture} />
+        {disabled && selectedBy && selectedBy._id !== userId && (
+            <img alt={selectedBy.profile.userName} src={selectedBy.profile.picture} />
         )}
         {!disabled && !selectedBy && (
             <FontAwesomeIcon icon={faPlusSquare} size="2x" />

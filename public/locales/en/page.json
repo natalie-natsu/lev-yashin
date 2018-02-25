@@ -90,6 +90,14 @@
             "confirm": "Yes",
             "cancel": "Not really"
           }
+        },
+        "turn": {
+          "swal": {
+            "title": "It's your turn {{name}}!",
+            "text": "Time to chose a team. Simply click or touch what team you want.",
+            "groupStageText": "Time to chose a team. Click or touch what team you want, but be aware, you can only select one team per group.",
+            "confirm": "Ok"
+          }
         }
       }
     }
