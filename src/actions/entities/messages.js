@@ -38,7 +38,7 @@ export const fetchMessages = (payload, scope, then = () => false) => (dispatch, 
 
 export function successFetchMessages(response, scope, { limit, skip }) {
     return (dispatch) => {
-        const normalized = normalizeMessageEntities(response.messages);
+        const normalized = normalizeMessageEntities(response);
         dispatch(updateMessageEntities(response, normalized));
         dispatch({
             type: SUCCESS_FETCH_MESSAGES,
@@ -73,8 +73,8 @@ export const subscribeMessages = (payload, scope, then = () => false) => (dispat
 
 export function successSubscribeMessages(response, scope, then) {
     return (dispatch, getState) => {
-        const normalized = normalizeMessageEntities([response]);
-        dispatch(updateMessageEntities([response], normalized));
+        const normalized = normalizeMessageEntities(response);
+        dispatch(updateMessageEntities(response, normalized));
         dispatch({
             type: SUCCESS_SUBSCRIBE_MESSAGES,
             receivedAt: Date.now(),
