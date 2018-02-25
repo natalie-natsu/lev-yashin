@@ -34,7 +34,7 @@ export function successFetchMatch(response, scope, then) {
         dispatch({
             type: SUCCESS_FETCH_MATCH,
             receivedAt: Date.now(),
-            id: normalized.result,
+            id: normalized.result.match,
             scope,
             then,
         });
@@ -74,7 +74,7 @@ export function successFetchMatches(response, scope, then) {
         dispatch({
             type: SUCCESS_FETCH_MATCHES,
             receivedAt: Date.now(),
-            ids: normalized.result,
+            ids: normalized.result.matches,
             scope,
             then,
         });

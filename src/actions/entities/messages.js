@@ -38,13 +38,15 @@ export const fetchMessages = (payload, scope, then = () => false) => (dispatch, 
 
 export function successFetchMessages(response, scope, { limit, skip }) {
     return (dispatch) => {
+        const { totalMessages } = response;
+        delete response.totalMessages;
         const normalized = normalizeMessageEntities(response);
         dispatch(updateMessageEntities(response, normalized));
         dispatch({
             type: SUCCESS_FETCH_MESSAGES,
             receivedAt: Date.now(),
-            ids: normalized.result,
-            totalMessages: response.totalMessages,
+            ids: normalized.result.messages,
+            totalMessages,
             limit,
             response,
             scope,
