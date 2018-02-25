@@ -1,0 +1,235 @@
+15:22:05.454 [INFO] [org.gradle.launcher.daemon.server.Daemon] start() called on daemon - DefaultDaemonContext[uid=5b7e9263-68fc-43f7-86f6-e267714b5c43,javaHome=/usr/lib/jvm/java-8-oracle,daemonRegistryDir=/src/gradle/daemon,pid=87,idleTimeout=10800000,daemonOpts=-XX:MaxPermSize=256m,-XX:+HeapDumpOnOutOfMemoryError,-Xmx1024m,-Dfile.encoding=US-ASCII,-Duser.country=US,-Duser.language=en,-Duser.variant]
+15:22:05.469 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] updating lastActivityAt to 1519572125469
+15:22:05.492 [DEBUG] [org.gradle.messaging.remote.internal.inet.InetAddressFactory] Adding IP addresses for network interface eth0
+15:22:05.495 [DEBUG] [org.gradle.messaging.remote.internal.inet.InetAddressFactory] Is this a loopback interface? false
+15:22:05.498 [DEBUG] [org.gradle.messaging.remote.internal.inet.InetAddressFactory] Is this a multicast interface? true
+15:22:05.503 [DEBUG] [org.gradle.messaging.remote.internal.inet.InetAddressFactory] Adding remote address /172.17.0.2
+15:22:05.507 [DEBUG] [org.gradle.messaging.remote.internal.inet.InetAddressFactory] Adding remote multicast interface eth0
+15:22:05.513 [DEBUG] [org.gradle.messaging.remote.internal.inet.InetAddressFactory] Adding IP addresses for network interface lo
+15:22:05.520 [DEBUG] [org.gradle.messaging.remote.internal.inet.InetAddressFactory] Is this a loopback interface? true
+15:22:05.522 [DEBUG] [org.gradle.messaging.remote.internal.inet.InetAddressFactory] Is this a multicast interface? false
+15:22:05.524 [DEBUG] [org.gradle.messaging.remote.internal.inet.InetAddressFactory] Adding loopback address /127.0.0.1
+15:22:05.533 [DEBUG] [org.gradle.messaging.remote.internal.inet.TcpIncomingConnector] Listening on [1a066895-828a-4ac1-af1b-2ec8a5396f24 port:41807, addresses:[/127.0.0.1]].
+15:22:05.628 [DEBUG] [org.gradle.launcher.daemon.server.Daemon] Daemon starting at: Sun Feb 25 15:22:05 UTC 2018, with address: [1a066895-828a-4ac1-af1b-2ec8a5396f24 port:41807, addresses:[/127.0.0.1]]
+15:22:05.637 [INFO] [org.gradle.launcher.daemon.server.DomainRegistryUpdater] Advertising the daemon address to the clients: [1a066895-828a-4ac1-af1b-2ec8a5396f24 port:41807, addresses:[/127.0.0.1]]
+15:22:05.640 [DEBUG] [org.gradle.launcher.daemon.server.DomainRegistryUpdater] Advertised daemon context: DefaultDaemonContext[uid=5b7e9263-68fc-43f7-86f6-e267714b5c43,javaHome=/usr/lib/jvm/java-8-oracle,daemonRegistryDir=/src/gradle/daemon,pid=87,idleTimeout=10800000,daemonOpts=-XX:MaxPermSize=256m,-XX:+HeapDumpOnOutOfMemoryError,-Xmx1024m,-Dfile.encoding=US-ASCII,-Duser.country=US,-Duser.language=en,-Duser.variant]
+15:22:05.643 [DEBUG] [org.gradle.launcher.daemon.registry.PersistentDaemonRegistry] Storing daemon address: [1a066895-828a-4ac1-af1b-2ec8a5396f24 port:41807, addresses:[/127.0.0.1]], context: DefaultDaemonContext[uid=5b7e9263-68fc-43f7-86f6-e267714b5c43,javaHome=/usr/lib/jvm/java-8-oracle,daemonRegistryDir=/src/gradle/daemon,pid=87,idleTimeout=10800000,daemonOpts=-XX:MaxPermSize=256m,-XX:+HeapDumpOnOutOfMemoryError,-Xmx1024m,-Dfile.encoding=US-ASCII,-Duser.country=US,-Duser.language=en,-Duser.variant]
+15:22:05.672 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire exclusive lock on daemon addresses registry.
+15:22:05.683 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired.
+15:22:05.687 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+15:22:05.690 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire exclusive lock on daemon addresses registry.
+15:22:05.695 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired.
+15:22:05.734 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+15:22:05.736 [LIFECYCLE] [org.gradle.launcher.daemon.server.Daemon] Daemon server started.
+15:22:05.754 [DEBUG] [org.gradle.launcher.daemon.bootstrap.DaemonStartupCommunication] Completed writing the daemon greeting. Closing streams...
+15:22:05.763 [DEBUG] [org.gradle.launcher.daemon.server.Daemon] requestStopOnIdleTimeout(10800000 MILLISECONDS) called on daemon
+15:22:05.763 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] Idle timeout: waiting for daemon to stop or be idle for 10800000ms
+15:22:05.764 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] Daemon is idle, sleeping until state change or idle timeout at Sun Feb 25 18:22:05 UTC 2018
+15:22:05.822 [DEBUG] [org.gradle.messaging.remote.internal.inet.TcpIncomingConnector] Accepted connection from /127.0.0.1:53058 to /127.0.0.1:41807.
+15:22:05.960 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 13: received class org.gradle.launcher.daemon.protocol.Build
+15:22:05.963 [DEBUG] [org.gradle.launcher.daemon.server.DefaultDaemonConnection] Received non-IO message from client: Build{id=555873d7-33c7-4516-b5a5-c36025f95295.1, currentDir=/src}
+15:22:05.963 [INFO] [org.gradle.launcher.daemon.server.DefaultIncomingConnectionHandler] Received command: Build{id=555873d7-33c7-4516-b5a5-c36025f95295.1, currentDir=/src}.
+15:22:05.964 [DEBUG] [org.gradle.launcher.daemon.server.DefaultIncomingConnectionHandler] Starting executing command: Build{id=555873d7-33c7-4516-b5a5-c36025f95295.1, currentDir=/src} with connection: socket connection from /127.0.0.1:41807 to /127.0.0.1:53058.
+15:22:05.980 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] Command execution: started DaemonCommandExecution[command = Build{id=555873d7-33c7-4516-b5a5-c36025f95295.1, currentDir=/src}, connection = org.gradle.launcher.daemon.server.DefaultDaemonConnection@70f32f92] after 0.0 minutes of idle
+15:22:05.981 [INFO] [org.gradle.launcher.daemon.server.DomainRegistryUpdater] Marking the daemon as busy, address: [1a066895-828a-4ac1-af1b-2ec8a5396f24 port:41807, addresses:[/127.0.0.1]]
+15:22:05.982 [DEBUG] [org.gradle.launcher.daemon.registry.PersistentDaemonRegistry] Marking busy by address: [1a066895-828a-4ac1-af1b-2ec8a5396f24 port:41807, addresses:[/127.0.0.1]]
+15:22:05.983 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire exclusive lock on daemon addresses registry.
+15:22:05.984 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired.
+15:22:05.996 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+15:22:05.996 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] updating lastActivityAt to 1519572125996
+15:22:05.999 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] Daemon is busy, sleeping until state changes.
+15:22:06.007 [INFO] [org.gradle.launcher.daemon.server.exec.StartBuildOrRespondWithBusy] Daemon is about to start building Build{id=555873d7-33c7-4516-b5a5-c36025f95295.1, currentDir=/src}. Dispatching build started information...
+15:22:06.007 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 15: dispatching class org.gradle.launcher.daemon.protocol.BuildStarted
+15:22:06.026 [DEBUG] [org.gradle.launcher.daemon.server.exec.EstablishBuildEnvironment] Configuring env variables: {PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/android-sdk-linux/tools:/usr/local/android-sdk-linux/platform-tools, JAVA_HOME=/usr/lib/jvm/java-8-oracle, OLDPWD=/src/platforms/android, TERM=xterm, XFILESEARCHPATH=/usr/dt/app-defaults/%L/Dt, ANDROID_HOME=/usr/local/android-sdk-linux, DEBIAN_FRONTEND=noninteractive, GRADLE_USER_HOME=/src/gradle, HOSTNAME=031306a8dde3, NLSPATH=/usr/dt/lib/nls/msg/%L/%N.cat, PWD=/src, HOME=/root, SHLVL=0}
+15:22:06.074 [INFO] [org.gradle.launcher.daemon.server.exec.LogToClient] About to start relaying all logs to the client via the connection.
+15:22:06.075 [INFO] [org.gradle.launcher.daemon.server.exec.LogToClient] The client will now receive all logging from the daemon (pid: 87). The daemon log file: /src/gradle/daemon/2.2.1/daemon-87.out.log
+15:22:06.080 [DEBUG] [org.gradle.launcher.daemon.server.exec.ExecuteBuild] The daemon has started executing the build.
+15:22:06.080 [INFO] [org.gradle.launcher.daemon.server.exec.ExecuteBuild] Executing build with daemon context: DefaultDaemonContext[uid=5b7e9263-68fc-43f7-86f6-e267714b5c43,javaHome=/usr/lib/jvm/java-8-oracle,daemonRegistryDir=/src/gradle/daemon,pid=87,idleTimeout=10800000,daemonOpts=-XX:MaxPermSize=256m,-XX:+HeapDumpOnOutOfMemoryError,-Xmx1024m,-Dfile.encoding=US-ASCII,-Duser.country=US,-Duser.language=en,-Duser.variant]
+Download https://repo1.maven.org/maven2/com/android/tools/build/gradle/1.0.0/gradle-1.0.0.pom
+Download https://repo1.maven.org/maven2/com/android/tools/build/builder/1.0.0/builder-1.0.0.pom
+Download https://repo1.maven.org/maven2/com/android/tools/lint/lint/24.0.0/lint-24.0.0.pom
+Download https://repo1.maven.org/maven2/net/sf/proguard/proguard-gradle/5.1/proguard-gradle-5.1.pom
+Download https://repo1.maven.org/maven2/net/sf/proguard/proguard-parent/5.1/proguard-parent-5.1.pom
+Download https://repo1.maven.org/maven2/com/android/tools/sdk-common/24.0.0/sdk-common-24.0.0.pom
+Download https://repo1.maven.org/maven2/org/bouncycastle/bcprov-jdk15on/1.48/bcprov-jdk15on-1.48.pom
+Download https://repo1.maven.org/maven2/com/squareup/javawriter/2.5.0/javawriter-2.5.0.pom
+Download https://repo1.maven.org/maven2/org/sonatype/oss/oss-parent/7/oss-parent-7.pom
+Download https://repo1.maven.org/maven2/com/android/tools/common/24.0.0/common-24.0.0.pom
+Download https://repo1.maven.org/maven2/com/android/tools/build/builder-test-api/1.0.0/builder-test-api-1.0.0.pom
+Download https://repo1.maven.org/maven2/com/android/tools/ddms/ddmlib/24.0.0/ddmlib-24.0.0.pom
+Download https://repo1.maven.org/maven2/com/android/tools/build/manifest-merger/24.0.0/manifest-merger-24.0.0.pom
+Download https://repo1.maven.org/maven2/com/android/tools/build/builder-model/1.0.0/builder-model-1.0.0.pom
+Download https://repo1.maven.org/maven2/com/android/tools/sdklib/24.0.0/sdklib-24.0.0.pom
+Download https://repo1.maven.org/maven2/org/bouncycastle/bcpkix-jdk15on/1.48/bcpkix-jdk15on-1.48.pom
+Download https://repo1.maven.org/maven2/com/android/tools/lint/lint-checks/24.0.0/lint-checks-24.0.0.pom
+Download https://repo1.maven.org/maven2/org/eclipse/jdt/core/compiler/ecj/4.2.2/ecj-4.2.2.pom
+Download https://repo1.maven.org/maven2/net/sf/proguard/proguard-base/5.1/proguard-base-5.1.pom
+Download https://repo1.maven.org/maven2/com/google/guava/guava/17.0/guava-17.0.pom
+Download https://repo1.maven.org/maven2/com/google/guava/guava-parent/17.0/guava-parent-17.0.pom
+Download https://repo1.maven.org/maven2/net/sf/kxml/kxml2/2.3.0/kxml2-2.3.0.pom
+Download https://repo1.maven.org/maven2/com/android/tools/layoutlib/layoutlib-api/24.0.0/layoutlib-api-24.0.0.pom
+Download https://repo1.maven.org/maven2/org/apache/httpcomponents/httpclient/4.1.1/httpclient-4.1.1.pom
+Download https://repo1.maven.org/maven2/org/apache/httpcomponents/httpcomponents-client/4.1.1/httpcomponents-client-4.1.1.pom
+Download https://repo1.maven.org/maven2/org/apache/httpcomponents/project/4.1.1/project-4.1.1.pom
+Download https://repo1.maven.org/maven2/org/apache/httpcomponents/httpmime/4.1/httpmime-4.1.pom
+Download https://repo1.maven.org/maven2/org/apache/httpcomponents/httpcomponents-client/4.1/httpcomponents-client-4.1.pom
+Download https://repo1.maven.org/maven2/com/android/tools/dvlib/24.0.0/dvlib-24.0.0.pom
+Download https://repo1.maven.org/maven2/org/apache/commons/commons-compress/1.8.1/commons-compress-1.8.1.pom
+Download https://repo1.maven.org/maven2/org/apache/commons/commons-parent/33/commons-parent-33.pom
+Download https://repo1.maven.org/maven2/org/apache/apache/13/apache-13.pom
+Download https://repo1.maven.org/maven2/com/android/tools/lint/lint-api/24.0.0/lint-api-24.0.0.pom
+Download https://repo1.maven.org/maven2/org/ow2/asm/asm-analysis/4.0/asm-analysis-4.0.pom
+Download https://repo1.maven.org/maven2/org/ow2/asm/asm-parent/4.0/asm-parent-4.0.pom
+Download https://repo1.maven.org/maven2/org/ow2/ow2/1.3/ow2-1.3.pom
+Download https://repo1.maven.org/maven2/org/apache/httpcomponents/httpcore/4.1/httpcore-4.1.pom
+Download https://repo1.maven.org/maven2/org/apache/httpcomponents/httpcomponents-core/4.1/httpcomponents-core-4.1.pom
+Download https://repo1.maven.org/maven2/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.pom
+Download https://repo1.maven.org/maven2/org/apache/commons/commons-parent/5/commons-parent-5.pom
+Download https://repo1.maven.org/maven2/org/apache/apache/4/apache-4.pom
+Download https://repo1.maven.org/maven2/commons-codec/commons-codec/1.4/commons-codec-1.4.pom
+Download https://repo1.maven.org/maven2/org/apache/commons/commons-parent/11/commons-parent-11.pom
+Download https://repo1.maven.org/maven2/org/ow2/asm/asm/4.0/asm-4.0.pom
+Download https://repo1.maven.org/maven2/com/android/tools/external/lombok/lombok-ast/0.2.2/lombok-ast-0.2.2.pom
+Download https://repo1.maven.org/maven2/org/ow2/asm/asm-tree/4.0/asm-tree-4.0.pom
+Download https://repo1.maven.org/maven2/com/android/tools/build/gradle/1.0.0/gradle-1.0.0.jar
+Download https://repo1.maven.org/maven2/com/android/tools/build/builder/1.0.0/builder-1.0.0.jar
+Download https://repo1.maven.org/maven2/com/android/tools/lint/lint/24.0.0/lint-24.0.0.jar
+Download https://repo1.maven.org/maven2/net/sf/proguard/proguard-gradle/5.1/proguard-gradle-5.1.jar
+Download https://repo1.maven.org/maven2/com/android/tools/sdk-common/24.0.0/sdk-common-24.0.0.jar
+Download https://repo1.maven.org/maven2/org/bouncycastle/bcprov-jdk15on/1.48/bcprov-jdk15on-1.48.jar
+Download https://repo1.maven.org/maven2/com/squareup/javawriter/2.5.0/javawriter-2.5.0.jar
+Download https://repo1.maven.org/maven2/com/android/tools/common/24.0.0/common-24.0.0.jar
+Download https://repo1.maven.org/maven2/com/android/tools/build/builder-test-api/1.0.0/builder-test-api-1.0.0.jar
+Download https://repo1.maven.org/maven2/com/android/tools/ddms/ddmlib/24.0.0/ddmlib-24.0.0.jar
+Download https://repo1.maven.org/maven2/com/android/tools/build/manifest-merger/24.0.0/manifest-merger-24.0.0.jar
+Download https://repo1.maven.org/maven2/com/android/tools/build/builder-model/1.0.0/builder-model-1.0.0.jar
+Download https://repo1.maven.org/maven2/com/android/tools/sdklib/24.0.0/sdklib-24.0.0.jar
+Download https://repo1.maven.org/maven2/org/bouncycastle/bcpkix-jdk15on/1.48/bcpkix-jdk15on-1.48.jar
+Download https://repo1.maven.org/maven2/com/android/tools/lint/lint-checks/24.0.0/lint-checks-24.0.0.jar
+Download https://repo1.maven.org/maven2/org/eclipse/jdt/core/compiler/ecj/4.2.2/ecj-4.2.2.jar
+Download https://repo1.maven.org/maven2/net/sf/proguard/proguard-base/5.1/proguard-base-5.1.jar
+Download https://repo1.maven.org/maven2/com/google/guava/guava/17.0/guava-17.0.jar
+Download https://repo1.maven.org/maven2/net/sf/kxml/kxml2/2.3.0/kxml2-2.3.0.jar
+Download https://repo1.maven.org/maven2/com/android/tools/layoutlib/layoutlib-api/24.0.0/layoutlib-api-24.0.0.jar
+Download https://repo1.maven.org/maven2/org/apache/httpcomponents/httpclient/4.1.1/httpclient-4.1.1.jar
+Download https://repo1.maven.org/maven2/org/apache/httpcomponents/httpmime/4.1/httpmime-4.1.jar
+Download https://repo1.maven.org/maven2/com/android/tools/dvlib/24.0.0/dvlib-24.0.0.jar
+Download https://repo1.maven.org/maven2/org/apache/commons/commons-compress/1.8.1/commons-compress-1.8.1.jar
+Download https://repo1.maven.org/maven2/com/android/tools/lint/lint-api/24.0.0/lint-api-24.0.0.jar
+Download https://repo1.maven.org/maven2/org/ow2/asm/asm-analysis/4.0/asm-analysis-4.0.jar
+Download https://repo1.maven.org/maven2/org/apache/httpcomponents/httpcore/4.1/httpcore-4.1.jar
+Download https://repo1.maven.org/maven2/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar
+Download https://repo1.maven.org/maven2/commons-codec/commons-codec/1.4/commons-codec-1.4.jar
+Download https://repo1.maven.org/maven2/org/ow2/asm/asm/4.0/asm-4.0.jar
+Download https://repo1.maven.org/maven2/com/android/tools/external/lombok/lombok-ast/0.2.2/lombok-ast-0.2.2.jar
+Download https://repo1.maven.org/maven2/org/ow2/asm/asm-tree/4.0/asm-tree-4.0.jar
+:preBuild
+:compileDebugNdk
+:preDebugBuild
+:checkDebugManifest
+:CordovaLib:compileLint
+:CordovaLib:copyDebugLint UP-TO-DATE
+:CordovaLib:mergeDebugProguardFiles
+:CordovaLib:preBuild
+:CordovaLib:preDebugBuild
+:CordovaLib:checkDebugManifest
+:CordovaLib:prepareDebugDependencies
+:CordovaLib:compileDebugAidl
+:CordovaLib:compileDebugRenderscript
+:CordovaLib:generateDebugBuildConfig
+:CordovaLib:generateDebugAssets UP-TO-DATE
+:CordovaLib:mergeDebugAssets
+:CordovaLib:generateDebugResValues
+:CordovaLib:generateDebugResources
+:CordovaLib:packageDebugResources
+:CordovaLib:processDebugManifest
+:CordovaLib:processDebugResources
+:CordovaLib:generateDebugSources
+:CordovaLib:compileDebugJavaNote: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+:CordovaLib:processDebugJavaRes UP-TO-DATE
+:CordovaLib:packageDebugJar
+:CordovaLib:compileDebugNdk
+:CordovaLib:packageDebugJniLibs UP-TO-DATE
+:CordovaLib:packageDebugLocalJar UP-TO-DATE
+:CordovaLib:packageDebugRenderscript UP-TO-DATE
+:CordovaLib:bundleDebug
+:prepareAndroidCordovaLibUnspecifiedDebugLibrary
+:prepareDebugDependencies
+:compileDebugAidl
+:compileDebugRenderscript
+:generateDebugBuildConfig
+:generateDebugAssets UP-TO-DATE
+:mergeDebugAssets
+:generateDebugResValues
+:generateDebugResources
+:mergeDebugResources
+:processDebugManifest
+:processDebugResources
+:generateDebugSources
+:compileDebugJava
+:preDexDebug
+:dexDebug
+:processDebugJavaRes UP-TO-DATE
+:validateDebugSigning
+:packageDebug
+:zipalignDebug
+:assembleDebug
+:cdvBuildDebug
+
+BUILD SUCCESSFUL
+
+Total time: 1 mins 13.533 secs
+15:23:08.404 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on buildscript class cache for settings file '/src/platforms/android/settings.gradle' (/src/gradle/caches/2.2.1/scripts/settings_ek59pn8wqr8cucdzfydq4z1hj/SettingsScript/buildscript).
+15:23:08.407 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on no_buildscript class cache for settings file '/src/platforms/android/settings.gradle' (/src/gradle/caches/2.2.1/scripts/settings_ek59pn8wqr8cucdzfydq4z1hj/SettingsScript/no_buildscript).
+15:23:08.407 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on buildscript class cache for build file '/src/platforms/android/build.gradle' (/src/gradle/caches/2.2.1/scripts/build_etgv2kkpixwmzsoz3cmvdk68c/ProjectScript/buildscript).
+15:23:08.407 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on no_buildscript class cache for build file '/src/platforms/android/build.gradle' (/src/gradle/caches/2.2.1/scripts/build_etgv2kkpixwmzsoz3cmvdk68c/ProjectScript/no_buildscript).
+15:23:08.408 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on buildscript class cache for script '/src/platforms/android/CordovaLib/cordova.gradle' (/src/gradle/caches/2.2.1/scripts/cordova_8npwgxc89zkyr6i078p6dn4ah/DefaultScript/buildscript).
+15:23:08.408 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on no_buildscript class cache for script '/src/platforms/android/CordovaLib/cordova.gradle' (/src/gradle/caches/2.2.1/scripts/cordova_8npwgxc89zkyr6i078p6dn4ah/DefaultScript/no_buildscript).
+15:23:08.409 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on buildscript class cache for build file '/src/platforms/android/CordovaLib/build.gradle' (/src/gradle/caches/2.2.1/scripts/build_6murzpcmv6gxo0b49yvpjniuk/ProjectScript/buildscript).
+15:23:08.409 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on no_buildscript class cache for build file '/src/platforms/android/CordovaLib/build.gradle' (/src/gradle/caches/2.2.1/scripts/build_6murzpcmv6gxo0b49yvpjniuk/ProjectScript/no_buildscript).
+15:23:08.410 [DEBUG] [org.gradle.api.internal.tasks.compile.daemon.CompilerDaemonManager] Stopping 0 compiler daemon(s).
+15:23:08.410 [INFO] [org.gradle.api.internal.tasks.compile.daemon.CompilerDaemonManager] Stopped 0 compiler daemon(s).
+15:23:08.419 [DEBUG] [org.gradle.cache.internal.DefaultCacheAccess] Cache Plugin Resolution Cache (/src/gradle/caches/2.2.1/plugin-resolution) was closed 0 times.
+15:23:08.420 [DEBUG] [org.gradle.cache.internal.btree.BTreePersistentIndexedCache] Closing cache artifact-at-url.bin (/src/gradle/caches/modules-2/metadata-2.14/artifact-at-url.bin)
+15:23:08.420 [DEBUG] [org.gradle.cache.internal.btree.BTreePersistentIndexedCache] Closing cache artifact-at-repository.bin (/src/gradle/caches/modules-2/metadata-2.14/artifact-at-repository.bin)
+15:23:08.420 [DEBUG] [org.gradle.cache.internal.btree.BTreePersistentIndexedCache] Closing cache module-versions.bin (/src/gradle/caches/modules-2/metadata-2.14/module-versions.bin)
+15:23:08.421 [DEBUG] [org.gradle.cache.internal.btree.BTreePersistentIndexedCache] Closing cache module-metadata.bin (/src/gradle/caches/modules-2/metadata-2.14/module-metadata.bin)
+15:23:08.430 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on artifact cache (/src/gradle/caches/modules-2).
+15:23:08.432 [DEBUG] [org.gradle.cache.internal.btree.BTreePersistentIndexedCache] Closing cache taskArtifacts.bin (/src/platforms/android/.gradle/2.2.1/taskArtifacts/taskArtifacts.bin)
+15:23:08.432 [DEBUG] [org.gradle.cache.internal.btree.BTreePersistentIndexedCache] Closing cache fileHashes.bin (/src/platforms/android/.gradle/2.2.1/taskArtifacts/fileHashes.bin)
+15:23:08.432 [DEBUG] [org.gradle.cache.internal.btree.BTreePersistentIndexedCache] Closing cache fileSnapshots.bin (/src/platforms/android/.gradle/2.2.1/taskArtifacts/fileSnapshots.bin)
+15:23:08.433 [DEBUG] [org.gradle.cache.internal.btree.BTreePersistentIndexedCache] Closing cache outputFileStates.bin (/src/platforms/android/.gradle/2.2.1/taskArtifacts/outputFileStates.bin)
+15:23:08.433 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on task history cache (/src/platforms/android/.gradle/2.2.1/taskArtifacts).
+15:23:08.449 [DEBUG] [org.gradle.api.internal.artifacts.ivyservice.ivyresolve.memcache.InMemoryCachedRepositoryFactory] In-memory dependency metadata cache closed. Repos cached: 6, cache instances: 1, modules served from cache: 10, artifacts: 10
+15:23:08.449 [DEBUG] [org.gradle.api.internal.artifacts.ivyservice.resolveengine.store.CachedStoreFactory] Resolution result cache closed. Cache reads: 0, disk reads: 2 (avg: 0.005 secs, total: 0.01 secs)
+15:23:08.450 [DEBUG] [org.gradle.api.internal.artifacts.ivyservice.resolveengine.store.CachedStoreFactory] Resolved configuration cache closed. Cache reads: 0, disk reads: 0 (avg: 0.0 secs, total: 0.0 secs)
+15:23:08.453 [DEBUG] [org.gradle.api.internal.artifacts.ivyservice.resolveengine.store.ResolutionResultsStoreFactory] Deleted 2 resolution results binary files in 0.004 secs
+15:23:08.453 [DEBUG] [org.gradle.launcher.daemon.server.exec.ExecuteBuild] The daemon has finished executing the build.
+15:23:08.963 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] Daemon is busy, sleeping until state changes.
+15:23:08.965 [DEBUG] [org.apache.http.impl.conn.PoolingClientConnectionManager] Connection manager is shutting down
+15:23:08.966 [DEBUG] [org.apache.http.impl.conn.DefaultClientConnection] Connection 0.0.0.0:45832<->151.101.36.209:443 closed
+15:23:08.966 [DEBUG] [org.apache.http.impl.conn.DefaultClientConnection] Connection 0.0.0.0:45832<->151.101.36.209:443 closed
+15:23:08.966 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] Command execution: finished waiting for DaemonCommandExecution[command = Build{id=555873d7-33c7-4516-b5a5-c36025f95295.1, currentDir=/src}, connection = org.gradle.launcher.daemon.server.DefaultDaemonConnection@70f32f92]. Result org.gradle.launcher.daemon.server.DaemonStateCoordinator@55e79c07 with state Running
+15:23:08.966 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] Command execution: completed DaemonCommandExecution[command = Build{id=555873d7-33c7-4516-b5a5-c36025f95295.1, currentDir=/src}, connection = org.gradle.launcher.daemon.server.DefaultDaemonConnection@70f32f92]
+15:23:08.967 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] updating lastActivityAt to 1519572188967
+15:23:08.967 [INFO] [org.gradle.launcher.daemon.server.DomainRegistryUpdater] Marking the daemon as idle, address: [1a066895-828a-4ac1-af1b-2ec8a5396f24 port:41807, addresses:[/127.0.0.1]]
+15:23:08.968 [DEBUG] [org.gradle.launcher.daemon.registry.PersistentDaemonRegistry] Marking idle by address: [1a066895-828a-4ac1-af1b-2ec8a5396f24 port:41807, addresses:[/127.0.0.1]]
+15:23:08.969 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire exclusive lock on daemon addresses registry.
+15:23:08.970 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired.
+15:23:08.970 [DEBUG] [org.apache.http.impl.conn.PoolingClientConnectionManager] Connection manager shut down
+15:23:08.975 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+15:23:08.976 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] Daemon is idle, sleeping until state change or idle timeout at Sun Feb 25 18:23:08 UTC 2018
+15:23:08.976 [DEBUG] [org.gradle.launcher.daemon.server.exec.ReturnResult] Daemon is dispatching the build result: DaemonCommandResult[type=Success, value=null]
+15:23:08.977 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 12: dispatching class org.gradle.launcher.daemon.protocol.Success
+15:23:08.986 [DEBUG] [org.gradle.launcher.daemon.server.DefaultIncomingConnectionHandler] Finishing executing command: Build{id=555873d7-33c7-4516-b5a5-c36025f95295.1, currentDir=/src}
+15:23:08.994 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 13: received class org.gradle.launcher.daemon.protocol.CloseInput
+15:23:08.995 [DEBUG] [org.gradle.launcher.daemon.server.DefaultDaemonConnection] Received IO message from client: CloseInput[id=555873d7-33c7-4516-b5a5-c36025f95295.2]
+15:23:09.001 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 13: received class org.gradle.launcher.daemon.protocol.Finished
+15:23:09.002 [DEBUG] [org.gradle.launcher.daemon.server.DefaultDaemonConnection] Received non-IO message from client: org.gradle.launcher.daemon.protocol.Finished@8f8c13a
+15:23:09.002 [DEBUG] [org.gradle.launcher.daemon.server.DefaultIncomingConnectionHandler] Received finished message: org.gradle.launcher.daemon.protocol.Finished@8f8c13a
+15:23:09.002 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 12: stopping connection
+15:23:09.003 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 13: received null
+15:23:09.003 [DEBUG] [org.gradle.launcher.daemon.server.DefaultDaemonConnection] Received end-of-input from client.
+15:23:09.006 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 12: stopping connection
