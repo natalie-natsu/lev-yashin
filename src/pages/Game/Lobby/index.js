@@ -175,7 +175,7 @@ class Lobby extends React.Component {
                 index={index}
                 isAdmin={player._id === game.admin}
                 isGettingReady={page.isGettingReady}
-                isReady={game.readyUsers.includes(player._id)}
+                isReady={game.readyUsers.some(user => user._id === player._id)}
                 key={player._id}
                 last={index === players.length - 1}
                 onBan={(e, p) => this.handleBan(e, p)}

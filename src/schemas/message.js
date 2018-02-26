@@ -3,8 +3,8 @@ import { userSchema } from './user';
 import { gameSchema } from './game';
 
 export const messageSchema = new schema.Entity('messages', {
-    gameId: gameSchema,
-    userId: userSchema,
+    game: gameSchema,
+    user: userSchema,
 }, { idAttribute: '_id' });
 
 export const messageListSchema = [messageSchema];

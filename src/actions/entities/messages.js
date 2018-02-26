@@ -6,19 +6,6 @@ import { getEndpoint, getHeaders } from '../../helpers/endpoint';
 import { client } from '../../helpers/nes';
 import { userListSchema, userSchema } from '../../schemas/user';
 
-export function normalizeMessageEntities(response) {
-    return normalize(response, {
-        messages: messageListSchema,
-        users: userListSchema,
-    });
-}
-
-export function updateMessageEntities(response, normalized = this.normalizeMessageEntities(response)) {
-    return (dispatch) => {
-        dispatch(receiveEntities(normalized.entities));
-    };
-}
-
 export const REFRESH_MESSAGES = 'REFRESH_MESSAGES';
 export const REQUEST_FETCH_MESSAGES = 'REQUEST_FETCH_MESSAGES';
 export const SUCCESS_FETCH_MESSAGES = 'SUCCESS_FETCH_MESSAGES';
@@ -40,8 +27,13 @@ export function successFetchMessages(response, scope, { limit, skip }) {
     return (dispatch) => {
         const { totalMessages } = response;
         delete response.totalMessages;
-        const normalized = normalizeMessageEntities(response);
-        dispatch(updateMessageEntities(response, normalized));
+
+        const normalized = normalize(response, {
+            messages: messageListSchema,
+            users: userListSchema,
+        });
+
+        dispatch(receiveEntities(normalized.entities));
         dispatch({
             type: SUCCESS_FETCH_MESSAGES,
             receivedAt: Date.now(),
@@ -75,12 +67,16 @@ export const subscribeMessages = (payload, scope, then = () => false) => (dispat
 
 export function successSubscribeMessages(response, scope, then) {
     return (dispatch, getState) => {
-        const normalized = normalizeMessageEntities(response);
-        dispatch(updateMessageEntities(response, normalized));
+        const normalized = normalize(response, {
+            message: messageSchema,
+            users: userListSchema,
+        });
+
+        dispatch(receiveEntities(normalized.entities));
         dispatch({
             type: SUCCESS_SUBSCRIBE_MESSAGES,
             receivedAt: Date.now(),
-            ids: normalized.result,
+            ids: normalized.result.message,
             totalMessages: getState().pages.GameMessages.totalMessages + 1,
             skip: getState().pages.GameMessages.skip + 1,
             response,
@@ -124,11 +120,11 @@ export function successSendMessage(response, scope, then) {
             user: userSchema,
         });
 
-        dispatch(updateMessageEntities(response, normalized));
+        dispatch(receiveEntities(normalized.entities));
         dispatch({
             type: SUCCESS_SEND_MESSAGE,
             receivedAt: Date.now(),
-            ids: normalized.result,
+            ids: normalized.result.message,
             response,
             scope,
             then,

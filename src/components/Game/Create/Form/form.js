@@ -48,14 +48,6 @@ class GameCreateForm extends React.Component {
                     type="text"
                     errors={this.nameErrors}
                 />
-                <span className="d-none">
-                    <Field
-                        component={renderInput}
-                        formControl={{ id: 'locale' }}
-                        name="locale"
-                        type="text"
-                    />
-                </span>
                 <div className="row mb-3">
                     <div className="col-md-12">
                         <Field
