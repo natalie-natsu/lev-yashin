@@ -16,7 +16,7 @@ import SideAction from '../../../components/MainHeader/SideAction';
 class Draft extends React.Component {
     render() {
         const { credentials, game } = this.props;
-        const isUserTurn = game.draftOrder[0]._id === credentials._id;
+        const isUserTurn = game.draftOrder[game.draftIndex]._id === credentials._id;
 
         return (
             <section id="game-draft">
@@ -42,6 +42,7 @@ Draft.propTypes = {
     game: PropTypes.shape({
         _id: PropTypes.string.isRequired,
         admin: PropTypes.string.isRequired,
+        draftIndex: PropTypes.number,
         users: PropTypes.arrayOf(PropTypes.shape({
             _id: PropTypes.string.isRequired,
             profile: PropTypes.shape({

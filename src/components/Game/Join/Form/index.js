@@ -32,7 +32,7 @@ class RegisterForm extends React.Component {
                 } else {
                     dispatch(successJoinGame(json, scope));
                     history.push({
-                        pathname: routes.game.read.replace(':id', json.game._id),
+                        pathname: routes.game.read.replace(':id', json.game._id).replace(':step', json.game.step),
                         state: { game: json.game },
                     });
                     toast.success(t('form:joinGame.success'), { position: toast.POSITION.BOTTOM_RIGHT });
