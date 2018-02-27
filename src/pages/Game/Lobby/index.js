@@ -21,6 +21,7 @@ import { getPublicName } from '../../../helpers/user';
 import Slot from '../../../components/Game/Slot';
 import UpdateGameForm from '../../../components/Game/Update/Form';
 import SideAction from '../../../components/MainHeader/SideAction';
+import Title from '../../../components/MainHeader/Title';
 
 class Lobby extends React.Component {
     userIsBanned(game = this.props.game, credentials = this.props.credentials) {
@@ -224,6 +225,7 @@ class Lobby extends React.Component {
 
         return (
             <section id="game-lobby">
+                <Title>{game.name}</Title>
                 <SideAction>
                     <div className="btn-side-action mx-2 mx-sm-3">
                         <Link to={routes.game.messages.replace(':id', game._id)} className="btn">

@@ -18,6 +18,7 @@ import {
 } from '../../../actions/entities/messages';
 
 import Chat from '../../../components/Chat';
+import Title from '../../../components/MainHeader/Title';
 import SideAction from '../../../components/MainHeader/SideAction';
 
 class Messages extends React.Component {
@@ -63,6 +64,7 @@ class Messages extends React.Component {
         const { credentials, game, messages, page } = this.props;
         return (
             <section id="game-messages">
+                <Title>{game.name}</Title>
                 <SideAction>
                     <div className="btn-side-action mx-2 mx-sm-3">
                         <Link to={routes.game.read.replace(':id', game._id)} className="btn">

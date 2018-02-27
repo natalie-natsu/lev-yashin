@@ -93,8 +93,8 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-    credentials: PropTypes.shape({ token: PropTypes.string }).isRequired,
     app: PropTypes.shape({ firstVisit: PropTypes.bool, locale: PropTypes.string }).isRequired,
+    credentials: PropTypes.shape({ token: PropTypes.string }).isRequired,
     dispatch: PropTypes.func.isRequired,
 };
 

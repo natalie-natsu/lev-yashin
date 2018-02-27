@@ -18,7 +18,6 @@ import { resetMessages } from '../../actions/components/Game/Messages';
 import NoMatch from '../NoMatch';
 import PrivateRoute from '../../components/PrivateRoute';
 import Loader from '../../components/Loader';
-import Title from '../../components/MainHeader/Title';
 import Lobby from './Lobby';
 import Draft from './Draft';
 import Messages from './Messages';
@@ -125,7 +124,6 @@ class Game extends React.Component {
 
         return (
             <div id="game">
-                <Title>{game.name}</Title>
                 <div className="container">
                     {this.renderAlert()}
                     <Switch>

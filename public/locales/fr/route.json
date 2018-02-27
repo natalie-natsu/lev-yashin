@@ -1,26 +1,34 @@
 {
   "home": {
-    "text": "Accueil"
+    "name": "Accueil",
+    "description": "Prêt à vivre une toute autre Coupe du Monde ? Affronte tes amis dans un jeu où les résultats des matchs détermineront qui est le meilleur de vous quatre."
   },
   "legends": {
-    "text": "Légendes FIFA"
+    "name": "Légendes FIFA",
+    "description": "Collectionne les cartes des légendes de la FIFA comme Zidane, Deschamps, Platini et bien d'autres ! "
   },
   "newGame": {
-    "text": "Nouvelle partie"
+    "name": "Nouvelle partie",
+    "description": "Envie de te lancer, de créer une nouvelle partie ou de rejoindre celle de tes potes ? C'est par ici."
   },
   "games": {
-    "text": "Parties en cours"
+    "name": "Parties en cours",
+    "description": "Retrouve toutes les parties auquelles tu participes."
   },
   "calendar": {
-    "text": "Les matchs"
+    "name": "Les matchs",
+    "description": "Suis les matchs en tant réel et check si l'Islande ou le Nigeria vont finir à la tète de leur groupe."
   },
   "shop": {
-    "text": "Plus de bonus"
+    "name": "Plus de bonus",
+    "description": "Pas d'arnaque, ni de jeu de hasard (gambling), ni de pay to win. Ici, tout ce que tu achêtes est du bonus."
   },
   "signIn": {
-    "text": "Connexion"
+    "name": "Connexion",
+    "description": "On a envie d'y retourner ? Tu peux te connecter ici avant d'aller mettre la patée à tes potes."
   },
   "register": {
-    "text": "Inscription"
+    "name": "Inscription",
+    "description": "Rejoins-nous en t'inscrivant sur cette page, puis profite de cette belle Coupe qui s'annonce. Mais qui va gagner ?"
   }
 }
