@@ -1,34 +1,71 @@
 {
-  "home": {
-    "name": "Accueil",
-    "description": "Prêt à vivre une toute autre Coupe du Monde ? Affronte tes amis dans un jeu où les résultats des matchs détermineront qui est le meilleur de vous quatre."
-  },
-  "legends": {
-    "name": "Légendes FIFA",
-    "description": "Collectionne les cartes des légendes de la FIFA comme Zidane, Deschamps, Platini et bien d'autres ! "
-  },
-  "newGame": {
-    "name": "Nouvelle partie",
-    "description": "Envie de te lancer, de créer une nouvelle partie ou de rejoindre celle de tes potes ? C'est par ici."
-  },
-  "games": {
-    "name": "Parties en cours",
-    "description": "Retrouve toutes les parties auquelles tu participes."
+  "auth": {
+    "forgotPassword": {
+      "name": "Mot de passe oublié"
+    },
+    "register": {
+      "name": "Inscription",
+      "description": "Rejoins-nous en t'inscrivant sur cette page, puis profite de cette belle Coupe qui s'annonce. Mais qui va gagner ?."
+    },
+    "signIn": {
+      "name": "Connexion",
+      "description": "On a envie d'y retourner ? Tu peux te connecter ici avant d'aller mettre la patée à tes potes."
+    }
   },
   "calendar": {
     "name": "Les matchs",
     "description": "Suis les matchs en tant réel et check si l'Islande ou le Nigeria vont finir à la tète de leur groupe."
   },
+  "game": {
+    "create": {
+      "name": "Nouvelle partie",
+      "description": "Envie de te lancer, de créer une nouvelle partie ou de rejoindre celle de tes potes ? C'est par ici."
+    },
+    "lobby": {
+      "name": "Lobby"
+    },
+    "draft": {
+      "name": "Draft"
+    },
+    "onGoing": {
+      "name": "Détails partie"
+    },
+    "messages": {
+      "name": "Messages"
+    }
+  },
+  "home": {
+    "name": "Accueil",
+    "description": "Prêt à vivre une toute autre Coupe du Monde ? Affronte tes amis dans un jeu où les résultats des matchs détermineront qui est le meilleur de vous quatre."
+  },
+  "match": {
+    "name": "Match"
+  },
+  "me": {
+    "exact": {
+      "name": "Profil"
+    },
+    "resetPassword": {
+      "name": "Changer de mot de passe"
+    },
+    "update": {
+      "name": "Modifier profil"
+    }
+  },
+  "notAllowed": {
+    "name": "401"
+  },
+
+  "legends": {
+    "name": "Légendes FIFA",
+    "description": "Collectionne les cartes des légendes de la FIFA comme Zidane, Deschamps, Platini et bien d'autres ! "
+  },
+  "games": {
+    "name": "Parties en cours",
+    "description": "Retrouve toutes les parties auquelles tu participes."
+  },
   "shop": {
     "name": "Plus de bonus",
     "description": "Pas d'arnaque, ni de jeu de hasard (gambling), ni de pay to win. Ici, tout ce que tu achêtes est du bonus."
-  },
-  "signIn": {
-    "name": "Connexion",
-    "description": "On a envie d'y retourner ? Tu peux te connecter ici avant d'aller mettre la patée à tes potes."
-  },
-  "register": {
-    "name": "Inscription",
-    "description": "Rejoins-nous en t'inscrivant sur cette page, puis profite de cette belle Coupe qui s'annonce. Mais qui va gagner ?"
   }
 }

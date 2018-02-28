@@ -1,26 +1,64 @@
 {
-  "home": {
-    "text": "Home"
-  },
-  "legends": {
-    "text": "FIFA Legends"
-  },
-  "newGame": {
-    "text": "New game"
-  },
-  "games": {
-    "text": "Current games"
+  "auth": {
+    "forgotPassword": {
+      "name": "Forgot password"
+    },
+    "register": {
+      "name": "Register"
+    },
+    "signIn": {
+      "name": "Sign in"
+    }
   },
   "calendar": {
-    "text": "Events"
+    "name": "Calendar"
+  },
+  "game": {
+    "create": {
+      "name": "New game"
+    },
+    "lobby": {
+      "name": "Lobby"
+    },
+    "draft": {
+      "name": "Draft"
+    },
+    "onGoing": {
+      "name": "Game details"
+    },
+    "messages": {
+      "name": "Messages"
+    }
+  },
+  "home": {
+    "name": "Home",
+    "description": "Reday to live a unique World Cup ? Challenge your friends in a game where match's results define who is the best of yor four."
+  },
+  "match": {
+    "name": "Match"
+  },
+  "me": {
+    "exact": {
+      "name": "Profile"
+    },
+    "resetPassword": {
+      "name": "Change password"
+    },
+    "update": {
+      "name": "Update profile"
+    }
+  },
+  "notAllowed": {
+    "name": "401"
+  },
+
+  "legends": {
+    "name": "FIFA Legends"
+  },
+  "games": {
+    "name": "On going games"
   },
   "shop": {
-    "text": "More bonuses"
-  },
-  "signIn": {
-    "text": "Sign in"
-  },
-  "register": {
-    "text": "Register"
+    "name": "More bonuses"
   }
 }

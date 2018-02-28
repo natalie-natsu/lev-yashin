@@ -68,12 +68,12 @@ const Drawer = ({ credentials, dispatch, isOpen, t }) => (
                     <ul className="fa-ul">
                         <li className="nav-item">
                             <Link className="nav-link" to={routes.auth.signIn} onClick={() => close(dispatch)}>
-                                <FontAwesomeIcon icon={faSignInAlt} listItem />&nbsp;{t('route:signIn.name')}
+                                <FontAwesomeIcon icon={faSignInAlt} listItem />&nbsp;{t('route:auth.signIn.name')}
                             </Link>
                         </li>
                         <li className="nav-item">
                             <Link className="nav-link" to={routes.auth.register} onClick={() => close(dispatch)}>
-                                <FontAwesomeIcon icon={faEdit} listItem />&nbsp;{t('route:register.name')}
+                                <FontAwesomeIcon icon={faEdit} listItem />&nbsp;{t('route:auth.register.name')}
                             </Link>
                         </li>
                     </ul>
@@ -92,7 +92,7 @@ const Drawer = ({ credentials, dispatch, isOpen, t }) => (
                     {credentials.token && (
                         <li className="nav-item">
                             <Link className="nav-link" to={routes.game.create} onClick={() => close(dispatch)}>
-                                <FontAwesomeIcon icon={faPlayCircle} listItem />&nbsp;{t('route:newGame.name')}
+                                <FontAwesomeIcon icon={faPlayCircle} listItem />&nbsp;{t('route:game.create.name')}
                             </Link>
                         </li>
                     )}
