@@ -9,7 +9,7 @@ import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faCalendarAlt } from '@fortawesome/fontawesome-free-solid/index';
 
 import { failFetchMatch, fetchMatch, successFetchMatch } from '../../actions/entities/match';
-import { matchCalendarSchema } from '../../schemas/calendar';
+import { matchSchema } from '../../schemas/match';
 import { routes } from '../../helpers/routes';
 import { getTeamName } from '../../helpers/team';
 import cityToPicture from './cityToPicture';
@@ -159,7 +159,7 @@ export default translate(['common', 'page'])(connect(
         credentials: state.credentials,
         page: {
             ...state.pages.Match,
-            match: state.entities.matches && denormalize(ownProps.match.params.id, matchCalendarSchema, state.entities),
+            match: state.entities.matches && denormalize(ownProps.match.params.id, matchSchema, state.entities),
         },
     }),
     dispatch => ({ dispatch }),

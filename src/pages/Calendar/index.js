@@ -1,4 +1,5 @@
 import React from 'react';
+import { map } from 'lodash';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { denormalize } from 'normalizr';
@@ -6,8 +7,8 @@ import { translate } from 'react-i18next';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { faSync } from '@fortawesome/fontawesome-free-solid';
 
-import { failFetchCalendar, fetchCalendar, successFetchCalendar } from '../../actions/entities/match';
-import { calendarSchema } from '../../schemas/calendar';
+import { failFetchMatches, fetchMatches, successFetchMatches } from '../../actions/entities/match';
+import { matchListSchema } from '../../schemas/match';
 import { routes } from '../../helpers/routes';
 
 import './Calendar.scss';
@@ -27,9 +28,9 @@ class Calendar extends React.Component {
 
         if (!calendar.isFetching) {
             const scope = routes.calendar;
-            dispatch(fetchCalendar({}, scope, (response) => {
-                if (response.error) dispatch(failFetchCalendar(response, scope));
-                else dispatch(successFetchCalendar(response, scope));
+            dispatch(fetchMatches({}, scope, (response) => {
+                if (response.error) dispatch(failFetchMatches(response, scope));
+                else dispatch(successFetchMatches(response, scope));
             }));
         }
     }
@@ -76,8 +77,8 @@ export default translate(['common', 'page'])(connect(
     state => ({
         credentials: state.credentials,
         calendar: {
-            ...state.calendar,
-            matches: denormalize(state.calendar.matches, calendarSchema, state.entities),
+            ...state.pages.Calendar,
+            matches: denormalize(map(state.entities.matches, m => m.id), matchListSchema, state.entities),
         },
     }),
     dispatch => ({ dispatch }),

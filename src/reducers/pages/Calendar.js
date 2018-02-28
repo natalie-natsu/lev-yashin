@@ -1,5 +1,5 @@
-import { createReducer } from './utilities';
-import { FAIL_FETCH_CALENDAR, REQUEST_FETCH_CALENDAR, SUCCESS_FETCH_CALENDAR } from '../actions/entities/match';
+import { createReducer } from '../utilities/index';
+import { FAIL_FETCH_MATCHES, REQUEST_FETCH_MATCHES, SUCCESS_FETCH_MATCHES } from '../../actions/entities/match';
 
 const initialCalendarState = {
     matches: [],
@@ -8,7 +8,7 @@ const initialCalendarState = {
     receivedAt: null,
 };
 
-function failFetchCalendar(state) {
+function failFetchMatches(state) {
     return {
         ...state,
         isFetching: false,
@@ -16,7 +16,7 @@ function failFetchCalendar(state) {
     };
 }
 
-function requestFetchCalendar(state) {
+function requestFetchMatches(state) {
     return {
         ...state,
         isFetching: true,
@@ -24,7 +24,7 @@ function requestFetchCalendar(state) {
     };
 }
 
-function successFetchCalendar(state, actions) {
+function successFetchMatches(state, actions) {
     return {
         ...state,
         matches: actions.ids,
@@ -35,7 +35,7 @@ function successFetchCalendar(state, actions) {
 }
 
 export default createReducer(initialCalendarState, {
-    [FAIL_FETCH_CALENDAR]: failFetchCalendar,
-    [REQUEST_FETCH_CALENDAR]: requestFetchCalendar,
-    [SUCCESS_FETCH_CALENDAR]: successFetchCalendar,
+    [FAIL_FETCH_MATCHES]: failFetchMatches,
+    [REQUEST_FETCH_MATCHES]: requestFetchMatches,
+    [SUCCESS_FETCH_MATCHES]: successFetchMatches,
 });

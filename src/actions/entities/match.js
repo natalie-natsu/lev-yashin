@@ -1,11 +1,10 @@
 import { normalize } from 'normalizr';
 import { receiveEntities } from '../entities';
 import { matchListSchema, matchSchema } from '../../schemas/match';
-import { calendarSchema } from '../../schemas/calendar';
+import { teamListSchema } from '../../schemas/team';
+import { groupListSchema, groupSchema } from '../../schemas/group';
 
 import { getEndpoint, getHeaders } from '../../helpers/endpoint';
-import { teamListSchema } from '../../schemas/team';
-import { groupSchema } from '../../schemas/group';
 
 export const REQUEST_FETCH_MATCH = 'REQUEST_FETCH_MATCH';
 export const SUCCESS_FETCH_MATCH = 'SUCCESS_FETCH_MATCH';
@@ -26,9 +25,9 @@ export const fetchMatch = (payload, scope, then = () => false) => (dispatch, get
 export function successFetchMatch(response, scope, then) {
     return (dispatch) => {
         const normalized = normalize(response, {
+            group: groupSchema,
             match: matchSchema,
             teams: teamListSchema,
-            group: groupSchema,
         });
         dispatch(receiveEntities(normalized.entities));
         dispatch({
@@ -69,7 +68,11 @@ export const fetchMatches = (payload, scope, then = () => false) => (dispatch, g
 
 export function successFetchMatches(response, scope, then) {
     return (dispatch) => {
-        const normalized = normalize(response, matchListSchema);
+        const normalized = normalize(response, {
+            groups: groupListSchema,
+            matches: matchListSchema,
+            teams: teamListSchema,
+        });
         dispatch(receiveEntities(normalized.entities));
         dispatch({
             type: SUCCESS_FETCH_MATCHES,
@@ -84,46 +87,6 @@ export function successFetchMatches(response, scope, then) {
 export function failFetchMatches(response, scope, then) {
     return {
         type: FAIL_FETCH_MATCHES,
-        receivedAt: Date.now(),
-        error: response,
-        scope,
-        then,
-    };
-}
-
-export const REQUEST_FETCH_CALENDAR = 'REQUEST_FETCH_CALENDAR';
-export const SUCCESS_FETCH_CALENDAR = 'SUCCESS_FETCH_CALENDAR';
-export const FAIL_FETCH_CALENDAR = 'FAIL_FETCH_CALENDAR';
-
-export const fetchCalendar = (payload, scope, then = () => false) => (dispatch, getState) => {
-    dispatch({ type: REQUEST_FETCH_CALENDAR, payload, scope });
-
-    fetch(getEndpoint('fetchCalendar', payload), {
-        method: 'GET',
-        headers: getHeaders(getState().credentials),
-    })
-        .then(response => response.json())
-        .then(response => then(response))
-        .catch(error => dispatch({ type: FAIL_FETCH_CALENDAR, error, payload, scope }));
-};
-
-export function successFetchCalendar(response, scope, then) {
-    return (dispatch) => {
-        const normalized = normalize(response, calendarSchema);
-        dispatch(receiveEntities(normalized.entities));
-        dispatch({
-            type: SUCCESS_FETCH_CALENDAR,
-            receivedAt: Date.now(),
-            ids: normalized.result,
-            scope,
-            then,
-        });
-    };
-}
-
-export function failFetchCalendar(response, scope, then) {
-    return {
-        type: FAIL_FETCH_CALENDAR,
         receivedAt: Date.now(),
         error: response,
         scope,

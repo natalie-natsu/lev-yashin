@@ -21,6 +21,7 @@ import { localeTo } from '../../helpers/locales';
 import './App.scss';
 import Layout from '../Layout';
 import FirstVisit from '../FirstVisit';
+import FIFA from '../FIFA';
 
 import PrivateRoute from '../PrivateRoute';
 import NotAllowed from '../../pages/NotAllowed';
@@ -69,6 +70,7 @@ class App extends React.Component {
         return (
             <I18nextProvider i18n={i18n}>
                 <div id="app">
+                    <FIFA />
                     <ToastContainer />
                     <BrowserRouter>
                         <Layout signOut={() => this.props.dispatch(signOut())}>

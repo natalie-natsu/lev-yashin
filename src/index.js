@@ -43,14 +43,14 @@ class AppProvider extends React.Component {
 
     componentWillMount() {
         // store only a subset of the state of entities
-        const saveSubsetFilter = createFilter(
+        const saveEntitiesFilter = createFilter(
             'entities',
             ['groups', 'matches', 'teams'],
         );
 
         persistStore(store, {
-            whitelist: ['app', 'calendar', 'credentials', 'entities'],
-            transforms: [saveSubsetFilter],
+            whitelist: ['app', 'credentials', 'entities'],
+            transforms: [saveEntitiesFilter],
         }, () => { this.setState({ rehydrated: true }); });
     }
 

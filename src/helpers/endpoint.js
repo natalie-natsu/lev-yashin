@@ -21,7 +21,6 @@ const endpoints = {
     fetchMessages: ({ id, skip = 0, limit = 50 }) => `/games/${id}/messages/${skip}/${limit}`,
     sendMessage: ({ id }) => `/games/${id}/messages`,
     // FIFA
-    fetchCalendar: () => '/fifa/calendar',
     fetchMatch: ({ id }) => `/fifa/matches/${id}`,
     fetchMatches: () => '/fifa/matches',
 };
