@@ -112,6 +112,10 @@ class DraftSelection extends React.Component {
                     return disabled;
                 }));
 
+                if (chosenTeamsByUser[credentials._id] && chosenTeamsByUser[credentials._id][group.id]) {
+                    disabled = true;
+                }
+
                 groupWithAddOn.teams[j].disabled = disabled;
                 groupWithAddOn.teams[j].selectedBy = selectedBy;
                 groupWithAddOn.teams[j].addOn = (

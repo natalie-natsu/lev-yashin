@@ -107,7 +107,7 @@
     },
     "success": "Profile updated successfully!",
     "errors": {
-      "badRequest": "Tes informations sont incorrectes.",
+      "badRequest": "Your information is incorrect.",
       "email": {
         "required": "Email is required",
         "invalid": "Email is invalid",
