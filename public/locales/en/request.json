@@ -1,6 +1,7 @@
 {
   "error": {
     "notPrecise": "Oops, an error occured, please try it later.",
-    "badRequest": "This request is not correct."
+    "badRequest": "This request is not correct.",
+    "badToken": "Your token was invalid, please try to log in again"
   }
 }

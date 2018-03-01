@@ -4,10 +4,14 @@ import { gameSchema } from '../../schemas/game';
 
 import { getEndpoint, getHeaders } from '../../helpers/endpoint';
 import { client } from '../../helpers/nes';
+import { userListSchema } from '../../schemas/user';
 
 export function updateGameEntity(response) {
     return (dispatch) => {
-        const normalized = normalize(response, gameSchema);
+        const normalized = normalize(response, {
+            game: gameSchema,
+            users: userListSchema,
+        });
         dispatch(receiveEntities(normalized.entities));
     };
 }

@@ -68,12 +68,12 @@ const Drawer = ({ credentials, dispatch, isOpen, t }) => (
                     <ul className="fa-ul">
                         <li className="nav-item">
                             <Link className="nav-link" to={routes.auth.signIn} onClick={() => close(dispatch)}>
-                                <FontAwesomeIcon icon={faSignInAlt} listItem />&nbsp;{t('route:signIn.text')}
+                                <FontAwesomeIcon icon={faSignInAlt} listItem />&nbsp;{t('route:auth.signIn.name')}
                             </Link>
                         </li>
                         <li className="nav-item">
                             <Link className="nav-link" to={routes.auth.register} onClick={() => close(dispatch)}>
-                                <FontAwesomeIcon icon={faEdit} listItem />&nbsp;{t('route:register.text')}
+                                <FontAwesomeIcon icon={faEdit} listItem />&nbsp;{t('route:auth.register.name')}
                             </Link>
                         </li>
                     </ul>
@@ -85,27 +85,27 @@ const Drawer = ({ credentials, dispatch, isOpen, t }) => (
                     {credentials.token && (
                         <li className="nav-item">
                             <Link className="nav-link" to={routes.home} onClick={() => close(dispatch)}>
-                                <FontAwesomeIcon icon={faHome} listItem />&nbsp;{t('route:home.text')}
+                                <FontAwesomeIcon icon={faHome} listItem />&nbsp;{t('route:home.name')}
                             </Link>
                         </li>
                     )}
                     {credentials.token && (
                         <li className="nav-item">
                             <Link className="nav-link" to={routes.game.create} onClick={() => close(dispatch)}>
-                                <FontAwesomeIcon icon={faPlayCircle} listItem />&nbsp;{t('route:newGame.text')}
+                                <FontAwesomeIcon icon={faPlayCircle} listItem />&nbsp;{t('route:game.create.name')}
                             </Link>
                         </li>
                     )}
                     {credentials.token && (
                         <li className="nav-item">
                             <Link className="nav-link" to="#" onClick={() => close(dispatch)}>
-                                <FontAwesomeIcon icon={faTasks} listItem />&nbsp;{t('route:games.text')}
+                                <FontAwesomeIcon icon={faTasks} listItem />&nbsp;{t('route:games.name')}
                             </Link>
                         </li>
                     )}
                     <li className="nav-item">
                         <Link className="nav-link" to={routes.calendar} onClick={() => close(dispatch)}>
-                            <FontAwesomeIcon icon={faCalendarAlt} listItem />&nbsp;{t('route:calendar.text')}
+                            <FontAwesomeIcon icon={faCalendarAlt} listItem />&nbsp;{t('route:calendar.name')}
                         </Link>
                     </li>
                 </ul>
@@ -116,12 +116,12 @@ const Drawer = ({ credentials, dispatch, isOpen, t }) => (
                     <ul className="fa-ul">
                         <li className="nav-item">
                             <Link className="nav-link" to="#" onClick={() => close(dispatch)}>
-                                <FontAwesomeIcon icon={faUsers} listItem />&nbsp;{t('route:legends.text')}
+                                <FontAwesomeIcon icon={faUsers} listItem />&nbsp;{t('route:legends.name')}
                             </Link>
                         </li>
                         <li className="nav-item">
                             <Link className="nav-link" to="#" onClick={() => close(dispatch)}>
-                                <FontAwesomeIcon icon={faGift} listItem />&nbsp;{t('route:shop.text')}
+                                <FontAwesomeIcon icon={faGift} listItem />&nbsp;{t('route:shop.name')}
                             </Link>
                         </li>
                     </ul>

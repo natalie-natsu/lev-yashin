@@ -37,7 +37,10 @@ class UpdateGameForm extends React.Component {
                     throw new SubmissionError(handleCreateGameError(json));
                 } else {
                     dispatch(successUpdateGame(json, scope));
-                    history.push({ pathname: routes.game.read.replace(':id', json._id), state: { game: json } });
+                    history.push({
+                        pathname: routes.game.read.replace(':id', json.game._id),
+                        state: { game: json.game },
+                    });
                     toast.success(t('form:updateGame.success'), { position: toast.POSITION.BOTTOM_RIGHT });
                 }
             }).catch((error) => {

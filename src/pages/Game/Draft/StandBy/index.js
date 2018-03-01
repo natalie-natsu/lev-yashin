@@ -26,8 +26,8 @@ class DraftStandBy extends React.Component {
 
     render() {
         const { credentials, game, t } = this.props;
-        const playerTurn = game.draftOrder[0];
-        const playerNext = game.draftOrder[1];
+        const playerTurn = game.draftOrder[game.draftIndex];
+        const playerNext = game.draftOrder[(game.draftIndex + 1) % 4];
         const userIsNext = playerNext._id === credentials._id;
 
         return (

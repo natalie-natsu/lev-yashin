@@ -21,6 +21,14 @@ import Group from '../../../../components/Group';
 const groupsIds = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
 
 class DraftSelection extends React.Component {
+    componentDidMount() {
+        this.showTurnSwal();
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (this.props.notUserTurn !== nextProps.notUserTurn) { this.showTurnSwal(nextProps); }
+    }
+
     handleSelect(team, group, e) {
         if (e) { e.preventDefault(); }
         const { dispatch, game, t } = this.props;
@@ -68,8 +76,8 @@ class DraftSelection extends React.Component {
         return false;
     }
 
-    showTurnSwal() {
-        const { credentials, notUserTurn, t } = this.props;
+    showTurnSwal({ credentials, notUserTurn } = this.props) {
+        const { t } = this.props;
         const groupStage = true;
 
         if (!credentials || notUserTurn) { return false; }
@@ -127,7 +135,6 @@ class DraftSelection extends React.Component {
 
     render() {
         const { notUserTurn } = this.props;
-        this.showTurnSwal();
 
         return (
             <div id="game-draft-selection" className={classNames({ notUserTurn })}>

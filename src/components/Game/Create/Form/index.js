@@ -17,7 +17,7 @@ class CreateGameForm extends React.Component {
     handleSubmit(values) {
         if (!values) { return false; }
 
-        const { credentials, dispatch, history, t } = this.props;
+        const { credentials, dispatch, history, i18n, t } = this.props;
         const { scope } = this.props.scope;
 
         dispatch({ type: REQUEST_CREATE_GAME, scope });
@@ -27,7 +27,7 @@ class CreateGameForm extends React.Component {
             headers: getHeaders(credentials),
             body: JSON.stringify({
                 name: values.name,
-                locale: values.locale,
+                locale: i18n.language,
                 isWithBonuses: !!values.isWithBonuses,
                 isPublic: !!values.isPublic,
             }),
@@ -37,7 +37,10 @@ class CreateGameForm extends React.Component {
                     throw new SubmissionError(handleCreateGameError(json));
                 } else {
                     dispatch(successCreateGame(json, scope));
-                    history.push({ pathname: routes.game.read.replace(':id', json._id), state: { game: json } });
+                    history.push({
+                        pathname: routes.game.read.replace(':id', json.game._id).replace(':step?', ''),
+                        state: { game: json.game },
+                    });
                     toast.success(t('form:createGame.success'), { position: toast.POSITION.BOTTOM_RIGHT });
                 }
             }).catch((error) => {
@@ -60,6 +63,7 @@ CreateGameForm.propTypes = {
     credentials: PropTypes.shape({ token: PropTypes.string.isRequired }).isRequired,
     dispatch: PropTypes.func.isRequired,
     history: PropTypes.shape({ goBack: PropTypes.func.isRequired }).isRequired,
+    i18n: PropTypes.shape({ language: PropTypes.string }).isRequired,
     form: PropTypes.func,
     scope: PropTypes.string,
     t: PropTypes.func.isRequired,

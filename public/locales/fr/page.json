@@ -77,6 +77,7 @@
       }
     },
     "Draft": {
+      "navTitle": "Tour de {{name}}",
       "StandBy": {
         "title": "{{name}} choisis une équipe",
         "description": "Patience, c'est bientôt ton tour.",
