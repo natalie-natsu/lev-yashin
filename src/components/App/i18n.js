@@ -26,6 +26,10 @@ i18n
             nsMode: 'default',
             defaultTransParent: 'span',
         },
+
+        backend: {
+            loadPath: `${process.env.PUBLIC_URL}/locales/{{lng}}/{{ns}}.json`,
+        },
     });
 
 export default i18n;

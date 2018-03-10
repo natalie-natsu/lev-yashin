@@ -38,7 +38,6 @@
     "classnames": "^2.2.5",
     "css-loader": "0.28.4",
     "dotenv": "4.0.0",
-    "file-loader": "0.11.2",
     "flag-icon-css": "^2.8.0",
     "fs-extra": "3.0.1",
     "html-webpack-plugin": "2.29.0",
@@ -86,7 +85,6 @@
     "sweetalert2": "^7.6.3",
     "url-loader": "0.5.9",
     "uuid": "^3.1.0",
-    "webpack": "3.5.1",
     "webpack-dev-server": "2.7.1",
     "webpack-manifest-plugin": "1.2.1",
     "whatwg-fetch": "2.0.3"
