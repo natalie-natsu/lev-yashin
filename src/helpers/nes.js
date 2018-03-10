@@ -8,8 +8,13 @@ export const getHeaders = (credentials) => {
 
 export const client = new Client(process.env.WS_PATH);
 
-export async function wsConnect(headers) {
-    await client.connect({ auth: { headers } });
+export function wsConnect(headers) {
+    client.connect({ auth: { headers } })
+        .catch((error) => {
+            // TODO handle error
+            // eslint-disable-next-line no-console
+            console.error(error);
+        });
 }
 export function wsDisconnect() {
     client.disconnect();
