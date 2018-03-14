@@ -63,6 +63,7 @@ export const register = (payload, scope, then = () => false) => (dispatch) => {
 export function successRegister(response, scope, then) {
     const { _id, profile, token } = response;
     return (dispatch) => {
+        wsConnect(getHeaders(response));
         dispatch(successFetchUser(response));
         dispatch({
             type: SUCCESS_REGISTER,
