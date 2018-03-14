@@ -61,9 +61,17 @@ class AppProvider extends React.Component {
     }
 }
 
-ReactDOM.render(
-    <AppProvider />,
-    document.getElementById('root'),
-);
+function startApp() {
+    ReactDOM.render(
+        <AppProvider />,
+        document.getElementById('root'),
+    );
+}
+
+if (window.cordova) {
+    document.addEventListener('deviceready', startApp, false);
+} else {
+    startApp();
+}
 
 export { store as default };
